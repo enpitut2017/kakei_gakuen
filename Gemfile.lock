@@ -42,6 +42,8 @@ GEM
       tzinfo (~> 1.1)
     arel (8.0.0)
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x64-mingw32)
+    bcrypt-ruby (3.1.1.rc1)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.0.6)
@@ -175,6 +177,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   bcrypt (~> 3.1.7)
+  bcrypt-ruby (= 3.1.1.rc1)
   byebug
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
