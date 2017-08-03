@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :books
   resources :users
 
-  root 'users#show'
+  root 'users#index'
+
+  #root 'users#show'
 
   #get 'book#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
