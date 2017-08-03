@@ -4,7 +4,7 @@
 お金の管理が苦手な人向けのめんどくさくない家計簿を実現する家計簿アプリです
 これはかんたんで多様な入力方法ができ、既存の家計簿アプリとは違ってとにかく入力が楽で、残高をゲーム的に管理することができます
 ## URL
-* サービスのURL
+* [サービスのURL](https://nameless-springs-98046.herokuapp.com/)
 * [CI](https://travis-ci.org/enpitut2017/kakei_gakuen)
 * [カンバン](https://docs.google.com/spreadsheets/d/1gxHxn2aOs5fLqaxsvO0xVdqmIt4NJ-eUuDMCbEAsSuU/edit?usp=sharing)
 ## メンバー
@@ -14,3 +14,4 @@
 [tomoya-paseri](https://github.com/tomoya-paseri)  
 [MinamiKaori](https://github.com/MinamiKaori)   
 [muratananaho](https://github.com/muratananaho)  
+
