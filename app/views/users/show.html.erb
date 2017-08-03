@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
+  <strong>残高:</strong>
+  <%= @user.budget %>
 </p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
+  <strong>出費:</strong>
+  <%= @user.budget %>
 </p>
 
 <p>
-  <strong>Budget:</strong>
+  <strong>予算:</strong>
   <%= @user.budget %>
 </p>
 
@@ -25,5 +25,6 @@
   <%= @user.level %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= # link_to 'Edit', edit_user_path(@user) %> |
+<%= # link_to 'Back', users_path %> |
+<%= link_to 'NewBook', books_path %>
