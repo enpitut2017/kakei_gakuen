@@ -11,22 +11,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :item %>
-    <%= form.text_field :item, id: :book_item %>
-  </div>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+  function parse_input(){
+    str = $("#result_text").val();
+    if(str){
+      str = str.replace(/\s|　|\.|\,|円/g, '');
+      item = str.replace(/\d+/g, ' ');
+      cost = str.replace(/\D+/g, ' ');
+      items = item.split(' ');
+      costs = cost.split(' ');
+      items = $.grep(items, function(e){return e !== "";});
+      costs = $.grep(costs, function(e){return e !== "";});
+      //for (i=0; i<items.length; i++) {
+      //  $('#add').html('<input type="text" value="' + items[i] + ' ' + costs[i] + '">');
+      //}
+      //$('#add').html('');
+      $.ajax({
+        type: "POST",
+        url: "/books",
+        data: {
+          'items[]': items,
+          'costs[]': costs
+        }
+      });
+    } else {
+      return $('#result_text').val('文字列を入力してください。');
+    }
+  }
+  </script>
+  <script>
+  window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+  var recognition = new webkitSpeechRecognition();
+  recognition.lang = 'ja';
 
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.number_field :cost, id: :book_cost %>
-  </div>
+  // 録音終了時トリガー
+  recognition.addEventListener('result', function(event){
+      var text = event.results.item(0).item(0).transcript;
+      $("#result_text").val(text);
+  }, false);
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :book_user_id %>
-  </div>
+  // 録音開始
+  function record()
+  {
+      recognition.start();
+  }
+  </script>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <body>
+
+  <form name="result">
+    <textarea name="rec_text" id="result_text" cols="100" rows="10"></textarea><br>
+    <input type="button" onclick="parse_input()" value="決定"><input type="reset" value="クリア">
+  </form>
+  <input type="button" onClick="record()" value="録音開始">
 <% end %>
