@@ -1,7 +1,13 @@
 language: ruby
 rvm:
-  - 2.4.1
+- 2.4.1
 script:
-  - bin/rails db:migrate RAILS_ENV=test
-  - bin/rails test
-
+- bin/rails db:migrate RAILS_ENV=test
+- bin/rails test
+deploy:
+  provider: heroku
+  api_key:
+    secure: MOLl+/8ZF3DYKlmcJowZpA/rj25csOhNZvP75aHIOrmpS5Q8K+QrgUSRMqQhAo8SDyETYRxrfspsbY/YJqXtb2RpGTGPHgaZ8dy+uSEML8utirKSEvCo6J3kFdNYbulxiusdFjlnrJAPpz7/J1fA0924x7mRdzMXN356o6xTjXoN66G5wkXBGG/uPghOK2VFbC+VZPbODP5FYoemsWWOBQpQ8QHj6DTymPIpKEoyRCmJ0fODs0JSKTlBmW7KjyYGnvYjlIBu5OzmCV7l7G9TANApS64ZMVFeNoAPBns780ovcy7h8iV7Lh6UJ8dhUHuAecnoiTxtOJobmlzDCkr3Qb4s35lfLQWGu1j9sz+Qq5VfiJiTA07xmimU8pKFKM3E8if9m4fgL1PHPqc/Z60soSnfsSEWcA/6JqgRgm+se3urkcxjhxtK2BNvbdjlLywyrCCfgZuOvnOwRFXmJ4qgYq3L1GzIcqI3Da+mP6Sca+ywIUV9cqEScLS7clAxSCMEr5PHfXU6Qc8ptBBi7ORi5Gff6SkwE7VPKcN6Mzbb0B/coXTSxZ/XWPR7raRzU/q1EDwpoy6aqM+3Yvvmkm+89TLZBlmRO5dj4G3WIXRE6LW65spwEigHY1AtHJakFGeTyIpYy4JSCP8oZPloIhQYDaRAT9thuJijkBXv83uRMGE=
+  app: nameless-springs-98046
+  on:
+    repo: enpitut2017/kakei_gakuen
