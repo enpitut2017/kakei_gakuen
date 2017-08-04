@@ -1,4 +1,9 @@
 <%= form_with(model: book, local: true) do |form| %>
+  <div id="add_items">
+  </div>
+  <div id="submit" style="display: none;">
+    <%= form.submit %>
+  </div>
   <% if book.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
@@ -10,59 +15,4 @@
       </ul>
     </div>
   <% end %>
-
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script>
-  function parse_input(){
-    str = $("#result_text").val();
-    if(str){
-      str = str.replace(/\s|　|\.|\,|円/g, '');
-      item = str.replace(/\d+/g, ' ');
-      cost = str.replace(/\D+/g, ' ');
-      items = item.split(' ');
-      costs = cost.split(' ');
-      items = $.grep(items, function(e){return e !== "";});
-      costs = $.grep(costs, function(e){return e !== "";});
-      //for (i=0; i<items.length; i++) {
-      //  $('#add').html('<input type="text" value="' + items[i] + ' ' + costs[i] + '">');
-      //}
-      //$('#add').html('');
-      $.ajax({
-        type: "POST",
-        url: "/books",
-        data: {
-          'items[]': items,
-          'costs[]': costs
-        }
-      });
-    } else {
-      return $('#result_text').val('文字列を入力してください。');
-    }
-  }
-  </script>
-  <script>
-  window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-  var recognition = new webkitSpeechRecognition();
-  recognition.lang = 'ja';
-
-  // 録音終了時トリガー
-  recognition.addEventListener('result', function(event){
-      var text = event.results.item(0).item(0).transcript;
-      $("#result_text").val(text);
-  }, false);
-
-  // 録音開始
-  function record()
-  {
-      recognition.start();
-  }
-  </script>
-
-  <body>
-
-  <form name="result">
-    <textarea name="rec_text" id="result_text" cols="100" rows="10"></textarea><br>
-    <input type="button" onclick="parse_input()" value="決定"><input type="reset" value="クリア">
-  </form>
-  <input type="button" onClick="record()" value="録音開始">
 <% end %>
