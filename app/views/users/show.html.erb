@@ -17,6 +17,28 @@
       <strong>予算:</strong>
       <%= @user.budget %>
     </p>
+
+    <h1>最近買ったもの</h1>
+
+    <table id="item_table">
+      <thead>
+        <tr>
+          <th>日付</th><!--日付!-->
+          <th>件名</th>
+          <th>金額</th>
+        </tr>
+      </thead>
+
+        <tbody>
+            <% @books.each do |book| %>
+            <tr>
+            <td><%= book.created_at.strftime("%Y年%m月%d日") %></td>
+            <td><%= book.item %></td>
+            <td><%= book.cost %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   
   <div class="col-sm-6">
