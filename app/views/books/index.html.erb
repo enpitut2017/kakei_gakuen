@@ -13,10 +13,14 @@
   </thead>
 
     <tbody>
-        <% @books.each do |book| %>
-        <tr>
+    <% @books.each do |book| %>
+    <tr>
+    <%         
+       #if(date.empty?){
+    #      date = book.created_at.strftime("%Y年%m月%d日")
+     #   %>
+      <%#  }else{%><%#}%>   
         <td><%= book.created_at.strftime("%Y年%m月%d日") %></td>
-        <td><%= book.item %></td>
         <td><%= book.cost %></td>
         <td><%= link_to '詳細', book %></td>
         <td><%= link_to '編集', edit_book_path(book) %></td>
@@ -28,4 +32,5 @@
 
 <br>
 
-<%= link_to 'New Book', new_book_path %>
+<%= link_to 'New Book', new_book_path %> |
+<%= link_to 'Back', user_path(@books.first.user) %>
