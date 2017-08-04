@@ -1,21 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<% lost = 0 %>
-
 <p>
   <strong>残高:</strong>
-
-  <% rest = @user.budget - lost %>
-  <%= rest %>
+  <%= @rest %>
 </p>
 
 <p>
   <strong>出費:</strong>
-  <% User.find(1).books.each do |t|
-      lost += t.cost
-  end %>
-
-  <%= lost%>
+  <%= @lost%>
 </p>
 
 <p>
