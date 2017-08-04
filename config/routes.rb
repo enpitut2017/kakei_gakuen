@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'static_page/index'
 
   resources :books
   resources :users
+
+  get  '/login',  to: 'static_page#login'
 
   root 'static_page#index'
 
