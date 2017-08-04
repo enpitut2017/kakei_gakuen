@@ -1,31 +1,45 @@
 <p id="notice"><%= notice %></p>
 <h1>ホーム画面</h1>
 
-<p>
-  <strong>残高:</strong>
-  <%= @rest %>
-</p>
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <strong>残高:</strong>
+      <%= @rest %>
+    </p>
+    
+    <p>
+      <strong>出費:</strong>
+      <%= @lost%>
+    </p>
+    
+    <p>
+      <strong>予算:</strong>
+      <%= @user.budget %>
+    </p>
+  </div>
+  
+  <div class="col-sm-6">
+    <div class="col-sm-3">
+    <p>
+      <strong>Exp:</strong>
+      <%= @user.exp %>
+    </p>
+    </div>
+    
+    <div class="col-sm-3">
+    <p>
+      <strong>Level:</strong>
+      <%= @user.level %>
+    </p>
+    </div>
+    <p>
+    <img class="img-responsive" alt="charactor" src="/assets/cookie.png" />
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>出費:</strong>
-  <%= @lost%>
-</p>
-
-<p>
-  <strong>予算:</strong>
-  <%= @user.budget %>
-</p>
-
-<p>
-  <strong>Exp:</strong>
-  <%= @user.exp %>
-</p>
-
-<p>
-  <strong>Level:</strong>
-  <%= @user.level %>
-</p>
-
-
+<div>
 <%= link_to 'New', new_book_url %> |
 <%= link_to 'index', books_path %>
+</div>
