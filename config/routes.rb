@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :books
   resources :users
 
-  root 'users#index'
+  root 'static_page#index'
 
   #root 'users#show'
 
