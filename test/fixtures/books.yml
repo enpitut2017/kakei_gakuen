@@ -3,9 +3,9 @@
 one:
   item: MyString
   cost: 1
-  user_id: 1
+  user: one
 
 two:
   item: MyString
   cost: 1
-  user_id: 1
+  user: two

@@ -12,9 +12,8 @@
 
 <p>
   <strong>User:</strong>
-  <%= @book.user_id %>
+  <%= @book.user %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%#= link_to 'Back', user(1) %>
-<a href="../users/1">Back</a>
+<%= link_to 'Back', books_path %>
