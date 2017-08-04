@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_page/index'
+
   resources :books
   resources :users
 
