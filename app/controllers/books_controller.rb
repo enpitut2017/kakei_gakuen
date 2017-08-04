@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = User.first.books
+    @user = current_user
+    @books = @user.books
   end
 
   # GET /books/1
@@ -29,10 +30,10 @@ class BooksController < ApplicationController
     items = params[:items];
     costs = params[:costs];
     @books = [];
-    @user = User.first
+    @user = current_user
 
     for i in 0..items.size-1 do
-      @books.push(Book.new(item: items[i], cost: costs[i], user_id: 1))
+      @books.push(Book.new(item: items[i], cost: costs[i], user: @user))
     end
 
     respond_to do |format|
