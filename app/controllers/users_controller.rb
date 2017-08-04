@@ -10,6 +10,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @lost = 0
+    @rest = 0
+    books = Book.where(user: @user)
+    books.each do |book|
+      @lost += book.cost
+    end
+    @rest = @user.budget - @lost
   end
 
   # GET /users/new
