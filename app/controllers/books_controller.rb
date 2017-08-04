@@ -24,15 +24,24 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
+    items = Array.new
+    costs = Array.new
+    items = params[:items];
+    costs = params[:costs];
+    @books = [];
+    @user = User.first
+
+    for i in 0..items.size-1 do
+      @books.push(Book.new(item: items[i], cost: costs[i], user_id: 1))
+    end
 
     respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render :show, status: :created, location: @book }
+      if Book.import @books
+        format.html { redirect_to @user, notice: 'Book was successfully created.' }
+        format.json { render :show, status: :created, location: @books }
       else
         format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: @books.errors, status: :unprocessable_entity }
       end
     end
   end
