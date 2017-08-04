@@ -14,10 +14,15 @@ function parse_input(){
       $('#add_items').append('<input type="text" name="items[]" value="' + items[i] + '">');
       $('#add_items').append('<input type="text" name="costs[]" value="' + costs[i] + '"><br>');
     }
+    clear();
     $('#submit').show();
   } else {
-    $('#result_text').val('文字列を入力してください。');
+    return $('#result_text').val('文字列を入力してください。');
   }
+}
+
+function clear(){
+  $("#result_text").val('');
 }
 
 window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
@@ -35,3 +40,4 @@ function record()
 {
     recognition.start();
 }
+;
