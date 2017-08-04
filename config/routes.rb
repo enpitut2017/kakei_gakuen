@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
 
   get  '/login',  to: 'static_page#login'
+  get 'static_page/index'
 
   root 'static_page#index'
 
