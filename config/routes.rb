@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+constraints subdomain: 'api' do
+  # api.sample.com
+  resources :books
+  resources :users
+end
+
   get 'static_page/index'
 
   root 'static_page#index'
