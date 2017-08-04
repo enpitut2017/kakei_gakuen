@@ -1,6 +1,9 @@
 language: ruby
 rvm:
 - 2.4.1
+install: bundle install --deployment
+cache:
+  directories: vendor/bundle
 script:
 - bin/rails db:migrate RAILS_ENV=test
 - bin/rails test
