@@ -61,6 +61,7 @@ GEM
     ffi (1.9.18-x64-mingw32)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    honoka-rails (3.3.7)
     i18n (0.8.6)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -180,6 +181,7 @@ DEPENDENCIES
   bcrypt-ruby (= 3.1.1.rc1)
   byebug
   coffee-rails (~> 4.2)
+  honoka-rails (>= 3.3.7)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (= 0.20.0)
