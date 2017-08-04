@@ -23,3 +23,12 @@ body {
   text-align: center;
   color: #dddddd;
 }
+
+/* users/show */
+#data {
+}
+
+/*index_book*/
+#item_table td,th{
+    padding: 2px 4px; 
+}
