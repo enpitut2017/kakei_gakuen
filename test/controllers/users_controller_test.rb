@@ -4,6 +4,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @user = users(:one)
+    @other_user = users(:two)
+    @no_books_user = users(:three)
   end
 
   test "should get index" do
@@ -26,6 +28,46 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should show user" do
     get user_url(@user)
+    @lost = 0
+    @rest = 0
+    books = Book.where(user: @user)
+
+    #@userの持っている数だけ取得できているかのテスト
+    assert_equal books.size, 2
+
+    #booksがすべて@userのものかをテスト
+    books.each do |book|
+      assert_equal book.user, @user
+    end
+
+    #出費の計算ができているかをテスト
+    assert_difference('@lost', 400) do
+      books.each do |book|
+        @lost += book.cost
+      end
+    end
+
+    #残高の計算ができているかをテスト
+    assert_difference('@rest', 600) do
+      @rest = @user.budget - @lost
+    end
+
+    assert_response :success
+  end
+
+  test "should show user has collect books" do
+    get user_url(@user)
+    bad_books = Book.where(user: @other_user)
+    bad_books.each do |book|
+      assert_not_equal book.user, @user
+    end
+    assert_response :success
+  end
+
+  test "should show user has no books" do
+    get user_url(@no_books_user)
+    books = Book.where(user: @no_books_user)
+    assert_equal books.size, 0
     assert_response :success
   end
 
