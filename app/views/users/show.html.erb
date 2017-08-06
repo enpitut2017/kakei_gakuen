@@ -18,7 +18,7 @@
     </p>
 
     <h1>最近買ったもの</h1>
-
+<% if @books.size != 0 then %>
     <table id="item_table">
       <thead>
         <tr>
@@ -38,8 +38,10 @@
         <% end %>
       </tbody>
     </table>
+<% else %>
+  <p>未登録です</p>
+<% end %>
   </div>
-
   <div class="col-sm-6">
     <div class="col-sm-3">
     <p>
@@ -54,13 +56,15 @@
       <%= @user.level %>
     </p>
     </div>
-    <p>
+    <p> 
     <img class="img-responsive" alt="charactor" src="/assets/cookie.png" />
     </p>
   </div>
 </div>
 
 <div>
-<%= link_to 'New', new_book_url %> |
+<%= link_to 'New', new_book_url %>
+<% if @books.size != 0 then %>
 <%= link_to 'index', books_path %>
+<% end %>
 </div>

@@ -4,8 +4,6 @@
       t.string :name
       t.string :email
       t.integer :budget
-      t.integer :exp
-      t.integer :level
 
       t.timestamps
     end
