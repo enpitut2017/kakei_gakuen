@@ -27,13 +27,17 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    items = Array.new
-    costs = Array.new
     items = params[:items]
     costs = params[:costs]
     _times = params[:times]
     @books = [];
     @user = current_user
+
+    if items == nil || costs == nil || _times == nil then
+      @book = Book.new
+      @book.errors[:base] << "家計簿を入力してください"
+      return render :new
+    end
 
     for i in 0..items.size-1 do
       @books.push(Book.new(item: items[i], cost: costs[i], user: @user, time: _times[i]))
