@@ -1,5 +1,20 @@
+window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+var recognition = new webkitSpeechRecognition();
+recognition.lang = 'ja';
+
+// 録音終了時トリガー
+recognition.addEventListener('result', function(event){
+    var text = event.results.item(0).item(0).transcript;
+    $("#result_text").val(text);
+}, false);
+
 function parse_input() {
   str = $("#result_text").val();
+  now = new Date();
+  yyyymmdd = now.getFullYear()+ "-" +
+	           ( "0" + ( now.getMonth()+1 ) ).slice(-2) + "-" +
+	           ( "0" + now.getDate() ).slice(-2);
+
   if(str){
     str = str.replace(/\s|　|\.|\,|円/g, '');
     str = str.replace(/万/g, '0000');
@@ -10,13 +25,15 @@ function parse_input() {
     items = $.grep(items, function(e){return e !== "";});
     costs = $.grep(costs, function(e){return e !== "";});
     for (i=0; i<items.length; i++) {
-      $('#add_items').append('<input type="text" name="items[]" value="' + items[i] + '">');
-      $('#add_items').append('<input type="text" name="costs[]" value="' + costs[i] + '">');
-      $('#add_items').append('<input type="text" name="times[]" id="datepicker' + i + '" value=""><br>')
-      $('#datepicker' + i).datepicker({
+      $('#add_items').append('<tr>'
+                            +'<td><input type="text" name="items[]" value="' + items[i] + '"></td>'
+                            +'<td><input type="text" name="costs[]" value="' + costs[i] + '"></td>'
+                            +'<td><input type="text" name="times[]" id="datepicker" value="' + yyyymmdd +'"></td>'
+                            +'<td>　<span onClick="remove(this)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>'
+                            +'<tr><br>');
+      $('#datepicker').datepicker({
         format: "yyyy-mm-dd"
       });
-      $('#datepicker' + i).datepicker('setDate','today');
     }
     reset();
     $('#submit').show();
@@ -29,18 +46,12 @@ function reset() {
   $('#result_text').val('');
 }
 
-window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-var recognition = new webkitSpeechRecognition();
-recognition.lang = 'ja';
-
-// 録音終了時トリガー
-recognition.addEventListener('result', function(event){
-    var text = event.results.item(0).item(0).transcript;
-    $("#result_text").val(text);
-}, false);
-
 // 録音開始
-function record()
-{
+function record() {
     recognition.start();
+}
+
+
+function remove(obj) {
+    $(obj).parent().parent().remove();
 }
