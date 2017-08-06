@@ -1,12 +1,11 @@
 /* universal */
 
 body {
-  padding-top: 81px;
+  padding-top: 90px;
 }
 
-
 /*header*/
-#header{
+header{
   width: 100%;
   height: 90px;
   background-color: #ffecd2;
@@ -54,18 +53,25 @@ body {
   border-color: #33241d;
 }
 
-#footer {
-  position: absolute;
-  bottom: 0;
+/* footer */
+footer {
   width: 100%;
   height: 30px;
-  background-color: #000000
+  background-color: #000;
+  position: fixed;
+  bottom: 0;
 }
 
-#copyright{
+footer p{
   padding: 0 30px;
+  margin: 0;
   text-align: center;
   color: #dddddd;
+}
+
+/* contents*/
+#contents{
+  min-height: 860px;
 }
 
 /* users/show */
