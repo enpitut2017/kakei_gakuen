@@ -2,6 +2,7 @@ function parse_input(){
   str = $("#result_text").val();
   if(str){
     str = str.replace(/\s|　|\.|\,|円/g, '');
+    str = str.replace(/万/g, '0000');
     item = str.replace(/\d+/g, ' ');
     cost = str.replace(/\D+/g, ' ');
     items = item.split(' ');
