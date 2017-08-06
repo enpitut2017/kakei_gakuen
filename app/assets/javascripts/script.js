@@ -14,6 +14,7 @@ function parse_input() {
   yyyymmdd = now.getFullYear()+ "-" +
 	           ( "0" + ( now.getMonth()+1 ) ).slice(-2) + "-" +
 	           ( "0" + now.getDate() ).slice(-2);
+  id = now.getFullYear()+now.getMonth()+now.getDate()+now.getDay()+now.getMinutes()+now.getSeconds();
 
   if(str){
     str = str.replace(/\s|　|\.|\,|円/g, '');
@@ -26,12 +27,12 @@ function parse_input() {
     costs = $.grep(costs, function(e){return e !== "";});
     for (i=0; i<items.length; i++) {
       $('#add_items').append('<tr>'
-                            +'<td><input type="text" name="items[]" value="' + items[i] + '"></td>'
-                            +'<td><input type="text" name="costs[]" value="' + costs[i] + '"></td>'
-                            +'<td><input type="text" name="times[]" id="datepicker" value="' + yyyymmdd +'"></td>'
+                            +'<td><input type="text" name="items[]" value="'+ items[i] +'"></td>'
+                            +'<td><input type="text" name="costs[]" value="'+ costs[i] +'"></td>'
+                            +'<td><input type="text" name="times[]" id="datepicker'+ id + i +'" value="' + yyyymmdd +'"></td>'
                             +'<td>　<span onClick="remove(this)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>'
                             +'<tr><br>');
-      $('#datepicker').datepicker({
+      $('#datepicker'+ id + i).datepicker({
         format: "yyyy-mm-dd"
       });
     }

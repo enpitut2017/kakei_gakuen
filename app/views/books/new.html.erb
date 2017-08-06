@@ -5,8 +5,8 @@
 <h1>アイテムを追加</h1>
 
 <textarea name="rec_text" class="form-control" id="result_text" cols="100" rows="10"></textarea><br>
-<input type="button" onClick="parse_input()" value="決定">
 <input type="button" onClick="record()" value="録音開始">
 <input type="button" onClick="reset()" value="クリア">
+<input type="button" onClick="parse_input()" value="決定">
 
 <%= render 'form', book: @book %>
