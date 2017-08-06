@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-=begin
+
   setup do
     @user = users(:one)
   end
@@ -18,16 +18,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: { user: { budget: @user.budget, email: @user.email, exp: @user.exp, level: @user.level, name: @user.name } }
+      post users_url, params: { user: { budget: 1000, email: 'example@sample.com', exp: 0, level: 0, name: 'example', password: 'foobar', password_confirmation: 'foobar' } }
     end
 
     assert_redirected_to user_url(User.last)
   end
 
-  #test "should show user" do
-#    get user_url(@user)
-#    assert_response :success
- # end
+  test "should show user" do
+    get user_url(@user)
+    assert_response :success
+  end
 
   test "should get edit" do
     get edit_user_url(@user)
@@ -35,7 +35,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update user" do
-    patch user_url(@user), params: { user: { budget: @user.budget, email: @user.email, exp: @user.exp, level: @user.level, name: @user.name } }
+    patch user_url(@user), params: { user: { budget: 1000, email: 'example@sample.com', exp: 0, level: 0, name: 'example', password: 'foobar', password_confirmation: 'foobar' } }
     assert_redirected_to user_url(@user)
   end
 
@@ -46,5 +46,5 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to users_url
   end
-=end
+
 end
