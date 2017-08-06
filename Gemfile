@@ -34,6 +34,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
 # Use activerecord method import
 gem 'activerecord-import'
+# Use kaminaei pagenation
+gem 'kaminari'
+gem 'rails-i18n'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
