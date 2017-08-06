@@ -2,21 +2,24 @@
 
 one:
   name: MyString
-  email: MyString
+  email: test@sample.com
   budget: 1000
   exp: 1
   level: 1
+  password_digest: <%= User.digest('foobar') %>
 
 two:
   name: MyString
-  email: MyString
+  email: test2@sample.com
   budget: 1
   exp: 1
   level: 1
+  password_digest: <%= User.digest('foobar') %>
 
 three:
   name: MyString
-  email: MyString
+  email: test3@sample.com
   budget: 1
   exp: 1
   level: 1
+  password_digest: <%= User.digest('foobar') %>
