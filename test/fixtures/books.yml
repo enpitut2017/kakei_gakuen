@@ -2,10 +2,15 @@
 
 one:
   item: MyString
-  cost: 1
+  cost: 100
   user: one
 
 two:
   item: MyString
   cost: 1
   user: two
+
+three:
+  item: MyString
+  cost: 300
+  user: one
