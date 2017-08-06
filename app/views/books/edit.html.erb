@@ -1,6 +1,39 @@
 <h1>Editing Book</h1>
 
-<%= render 'form', book: @book %>
+<%= form_with(model: @book, local: true) do |form| %>
+  <div id="add_items">
+  </div>
+  <div id="submit" style="display: none;">
+    <%= form.submit %>
+  </div>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Show', @book %> |
+  <div class="field">
+    <%= form.label :item %>
+    <%= form.text_field :item, id: :book_item %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost, id: :book_cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time %>
+    <%= form.date_field :time, id: :book_time %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Back', books_path %>
