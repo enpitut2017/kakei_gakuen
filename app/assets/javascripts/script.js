@@ -1,4 +1,4 @@
-function parse_input(){
+function parse_input() {
   str = $("#result_text").val();
   if(str){
     str = str.replace(/\s|　|\.|\,|円/g, '');
@@ -9,16 +9,24 @@ function parse_input(){
     costs = cost.split(' ');
     items = $.grep(items, function(e){return e !== "";});
     costs = $.grep(costs, function(e){return e !== "";});
-    console.log(items, costs);
     for (i=0; i<items.length; i++) {
-      console.log(i);
       $('#add_items').append('<input type="text" name="items[]" value="' + items[i] + '">');
-      $('#add_items').append('<input type="text" name="costs[]" value="' + costs[i] + '"><br>');
+      $('#add_items').append('<input type="text" name="costs[]" value="' + costs[i] + '">');
+      $('#add_items').append('<input type="text" name="times[]" id="datepicker' + i + '" value=""><br>')
+      $('#datepicker' + i).datepicker({
+        format: "yyyy-mm-dd"
+      });
+      $('#datepicker' + i).datepicker('setDate','today');
     }
+    reset();
     $('#submit').show();
   } else {
     $('#result_text').val('文字列を入力してください。');
   }
+}
+
+function reset() {
+  $('#result_text').val('');
 }
 
 window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
