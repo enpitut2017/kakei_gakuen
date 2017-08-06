@@ -19,7 +19,7 @@
     </p>
 
     <h1>最近買ったもの</h1>
-
+<% if @books.size != 0 then %>
     <table id="item_table">
       <thead>
         <tr>
@@ -39,8 +39,10 @@
         <% end %>
       </tbody>
     </table>
+<% else %>
+  <p>未登録です</p>
+<% end %>
   </div>
-  
   <div class="col-sm-6">
     <div class="col-sm-3">
     <p>
