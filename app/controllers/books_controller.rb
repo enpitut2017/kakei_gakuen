@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   def index
     @user = current_user 
     @books = @user.books
+    @books = Book.order('time DESC').page(params[:page]).per(10)
   end
 
   # GET /books/1
@@ -20,6 +21,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book = Book.find(params[:id])
   end
 
   # POST /books
@@ -53,7 +55,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -80,6 +82,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:item, :cost, :user_id)
+      params.require(:book).permit(:item, :cost, :time)
     end
 end
