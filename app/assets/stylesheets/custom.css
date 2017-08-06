@@ -6,8 +6,52 @@ body {
 
 
 /*header*/
+#header{
+  width: 100%;
+  height: 90px;
+  background-color: #ffecd2;
+  box-shadow: 0 0px 10px 0 rgba(0,0,0,0.3);
+}
+#header_container{
+  height: 80px;
+}
 #logo{
- float: left;
+  color: #33241d;
+  margin: 0;
+  height: 80px;
+  width: 100px;
+  line-height: 80px;
+  text-align: center;
+  font-size: 35px;
+  float: left;
+}
+.header_button{
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
+.setting_button{
+  height: 80px;
+  width: 80px;
+  text-align: center;
+}
+.button_settings{
+  border-radius: 15px;
+  border: solid 5px #000;
+}
+.border_test{
+  width: 100%;
+  height: 10px;
+  background-image: linear-gradient(45deg,
+                    #ffecd2 25%,
+                    #33241d 25%, #33241d 50%,
+                    #ffecd2 50%, #ffecd2 75%,
+                    #33241d 75%, #33241d
+                    );
+  /* 幅8px、高さ8pxで背景画像のサイズを指定 */
+  background-size: 8px 8px;
+  border-style: solid none solid none;
+  border-color: #33241d;
 }
 
 #footer {
@@ -30,5 +74,5 @@ body {
 
 /*index_book*/
 #item_table td,th{
-    padding: 2px 4px; 
+    padding: 2px 4px;
 }
