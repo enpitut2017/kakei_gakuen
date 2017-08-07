@@ -15,9 +15,6 @@ class SessionsController < ApplicationController
 
     def destroy
         log_out
-        puts "&&&&&&&&&&&&&&&&&&&&&&&&&"
-        puts logged_in?
-        puts "&&&&&&&&&&&&&&&&&&&&&&&&&"
         redirect_to signup_path
     end
 end
