@@ -10,6 +10,11 @@ recognition.addEventListener('result', function(event){
 
 function parse_input() {
   str = $("#result_text").val();
+
+  if (str == '文字列を入力してください。') {
+    return 0;
+  }
+
   now = new Date();
   yyyymmdd = now.getFullYear()+ "-" +
 	           ( "0" + ( now.getMonth()+1 ) ).slice(-2) + "-" +
@@ -27,9 +32,9 @@ function parse_input() {
     costs = $.grep(costs, function(e){return e !== "";});
     for (i=0; i<items.length; i++) {
       $('#add_items').append('<tr>'
-                            +'<td><input type="text" name="items[]" value="'+ items[i] +'"></td>'
-                            +'<td><input type="text" name="costs[]" value="'+ costs[i] +'"></td>'
-                            +'<td><input type="text" name="times[]" id="datepicker'+ id + i +'" value="' + yyyymmdd +'"></td>'
+                            +'<td><input class="form-control" type="text" name="items[]" value="'+ items[i] +'"></td>'
+                            +'<td><input class="form-control" type="text" name="costs[]" value="'+ costs[i] +'"></td>'
+                            +'<td><input class="form-control" type="text" name="times[]" id="datepicker'+ id + i +'" value="' + yyyymmdd +'"></td>'
                             +'<td>　<span onClick="remove(this)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>'
                             +'<tr><br>');
       $('#datepicker'+ id + i).datepicker({
@@ -55,4 +60,7 @@ function record() {
 
 function remove(obj) {
     $(obj).parent().parent().remove();
+    if (! $('table td').length) {
+      $('#submit').hide();
+    }
 }
