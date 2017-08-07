@@ -9,12 +9,12 @@ recognition.addEventListener('result', function(event){
 }, false);
 
 recognition.onaudiostart = function() {
-  $('#rec_button').html('<span onClick="remove(this)" class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 録音中');
+  $('#rec_button').html('<span class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 録音中');
   $('#rec_button').prop("disabled", true);
 }
 
 recognition.onaudioend = function() {
-  $('#rec_button').html('<span onClick="remove(this)" class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 録音開始');
+  $('#rec_button').html('<span class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 録音開始');
   $('#rec_button').prop("disabled", false);
 }
 
