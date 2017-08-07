@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :budget)
     end
-    
+
      # ログイン済みユーザーかどうか確認
     def logged_in_user
       unless logged_in?
