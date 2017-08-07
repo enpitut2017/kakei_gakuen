@@ -1,10 +1,20 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-<div class="container">
-    <h1 id="logo"><%= link_to "家計学園(仮)", static_page_index_path %></h1>
+<header class="navbar navbar-fixed-top">
+  <div id="header_container" class="container">
+    <%= link_to image_tag('/assets/logo-s.png', {:id => "logo", :border => '0', :alt => '家計学園'}), root_path %>
     <nav>
-    <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "ログイン" , login_path %></li>
-    </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!--<li class="header_button">
+          <%= link_to "ボタン1" , "#" %>
+        </li>
+        <li class="header_button">
+          <%= link_to "ボタン2" , "#" %>
+        </li>-->
+        <li class="setting_button">
+          <%= link_to "設定" , "#" , { :class => "btn button_settings" } %>
+        </li>
+      </ul>
     </nav>
-</div>
+  </div>
+  <div class="border_test">
+  </div>
 </header>

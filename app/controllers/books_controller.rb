@@ -4,8 +4,9 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @user = current_user
+    @user = current_user 
     @books = @user.books
+    @books = Book.order('time DESC').page(params[:page]).per(10)
   end
 
   # GET /books/1
@@ -20,20 +21,26 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book = Book.find(params[:id])
   end
 
   # POST /books
   # POST /books.json
   def create
-    items = Array.new
-    costs = Array.new
-    items = params[:items];
-    costs = params[:costs];
+    items = params[:items]
+    costs = params[:costs]
+    _times = params[:times]
     @books = [];
     @user = current_user
 
+    if items == nil || costs == nil || _times == nil then
+      @book = Book.new
+      @book.errors[:base] << "家計簿を入力してください"
+      return render :new
+    end
+
     for i in 0..items.size-1 do
-      @books.push(Book.new(item: items[i], cost: costs[i], user: @user))
+      @books.push(Book.new(item: items[i], cost: costs[i], user: @user, time: _times[i]))
     end
 
     respond_to do |format|
@@ -52,7 +59,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -79,6 +86,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:item, :cost, :user_id)
+      params.require(:book).permit(:item, :cost, :time)
     end
 end

@@ -1,34 +1,98 @@
 /* universal */
-
 body {
-  padding-top: 81px;
+  height: 100vh;
+  background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
 }
-
+#contents{
+  padding-top: 90px;
+  min-height: 100%;
+  background-size: cover;
+  background-color: rgba(255,234,222,0.8);
+  box-shadow: 0 0 10px 10px rgba(0,0,0,0.3);
+}
+.title{
+  font-family: "Rounded Mplus 1c";
+}
+#fab{
+  position: fixed;
+  width: 12vw;
+  height: 12vw;
+  bottom: 10vh;
+  right: 10vw;
+  border-radius: 6vw;
+  background-color: #804040;
+  box-shadow: 0 1vw 3vw 0.75vw rgba(0,0,0,0.3);  
+  text-align: center;/*中央寄せ*/
+}
+#fab i{
+  vertical-align: middle;
+  line-height: 12vw;
+  color: #fff;
+  font-size: 4.5vw;
+}
 
 /*header*/
+header{
+  width: 100%;
+  height: 90px;
+  background-color: #ffecd2;
+  box-shadow: 0 0px 10px 0 rgba(0,0,0,0.3);
+}
+#header_container{
+  height: 80px;
+}
 #logo{
- float: left;
+  margin: 15px 0 5px 0;
+  height: 60px;
+  float: left;
+}
+.header_button{
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
+.setting_button{
+  height: 80px;
+  width: 80px;
+  text-align: center;
+}
+.button_settings{
+  border-radius: 15px;
+  border: solid 5px #000;
+}
+.border_test{
+  width: 100%;
+  height: 10px;
+  background-image: linear-gradient(45deg,
+                    #ffecd2 25%,
+                    #33241d 25%, #33241d 50%,
+                    #ffecd2 50%, #ffecd2 75%,
+                    #33241d 75%, #33241d
+                    );
+  /* 幅8px、高さ8pxで背景画像のサイズを指定 */
+  background-size: 8px 8px;
+  border-style: solid none solid none;
+  border-color: #33241d;
 }
 
-#footer {
-  position: absolute;
-  bottom: 0;
+/* footer */
+footer {
   width: 100%;
   height: 30px;
-  background-color: #000000
+  background-color: #000;
+  position: fixed;
+  bottom: 0;
 }
-
-#copyright{
+footer p{
   padding: 0 30px;
+  margin: 0;
   text-align: center;
   color: #dddddd;
 }
 
 /* users/show */
-#data {
-}
 
 /*index_book*/
 #item_table td,th{
-    padding: 2px 4px; 
+    padding: 2px 4px;
 }

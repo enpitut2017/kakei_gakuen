@@ -6,12 +6,17 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
+    <div id="contents" class="container">
+    <p id="notice"><%= notice %></p>
     <%= render 'layouts/header'%>
     <%= yield %>
     </div>
+    <%= link_to new_book_url, id: "fab" do %>
+      <i class="glyphicon glyphicon-pencil"></i>
+    <% end %>
     <%= render 'layouts/footer'%>
   </body>
 </html>
