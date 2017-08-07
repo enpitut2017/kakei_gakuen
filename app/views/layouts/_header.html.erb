@@ -9,9 +9,11 @@
         <li class="header_button">
           <%= link_to "ボタン2" , "#" %>
         </li>-->
+        <% if logged_in? %>
         <li class="setting_button">
-          <%= link_to "設定" , "#" , { :class => "btn button_settings" } %>
+          <%= link_to "設定" , edit_user_path(current_user.id), { :class => "btn button_settings" } %>
         </li>
+        <% end %>
       </ul>
     </nav>
   </div>

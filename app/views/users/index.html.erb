@@ -1,7 +1,11 @@
-<% provide(:title, 'All users') %>
-<h1>All users</h1>
 
-<table>
+<div class="col-sm-12">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Users</h1>
+
+
+ <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -10,16 +14,18 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
+
+    <tbody>
+      <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New User', new_user_path %>
+  <%= link_to 'New User', new_user_path %>
+</div>
