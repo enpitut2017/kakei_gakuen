@@ -1,33 +1,39 @@
-<div class="col-sm-12">
+<div class="row">
   <p id="notice"><%= notice %></p>
-
-
-
-  <h1>一覧</h1>
-  <table id="item_table">
-    <thead>
-      <tr>
-        <th>日付</th><!--日付!-->
-        <th>件名</th>
-        <th>金額</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @books.each do |book| %>
-      <tr>
-        <td><%= book.time.strftime("%Y年%m月%d日") %></td>
+    <H1>買ったもの</H1>
+      <%
+        year="" 
+        month=""
+        day = ""%>
+<% @books.each do |book| 
+    %>
+     <%if book.time.strftime("%-Y") != year then%>
+    <div class="col-sm-12">
+        <h2><%= book.time.strftime("%-Y年") %></h2></div>
+    <%end%>
+     <%if book.time.strftime("%-m") != month then%>
+        <h4><%= book.time.strftime("%-m月の出費") %></h4>
+     <%end%>
+        <div class="col-xs-3">
+    <%if book.time.strftime("%-d") != day then%>
+<%= book.time.strftime("%-d日") %>
+            <%end%></div>
+         <div class="col-xs-9">
+        <table id="item_table">
+        <tbody>
+        <tr>
         <td><%= book.item %></td>
-        <td><%= book.cost %></td>
-        <td><%= link_to '詳細', book %></td>
+        <td><%= book.cost %>円</td>
+        <!--<td><%#= link_to '詳細', book %></td>!-->
         <td><%= link_to '編集', edit_book_path(book) %></td>
         <td><%= link_to '削除', book, method: :delete, data: { confirm: 'Are you sure?' }   %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate(@books) %>
+      </tr>    </tbody>
+            </table></div><%
+       year = book.time.strftime("%-Y")
+       month = book.time.strftime("%-m")
+       day = book.time.strftime("%-d")
+      end %>
+  <%#= paginate(@books)#ページ遷移のやつ %>
   <br>
 
   <%= link_to 'もどる', user_path(@books.first.user) %>
