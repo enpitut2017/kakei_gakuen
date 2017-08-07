@@ -22,10 +22,9 @@ class UsersController < ApplicationController
     @books = @user.books.order("id DESC").limit(5)
 
     @exp = @user.exp
-    @level = level_culcurate
+    @user.level = level_culcurate
 
-    @user.level = @level
-    @user.save
+    
 
   end
 
