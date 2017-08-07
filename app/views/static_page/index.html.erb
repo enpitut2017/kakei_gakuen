@@ -1,23 +1,16 @@
-<%= stylesheet_link_tag  'custom' %>
+<div class="container">
 <div class="col-md-12">
 <div class="jumbotron jumbo">
 	<div class="logo"><img src="assets/logo.png" arc="logo" class="img-responsive"></div>
   <p class="logo_text">残高把握と既存のアプリの問題点を解決したい お金の管理が苦手な人向けのめんどくさくない家計簿を実現する家計簿アプリです これはかんたんで多様な入力方法ができ、既存の家計簿アプリとは違ってとにかく入力が楽で、残高をゲーム的に管理することができます</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">新規登録</a></p>
+  <p><%= link_to '新規登録', signup_path, {:class => "btn btn-primary btn-lg"} %>
 </div>
 	<div class="row">
 		<div class="col-sm-6">
-			<div class="row">
-			<div class="well well-lg">
-				<p class="btn btn-default btn-xxl btn-block"><%= link_to '新規アカウント作成' , new_user_path %></p>
-				<div class="login">
-				<p class="btn btn-default btn-xxl btn-block"><%= link_to 'ログイン' , login_path %></p>
-				</div>
-			</div>
-			</div>
 		</div>
 		<div class="col-sm-6">
 			<p></p>
 		</div>
 	</div>
+</div>
 </div>

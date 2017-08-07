@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def show
     @lost = 0
     @rest = 0
+    @img_path = image_path(@user.level)
     books = Book.where(user: @user)
     books.each do |book|
       @lost += book.cost
