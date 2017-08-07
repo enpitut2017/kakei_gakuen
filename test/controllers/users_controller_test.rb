@@ -9,7 +9,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get users_url
+    get root_path
     assert_response :success
   end
 
