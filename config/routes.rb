@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   get   '/logout',  to: 'sessions#destroy'
 
+  get   '/retire',  to: 'users#destroy'
+
   constraints subdomain: 'api' do
     # api.sample.com
     resources :books
