@@ -31,7 +31,9 @@ class BooksController < ApplicationController
     costs = params[:costs]
     _times = params[:times]
     @books = [];
-    @user = current_user
+    @user = User.find(current_user.id)
+    exp = @user.exp + culcurate_exp(_times) 
+    @user.update_attribute(:exp, exp)
 
     if items == nil || costs == nil || _times == nil then
       @book = Book.new

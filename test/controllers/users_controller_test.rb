@@ -57,14 +57,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should destroy user" do
-    assert_difference('User.count', -1) do
-      delete user_url(@user)
-    end
-    assert_redirected_to users_url
-    return
-  end
-
   test "should redirect edit when not logged in" do
     get edit_user_path(@user)
     assert_not flash.empty?
