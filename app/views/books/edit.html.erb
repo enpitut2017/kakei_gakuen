@@ -1,19 +1,20 @@
-<h1>Editing Book</h1>
+<div class="col-sm-12">
+  <h1>Editing Book</h1>
 
-<%= form_with(model: @book, local: true) do |form| %>
+  <%= form_with(model: @book, local: true) do |form| %>
   <div id="add_items">
   </div>
   <div id="submit" style="display: none;">
-    <%= form.submit %>
+  <%= form.submit %>
   </div>
   <% if @book.errors.any? %>
-    <div id="error_explanation">
-      <ul>
+  <div id="error_explanation">
+    <ul>
       <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
   <div class="field">
@@ -32,8 +33,9 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+  <%= form.submit %>
   </div>
-<% end %>
+  <% end %>
 
-<%= link_to 'Back', books_path %>
+  <%= link_to 'もどる', books_path %>
+</div>
