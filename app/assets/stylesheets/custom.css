@@ -143,6 +143,13 @@ footer p{
   padding: 10px;
   width: 280px;
 }
+
+/*books*/
+#books_text{
+  color: #444;
+  margin: 18px 0;
+  font-family: "Rounded Mplus 1c";
+}
 /*
 .logo_text {
   margin: 10px;
