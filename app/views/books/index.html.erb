@@ -5,7 +5,7 @@
         year="" 
         month=""
         day = ""%>
-<% @books.each do |book| 
+     <% @user.books.each do |book| 
     %>
      <%if book.time.strftime("%-Y") != year then%>
     <div class="col-sm-12">
