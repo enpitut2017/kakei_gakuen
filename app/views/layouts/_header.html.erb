@@ -1,32 +1,32 @@
 <header class="navbar navbar-fixed-top">
   <div id="header_container" class="container">
     <%= link_to image_tag('/assets/logo-m.png', {:id => "logo", :border => '0', :alt => '家計学園'}), root_path %>
-    <nav>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navi">
+        <span class="sr-only">メニュー</span>
+        <span class="icon-bar glyphicon glyphicon-menu-hamburger"></span>
+      </button>
+    </div>
+    <div id="navi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <!--<li class="header_button">
-          <%= link_to "ボタン1" , "#" %>
-        </li>
-        <li class="header_button">
-          <%= link_to "ボタン2" , "#" %>
-        </li>-->
         <% if logged_in? %>
-          <li class="home_button">
+          <li>
             <%= link_to user_path(current_user.id), { :class => "btn button_settings" } do %>
               <i class="glyphicon glyphicon-home"></i> ホーム
             <% end %>
           </li>
-          <li class="setting_button">
+          <li>
             <%= link_to edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
               <i class="glyphicon glyphicon-cog"></i> 設定
             <% end %>
           </li>
         <% else %>
-          <li class="login_button">
+          <li>
             <%= link_to 'ログイン', login_path, { :class => "btn button_settings" } %>
           </li>
         <% end %>
       </ul>
-    </nav>
+    </div>
   </div>
   <div class="border_test">
   </div>
