@@ -49,7 +49,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :success
   end
-=end
+
+  test "should show user has no books" do
+    get user_url(@no_books_user)
+    books = Book.where(user: @no_books_user)
+    assert_equal books.size, 0
+    assert_response :success
+  end
+
+  test "should destroy user" do
+    assert_difference('User.count', -1) do
+      delete user_url(@user)
+    end
+    assert_redirected_to users_url
+    return
+  end
+
   test "should redirect edit when not logged in" do
     get edit_user_path(@user)
     assert_not flash.empty?
@@ -61,7 +76,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to login_url
   end
-=begin    
+=begin
   test "should redirect edit when logged in as wrong user" do
     log_in_as(@other_user)
     get edit_user_path(@user)

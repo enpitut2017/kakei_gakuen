@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :logged_in_user, only: [:index, :edit, :update, :show]
-  before_action :correct_user,   only: [:edit, :update, :show]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /users
   # GET /users.json
   def index
-    return redirect_to root_path 
+    return redirect_to root_path
   end
 
   # GET /users/1
@@ -56,20 +56,29 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
+        return redirect_to user_url(@user)
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+        return
       end
+    end
+
+    if @user.update_attributes(user_params)
+        flash[:success] = "ユーザ登録情報更新"
+        redirect_to user_path
+    else
+        render 'edit'
     end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+     User.find(current_user.id).destroy
+     respond_to do |format|
+     format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+     format.json { head :no_content }
     end
   end
 
@@ -83,7 +92,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :budget)
     end
-    
+
      # ログイン済みユーザーかどうか確認
     def logged_in_user
       unless logged_in?
