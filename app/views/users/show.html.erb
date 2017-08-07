@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-xs-8 col-xs-offset-2" id="zandaka">
+<div>
+  <div class="col-sm-8 col-sm-offset-2" id="zandaka">
     <div>
       <h1>
         <strong>残高:</strong>
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4 col-sm-offset-1" id="recent">
     <h1 class="title"><strong>最近買ったもの</strong></h1>
     <% if @books.size != 0 then %>
     <table id="item_table">
@@ -31,11 +31,10 @@
           <th>金額</th>
         </tr>
       </thead>
-
       <tbody>
         <% @books.each do |book| %>
         <tr>
-          <td><%= book.created_at.strftime("%Y年%m月%d日") %></td>
+          <td><%= book.time.strftime("%Y年%m月%d日") %></td>
           <td><%= book.item %></td>
           <td><%= book.cost %></td>
         </tr>
@@ -44,29 +43,29 @@
     </table>
     <div>
     <% if @books.size != 0 then %>
-    <%= link_to 'もっと見る', books_path %>
+    <strong><%= link_to 'もっと見る', books_path %></strong>
     <% end %>
     </div>
     <% else %>
     <p>未登録です</p>
     <% end %>
   </div>
-  <div class="col-sm-6">
-    <div class="col-sm-3">
-    <p>
-      <strong>Exp:</strong>
-      <%= @user.exp %>
-    </p>
-    </div>
+  <div class="col-sm-6 col-sm-offset-1" id="chara">
     <div class="col-sm-3">
       <p>
         <strong>Level:</strong>
         <%= @user.level %>
       </p>
     </div>
-    <p>
-      <img class="img-responsive" alt="charactor" src="<%= @img_path %>" />
-    </p>
+    <div class="col-sm-3">
+      <p>
+        <strong>Exp:</strong>
+        <%= @user.exp %>
+      </p>
+    </div>
+    <div>
+      <img id="chara-img" alt="charactor" src="<%= @img_path %>" />
+    </div>
   </div>
 </div>
 <%= link_to new_book_url, id: "fab" do %>
