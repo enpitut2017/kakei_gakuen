@@ -12,12 +12,12 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     get books_url
     assert_response :success
   end
-=end
+
   test "should get new" do
     get new_book_url
     assert_response :success
   end
-=begin
+
   test "should create book" do
     log_in_as(@user)
     assert_difference('Book.count') do
@@ -26,13 +26,13 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to book_url(Book.last)
   end
-=end
+
 
   test "should show book" do
     get book_url(@book)
     assert_response :success
   end
-
+=end
   test "should get edit" do
     get edit_book_url(@book)
     assert_response :success
