@@ -96,3 +96,11 @@ footer p{
 #item_table td,th{
     padding: 2px 4px;
 }
+
+/* top_index */
+.btn-xxl {
+  padding: 20px 26px;
+  margin: 5px;
+  font-size: 25px;
+  border-radius: 8px;
+}

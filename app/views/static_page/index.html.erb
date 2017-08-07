@@ -1,8 +1,18 @@
-<div class="col-sm-12">
-  <h1 class="title"><strong>家計学園</strong></h1>
-  <%= link_to '新規アカウント作成' , new_user_path %>
-
-  <br>
-
-  <%= link_to 'ログイン' , login_path %>
+<%= stylesheet_link_tag  'custom' %>
+<div class="col-md-12">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="row">
+			<div class="well well-lg">
+				<p class="btn btn-default btn-xxl btn-block"><%= link_to '新規アカウント作成' , new_user_path %></p>
+				<div class="login">
+				<p class="btn btn-default btn-xxl btn-block"><%= link_to 'ログイン' , login_path %></p>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<p><img src="assets/logo.png" arc="logo" class="img-responsive center-block"></p>
+		</div>
+	</div>
 </div>
