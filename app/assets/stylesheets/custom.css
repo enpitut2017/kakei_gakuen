@@ -104,3 +104,17 @@ footer p{
   font-size: 25px;
   border-radius: 8px;
 }
+.jumbo {
+  background-image: url("urukususu0302.png");
+  background-color: rgba( 204, 255, 204, 0.55 );
+}
+.logo img{
+  background-color: rgba( 204, 255, 204, 0.55 );
+  padding: 10px;
+  width: 280px;
+}
+/*
+.logo_text {
+  margin: 10px;
+  background-color: rgba( 204, 255, 204, 0.55 );
+}*/
