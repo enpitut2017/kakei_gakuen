@@ -30,16 +30,21 @@ class BooksController < ApplicationController
     items = params[:items]
     costs = params[:costs]
     _times = params[:times]
-    @books = [];
-    @user = User.find(current_user.id)
-    exp = @user.exp + culcurate_exp(_times) 
-    @user.update_attribute(:exp, exp)
 
     if items == nil || costs == nil || _times == nil then
       @book = Book.new
       @book.errors[:base] << "家計簿を入力してください"
       return render :new
     end
+
+    @books = [];
+    @user = User.find(current_user.id)
+    #経験値の計算
+    exp = @user.exp + culcurate_exp(_times) 
+    @user.update_attribute(:exp, exp)
+    #レベルの計算
+    level = level_culcurate
+    @user.update_attribute(:level, level)
 
     for i in 0..items.size-1 do
       @books.push(Book.new(item: items[i], cost: costs[i], user: @user, time: _times[i]))

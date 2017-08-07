@@ -14,18 +14,13 @@ class UsersController < ApplicationController
   def show
     @lost = 0
     @rest = 0
+    @img_path = image_path(@user.level)
     books = Book.where(user: @user)
     books.each do |book|
       @lost += book.cost
     end
     @rest = @user.budget - @lost
     @books = @user.books.order("id DESC").limit(5)
-
-    @exp = @user.exp
-    @user.level = level_culcurate
-
-    
-
   end
 
   # GET /users/new
@@ -111,22 +106,5 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless @user == current_user
-    end
-        #レベル計算
-    def level_culcurate
-        exp = current_user.exp
-        if exp == nil then
-            exp = 0
-        end
-        #debugger
-
-        level = 0
-        levelup_table = [0, 10, 20]
-        size = levelup_table.size
-        tmpexp = exp
-        while (level < size) and ((tmpexp -= levelup_table[level]) >= 0) do
-            level += 1
-        end
-        return level
     end
 end
