@@ -59,6 +59,13 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+
+    if @user.update_attributes(user_params)
+        flash[:success] = "ユーザ登録情報更新"
+        redirect_to user_path
+    else
+        render 'edit'
+    end
   end
 
   # DELETE /users/1
@@ -80,5 +87,10 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :budget)
+    end
+
+    def correct_user
+        @user = User.find(params[:id])
+        redirect_to(root_path) unless current_user?(@user)
     end
 end
