@@ -37,6 +37,11 @@
         <% end %>
       </tbody>
     </table>
+    <div>
+    <% if @books.size != 0 then %>
+    <%= link_to 'もっと見る', books_path %>
+    <% end %>
+    </div>
 <% else %>
     <p>未登録です</p>
 <% end %>
@@ -54,15 +59,11 @@
       <%= @user.level %>
     </p>
     </div>
-    <p> 
+    <p>
     <img class="img-responsive" alt="charactor" src="/assets/sotai_low.png" />
     </p>
   </div>
 </div>
-
-<div>
-<%= link_to 'New', new_book_url %>
-<% if @books.size != 0 then %>
-<%= link_to 'index', books_path %>
+<%= link_to new_book_url, id: "fab" do %>
+  <i class="glyphicon glyphicon-pencil"></i>
 <% end %>
-</div>
