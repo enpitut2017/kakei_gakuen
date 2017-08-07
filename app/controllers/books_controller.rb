@@ -1,12 +1,13 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:creat, :edit, :update, :destroy, :show]
+  before_action :correct_user, only: [:creat, :edit, :update, :destroy, :show]
 
   # GET /books
   # GET /books.json
   def index
     @user = current_user 
     @books = @user.books
-    @books = Book.order('time DESC').page(params[:page]).per(10)
   end
 
   # GET /books/1
@@ -94,5 +95,20 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:item, :cost, :time)
+    end
+
+    # ログイン済みユーザーかどうか確認
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to user_path(current_user)
+      end
+    end
+
+    #正しいユーザーか確認
+    def correct_user
+      @user = User.find(Book.find(params[:id]).user_id)
+      redirect_to user_path(current_user) unless @user == current_user
     end
 end
