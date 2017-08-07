@@ -13,27 +13,27 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :user_name %>
+    <%= form.text_field :name, id: :user_name, class: 'form-control'%>
   </div>
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email, id: :user_email %>
+    <%= form.text_field :email, id: :user_email, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :password %>
-    <%= form.password_field :password, id: :user_password %>
+    <%= form.password_field :password, id: :user_password, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :password_confirmation %><br>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :budget %>
-    <%= form.number_field :budget, id: :user_budget %>
+    <%= form.label '今月の予算' %>
+    <%= form.number_field :budget, id: :user_budget, class: 'form-control' %>
   </div>
 
   <!--div class="field">
@@ -46,7 +46,7 @@
     <%= form.number_field :level, id: :user_level %>
   </div-->
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions text-center"><br>
+    <%= form.submit '登録', class: 'btn btn-primary' %>
   </div>
 <% end %>
