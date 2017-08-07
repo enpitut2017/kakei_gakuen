@@ -32,6 +32,7 @@ class BooksController < ApplicationController
     _times = params[:times]
     @books = [];
     @user = current_user
+    culcurate_exp(_times)
 
     if items == nil || costs == nil || _times == nil then
       @book = Book.new
