@@ -7,7 +7,8 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @user = current_user 
-    @books = @user.books
+    @books = @user.books.order('time DESC').page(params[:page]).per(10)
+
   end
 
   # GET /books/1
