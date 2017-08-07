@@ -8,10 +8,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @no_books_user = users(:three)
   end
 
-  test "should get index" do
-    get root_path
-    assert_response :success
-  end
 
   test "should get new" do
     get new_user_url
@@ -25,7 +21,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to user_url(User.last)
   end
-
+=begin
   test "should show user" do
     get user_url(@user)
     @lost = 0
@@ -50,16 +46,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     #残高の計算ができているかをテスト
     assert_difference('@rest', 600) do
       @rest = @user.budget - @lost
-    end
-
-    assert_response :success
-  end
-
-  test "should show user has collect books" do
-    get user_url(@user)
-    bad_books = Book.where(user: @other_user)
-    bad_books.each do |book|
-      assert_not_equal book.user, @user
     end
     assert_response :success
   end
