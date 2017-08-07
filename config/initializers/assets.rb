@@ -13,6 +13,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w( script.js )
+Rails.application.config.assets.precompile += %w( custom.css )
 Rails.application.config.assets.precompile += %w( bootstrap-datepicker.min.js )
 Rails.application.config.assets.precompile += %w( bootstrap-datepicker.min.css )
+
 
