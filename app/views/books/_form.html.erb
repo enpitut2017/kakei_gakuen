@@ -1,13 +1,13 @@
 <%= form_with(model: book, local: true) do |form| %>
-  <div id="add_items">
-  </div>
-  <div id="submit" style="display: none;">
-    <%= form.submit %>
-  </div>
+  <br>
+  <table id="add_items">
+  </table>
+  <br>
+
+  <%= form.submit class: 'btn btn-default', id: 'submit', style: 'display:none;' %>
+
   <% if book.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
       <ul>
       <% book.errors.full_messages.each do |message| %>
         <li><%= message %></li>

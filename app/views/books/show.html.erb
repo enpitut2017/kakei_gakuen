@@ -11,6 +11,10 @@
   <%= @book.cost %>
 </p>
 
+<p>
+  <strong>Time:</strong>
+  <%= @book.time.strftime("%Y年%m月%d日") %>
+</p>
 
 
 <%= link_to 'Edit', edit_book_path(@book) %> |

@@ -1,24 +1,22 @@
-<p id="notice"><%= notice %></p>
-<h1>ホーム画面</h1>
-
 <div class="row">
-  <div class="col-sm-6">
-    <p>
+  <div class="col-sm-12">
+    <h1 class="title">
       <strong>残高:</strong>
-      <%= @rest %>
+      <%= @rest %>円
+    </h1>
+
+    <p>
+      <strong>今月の出費　:</strong>
+      <%= @lost%>円
     </p>
 
     <p>
-      <strong>出費:</strong>
-      <%= @lost%>
+      <strong>残り予算　　:</strong>
+      <%= @user.budget %>円
     </p>
-
-    <p>
-      <strong>予算:</strong>
-      <%= @user.budget %>
-    </p>
-
-    <h1>最近買ったもの</h1>
+  </div>
+  <div class="col-sm-6">
+    <h1 class="title"><strong>最近買ったもの</strong></h1>
 <% if @books.size != 0 then %>
     <table id="item_table">
       <thead>
@@ -29,18 +27,23 @@
         </tr>
       </thead>
 
-        <tbody>
-            <% @books.each do |book| %>
-            <tr>
-            <td><%= book.created_at.strftime("%Y年%m月%d日") %></td>
-            <td><%= book.item %></td>
-            <td><%= book.cost %></td>
-          </tr>
+      <tbody>
+        <% @books.each do |book| %>
+        <tr>
+          <td><%= book.created_at.strftime("%Y年%m月%d日") %></td>
+          <td><%= book.item %></td>
+          <td><%= book.cost %></td>
+        </tr>
         <% end %>
       </tbody>
     </table>
+    <div>
+    <% if @books.size != 0 then %>
+    <%= link_to 'もっと見る', books_path %>
+    <% end %>
+    </div>
 <% else %>
-  <p>未登録です</p>
+    <p>未登録です</p>
 <% end %>
   </div>
   <div class="col-sm-6">
@@ -50,7 +53,6 @@
       <%= @user.exp %>
     </p>
     </div>
-
     <div class="col-sm-3">
     <p>
       <strong>Level:</strong>
@@ -58,12 +60,10 @@
     </p>
     </div>
     <p>
-    <img class="img-responsive" alt="charactor" src="/assets/cookie.png" />
+    <img class="img-responsive" alt="charactor" src="/assets/sotai_low.png" />
     </p>
   </div>
 </div>
-
-<div>
-<%= link_to 'New', new_book_url %> |
-<%= link_to 'index', books_path %>
-</div>
+<%= link_to new_book_url, id: "fab" do %>
+  <i class="glyphicon glyphicon-pencil"></i>
+<% end %>

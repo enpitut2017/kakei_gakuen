@@ -4,13 +4,16 @@ one:
   item: MyString
   cost: 100
   user: one
+  time: '2017-8-6'
 
 two:
   item: MyString
   cost: 1
   user: two
+  time: '2017-8-6'
 
 three:
   item: MyString
   cost: 300
   user: one
+  time: '2017-8-6'
