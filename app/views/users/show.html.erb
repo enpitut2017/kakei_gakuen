@@ -1,27 +1,32 @@
 <div class="row">
-  <div class="col-sm-12">
-    <h1 class="title">
-      <strong>残高:</strong>
-      <%= @rest %>円
-    </h1>
-
-    <p>
-      <strong>今月の出費　:</strong>
-      <%= @lost%>円
-    </p>
-
-    <p>
-      <strong>残り予算　　:</strong>
-      <%= @user.budget %>円
-    </p>
+  <div class="col-xs-8 col-xs-offset-2" id="zandaka">
+    <div>
+      <h1>
+        <strong>残高:</strong>
+        <%= @rest %>円
+      </h1>
+      <div class="col-md-6 col-sm-12">
+        <h2 id="user_name"><strong><%= @user.name %>さんの家計簿</strong></h2>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <p>
+          <strong>予算　　:</strong>
+          <%= @user.budget %>円
+        </p>
+        <p>
+          <strong>今月の出費　:</strong>
+          <%= @lost%>円
+        </p>
+      </div>
+    </div>
   </div>
   <div class="col-sm-6">
     <h1 class="title"><strong>最近買ったもの</strong></h1>
-<% if @books.size != 0 then %>
+    <% if @books.size != 0 then %>
     <table id="item_table">
       <thead>
         <tr>
-          <th>日付</th><!--日付!-->
+          <th>日付</th>
           <th>件名</th>
           <th>金額</th>
         </tr>
@@ -42,9 +47,9 @@
     <%= link_to 'もっと見る', books_path %>
     <% end %>
     </div>
-<% else %>
+    <% else %>
     <p>未登録です</p>
-<% end %>
+    <% end %>
   </div>
   <div class="col-sm-6">
     <div class="col-sm-3">
@@ -54,16 +59,16 @@
     </p>
     </div>
     <div class="col-sm-3">
-    <p>
-      <strong>Level:</strong>
-      <%= @user.level %>
-    </p>
+      <p>
+        <strong>Level:</strong>
+        <%= @user.level %>
+      </p>
     </div>
     <p>
-    <img class="img-responsive" alt="charactor" src="/assets/sotai_low.png" />
+      <img class="img-responsive" alt="charactor" src="/assets/sotai_low.png" />
     </p>
   </div>
 </div>
 <%= link_to new_book_url, id: "fab" do %>
-  <i class="glyphicon glyphicon-pencil"></i>
+<i class="glyphicon glyphicon-pencil"></i>
 <% end %>
