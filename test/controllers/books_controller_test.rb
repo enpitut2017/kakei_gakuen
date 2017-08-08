@@ -6,6 +6,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     @book = books(:one)
     @user = users(:one)
   end
+
 =begin
   test "should get index" do
     log_in_as(@user)
@@ -48,7 +49,8 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 #      delete book_url(@book)
 #    end
 
+
     assert_redirected_to books_url
   end
-
+=end
 end
