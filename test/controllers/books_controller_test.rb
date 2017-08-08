@@ -48,7 +48,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 #      delete book_url(@book)
 #    end
 
-    assert_redirected_to books_url
-  end
+#    assert_redirected_to books_url
+#  end
 
 end
