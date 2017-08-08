@@ -6,6 +6,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     @book = books(:one)
     @user = users(:one)
   end
+
 =begin
   test "should get index" do
     log_in_as(@user)
