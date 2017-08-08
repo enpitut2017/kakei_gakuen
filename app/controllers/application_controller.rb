@@ -64,16 +64,16 @@ class ApplicationController < ActionController::Base
 
     #403エラー
     def error_403
-        return render :template => '/error/403', :layout => true, :status => 404
+        return render :template => '/error/error_403', :layout => true, :status => 403
     end
 
     #404エラー
     def error_404
-        return render :template => '/error/404', :layout => true, :status => 404
+        return render :template => '/error/error_404', :layout => true, :status => 404
     end
 
     #500エラー
     def error_500
-        return render :template => '/error/500', :layout => true, :status => 500
+        return render :template => '/error/error_500', :layout => true, :status => 500
     end
 end
