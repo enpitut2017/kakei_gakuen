@@ -153,14 +153,40 @@ footer p{
   border-radius: 8px;
 }
 .jumbo {
-  background-image: url("top_sotaichan.png");
+  background-image: url("top_sotaichan_m.png");
+  background-position: center;
   background-size: cover;
-  background-color: rgba( 204, 255, 204, 0.55 );
+  background-color: #fff;
+  border: 3px solid #FC0C60;
+  box-shadow: 0 0.5vw 1vw 0vw rgba(0,0,0,0.3);
 }
+/*@media only screen and (min-width: 640px) {
+  .jumbo {
+    background-image: url("top_sotaichan_sm.png");
+  }
+}
+@media only screen and (max-width: 640px) {
+  .jumbo {
+    background-image: url("top_sotaichan.png");
+  }
+}*/
 .logo img{
-  background-color: rgba( 204, 255, 204, 0.55 );
-  padding: 10px;
-  width: 280px;
+  width: 320px;
+  margin: 10px;
+}
+.logo_text {
+  margin: 10px;
+  padding: 30px;
+  font-family: "Rounded Mplus 1c";
+  font-size: 20px;
+  color: #444;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0.5vw 1vw 0vw rgba(0,0,0,0.3);
+}
+.btn-default{
+  margin: 10px;
+  box-shadow: 0 0.5vw 1vw 0vw rgba(0,0,0,0.3);
 }
 
 /*books*/
@@ -169,10 +195,3 @@ footer p{
   margin: 18px 0;
   font-family: "Rounded Mplus 1c";
 }
-
-
-/*
-.logo_text {
-  margin: 10px;
-  background-color: rgba( 204, 255, 204, 0.55 );
-}*/
