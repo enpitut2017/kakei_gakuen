@@ -103,7 +103,7 @@ class BooksController < ApplicationController
       unless logged_in?
         store_location
         flash[:danger] = "Please log in."
-        redirect_to user_path(current_user)
+        redirect_to login_path
       end
     end
 
