@@ -4,9 +4,6 @@
       <%
         year="" 
         month=""
-        day = ""
-      %>
-<% @books.each do |book| %>
     <%if book.time.strftime("%-Y") != year then%>
     <div class="col-sm-12">
       <h2 id="books_text"><%= book.time.strftime("%-Y年") %></h2>
