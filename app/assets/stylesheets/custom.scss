@@ -35,7 +35,8 @@ header{
   text-align: center;
 }
 .button_settings{
-  background-color: rgba(255,236,210,0.5);
+  background-color: rgba(255,236,210,1);
+  border: 1px solid #999;
 }
 
 .border_test{
@@ -71,7 +72,7 @@ footer p{
 /* users/show */
 #zandaka{
   background-color: rgba(255,255,255,0.5);
-  border-radius: 10px;
+  border-radius: 2px;
   padding-bottom: 15px;
   box-shadow: 0 5px 10px 0vw rgba(0,0,0,0.3);
   margin-top: 10px;
@@ -95,7 +96,7 @@ footer p{
 }
 #recent{
   background-color: rgba(255,255,255,0.5);
-  border-radius: 10px;
+  border-radius: 2px;
   padding-bottom: 15px;
   box-shadow: 0 5px 10px 0vw rgba(0,0,0,0.3);
   margin-top: 10px;
@@ -103,7 +104,7 @@ footer p{
 }
 #chara{
   background-color: rgba(255,255,255,0.5);
-  border-radius: 10px;
+  border-radius: 2px;
   padding-bottom: 15px;
   box-shadow: 0 5px 10px 0vw rgba(0,0,0,0.3);
   margin-top: 10px;
@@ -153,40 +154,40 @@ footer p{
   border-radius: 8px;
 }
 .jumbo {
-  background-image: url("top_sotaichan_m.png");
   background-position: center;
   background-size: cover;
   background-color: #fff;
-  border: 3px solid #FC0C60;
   box-shadow: 0 0.5vw 1vw 0vw rgba(0,0,0,0.3);
 }
-/*@media only screen and (min-width: 640px) {
-  .jumbo {
-    background-image: url("top_sotaichan_sm.png");
-  }
-}
-@media only screen and (max-width: 640px) {
-  .jumbo {
-    background-image: url("top_sotaichan.png");
-  }
-}*/
-.logo img{
-  width: 320px;
-  margin: 10px;
+.logo_img{
+  width: 380px;
+  margin-top: 120px;
+  padding: 20px;
 }
 .logo_text {
-  margin: 10px;
-  padding: 30px;
+  margin: 40px 10px 10px 10px;
+  font-size: 40px;
+  color: #222;
+  text-align: center;
   font-family: "Rounded Mplus 1c";
-  font-size: 20px;
-  color: #444;
-  border-radius: 10px;
-  background-color: rgba(255,255,255,0.7);
-  box-shadow: 0 0.5vw 1vw 0vw rgba(0,0,0,0.3);
 }
-.btn-default{
-  margin: 10px;
-  box-shadow: 0 0.5vw 1vw 0vw rgba(0,0,0,0.3);
+.btn-signup{
+  text-align: center;
+  margin-top: 30px;
+}
+.logo{
+  text-align: center;
+}
+.top_box{
+  height: 800px;
+}
+#top_girl{
+  display: block;
+  position: fixed;
+  width: 25vw;
+  height: 12vw;
+  right: 10vw;
+  bottom: 18vw;
 }
 
 /*books*/
