@@ -1,0 +1,8 @@
+ja:
+  attributes:
+    name:   名前
+    email: メールアドレス
+    budget: 残高
+    item: 商品
+    cost: 値段
+    password: パスワード
