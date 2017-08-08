@@ -1,9 +1,31 @@
-<div class="col-sm-12">
-  <h1 class="title">Editing User</h1>
-
-  <%= render 'form', user: @user %>
-
-  <%= link_to '戻る', @user %> |
-  <%= link_to 'ログアウト', login_path %> |
-  <%= link_to '退会', retire_path %>
+<div class="row">
+  <br>
+  <div class="well col-md-6 col-md-offset-3">
+    <%= render 'form', user: @user %>
+  </div>
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <%= link_to 'ログアウト', logout_path, class: 'btn btn-default' %>
+    <%= link_to '退会', {}, onclick: "confirm_delete();return false;", class: 'btn btn-danger' %>
+  </div>
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <div id="modal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3 class="modal-title">アカウント削除</h4>
+              </div>
+              <div class="modal-body">
+                  <p>アカウントを削除します。</p>
+                  <p>本当によろしいですか？</p>
+                  <p class="text-danger"><small>家計簿やキャラクターの育成データは全て失われます。</small></p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                  <%= link_to '退会する', retire_path, class: 'btn btn-danger' %>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>

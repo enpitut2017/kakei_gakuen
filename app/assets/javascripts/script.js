@@ -74,3 +74,7 @@ function remove(obj) {
       $('#submit').hide();
     }
 }
+
+function confirm_delete() {
+  $("#modal").modal('show');
+}
