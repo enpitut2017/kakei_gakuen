@@ -46,7 +46,7 @@ function parse_input() {
                             +'<td><input class="form-control" type="text" name="costs[]" value="'+ costs[i] +'"></td>'
                             +'<td><input class="form-control" type="text" name="times[]" id="datepicker'+ id + i +'" value="' + yyyymmdd +'"></td>'
                             +'<td>　<span onClick="remove(this)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>'
-                            +'<tr><br>');
+                            +'<tr>');
       $('#datepicker'+ id + i).datepicker({
         format: "yyyy-mm-dd"
       });
