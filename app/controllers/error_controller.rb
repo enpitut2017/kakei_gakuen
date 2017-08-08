@@ -1,10 +1,10 @@
 class ErrorController < ApplicationController
-  def 403
+  def error_403
   end
 
-  def 404
+  def error_404
   end
 
-  def 500
+  def error_500
   end
 end
