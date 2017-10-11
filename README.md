@@ -1,4 +1,7 @@
 ## 家計学園(仮) / やっていき [![Build Status](https://travis-ci.org/enpitut2017/kakei_gakuen.svg?branch=master)](https://travis-ci.org/enpitut2017/kakei_gakuen)
+
+# 春学期
+
 ## エレベーターピッチ
 自分の残高を知りたい！既存の家計簿アプリの"続けられない"、"入力が面倒くさい"という問題を解決したい！
 お金の管理が苦手な人のための家計簿アプリ ***家計学園*** です。
@@ -39,4 +42,6 @@
 四日目のやり方をベースに、作業の分担を考慮して開発
 
 
+# 秋学期
 
+[リンクを参照](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
