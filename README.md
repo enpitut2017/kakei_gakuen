@@ -44,4 +44,4 @@
 
 # 秋学期
 
-[リンクを参照](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
+[こちらを参照](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
