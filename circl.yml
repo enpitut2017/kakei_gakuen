@@ -5,7 +5,7 @@ deployment: # デプロイ詳細
   production: # （本番）
     branch: test-circlci # Githubはここのブランチ名見てプッシュと同時に動作開始
     codedeploy: # CodeDeployの設定
-      wonder: # アプリ名
+      yatteiki_kakeigakuen:
         application_root: /
         region: ap-northeast-1
         revision_location:
