@@ -6,6 +6,8 @@ deployment: # デプロイ詳細
     branch: test-circlci # Githubはここのブランチ名見てプッシュと同時に動作開始
     codedeploy: # CodeDeployの設定
       yatteiki_kakeigakuen:
+        deployment_group: yatteiki # CodeDeployのデプロイグループ名
+        deployment_config: CodeDeployDefault.AllAtOnce
         application_root: /
         region: ap-northeast-1
         revision_location:
@@ -13,5 +15,3 @@ deployment: # デプロイ詳細
           s3_location: # S3の設定
             bucket: yatteikikakeigakuen # bucket名
             key_pattern: test/master/yatteikikakeigakuen-{BRANCH}-{SHORT_COMMIT}
-        deployment_group: yatteiki # CodeDeployのデプロイグループ名
-        deployment_config: CodeDeployDefault.AllAtOnce
