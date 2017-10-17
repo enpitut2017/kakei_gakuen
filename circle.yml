@@ -9,14 +9,12 @@ dependencies:
     - bundle install:
         timeout: 180
 database:
-  pre:
-    - mv config/database.yml.ci config/database.yml
   override:
     - bundle exec rake db:create db:schema:load RAILS_ENV=test
     - bundle exec rake db:migrate RAILS_ENV=test
 test:
   override:
-    - bundle exec rspec spec/
+    - bundle exec rails test
 deployment: # デプロイ詳細
   production: # （本番）
     branch: test-circlci # Githubはここのブランチ名見てプッシュと同時に動作開始
