@@ -1,0 +1,19 @@
+version: 0.0
+os: linux # このあたりはお約束なのでそのまま記述すること
+
+files: 
+# You can specify one or more mappings in the files section.
+  - source: /
+    destination: /home/yatteiki_deploy # 他が良ければ事前にユーザ名、ディレクトリは作成すること
+hooks:
+  BeforeInstall:
+    - location: Scripts/BeforeInstall.sh # このシェルを作成して中にMigrationなどの処理を記入
+  AfterInstall:
+    - location: Scripts/AfterInstall.sh
+      timeout: 60
+  ApplicationStart:
+    - location: Scripts/ApplicationStart.sh
+      timeout: 60
+  ValidateService:
+    - location: Scripts/ValidateService.sh
+      timeout: 60

@@ -62,18 +62,21 @@ class ApplicationController < ActionController::Base
         return path
     end
 
-    #403エラー
-    def error_403
-        return render :template => '/error/error_403', :layout => true, :status => 403
+	#403エラー
+    def error_403(e = nil)
+        logger.info "Rendering 403 with exception: #{e.message}" if e
+        redirect_to '/error_403',:status => 403
     end
 
     #404エラー
-    def error_404
-        return render :template => '/error/error_404', :layout => true, :status => 404
+    def error_404(e = nil)
+        logger.error "Rendering 404 with exception: #{e.message}" if e
+        redirect_to '/error_404',:status => 404
     end
 
     #500エラー
-    def error_500
-        return render :template => '/error/error_500', :layout => true, :status => 500
+    def error_500(e = nil)
+        logger.error "Rendering 500 with exception: #{e.message}" if e
+        redirect_to '/error_500',:status => 500
     end
 end

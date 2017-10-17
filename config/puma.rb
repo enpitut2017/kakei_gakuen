@@ -1,3 +1,9 @@
+app_dir = File.expand_path("../..", __FILE__)
+bind "unix://#{app_dir}/shared/tmp/sockets/puma.sock"
+pidfile "#{app_dir}/shared/tmp/pids/puma.pid"
+state_path "#{app_dir}/shared/tmp/pids/puma.state"
+stdout_redirect "#{app_dir}/shared/log/puma.stdout.log", "#{app_dir}/shared/log/puma.stderr.log", true
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
