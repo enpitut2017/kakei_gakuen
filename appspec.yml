@@ -4,7 +4,7 @@ os: linux # このあたりはお約束なのでそのまま記述すること
 files: 
 # You can specify one or more mappings in the files section.
   - source: /
-    destination: /home/yatteiki_deploy # 他が良ければ事前にユーザ名、ディレクトリは作成すること
+    destination: /home/yatteiki_deploy/www/yatteiki # 他が良ければ事前にユーザ名、ディレクトリは作成すること
 hooks:
   BeforeInstall:
     - location: Scripts/BeforeInstall.sh # このシェルを作成して中にMigrationなどの処理を記入
