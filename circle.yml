@@ -1,6 +1,22 @@
-test: # テストに関する記述
+machine:
+  timezone:
+    Asia/Tokyo
+  ruby:
+    version:
+      2.2.2
+dependencies:
   override:
-    - exit 0
+    - bundle install:
+        timeout: 180
+database:
+  pre:
+    - mv config/database.yml.ci config/database.yml
+  override:
+    - bundle exec rake db:create db:schema:load RAILS_ENV=test
+    - bundle exec rake db:migrate RAILS_ENV=test
+test:
+  override:
+    - bundle exec rspec spec/
 deployment: # デプロイ詳細
   production: # （本番）
     branch: test-circlci # Githubはここのブランチ名見てプッシュと同時に動作開始
