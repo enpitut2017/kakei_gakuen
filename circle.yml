@@ -3,7 +3,7 @@ machine:
     Asia/Tokyo
   ruby:
     version:
-      2.2.2
+      2.2.5
 dependencies:
   override:
     - bundle install:
