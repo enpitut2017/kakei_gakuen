@@ -1,0 +1,1 @@
+su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle install --without test development && sudo touch log/production.log && sudo chmod 777 log/production.log && bundle exec rails db:migrate'
