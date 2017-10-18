@@ -2,7 +2,7 @@
  <div class="col-xs-8">
     <H1 class="title"><strong>買ったもの</strong></H1>
       <%
-        year="" 
+        year=""
         month=""
         day = ""
       %>
@@ -30,7 +30,7 @@
             <td>　<%= book.cost %>円　</td>
             <!--<td><%#= link_to '詳細', book %></td>!-->
             <td>　　
-              <%= link_to  edit_book_path(book) do%>
+              <%= link_to edit_book_path(book) do%>
               <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
               <%end%>
             </td>

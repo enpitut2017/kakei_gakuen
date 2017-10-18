@@ -12,7 +12,7 @@
     <div id="contents" class="container">
     <!--p id="notice"><%= notice %></p-->
     <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
     <%= render 'layouts/header'%>
     <%= yield %>

@@ -1,7 +1,19 @@
 <div class="row">
   <br>
   <div class="well col-md-6 col-md-offset-3">
-    <%= render 'form', user: @user %>
+      <%= render partial: 'form', locals: {user: @user} %>
+      <!--small>初めての方はアカウントを<%= link_to "新規作成", signup_path %>してください</small-->
+
+
+        <!--div class="field">
+          <%= form.label :exp %>
+          <%= form.number_field :exp, id: :user_exp %>
+        </div>
+
+        <div class="field">
+          <%= form.label :level %>
+          <%= form.number_field :level, id: :user_level %>
+        </div-->
   </div>
   <div class="col-md-6 col-md-offset-3 text-center">
     <%= link_to 'ログアウト', logout_path, class: 'btn btn-default' %>
