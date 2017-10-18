@@ -1,1 +1,1 @@
- su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle exec puma -t 5:5 -e production -C config/puma.rb -d && bundle exec rails assets:precompile RAILS_ENV=production'
+ su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle exec puma -t 5:5 -e production -C config/puma.rb -d'
