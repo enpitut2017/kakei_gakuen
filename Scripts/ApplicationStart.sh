@@ -1,1 +1,1 @@
- su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle exec puma -t 5:5 -e production -C config/puma.rb -d'
+ su -l yatteiki_deploy -c 'cd /var/www/yatteiki &&  export SECRET_KEY_BASE=bundle exec rake secret && bundle exec puma -t 5:5 -e production -C config/puma.rb -d'
