@@ -1,20 +1,39 @@
 <div class="row">
   <br>
   <div class="well col-md-6 col-md-offset-3">
-      <%= render partial: 'form', locals: {user: @user} %>
-      <!--small>初めての方はアカウントを<%= link_to "新規作成", signup_path %>してください</small-->
+      <%= form_for(@user) do |form| %>
 
+          <div class="field">
+            <%= form.label :name %>
+            <%= form.text_field :name, id: :user_name, class: 'form-control'%>
+          </div>
 
-        <!--div class="field">
-          <%= form.label :exp %>
-          <%= form.number_field :exp, id: :user_exp %>
+          <div class="field">
+            <%= form.label :email %>
+            <%= form.text_field :email, id: :user_email, class: 'form-control' %>
+          </div>
+
+          <div class="field">
+              <%= form.label :password, "パスワード" %>
+            <%= form.password_field :password, id: :user_password, class: 'form-control', value: @user.password %>
+          </div>
+
+          <div class="field">
+              <%= form.label :password_confirmation, "再確認用パスワード" %>
+            <%= form.password_field :password_confirmation, class: 'form-control', value: @user.password %>
+          </div>
+
+          <div class="field">
+            <%= form.label '今月の予算' %>
+            <%= form.number_field :budget, id: :user_budget, class: 'form-control' %>
+          </div>
+
+          <div class="actions text-center"><br>
+          <%= form.submit '登録', class: 'btn btn-primary' %>
         </div>
 
-        <div class="field">
-          <%= form.label :level %>
-          <%= form.number_field :level, id: :user_level %>
-        </div-->
-  </div>
+      <%end%>
+ </div>
   <div class="col-md-6 col-md-offset-3 text-center">
     <%= link_to 'ログアウト', logout_path, class: 'btn btn-default' %>
     <%= link_to '退会', {}, onclick: "confirm_delete();return false;", class: 'btn btn-danger' %>
