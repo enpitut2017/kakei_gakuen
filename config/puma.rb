@@ -1,3 +1,9 @@
+app_dir = File.expand_path("../..", __FILE__)
+bind "unix:///var/www/yatteiki/shared/tmp/sockets/puma.sock"
+pidfile "/var/www/yatteiki/shared/tmp/pids/puma.pid"
+state_path "/var/www/yatteiki/shared/tmp/pids/puma.state"
+stdout_redirect "/var/www/yatteiki/shared/log/puma.stdout.log", "/var/www/yatteiki/shared/log/puma.stderr.log", true
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
