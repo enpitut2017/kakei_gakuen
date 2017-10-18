@@ -1,1 +1,2 @@
-su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle install --without test development &&  bundle exec rails db:migrate'
+sudo chown -R yatteiki /var/www/yatteiki
+su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle install --without test development &&  bundle exec rails db:migrate RAILS_ENV=production && export SECRET_KEY_BASE=bundle exec rake secret'
