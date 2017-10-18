@@ -1,2 +1,2 @@
-# sudo chown -R yatteiki_deploy /var/www/yatteiki
+sudo chown -R yatteiki_deploy /var/www/yatteiki
 su -l yatteiki_deploy -c 'cd /var/www/yatteiki && bundle install --without test development &&  bundle exec rails db:migrate RAILS_ENV=production && export SECRET_KEY_BASE=bundle exec rake secret && bundle exec rails assets:precompile RAILS_ENV=production'
