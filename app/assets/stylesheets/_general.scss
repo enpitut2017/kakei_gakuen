@@ -28,10 +28,21 @@ hr{
   border-color: $kakeired-dark;
   margin: 10px auto;
 }
+.main{
+  padding-top: 15px;
+}
 .box{
-  margin: 15px 0;
+  margin-bottom: 15px;
   border-radius: 4px;
   background-color: $white;
+}
+.title{
+  text-align: center;
+}
+.title h3{
+  display: block;
+  margin-top: 0;
+  padding-top: 30px;
 }
 
 /* Flash */
@@ -41,23 +52,23 @@ hr{
 
 /* Navi */
 .navbar{
-  height:          100px;
-  border:              0;
-  border-radius:       0;
+  height: 100px;
+  border: 0;
+  border-radius: 0;
 }
 .navbar-header{
-  height:          100px;
+  height: 100px;
 }
 .navbar-toggle{
-  margin:      33px 20px;
+  margin: 33px 20px;
 }
 #gnavi{
-  padding:             0;
-  border:              0;
+  padding: 0;
+  border: 0;
 }
 ul.nav{
-  margin:              0;
-  width:            auto;
+  margin: 0;
+  width: auto;
 }
 #logo{
   margin: 25px;
