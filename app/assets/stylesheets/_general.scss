@@ -1,0 +1,76 @@
+/* Global Variables */
+$white:                       #FFF !default;
+$black:                       #000 !default;
+
+/* color difined by Hassaku */
+$kakeigray-dark:              #2C363C !default;
+$kakeigray-middle:            #434D53 !default;
+$kakeigray-light:             #9298A4 !default;
+
+$kakeired-dark:               #DD5061 !default;
+$kakeired-light:              #FF5E71 !default;
+
+$kakeiorange-light:           #EF966A !default;
+
+$kakeiemerald-dark:           #96D7CA !default;
+$kakeiemerald-light:          #AEF9E9 !default;
+
+$kakeibrown-light:            #EFFFE4 !default;
+
+/* General Settings */
+body{
+  background-color: $kakeiemerald-dark;
+}
+span{
+  display: inline-block;
+}
+hr{
+  border-color: $kakeired-dark;
+  margin: 10px auto;
+}
+.box{
+  margin: 15px 0;
+  border-radius: 4px;
+  background-color: $white;
+}
+
+/* Flash */
+#Flash{
+  background-color: $kakeiemerald-dark;
+}
+
+/* Navi */
+.navbar{
+  height:          100px;
+  border:              0;
+  border-radius:       0;
+}
+.navbar-header{
+  height:          100px;
+}
+.navbar-toggle{
+  margin:      33px 20px;
+}
+#gnavi{
+  padding:             0;
+  border:              0;
+}
+ul.nav{
+  margin:              0;
+  width:            auto;
+}
+#logo{
+  margin: 25px;
+}
+
+/* Footer */
+#Footer{
+  height: 60px;
+  background-color: $kakeigray-dark;
+}
+#Footer p{
+  margin: 0;
+  color: $white;
+  text-align: center;
+  line-height: 58px;
+}
