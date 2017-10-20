@@ -48,8 +48,8 @@ function parse_input() {
     }
     for (i=0; i<items.length; i++) {
       $('#add_items').append('<tr>'
-                            +'<td><input class="form-control" type="text" name="items[]" value="'+ items[i] +'"></td>'
-                            +'<td><input class="form-control" type="text" name="costs[]" value="' + costs[i] + '"></td>'
+                            +'<td><input class="form-control" type="text" name="items[]" value="'+ escape_html(items[i]) +'"></td>'
+                            +'<td><input class="form-control" type="text" name="costs[]" value="' + escape_html(costs[i]) + '"></td>'
                             +'<td><input class="form-control" type="text" name="times[]" id="datepicker'+ id + i +'" value="' + yyyymmdd +'"></td>'
                             +'<td>　<span onClick="remove(this)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>'
                             +'<tr>');
@@ -83,4 +83,20 @@ function remove(obj) {
 
 function confirm_delete() {
   $("#modal").modal('show');
+}
+
+function escape_html(string) {
+  if(typeof string !== 'string') {
+    return string;
+  }
+  return string.replace(/[&'`"<>]/g, function(match) {
+    return {
+      '&': '&amp;',
+      "'": '&#x27;',
+      '`': '&#x60;',
+      '"': '&quot;',
+      '<': '&lt;',
+      '>': '&gt;',
+    }[match]
+  });
 }
