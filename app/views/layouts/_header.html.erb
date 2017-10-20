@@ -1,7 +1,8 @@
 <header class="navbar navbar-fixed-top">
   <div id="header_container" class="container">
-    <%= link_to image_tag('/assets/logo-m.png', {:id => "logo", :border => '0', :alt => '家計学園'}), root_path %>
+    <%#= link_to image_tag('/assets/logo-m.png', {:id => "logo", :border => '0', :alt => '家計学園'}), user_path(current_user.id) %>
     <% if logged_in? %>
+    <%= link_to image_tag('/assets/logo-m.png', {:id => "logo", :border => '0', :alt => '家計学園'}), user_path(current_user.id) %>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navi">
           <span class="sr-only">メニュー</span>
@@ -23,6 +24,7 @@
         </ul>
       </div>
     <% else %>
+    <%= link_to image_tag('/assets/logo-m.png', {:id => "logo", :border => '0', :alt => '家計学園'}), root_path %>
       <ul class="nav navbar-nav navbar-right">
         <li>
           <%= link_to 'ログイン', login_path, { :class => "btn button_settings" } %>
