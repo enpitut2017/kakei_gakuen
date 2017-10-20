@@ -84,6 +84,7 @@ Rails.application.configure do
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+	logger.extend ActiveSupport::Logger.broadcast('/var/www/log/rails/production_error.log')
   end
 
   # Do not dump schema after migrations.
