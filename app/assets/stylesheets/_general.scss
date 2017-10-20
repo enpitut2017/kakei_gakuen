@@ -44,6 +44,32 @@ hr{
   margin-top: 0;
   padding-top: 30px;
 }
+.triangle-top{
+  position: relative;
+  width: 0;
+  height: 0;
+  top: -40px;
+  margin:auto;
+  margin-bottom: -40px;
+  left: 0;
+  right: 0;
+  border-bottom: 40px solid $white;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+}
+.triangle-bottom{
+  position: relative;
+  width: 0;
+  height: 0;
+  bottom: -40px;
+  margin:auto;
+  margin-top: -40px;
+  left: 0;
+  right: 0;
+  border-top: 40px solid $white;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+}
 
 /* Flash */
 #Flash{

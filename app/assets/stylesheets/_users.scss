@@ -1,6 +1,39 @@
 /* Users */
 
 /* show */
-.title-middle{
+#Information{
+  height: 250px;
+}
+#Information span.title-middle{
   font-weight: 700;
+}
+
+
+
+
+#Charactor-bg{
+  height: 700px;
+  background-image: image-url("charactor-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px 4px 0 0;
+}
+#Charactor-img{
+  display: block;
+  height: 600px;
+  position: absolute;
+  margin: auto;
+  padding-bottom: 40px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+#Charactor-balloon{
+  height: 100px;
+  background-color: $white;
+  border-radius: 0 0 4px 4px;
+}
+#Charactor-balloon div.triangle-top{
+  margin-left: 15%;
 }

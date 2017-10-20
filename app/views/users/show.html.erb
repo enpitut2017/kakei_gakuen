@@ -1,7 +1,7 @@
 <div class="container main">
   <div class="row">
-    <div class="col-sm-6 col-xs-12">
-      <div id="Infomation" class="box">
+    <div class="col-md-6 col-sm-12">
+      <div id="Information" class="box">
         <div class="title">
           <div>
             <h3><%= @user.name %>さんの家計簿</h3>
@@ -17,8 +17,17 @@
       </div>
       <div id="PurchaseForm" class="box">PurchaseForm</div>
     </div>
-    <div class="col-sm-6 col-xs-12">
-      <div id="Charactor" class="box">Charactor<br>hoge<br>poyo</div>
+    <div class="col-md-6 col-sm-12">
+      <div id="Charactor" class="box">
+        <div id="Charactor-bg">
+          <img id="Charactor-img" alt="charactor" src="<%= @img_path %>" />
+        </div>
+        <div id="Charactor-balloon">
+          <div class="triangle-top"></div>
+          <h4>素体ちゃん</h4>
+          <p>「あああああああああああああああ」</p>
+        </div>
+      </div>
     </div>
     <div class="col-xs-12">
       <div id="PurchaseHistory" class="box">PurchaseHistory</div>
