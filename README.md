@@ -1,6 +1,6 @@
 ## 家計学園(仮) / やっていき  
 Heroku [![Build Status](https://travis-ci.org/enpitut2017/kakei_gakuen.svg?branch=master)](https://travis-ci.org/enpitut2017/kakei_gakuen)
-AWS [![aws Build Status](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master)]
+AWS [![CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master.svg?style=svg)](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master)
 
 # 春学期
 

@@ -1,5 +1,5 @@
 app_dir = File.expand_path("../..", __FILE__)
-if Rails.env == "production"
+if ENV.fetch("RAILS_ENV") == "production"
   bind "unix:///var/www/yatteiki/shared/tmp/sockets/puma.sock"
   pidfile "/var/www/yatteiki/shared/tmp/pids/puma.pid"
   state_path "/var/www/yatteiki/shared/tmp/pids/puma.state"
