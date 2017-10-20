@@ -1,9 +1,0 @@
-*.o
-*.bundle
-*.so
-ext/mri/Makefile
-doc
-pkg
-*.class
-tmp/
-.DS_Store

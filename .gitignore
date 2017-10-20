@@ -104,6 +104,7 @@ config/initializers/secret_token.rb
 ## Environment normalization:
 /.bundle
 /vendor/bundle
+/vendor/bundler
 
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
@@ -184,4 +185,3 @@ Session.vim
 tags
 
 # End of https://www.gitignore.io/api/osx,vim,ruby,rails,emacs
-
