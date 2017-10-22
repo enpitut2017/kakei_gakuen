@@ -48,4 +48,4 @@ AWS [![CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master.sv
 
 # 秋学期
 
-[こちらを参照](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
+[活動内容](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
