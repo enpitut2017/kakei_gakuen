@@ -29,3 +29,7 @@ deployment: # デプロイ詳細
           s3_location: # S3の設定
             bucket: yatteikikakeigakuen # bucket名
             key_pattern: test/master/yatteikikakeigakuen-{BRANCH}-{SHORT_COMMIT}
+  staging: # （開発）
+    branch: setup-staging # Githubはここのブランチ名見てプッシュと同時に動作開始
+    commands: # CodeDeployの設定
+      - ssh -I yatteiki 210.140.216.214 script/script.sh
