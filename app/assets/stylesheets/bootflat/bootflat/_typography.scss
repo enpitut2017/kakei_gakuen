@@ -21,11 +21,8 @@ $image-radius:               4px !default;
    */
 
   body {
-    font-family: 'Noto Sans Japanese', sans-serif;
     color: $body-font-color;
     background-color: $body-background-color;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: auto;
   }
   a {
     color: $link-font-color;

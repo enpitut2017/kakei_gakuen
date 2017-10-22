@@ -2,13 +2,28 @@
 
 /* show */
 #Information{
-  height: 250px;
-}
-#Information span.title-middle{
-  font-weight: 700;
+  height: 300px;
+
+  span.title-middle{
+    font-size: 25px;
+  }
+  span.title-rest{
+    font-size: 40pt;
+  }
 }
 
 
+#PurchaseForm{
+  height: 485px;
+
+  .btn{
+    width: 160px;
+    height: 54px;
+    margin: 5px 10px;
+    line-height: 50px;
+    font-size: 16px;
+  }
+}
 
 
 #Charactor-bg{
@@ -33,7 +48,51 @@
   height: 100px;
   background-color: $white;
   border-radius: 0 0 4px 4px;
+
+  div.triangle-top{
+    margin-left: 15%;
+  }
+  h4{
+    margin: 15px 0 5px 30px;
+    color: $kakeigray-light;
+    font-size: 12pt;
+    font-weight: 500;
+  }
+  p{
+    font-size: 20pt;
+    text-align: center;
+  }
 }
-#Charactor-balloon div.triangle-top{
-  margin-left: 15%;
+
+
+#PurchaseHistory{
+  .timeline{
+    padding: 15px;
+    .events{
+      padding: 0;
+      background-color: $kakeiemerald-light;
+      table{
+        width: 90%;
+        margin: 5%;
+        td{
+          padding: 0 10px;
+        }
+        th{
+          padding: 0 10px;
+        }
+        .purchase-left{
+          text-align: left;
+        }
+        .purchase-middle{
+          text-align: center;
+        }
+        .purchase-right{
+          text-align: right;
+        }
+        .purchase-sum{
+          border-top: solid 1px $kakeiemerald-dark;
+        }
+      }
+    }
+  }
 }

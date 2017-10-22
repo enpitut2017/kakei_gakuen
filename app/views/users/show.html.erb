@@ -3,19 +3,44 @@
     <div class="col-md-6 col-sm-12">
       <div id="Information" class="box">
         <div class="title">
-          <div>
-            <h3><%= @user.name %>さんの家計簿</h3>
-            <hr width="300px">
-            <p>
-              <span class="title-middle">今月の残高：</span>
-              <span class="title-rest"><%= @rest %>円</span>
-            </p>
-            <p><span>今月の予算：</span><span><%= @user.budget %>円</span></p>
-            <p><span>今月の出費：</span><span><%= @lost%>円</span></p>
-          </div>
+          <h3><%= @user.name %>さんの家計簿</h3>
+          <hr width="300px">
+        </div>
+        <div>
+          <p>
+            <span class="title-middle noto-bold">今月の残高：</span>
+            <span class="title-rest noto-bold"><%= @rest %>円</span>
+          </p>
+          <p><span class="title-middle text-lightgray noto-light">今月の予算：<%= @user.budget %>円</span></p>
+          <p><span class="title-middle text-lightgray noto-light">今月の出費：<%= @lost%>円</span></p>
         </div>
       </div>
-      <div id="PurchaseForm" class="box">PurchaseForm</div>
+      <div id="PurchaseForm" class="box">
+        <div class="title">
+          <h3>入出金を記録</h3>
+          <hr width="300px">
+        </div>
+        <div>
+          <form action="/books" accept-charset="UTF-8" method="post">
+            <!--要否を確認-->
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="authenticity_token" value="bh+KyNwkXQGsf20i70F3L+gooNy3SA3cvKRK50bk4Zpw/xlKW/MWUHH2UX6RKLHNaSSp52zxNUn44lOPqYlz8A==">
+            <table>
+              <tr>
+                <h4 class="text-lightgray noto-light">品目<input class="form-text" type="text" name="items[]"></h4>
+              </tr>
+              <tr>
+                <h4 class="text-lightgray noto-light">金額<input class="form-text" type="text" name="costs[]"></h4>
+              </tr>
+              <tr>
+                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]"></h4>
+              </tr>
+            </table>
+            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
+            <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
+          </form>
+        </div>
+      </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div id="Charactor" class="box">
@@ -25,12 +50,47 @@
         <div id="Charactor-balloon">
           <div class="triangle-top"></div>
           <h4>素体ちゃん</h4>
-          <p>「あああああああああああああああ」</p>
+          <p>「今日も一日がんばろう！」</p>
         </div>
       </div>
     </div>
     <div class="col-xs-12">
-      <div id="PurchaseHistory" class="box">PurchaseHistory</div>
+      <div id="PurchaseHistory" class="box">
+        <div class="title">
+          <h3>今月の家計簿</h3>
+          <hr width="300px">
+        </div>
+        <div class="timeline">
+          <dl>
+            <dt>Oct 2017</dt>
+            <dd class="pos-right clearfix">
+						  <div class="circ"></div>
+						  <div class="time">Oct 15</div>
+						  <div class="events">
+							  <div class="events-body">
+                  <table>
+                    <% sum = 0 %>
+                    <% @books.each do |book| %>
+                    <tr>
+                      <td class="purchase-left noto-demilight"><%= book.item %></td>
+                      <td class="purchase-middle noto-demilight">:</td>
+                      <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
+                      <% sum += book.cost %>
+                    </tr>
+                    <% end %>
+                    <tr class="purchase-sum">
+                      <th class="purchase-left noto-bold">合計</th>
+                      <th class="purchase-middle noto-bold">:</th>
+                      <th class="purchase-right noto-bold"><%= sum %>円</th>
+                    </tr>
+                  </table>
+							  </div>
+							  <!--<h4 class="events-heading">Bootstrap</h4>-->
+						  </div>
+					  </dd>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </div>

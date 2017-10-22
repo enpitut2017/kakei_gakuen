@@ -12,13 +12,14 @@ $kakeired-light:              #FF5E71 !default;
 
 $kakeiorange-light:           #EF966A !default;
 
-$kakeiemerald-dark:           #96D7CA !default;
+$kakeiemerald-dark:           #69D7CA !default;
 $kakeiemerald-light:          #AEF9E9 !default;
 
 $kakeibrown-light:            #EFFFE4 !default;
 
 /* General Settings */
 body{
+  font-family: Noto Sans Japanese,Noto Sans JP,sans-serif;
   background-color: $kakeiemerald-dark;
 }
 span{
@@ -35,6 +36,7 @@ hr{
   margin-bottom: 15px;
   border-radius: 4px;
   background-color: $white;
+  text-align: center;
 }
 .title{
   text-align: center;
@@ -70,10 +72,44 @@ hr{
   border-left: 40px solid transparent;
   border-right: 40px solid transparent;
 }
+.form-text{
+  height: 40px;
+  width: 270px;
+  margin: 5px 0 5px 30px;
+  padding: 0 10px;
+  border: solid 1px $kakeigray-light;
+  border-radius: 4px;
+
+  &:focus{
+  border-color: $kakeiemerald-dark;
+  }
+}
+
+/* Typography */
+.noto-thin      { font-weight: 100; }
+.noto-light     { font-weight: 300; }
+.noto-demilight { font-weight: 350; }
+.noto-regular   { font-weight: 400; }
+.noto-medium    { font-weight: 500; }
+.noto-bold       { font-weight: 700; }
+.noto-black     { font-weight: 900; }
+
+
+.text-darkgray{
+  color: $kakeigray-dark;
+}
+.text-middlegray{
+  color: $kakeigray-middle;
+}
+.text-lightgray{
+  color: $kakeigray-light;
+}
+
 
 /* Flash */
 #Flash{
-  background-color: $kakeiemerald-dark;
+  background-color: rgba(256, 256, 256, 0.5);
+  text-align: center;
 }
 
 /* Navi */
@@ -100,14 +136,20 @@ ul.nav{
   margin: 25px;
 }
 
+/* Contents */
+#Contents{
+  min-height: 820px;
+}
+
 /* Footer */
 #Footer{
   height: 60px;
   background-color: $kakeigray-dark;
-}
-#Footer p{
+
+  p{
   margin: 0;
   color: $white;
   text-align: center;
   line-height: 58px;
+  }
 }

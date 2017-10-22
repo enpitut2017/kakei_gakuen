@@ -1,10 +1,10 @@
 // Variables
 //------------------------------------------------------
-$timeline-division-background-color:      $mediumgray-light !default;
-$timeline-years-background-color:		  $mediumgray-dark !default;
+$timeline-division-background-color:      $kakeiorange-light !default;
+$timeline-years-background-color:		      $kakeiorange-light !default;
 $timeline-years-color:                    $white !default;
-$timeline-dotted-color:                   $aqua-light !default;
-$timeline-dotted-border-color:            $lightgray-light !default;
+$timeline-dotted-color:                   $kakeired-dark !default;
+$timeline-dotted-border-color:            $white !default;
 
 $timeline-radius:                         4px !default;
 
@@ -141,7 +141,7 @@ $timeline-radius:                         4px !default;
 		  }
 	  }
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 9999px) {
 		.timeline dl {
 			&:before {
 				left: 60px;
