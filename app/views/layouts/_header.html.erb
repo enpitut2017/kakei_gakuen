@@ -17,9 +17,14 @@
             <% end %>
           </li>
           <li>
-            <%= link_to edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
+            <%= link_to profile_edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
               <i class="glyphicon glyphicon-cog"></i> 設定
             <% end %>
+          </li>
+          <li>
+              <%= link_to budget_edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
+                <i class="glyphicon glyphicon-cog"></i> 金設定
+              <% end %>
           </li>
         </ul>
       </div>
