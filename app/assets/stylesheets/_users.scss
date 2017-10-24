@@ -53,7 +53,9 @@
     margin-left: 15%;
   }
   h4{
-    margin: 15px 0 5px 30px;
+    margin: 15px 0 5px 0;
+    padding: 0 15%;
+    text-align: left;
     color: $kakeigray-light;
     font-size: 12pt;
     font-weight: 500;
@@ -70,29 +72,41 @@
     padding: 15px;
     .events{
       padding: 0;
+      font-size: 20px;
       background-color: $kakeiemerald-light;
       table{
         width: 90%;
         margin: 5%;
         td{
-          padding: 0 10px;
+          color: $kakeigray-light;
+          padding: 0;
         }
         th{
-          padding: 0 10px;
+          color: $kakeigray-dark;
+          padding: 0;
         }
         .purchase-left{
+          width: 45%;
           text-align: left;
         }
         .purchase-middle{
+          width: 10%;
           text-align: center;
         }
         .purchase-right{
+          width: 45%;
           text-align: right;
         }
         .purchase-sum{
+          padding: 5px 0;
+          margin: 5px 0;
           border-top: solid 1px $kakeiemerald-dark;
         }
       }
     }
+  }
+  .purchase-link{
+    padding: 10px;
+    font-size: 20px;
   }
 }

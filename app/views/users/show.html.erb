@@ -57,20 +57,49 @@
     <div class="col-xs-12">
       <div id="PurchaseHistory" class="box">
         <div class="title">
-          <h3>今月の家計簿</h3>
+          <h3>最近の家計簿</h3>
           <hr width="300px">
         </div>
+
+        <%
+        @books = Book.order(time: "DESC")
+        timesHash = Hash.new
+        @books.each do |book|
+           if !timesHash.has_key?(book.time)
+             timesHash[book.time] = [[book.item], [book.cost]]
+           else
+             timesHash[book.time][0].push(book.item)
+             timesHash[book.time][1].push(book.cost)
+           end
+           previousTime = book.time
+         end
+        %>
+
         <div class="timeline">
           <dl>
-            <dt>Oct 2017</dt>
+            <%
+            month = 0
+            counter = 0
+            timesHash.each{|key, value|
+              if counter == 10
+                break
+              end
+              if month != key.month
+            %>
+            <dt>
+              <%= key.year.to_s + "年" + key.month.to_s + "月" %>
+            </dt>
+            <% end %>
             <dd class="pos-right clearfix">
 						  <div class="circ"></div>
-						  <div class="time">Oct 15</div>
+						  <div class="time">
+                <%= key.month.to_s + "/" + key.day.to_s %>
+              </div>
 						  <div class="events">
 							  <div class="events-body">
                   <table>
                     <% sum = 0 %>
-                    <% @books.each do |book| %>
+                    <% @books.where(time: key).each do |book| %>
                     <tr>
                       <td class="purchase-left noto-demilight"><%= book.item %></td>
                       <td class="purchase-middle noto-demilight">:</td>
@@ -85,10 +114,15 @@
                     </tr>
                   </table>
 							  </div>
-							  <!--<h4 class="events-heading">Bootstrap</h4>-->
 						  </div>
 					  </dd>
+            <% counter += 1
+               month = key.month
+               } %>
           </dl>
+        </div>
+        <div class="purchase-link text-darkgray noto-regular">
+          <%= link_to 'もっと見る', books_path %>
         </div>
       </div>
     </div>
