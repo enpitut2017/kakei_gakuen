@@ -32,4 +32,4 @@ deployment: # デプロイ詳細
   staging: # （開発）
     branch: setup-staging # Githubはここのブランチ名見てプッシュと同時に動作開始
     commands: # CodeDeployの設定
-      - ssh -I yatteiki 210.140.216.214 script/script.sh
+      - ssh -i ~/.ssh/id_210.140.216.214 yatteiki@210.140.216.21 Script/script.sh
