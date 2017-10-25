@@ -11,7 +11,7 @@ Rails.application.routes.draw do
             get 'profile_edit'
             patch 'profile_update'
             put 'profile_update'
-            
+
             get 'budget_edit'
             patch 'budget_update'
             put 'budget_update'
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     #end
 
      #static_page
-    #get 'static_page/index'
+    get 'static_page/index'
     get '/index.html', to:'static_page#index'
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
