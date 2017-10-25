@@ -43,7 +43,7 @@ class BooksController < ApplicationController
     @user = User.find(current_user.id)
 
     #経験値の計算
-    coin = @user.coin + culcrate_coin(_times, costs)
+    coin = @user.coin + culcurate_coin(_times, costs)
     @user.update_attribute(:coin, coin)
 
     for i in 0..items.size-1 do
