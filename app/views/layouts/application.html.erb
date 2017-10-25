@@ -6,20 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="contents" class="container">
-    <!--p id="notice"><%= notice %></p-->
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= render 'layouts/header'%>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div id="Flash"><%= notice %></div>
+    <div id="Contents">
+      <%= yield %>
     </div>
-<!--    <%= link_to new_book_url, id: "fab" do %>
-      <i class="glyphicon glyphicon-pencil"></i>
-    <% end %>   -->
-    <%= render 'layouts/footer'%>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

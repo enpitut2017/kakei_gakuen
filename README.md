@@ -10,7 +10,7 @@ AWS [![CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master.sv
 家計学園は通常の手入力に加えて、音声入力で簡単に買い物の記録をすることができます。また、残高などをゲーム的に管理することで継続的に家計簿を記録する事ができます。
 ## URL
 * [サービスのURL](https://nameless-springs-98046.herokuapp.com/)
-* [awsサービス](http://kakeigakuen.xyz/)
+* [awsサービス](https://kakeigakuen.xyz/)
 * [CI](https://travis-ci.org/enpitut2017/kakei_gakuen)
 * [CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/)
 * [カンバン](https://docs.google.com/spreadsheets/d/1gxHxn2aOs5fLqaxsvO0xVdqmIt4NJ-eUuDMCbEAsSuU/edit?usp=sharing)
@@ -48,4 +48,4 @@ AWS [![CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master.sv
 
 # 秋学期
 
-[こちらを参照](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
+[活動内容](https://docs.google.com/presentation/d/1phSu8RyCM7EW4UvbenHvB6Iw4dSVXNC7gjnAFmQxGgo/edit?usp=sharing)
