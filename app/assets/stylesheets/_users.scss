@@ -1,0 +1,112 @@
+/* Users */
+
+/* show */
+#Information{
+  height: 300px;
+
+  span.title-middle{
+    font-size: 25px;
+  }
+  span.title-rest{
+    font-size: 40pt;
+  }
+}
+
+
+#PurchaseForm{
+  height: 485px;
+
+  .btn{
+    width: 160px;
+    height: 54px;
+    margin: 5px 10px;
+    line-height: 50px;
+    font-size: 16px;
+  }
+}
+
+
+#Charactor-bg{
+  height: 700px;
+  background-image: image-url("charactor-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px 4px 0 0;
+}
+#Charactor-img{
+  display: block;
+  height: 600px;
+  position: absolute;
+  margin: auto;
+  padding-bottom: 40px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+#Charactor-balloon{
+  height: 100px;
+  background-color: $white;
+  border-radius: 0 0 4px 4px;
+
+  div.triangle-top{
+    margin-left: 15%;
+  }
+  h4{
+    margin: 15px 0 5px 0;
+    padding: 0 15%;
+    text-align: left;
+    color: $kakeigray-light;
+    font-size: 12pt;
+    font-weight: 500;
+  }
+  p{
+    font-size: 20pt;
+    text-align: center;
+  }
+}
+
+
+#PurchaseHistory{
+  .timeline{
+    padding: 15px;
+    .events{
+      padding: 0;
+      font-size: 20px;
+      background-color: $kakeiemerald-light;
+      table{
+        width: 90%;
+        margin: 5%;
+        td{
+          color: $kakeigray-light;
+          padding: 0;
+        }
+        th{
+          color: $kakeigray-dark;
+          padding: 0;
+        }
+        .purchase-left{
+          width: 45%;
+          text-align: left;
+        }
+        .purchase-middle{
+          width: 10%;
+          text-align: center;
+        }
+        .purchase-right{
+          width: 45%;
+          text-align: right;
+        }
+        .purchase-sum{
+          padding: 5px 0;
+          margin: 5px 0;
+          border-top: solid 1px $kakeiemerald-dark;
+        }
+      }
+    }
+  }
+  .purchase-link{
+    padding: 10px;
+    font-size: 20px;
+  }
+}
