@@ -1,0 +1,42 @@
+/* static_page */
+
+/* Index */
+/* TopPic */
+#TopPic{
+  height: 600px;
+  background-image: image-url("top.png");
+  background-size: cover;
+  background-position: center;
+
+  h1{
+    margin-top: 230px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 100;
+  }
+  a{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* AppInfo */
+#AppInfo{
+  color: $white;
+  background-color: $kakeigray-dark;
+
+  h1{
+    margin-top: 40px;
+    font-size: 26pt;
+    font-weight: 400;
+  }
+  p{
+    margin-top: 25px;
+  }
+  div.col-sm-4.col-xs-12{
+    height: 220px;
+    text-align: center;
+  }
+}
