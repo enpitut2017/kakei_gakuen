@@ -1,12 +1,14 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :creat, :edit, :update, :destroy, :show]
+  before_action :correct_user, only: [:creat, :edit, :update, :destroy, :show]
 
   # GET /books
   # GET /books.json
   def index
-    @user = current_user 
-    @books = @user.books
-    @books = Book.order('time DESC').page(params[:page]).per(10)
+    @user = current_user
+    @books = @user.books.order('time DESC').page(params[:page]).per(10)
+
   end
 
   # GET /books/1
@@ -39,20 +41,25 @@ class BooksController < ApplicationController
 
     @books = [];
     @user = User.find(current_user.id)
+
     #経験値の計算
-    exp = @user.exp + culcurate_exp(_times) 
+    exp = @user.exp + culcurate_exp(_times, costs)
     @user.update_attribute(:exp, exp)
     #レベルの計算
-    level = level_culcurate
+    level = level_culcurate(exp)
     @user.update_attribute(:level, level)
 
     for i in 0..items.size-1 do
+        if costs[i].length >= 10 then
+            next
+        end
       @books.push(Book.new(item: items[i], cost: costs[i], user: @user, time: _times[i]))
     end
 
     respond_to do |format|
       if Book.import @books
-        format.html { redirect_to @user, notice: 'Book was successfully created.' }
+        #flash[:success] = "Book was successfully created."
+        format.html { redirect_to @user}
         format.json { render :show, status: :created, location: @books }
       else
         format.html { render :new }
@@ -66,8 +73,9 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to books_path, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
+          flash[:success] = "Book was successfully updated."
+          format.html { redirect_to books_path }
+          format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
         format.json { render json: @book.errors, status: :unprocessable_entity }
@@ -80,7 +88,8 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+        flash[:success] = 'Book was successfully destroyed.'
+      format.html { redirect_to books_url }
       format.json { head :no_content }
     end
   end
@@ -94,5 +103,65 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:item, :cost, :time)
+    end
+
+    # ログイン済みユーザーかどうか確認
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_path
+      end
+    end
+
+    #正しいユーザーか確認
+    def correct_user
+      @user = User.find(Book.find(params[:id]).user_id)
+      redirect_to user_path(current_user) unless @user == current_user
+    end
+
+    #経験値計算
+    def culcurate_exp(items, costs)
+        defalt_exp = 10
+        times = Array.new
+        d = Time.parse(Date.today.strftime("%Y-%m-%d")).to_i
+        items.each do |item|
+            times.push(((d-Time.parse(item).to_i)/100)/864)
+        end
+        times.each do |time|
+            defalt_exp -= time
+            #puts "now score : #{defalt_exp}"
+        end
+        if defalt_exp < 1 then
+            defalt_exp = 1
+        end
+
+        costs.length.times do |i|
+            if costs[i].length < 10 then
+                break
+            end
+            if i == costs.length - 1 then
+                defalt_exp = 0
+            end
+        end
+
+        return defalt_exp
+    end
+
+    #レベル計算
+    def level_culcurate(exp)
+        if exp == nil then
+            exp = 0
+        end
+        #level = 0
+        levelup_table = [0, 10, 30]
+        size = levelup_table.size
+        #tmpexp = exp
+        size.times do |now_level|
+            if exp < levelup_table[now_level]
+                return now_level
+            end
+        end
+        return size
     end
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :logged_in_user, only: [:edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:show, :edit, :update]
 
   # GET /users
   # GET /users.json
@@ -19,7 +19,10 @@ class UsersController < ApplicationController
     books.each do |book|
       @lost += book.cost
     end
-    @rest = @user.budget - @lost
+    #@rest = @user.budget - @lost
+    @rest = inserted_cost(@user.budget - @lost)
+    @lost = inserted_cost(@lost)
+    @budget = inserted_cost(@user.budget)
     @books = @user.books.order("id DESC").limit(5)
   end
 
@@ -30,6 +33,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+      @user = User.find(params[:id])
   end
 
   # POST /users
@@ -41,7 +45,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
           log_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+          flash[:success] = "User was successfully created."
+        format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -55,22 +60,23 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          flash[:success] = "User was successfully updated."
+        format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
-        return redirect_to user_url(@user)
+       return redirect_to user_url @user
       else
+          flash[:notice] = "User updating was failed."
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-        return
       end
     end
 
-    if @user.update_attributes(user_params)
-        flash[:success] = "ユーザ登録情報更新"
-        redirect_to user_path
-    else
-        render 'edit'
-    end
+#    if @user.update_attributes(user_params)
+#        flash[:success] = "User was successfully updated."
+#        redirect_to user_path
+#    else
+#        render 'edit'
+#    end
   end
 
   # DELETE /users/1
@@ -78,7 +84,8 @@ class UsersController < ApplicationController
   def destroy
      User.find(current_user.id).destroy
      respond_to do |format|
-     format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+        flash[:success] = "User was successfully deestroyed."
+     format.html { redirect_to users_url }
      format.json { head :no_content }
     end
   end
@@ -106,5 +113,16 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless @user == current_user
+    end
+
+    def inserted_cost(cost)
+        str_cost = cost.to_s
+        cost_size = str_cost.size
+        cost_size.times do |i|
+            if i%3 == 0 and i != cost_size and i != 0 then
+                str_cost.insert(cost_size - i, ",")
+            end
+        end
+        return str_cost
     end
 end

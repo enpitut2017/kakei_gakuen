@@ -54,7 +54,7 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production.
+  # Use a different cache store in staging.
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
@@ -84,7 +84,7 @@ Rails.application.configure do
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
-	logger.extend ActiveSupport::Logger.broadcast('/var/www/log/rails/production_error.log')
+	logger.extend ActiveSupport::Logger.broadcast('/home/yatteiki/log/rails/staging_error.log')
   end
 
   # Do not dump schema after migrations.

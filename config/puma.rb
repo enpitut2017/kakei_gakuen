@@ -1,3 +1,18 @@
+app_dir = File.expand_path("../..", __FILE__)
+if ENV.fetch("RAILS_ENV") == "production"
+  bind "unix:///var/www/yatteiki/shared/tmp/sockets/puma.sock"
+  pidfile "/var/www/yatteiki/shared/tmp/pids/puma.pid"
+  state_path "/var/www/yatteiki/shared/tmp/pids/puma.state"
+  stdout_redirect "/var/www/log/rails/puma.stdout.log", "/var/www/log/rails/puma.stderr.log", true
+end
+
+if ENV.fetch("RAILS_ENV") == "staging"
+  bind "unix:///home/yatteiki/rails/kakei_gakuen/shared/tmp/sockets/puma.sock"
+  pidfile "/home/yatteiki/rails/kakei_gakuen/shared/tmp/pids/puma.pid"
+  state_path "/home/yatteiki/rails/kakei_gakuen/shared/tmp/pids/puma.state"
+  stdout_redirect "/home/yatteiki/log/rails/puma.stdout.log", "/home/yatteiki/log/rails/puma.stderr.log", true
+end
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -13,7 +28,7 @@ port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch("RAILS_ENV") { "production" }
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
