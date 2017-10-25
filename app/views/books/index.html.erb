@@ -1,56 +1,74 @@
-<div class="row">
- <div class="col-xs-8">
-    <H1 class="title"><strong>買ったもの</strong></H1>
-      <%
-        year=""
-        month=""
-        day = ""
-      %>
-<% @books.each do |book| %>
-    <%if book.time.strftime("%-Y") != year then%>
-    <div class="col-sm-12">
-      <h2 id="books_text"><%= book.time.strftime("%-Y年") %></h2>
+<div class="container main">
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="PurchaseHistory" class="box">
+        <div class="title">
+          <h3>家計簿</h3>
+          <hr width="300px">
+        </div>
+
+        <%
+        @books = Book.order(time: "DESC")
+        timesHash = Hash.new
+        @books.each do |book|
+           if !timesHash.has_key?(book.time)
+             timesHash[book.time] = [[book.item], [book.cost]]
+           else
+             timesHash[book.time][0].push(book.item)
+             timesHash[book.time][1].push(book.cost)
+           end
+           previousTime = book.time
+         end
+        %>
+
+        <div class="timeline">
+          <dl>
+            <%
+            month = 0
+            counter = 0
+            timesHash.each{|key, value|
+              #if counter == 10
+              #  break
+              #end
+              if month != key.month
+            %>
+            <dt>
+              <%= key.year.to_s + "年" + key.month.to_s + "月" %>
+            </dt>
+            <% end %>
+            <dd class="pos-right clearfix">
+						  <div class="circ"></div>
+						  <div class="time">
+                <%= key.month.to_s + "/" + key.day.to_s %>
+              </div>
+						  <div class="events">
+							  <div class="events-body">
+                  <table>
+                    <% sum = 0 %>
+                    <% @books.where(time: key).each do |book| %>
+                    <tr>
+                      <td class="purchase-left noto-demilight"><%= book.item %></td>
+                      <td class="purchase-middle noto-demilight">:</td>
+                      <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
+                      <% sum += book.cost %>
+                    </tr>
+                    <% end %>
+                    <tr class="purchase-sum">
+                      <th class="purchase-left noto-bold">合計</th>
+                      <th class="purchase-middle noto-bold">:</th>
+                      <th class="purchase-right noto-bold"><%= sum %>円</th>
+                    </tr>
+                  </table>
+							  </div>
+						  </div>
+					  </dd>
+            <% counter += 1
+               month = key.month
+               } %>
+          </dl>
+        </div>
+      </div>
+      <%= link_to 'もどる', user_path(@user.id) %>
     </div>
-    <%end%>
-    <%if book.time.strftime("%-m") != month then%>
-    <div class="col-sm-12">
-      <h3 id="books_text"><%= book.time.strftime("%-m月の出費") %></h3>
-    </div>
-    <%end%>
-    <div class="col-xs-3 col-xs-offset-2" id="books_text">
-    <%if book.time.strftime("%-d") != day then%>
-      <strong><%= book.time.strftime("%-d日") %></strong>
-    <%end%>
-    </div>
-    <div class="col-xs-9">
-      <table id="books_text" >
-        <tbody>
-          <tr>
-            <td>　<%= book.item %>　</td>
-            <td>　<%= book.cost %>円　</td>
-            <!--<td><%#= link_to '詳細', book %></td>!-->
-            <td>　　
-              <%= link_to edit_book_path(book) do%>
-              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-              <%end%>
-            </td>
-            <td>
-              <%= link_to book, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              <%end%>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <%
-       year = book.time.strftime("%-Y")
-       month = book.time.strftime("%-m")
-       day = book.time.strftime("%-d")
-    %>
-<% end %>
-  <%= paginate(@books) %>
-  <br>
-  <%= link_to 'もどる', user_path(@user.id) %>
-</div>
+  </div>
 </div>

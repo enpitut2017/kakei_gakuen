@@ -1,0 +1,155 @@
+/* Global Variables */
+$white:                       #FFF !default;
+$black:                       #000 !default;
+
+/* color difined by Hassaku */
+$kakeigray-dark:              #2C363C !default;
+$kakeigray-middle:            #434D53 !default;
+$kakeigray-light:             #9298A4 !default;
+
+$kakeired-dark:               #DD5061 !default;
+$kakeired-light:              #FF5E71 !default;
+
+$kakeiorange-light:           #EF966A !default;
+
+$kakeiemerald-dark:           #69D7CA !default;
+$kakeiemerald-light:          #AEF9E9 !default;
+
+$kakeibrown-light:            #EFFFE4 !default;
+
+/* General Settings */
+body{
+  font-family: Noto Sans Japanese,Noto Sans JP,sans-serif;
+  background-color: $kakeiemerald-dark;
+}
+span{
+  display: inline-block;
+}
+hr{
+  border-color: $kakeired-dark;
+  margin: 10px auto;
+}
+.main{
+  padding-top: 15px;
+}
+.box{
+  margin-bottom: 15px;
+  border-radius: 4px;
+  background-color: $white;
+  text-align: center;
+}
+.title{
+  text-align: center;
+}
+.title h3{
+  display: block;
+  margin-top: 0;
+  padding-top: 30px;
+}
+.triangle-top{
+  position: relative;
+  width: 0;
+  height: 0;
+  top: -40px;
+  margin:auto;
+  margin-bottom: -40px;
+  left: 0;
+  right: 0;
+  border-bottom: 40px solid $white;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+}
+.triangle-bottom{
+  position: relative;
+  width: 0;
+  height: 0;
+  bottom: -40px;
+  margin:auto;
+  margin-top: -40px;
+  left: 0;
+  right: 0;
+  border-top: 40px solid $white;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+}
+.form-text{
+  height: 40px;
+  width: 270px;
+  margin: 5px 0 5px 30px;
+  padding: 0 10px;
+  border: solid 1px $kakeigray-light;
+  border-radius: 4px;
+
+  &:focus{
+  border-color: $kakeiemerald-dark;
+  }
+}
+
+/* Typography */
+.noto-thin      { font-weight: 100; }
+.noto-light     { font-weight: 300; }
+.noto-demilight { font-weight: 350; }
+.noto-regular   { font-weight: 400; }
+.noto-medium    { font-weight: 500; }
+.noto-bold       { font-weight: 700; }
+.noto-black     { font-weight: 900; }
+
+
+.text-darkgray{
+  color: $kakeigray-dark;
+}
+.text-middlegray{
+  color: $kakeigray-middle;
+}
+.text-lightgray{
+  color: $kakeigray-light;
+}
+
+
+/* Flash */
+#Flash{
+  background-color: rgba(256, 256, 256, 0.5);
+  text-align: center;
+}
+
+/* Navi */
+.navbar{
+  height: 100px;
+  border: 0;
+  border-radius: 0;
+}
+.navbar-header{
+  height: 100px;
+}
+.navbar-toggle{
+  margin: 33px 20px;
+}
+#gnavi{
+  padding: 0;
+  border: 0;
+}
+ul.nav{
+  margin: 0;
+  width: auto;
+}
+#logo{
+  margin: 25px;
+}
+
+/* Contents */
+#Contents{
+  min-height: 820px;
+}
+
+/* Footer */
+#Footer{
+  height: 60px;
+  background-color: $kakeigray-dark;
+
+  p{
+  margin: 0;
+  color: $white;
+  text-align: center;
+  line-height: 58px;
+  }
+}

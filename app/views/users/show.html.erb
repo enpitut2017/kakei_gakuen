@@ -1,74 +1,130 @@
-<div>
-  <div class="col-sm-8 col-sm-offset-2" id="zandaka">
+<div class="container main">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div id="Information" class="box">
+        <div class="title">
+          <h3><%= @user.name %>さんの家計簿</h3>
+          <hr width="300px">
+        </div>
+        <div>
+          <p>
+            <span class="title-middle noto-bold">今月の残高：</span>
+            <span class="title-rest noto-bold"><%= @rest %>円</span>
+          </p>
+          <p><span class="title-middle text-lightgray noto-light">今月の予算：<%= @user.budget %>円</span></p>
+          <p><span class="title-middle text-lightgray noto-light">今月の出費：<%= @lost%>円</span></p>
+        </div>
+      </div>
+      <div id="PurchaseForm" class="box">
+        <div class="title">
+          <h3>入出金を記録</h3>
+          <hr width="300px">
+        </div>
+        <div>
+          <form action="/books" accept-charset="UTF-8" method="post">
+            <!--要否を確認-->
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="authenticity_token" value="bh+KyNwkXQGsf20i70F3L+gooNy3SA3cvKRK50bk4Zpw/xlKW/MWUHH2UX6RKLHNaSSp52zxNUn44lOPqYlz8A==">
+            <table>
+              <tr>
+                <h4 class="text-lightgray noto-light">品目<input class="form-text" type="text" name="items[]"></h4>
+              </tr>
+              <tr>
+                <h4 class="text-lightgray noto-light">金額<input class="form-text" type="text" name="costs[]"></h4>
+              </tr>
+              <tr>
+                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]"></h4>
+              </tr>
+            </table>
+            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
+            <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div id="Charactor" class="box">
+        <div id="Charactor-bg">
+          <img id="Charactor-img" alt="charactor" src="<%= @img_path %>" />
+        </div>
+        <div id="Charactor-balloon">
+          <div class="triangle-top"></div>
+          <h4>素体ちゃん</h4>
+          <p>「今日も一日がんばろう！」</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div id="PurchaseHistory" class="box">
+        <div class="title">
+          <h3>最近の家計簿</h3>
+          <hr width="300px">
+        </div>
 
-    <div>
-      <h1>
-        <strong>残高:</strong>
-        <%= @rest %>円
-      </h1>
-      <div class="col-md-6 col-sm-12">
-        <h2 id="user_name"><strong><%= @user.name %>さんの家計簿</strong></h2>
+        <%
+        @books = Book.order(time: "DESC")
+        timesHash = Hash.new
+        @books.each do |book|
+           if !timesHash.has_key?(book.time)
+             timesHash[book.time] = [[book.item], [book.cost]]
+           else
+             timesHash[book.time][0].push(book.item)
+             timesHash[book.time][1].push(book.cost)
+           end
+           previousTime = book.time
+         end
+        %>
+
+        <div class="timeline">
+          <dl>
+            <%
+            month = 0
+            counter = 0
+            timesHash.each{|key, value|
+              if counter == 10
+                break
+              end
+              if month != key.month
+            %>
+            <dt>
+              <%= key.year.to_s + "年" + key.month.to_s + "月" %>
+            </dt>
+            <% end %>
+            <dd class="pos-right clearfix">
+						  <div class="circ"></div>
+						  <div class="time">
+                <%= key.month.to_s + "/" + key.day.to_s %>
+              </div>
+						  <div class="events">
+							  <div class="events-body">
+                  <table>
+                    <% sum = 0 %>
+                    <% @books.where(time: key).each do |book| %>
+                    <tr>
+                      <td class="purchase-left noto-demilight"><%= book.item %></td>
+                      <td class="purchase-middle noto-demilight">:</td>
+                      <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
+                      <% sum += book.cost %>
+                    </tr>
+                    <% end %>
+                    <tr class="purchase-sum">
+                      <th class="purchase-left noto-bold">合計</th>
+                      <th class="purchase-middle noto-bold">:</th>
+                      <th class="purchase-right noto-bold"><%= sum %>円</th>
+                    </tr>
+                  </table>
+							  </div>
+						  </div>
+					  </dd>
+            <% counter += 1
+               month = key.month
+               } %>
+          </dl>
+        </div>
+        <div class="purchase-link text-darkgray noto-regular">
+          <%= link_to 'もっと見る', books_path %>
+        </div>
       </div>
-      <div class="col-md-6 col-sm-12">
-        <p>
-          <strong>予算　　:</strong>
-          <%= @budget %>円
-        </p>
-        <p>
-          <strong>今月の出費　:</strong>
-          <%= @lost%>円
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-sm-offset-1" id="recent">
-    <h1 class="title"><strong>最近買ったもの</strong></h1>
-    <% if @books.size != 0 then %>
-    <table id="item_table">
-      <thead>
-        <tr>
-          <th>日付</th>
-          <th>件名</th>
-          <th>金額</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @books.each do |book| %>
-        <tr>
-          <td><%= book.time.strftime("%Y年%m月%d日") %></td>
-          <td><%= book.item %></td>
-          <td><%= book.cost %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div>
-    <% if @books.size != 0 then %>
-    <strong><%= link_to 'もっと見る', books_path %></strong>
-    <% end %>
-    </div>
-    <% else %>
-    <p>未登録です</p>
-    <% end %>
-  </div>
-  <div class="col-sm-6 col-sm-offset-1" id="chara">
-    <div class="col-sm-3">
-      <p>
-        <strong>Level:</strong>
-        <%= @user.level %>
-      </p>
-    </div>
-    <div class="col-sm-3">
-      <p>
-        <strong>Exp:</strong>
-        <%= @user.exp %>
-      </p>
-    </div>
-    <div>
-      <img id="chara-img" alt="charactor" src="<%= @img_path %>" />
     </div>
   </div>
 </div>
-<%= link_to new_book_url, id: "fab" do %>
-<i class="glyphicon glyphicon-pencil"></i>
-<% end %>
