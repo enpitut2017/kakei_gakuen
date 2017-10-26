@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
   #@user.validはバリデーションを通るとture,invalidだと逆に通らないとtureになる
 
   def setup
-    @user = User.new(name: 'foobar', email: 'sample@example.com', budget: 1000, exp:0, level:0, password:'foobar', password_confirmation: 'foobar')
+    @user = User.new(name: 'foobar', email: 'sample@example.com', budget: 1000, coin: 0, password:'foobar', password_confirmation: 'foobar')
   end
 
   #正しいユーザーはバリデーションを通る
