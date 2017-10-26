@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module KakeiGakuen
   class Application < Rails::Application
+
+      config.action_controller.action_on_unpermitted_parameters = :log
+
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.i18n.default_locale = :ja
