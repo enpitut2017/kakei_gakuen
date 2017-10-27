@@ -3,7 +3,11 @@
   <div class="container">
     <div class="navbar-header">
       <a href="/">
+        <% if logged_in? %>
+        <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), user_path %>
+        <% else %>
         <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), root_path %>
+        <% end %>
       </a>
       <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target="#gnavi">
         <span class="sr-only">メニュー</span>
