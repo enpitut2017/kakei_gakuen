@@ -26,9 +26,7 @@ function parse_input() {
   }
 
   now = new Date();
-  yyyymmdd = now.getFullYear()+ "-" +
-	           ( "0" + ( now.getMonth()+1 ) ).slice(-2) + "-" +
-	           ( "0" + now.getDate() ).slice(-2);
+  yyyymmdd = getDate();
   id = now.getFullYear()+now.getMonth()+now.getDate()+now.getDay()+now.getMinutes()+now.getSeconds();
 
   if(str){
@@ -41,7 +39,7 @@ function parse_input() {
     items = $.grep(items, function(e){return e !== "";});
     costs = $.grep(costs, function(e){return e !== "";});
     for (i = 0; i < costs.length; i++){
-    //    console.log(costs[i]);
+        //console.log(costs[i]);
         if (costs[i].length >= 10) {
             costs[i] = "国家予算超えちゃうよ！";
         }
@@ -64,6 +62,20 @@ function parse_input() {
   }
 }
 
+function users_init() {
+  today = getDate();
+
+  $('#date').val(today);
+  $('#date').datepicker({
+    format: "yyyy-mm-dd"
+  });
+}
+
+/* 入力時のフォーマットがダメな時モーダルかなんかで警告する
+function format_check() {
+
+}*/
+
 function reset() {
   $('#result_text').val('');
 }
@@ -73,6 +85,14 @@ function record() {
     recognition.start();
 }
 
+function getDate() {
+  now = new Date();
+  yyyymmdd = now.getFullYear()+ "-" +
+	           ( "0" + ( now.getMonth()+1 ) ).slice(-2) + "-" +
+	           ( "0" + now.getDate() ).slice(-2);
+
+  return yyyymmdd;
+}
 
 function remove(obj) {
     $(obj).parent().parent().remove();
