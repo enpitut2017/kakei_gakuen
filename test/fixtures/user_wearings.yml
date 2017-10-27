@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  upper_colthes: 1
+  lower_clothes: 1
+  sox: 1
+  front_hair: 1
+  back_hair: 1
+  face: 1
+
+two:
+  user_id: 1
+  upper_colthes: 1
+  lower_clothes: 1
+  sox: 1
+  front_hair: 1
+  back_hair: 1
+  face: 1
