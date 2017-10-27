@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     #books
     resources :books
 
+    #closets
+    resources :closets
+
     #users
     resources :users, :except => [:edit, :update] do
         member do
