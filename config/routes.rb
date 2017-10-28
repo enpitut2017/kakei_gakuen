@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :books
 
     #users
-    resources :users, :except => [:edit, :update] do
+    resources :users, :except => [:edit, :update, :new, :destroy] do
         member do
             get 'profile_edit'
             patch 'profile_update'
@@ -45,8 +45,8 @@ Rails.application.routes.draw do
     #end
 
      #static_page
-    get 'static_page/index'
-    get '/index.html', to:'static_page#index'
+    #get 'static_page/index'
+    #get '/index.html', to:'static_page#index'
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     get '*path', to: 'application#error_404'
