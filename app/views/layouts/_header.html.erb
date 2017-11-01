@@ -4,7 +4,30 @@
   <div class="container">
     <div class="navbar-header">
       <a href="/">
-        <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), root_path %>
+        <% if logged_in? %>
+            <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), user_path(current_user.id) %>
+        <% else %>
+            <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), root_path %>
+        <%end%>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <%= link_to user_path(current_user.id), { :class => "btn button_settings" } do %>
+          <i class="glyphicon glyphicon-home"></i> ホーム
+        <% end %>
+      </li>
+      <li>
+        <%= link_to profile_edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
+          <i class="glyphicon glyphicon-cog"></i> 設定
+        <% end %>
+      </li>
+      <li>
+          <%= link_to budget_edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
+            <i class="glyphicon glyphicon-cog"></i> 金設定
+          <% end %>
+      </li>
+    </ul>
+
       </a>
       <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target="#gnavi">
         <span class="sr-only">メニュー</span>
