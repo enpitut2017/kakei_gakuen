@@ -5,9 +5,6 @@ Rails.application.routes.draw do
     #books
     resources :books
 
-    #closets
-    resources :closets
-
     #users
     resources :users, :except => [:edit, :update] do
         member do
@@ -23,6 +20,10 @@ Rails.application.routes.draw do
 
     get   '/signup',  to:'users#new'
     get   '/retire',  to: 'users#destroy'
+
+    #closets
+    get '/closets', to:'closets#edit'
+    patch '/closets', to:'closets#update'
 
     #sessions
     get    '/login',   to: 'sessions#new'

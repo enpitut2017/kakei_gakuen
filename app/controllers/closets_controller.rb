@@ -1,6 +1,6 @@
 class ClosetsController < ApplicationController
 	before_action :logged_in_user, only: [:edit, :update]
-  	before_action :correct_user, only: [:edit, :update]
+    #before_action :correct_user, only: [:edit, :update]
 
     def edit
 
@@ -18,8 +18,13 @@ class ClosetsController < ApplicationController
 		tags = Tag.all
 
 		#clothesを使いやすいようにする
-		keys = Clothe.where(id: user_has_clothes).pluck(:id)
-		clothes =  Hash[keys.collect.zip(clothes)]
+		keys_clothes = Clothe.where(id: user_has_clothes).pluck(:id)
+		clothes =  Hash[keys_clothes.collect.zip(clothes)]
+
+		#tagsを使いやすいようにする
+		keys_tags = Tag.pluck(:id)
+		tags = Hash[keys_tags.collect.zip(tags)]
+
 
 		#テンプレートに送るデータの作成
 		@send_clothes = Hash.new
@@ -27,7 +32,7 @@ class ClosetsController < ApplicationController
 			if @send_clothes.has_key?(tags[clothes_tags_link.tag_id].tag) then
 				@send_clothes[tags[clothes_tags_link.tag_id].tag].push(clothes[clothes_tags_link.clothes_id])
 			else
-				@send_clothes[tags[clothes_tags_link.tag_id].tag] = array()
+				@send_clothes[tags[clothes_tags_link.tag_id].tag] = Array.new
 				@send_clothes[tags[clothes_tags_link.tag_id].tag].push(clothes[clothes_tags_link.clothes_id])
 			end
 		end
@@ -47,7 +52,7 @@ class ClosetsController < ApplicationController
 		end
 
 		def correct_user
-      		@user = User.find(params[:id]))
+      		@user = User.find(params[:id])
       		redirect_to user_path(current_user) unless @user == current_user
     	end
 end
