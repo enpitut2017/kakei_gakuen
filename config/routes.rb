@@ -44,9 +44,9 @@ Rails.application.routes.draw do
     #    resources :users
     #end
 
-     #static_page
-    #get 'static_page/index'
-    #get '/index.html', to:'static_page#index'
+    #static_page
+    get 'static_page/index'
+    get '/index.html', to:'static_page#index'
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     get '*path', to: 'application#error_404'
