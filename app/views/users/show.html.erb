@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  $(document).on('turbolinks:load', users_init);
+</script>
 <div class="container main">
   <div class="row">
     <div class="col-md-6 col-sm-12">
@@ -28,13 +31,13 @@
             <input type="hidden" name="authenticity_token" value="bh+KyNwkXQGsf20i70F3L+gooNy3SA3cvKRK50bk4Zpw/xlKW/MWUHH2UX6RKLHNaSSp52zxNUn44lOPqYlz8A==">
             <table>
               <tr>
-                <h4 class="text-lightgray noto-light">品目<input class="form-text" type="text" name="items[]"></h4>
+                <h4 class="text-lightgray noto-light">用途<input class="form-text" type="text" name="items[]"></h4>
               </tr>
               <tr>
                 <h4 class="text-lightgray noto-light">金額<input class="form-text" type="text" name="costs[]"></h4>
               </tr>
               <tr>
-                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]"></h4>
+                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]" id="date"></h4>
               </tr>
             </table>
             <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
