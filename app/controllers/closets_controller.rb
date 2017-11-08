@@ -7,7 +7,10 @@ class ClosetsController < ApplicationController
 		#@user_clothesがユーザーが今装備しているもの、@send_clothesがユーザーが持っている装備が入っているものです
 
 		#userのが現在設定している装備
-        @user_clothes = UserWearing.find_by(user_id: current_user.id)
+		@user_clothes = UserWearing.find_by(user_id: current_user.id)
+
+		#userが現在設定している装備を取得
+		user_clothes_data = Clothe.where(id:[@user_clothes.upper_colthes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face])
 
 		#userが所有している装備とそのタグ
         user_has_clothes = UserHasClothe.where(user_id: current_user.id).pluck(:clothes_id)
