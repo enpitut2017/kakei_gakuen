@@ -99,7 +99,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:item, :cost, :time)
+      params.require(:book).permit(:item, :cost, :time, :user)
     end
 
     # ログイン済みユーザーかどうか確認
@@ -143,21 +143,4 @@ class BooksController < ApplicationController
 
         return defalt_coin
     end
-
-    #レベル計算
-    #def level_culcurate(exp)
-    #    if exp == nil then
-    #        exp = 0
-    #    end
-    #    #level = 0
-    #    levelup_table = [0, 10, 30]
-    #    size = levelup_table.size
-    #    #tmpexp = exp
-    #    size.times do |now_level|
-    #        if exp < levelup_table[now_level]
-    #            return now_level
-    #        end
-    #    end
-    #    return size
-    #end
 end
