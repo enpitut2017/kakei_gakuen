@@ -1,0 +1,45 @@
+#Closets{
+  margin-top: 15px;
+  color: #0F0;
+}
+#ClosetsItems{
+  border-radius: 4px 0 0 0;
+  background-color: $kakeiorange-light;
+  height: 650px;
+  padding: 0 0 0 15px;
+  .col-md-6.col-sm-12{
+    padding: 0;
+  }
+}
+#ClosetsCharactor{
+  border-radius: 0 4px 0 0;
+  background-color: $kakeiemerald-light;
+  height: 650px;
+}
+#ClosetsItemGroups{
+  border-radius: 0 0 4px 4px;
+  background-color: $kakeired-dark;
+  height: 150px;
+}
+
+#ItemFadeout{
+  position: absolute;
+  bottom: 0;
+  margin-left: -15px;
+  width: 100%;
+  height: 100px;
+  background-color: #aaa;
+}
+
+.ItemBox{
+  background-color: #FFF;
+  height: 150px;
+  margin: 15px 15px 0 0;
+}
+.GroupBox{
+  height: 100px;
+  width: 100px;
+  margin: 15px;
+  background-color: #fff;
+  float: left;
+}
