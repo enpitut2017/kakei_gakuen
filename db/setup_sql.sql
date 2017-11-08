@@ -1,4 +1,4 @@
-delete from tgs;
+delete from tags;
 insert into tags(id, tag, created_at, updated_at) values 
 (1, 'upper_clothes', '2017-10-27', '2017-10-27'),
 (2, 'lower_clothes', '2017-10-27', '2017-10-27'),
@@ -10,8 +10,8 @@ insert into tags(id, tag, created_at, updated_at) values
 delete from clothes;
 insert into clothes (id, file_name, name, created_at, updated_at) values
 (1, 'clothes/001.png', '上の服1', '2017-10-27', '2017-10-27'),
-(2, 'clothes/images/002.png', '下の服1', '2017-10-27', '2017-10-27'),
-(3, 'clothes/images/003.png', '靴下1', '2017-10-27', '2017-10-27'),
+(2, 'clothes/002.png', '下の服1', '2017-10-27', '2017-10-27'),
+(3, 'clothes/003.png', '靴下1', '2017-10-27', '2017-10-27'),
 (4, 'clothes/004.png', '前髪1', '2017-10-27', '2017-10-27'),
 (5, 'clothes/005.png', '後ろ髪1', '2017-10-27', '2017-10-27'),
 (6, 'clothes/006.png', '顔1', '2017-10-27', '2017-10-27'),
@@ -37,8 +37,10 @@ insert into clothes_tags_links (id, tag_id, clothes_id, created_at, updated_at) 
 (11, 5, 11, '2017-10-27', '2017-10-27'),
 (12, 6, 12, '2017-10-27', '2017-10-27');
 
+delete from user_wearings;
 insert into user_wearings (id, user_id, upper_colthes, lower_clothes, sox, front_hair, back_hair, face, created_at, updated_at) values (1, 1, 1, 2, 3, 4, 5, 12, '2017-10-27', '2017-10-27');
 
+delete from user_has_clothes;
 insert into user_has_clothes (id, user_id, clothes_id, created_at, updated_at) values
 (1, 1, 1, '2017-10-27', '2017-10-27'),
 (2, 1, 2, '2017-10-27', '2017-10-27'),
