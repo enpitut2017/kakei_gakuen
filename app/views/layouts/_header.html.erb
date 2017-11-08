@@ -10,24 +10,6 @@
             <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), root_path %>
         <%end%>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <%= link_to user_path(current_user.id), { :class => "btn button_settings" } do %>
-          <i class="glyphicon glyphicon-home"></i> ホーム
-        <% end %>
-      </li>
-      <li>
-        <%= link_to profile_edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
-          <i class="glyphicon glyphicon-cog"></i> 設定
-        <% end %>
-      </li>
-      <li>
-          <%= link_to budget_edit_user_path(current_user.id), { :class => "btn button_settings" } do %>
-            <i class="glyphicon glyphicon-cog"></i> 金設定
-          <% end %>
-      </li>
-    </ul>
-
       </a>
       <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target="#gnavi">
         <span class="sr-only">メニュー</span>
@@ -40,6 +22,17 @@
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <%= link_to content_tag(:i, 'ホーム', class: "glyphicon glyphicon-home"), user_path(current_user.id)  %>
+                </li>
+                <li>
+                    <%= link_to content_tag(:i,'設定', class: "glyphicon glyphicon-tag"), profile_edit_user_path(current_user.id)  %>
+                </li>
+                <li>
+                    <%= link_to content_tag(:i,'金設定', class: "glyphicon glyphicon-cog"), budget_edit_user_path(current_user.id)  %>
+                </li>
+            </ul>
         <% else %>
           <li><%= link_to 'Login', login_path %></li>
           <li><%= link_to 'Sign up', signup_path %></li>
