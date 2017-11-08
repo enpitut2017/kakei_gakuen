@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     get   '/signup',  to:'users#new'
     get   '/retire',  to: 'users#destroy'
 
+    #closets
+    get '/closets', to:'closets#edit'
+    patch '/closets', to:'closets#update'
+
     #sessions
     get    '/login',   to: 'sessions#new'
     post   '/login',   to: 'sessions#create'
