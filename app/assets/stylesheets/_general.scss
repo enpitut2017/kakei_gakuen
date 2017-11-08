@@ -105,6 +105,15 @@ hr{
   color: $kakeigray-light;
 }
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(font-path('bootstrap/glyphicons-halflings-regular.eot'));
+  src: url(font-path('bootstrap/glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'),
+       url(font-path('bootstrap/glyphicons-halflings-regular.woff2')) format('woff2'),
+       url(font-path('bootstrap/glyphicons-halflings-regular.woff')) format('woff'),
+       url(font-path('bootstrap/glyphicons-halflings-regular.ttf')) format('truetype'),
+       url(font-path('bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
+}
 
 /* Flash */
 #Flash{
