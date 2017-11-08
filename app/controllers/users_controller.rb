@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @rest = inserted_cost(@user.budget - @lost)
     @lost = inserted_cost(@lost)
     @budget = inserted_cost(@user.budget)
-    @books = @user.books.order("id DESC").limit(5)
+    @books = @user.books.order("time DESC").limit(5)
   end
 
   # GET /users/new
