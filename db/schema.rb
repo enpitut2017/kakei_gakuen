@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20171027084929) do
 
   create_table "user_wearings", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "upper_colthes"
+    t.integer "upper_clothes"
     t.integer "lower_clothes"
     t.integer "sox"
     t.integer "front_hair"
