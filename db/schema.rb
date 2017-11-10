@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027084929) do
+ActiveRecord::Schema.define(version: 20171110065158) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -39,8 +39,7 @@ ActiveRecord::Schema.define(version: 20171027084929) do
   create_table "clothes", force: :cascade do |t|
     t.string "file_name"
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "price"
   end
 
   create_table "clothes_tags_links", force: :cascade do |t|
@@ -61,6 +60,7 @@ ActiveRecord::Schema.define(version: 20171027084929) do
     t.string "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "priority"
   end
 
   create_table "user_has_clothes", force: :cascade do |t|
