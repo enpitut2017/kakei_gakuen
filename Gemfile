@@ -69,3 +69,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #add admin_page
 gem 'activeadmin', github: 'activeadmin'
+
+
+gem 'rmagick'
+gem'carrierwave'

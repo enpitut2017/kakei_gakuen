@@ -1,0 +1,29 @@
+
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :tag %><br>
+    <%= f.number_field :tag %>
+  </div>
+  <!-- 追加箇所 開始 -->
+  <div class="field">
+    <% if @data.image? %>
+      <div class="thumbnail">
+        <%= image_tag @data.image.url %>
+      </div>
+    <% end %><br>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>

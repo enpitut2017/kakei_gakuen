@@ -1,2 +1,3 @@
 class UserWearing < ApplicationRecord
+
 end
