@@ -43,11 +43,8 @@ class BooksController < ApplicationController
     @user = User.find(current_user.id)
 
     #経験値の計算
-    exp = @user.exp + culcurate_exp(_times, costs)
-    @user.update_attribute(:exp, exp)
-    #レベルの計算
-    level = level_culcurate(exp)
-    @user.update_attribute(:level, level)
+    coin = @user.coin + culcurate_coin(_times, costs)
+    @user.update_attribute(:coin, coin)
 
     for i in 0..items.size-1 do
         if costs[i].length >= 10 then
@@ -102,7 +99,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:item, :cost, :time)
+      params.require(:book).permit(:item, :cost, :time, :user)
     end
 
     # ログイン済みユーザーかどうか確認
@@ -121,19 +118,18 @@ class BooksController < ApplicationController
     end
 
     #経験値計算
-    def culcurate_exp(items, costs)
-        defalt_exp = 10
+    def culcurate_coin(items, costs)
+        defalt_coin = 10
         times = Array.new
         d = Time.parse(Date.today.strftime("%Y-%m-%d")).to_i
         items.each do |item|
             times.push(((d-Time.parse(item).to_i)/100)/864)
         end
         times.each do |time|
-            defalt_exp -= time
-            #puts "now score : #{defalt_exp}"
+            defalt_coin -= time
         end
-        if defalt_exp < 1 then
-            defalt_exp = 1
+        if defalt_coin < 1 then
+            defalt_coin = 1
         end
 
         costs.length.times do |i|
@@ -141,27 +137,10 @@ class BooksController < ApplicationController
                 break
             end
             if i == costs.length - 1 then
-                defalt_exp = 0
+                defalt_coin = 0
             end
         end
 
-        return defalt_exp
-    end
-
-    #レベル計算
-    def level_culcurate(exp)
-        if exp == nil then
-            exp = 0
-        end
-        #level = 0
-        levelup_table = [0, 10, 30]
-        size = levelup_table.size
-        #tmpexp = exp
-        size.times do |now_level|
-            if exp < levelup_table[now_level]
-                return now_level
-            end
-        end
-        return size
+        return defalt_coin
     end
 end

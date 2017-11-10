@@ -1,9 +1,15 @@
+
 <!-- Navi -->
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a href="/">
-        <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), root_path %>
+        <% if logged_in? %>
+            <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), user_path(current_user.id) %>
+        <% else %>
+            <%= link_to image_tag('/assets/logo.png', {:id => "logo", :alt => '家計学園'}), root_path %>
+        <%end%>
+
       </a>
       <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target="#gnavi">
         <span class="sr-only">メニュー</span>
@@ -16,6 +22,12 @@
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+          <li>
+              <%= link_to '予算の設定', budget_edit_user_path(current_user.id) %>
+          </li>
+          <li>
+              <%= link_to 'アカウント管理', profile_edit_user_path(current_user.id) %>
+          </li>
         <% else %>
           <li><%= link_to 'Login', login_path %></li>
           <li><%= link_to 'Sign up', signup_path %></li>

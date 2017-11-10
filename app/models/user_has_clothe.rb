@@ -1,0 +1,2 @@
+class UserHasClothe < ApplicationRecord
+end

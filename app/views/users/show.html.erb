@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  $(document).on('turbolinks:load', users_init);
+</script>
 <div class="container main">
   <div class="row">
     <div class="col-md-6 col-sm-12">
@@ -11,10 +14,11 @@
             <span class="title-middle noto-bold">今月の残高：</span>
             <span class="title-rest noto-bold"><%= @rest %>円</span>
           </p>
-          <p><span class="title-middle text-lightgray noto-light">今月の予算：<%= @user.budget %>円</span></p>
+          <p><span class="title-middle text-lightgray noto-light">今月の予算：<%= @budget %>円</span></p>
           <p><span class="title-middle text-lightgray noto-light">今月の出費：<%= @lost%>円</span></p>
         </div>
       </div>
+
       <div id="PurchaseForm" class="box">
         <div class="title">
           <h3>入出金を記録</h3>
@@ -27,13 +31,13 @@
             <input type="hidden" name="authenticity_token" value="bh+KyNwkXQGsf20i70F3L+gooNy3SA3cvKRK50bk4Zpw/xlKW/MWUHH2UX6RKLHNaSSp52zxNUn44lOPqYlz8A==">
             <table>
               <tr>
-                <h4 class="text-lightgray noto-light">品目<input class="form-text" type="text" name="items[]"></h4>
+                <h4 class="text-lightgray noto-light">用途<input class="form-text" type="text" name="items[]"></h4>
               </tr>
               <tr>
                 <h4 class="text-lightgray noto-light">金額<input class="form-text" type="text" name="costs[]"></h4>
               </tr>
               <tr>
-                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]"></h4>
+                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]" id="date"></h4>
               </tr>
             </table>
             <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
@@ -62,7 +66,7 @@
         </div>
 
         <%
-        @books = Book.order(time: "DESC")
+        #@books = Book.order(time: "DESC")
         timesHash = Hash.new
         @books.each do |book|
            if !timesHash.has_key?(book.time)
