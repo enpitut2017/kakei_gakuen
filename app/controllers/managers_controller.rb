@@ -3,12 +3,12 @@ class ManagersController < ApplicationController
   end
 
   def create
-      manager = Manage.find_by(name: params[:manager][:name].downcase)
-      if manager && user.authenticate(params[:manager][:password])
+      manager = Manager.find_by(name: params[:manager][:name])
+      if manager && manager.authenticate(params[:manager][:password])
           log_in manager
           redirect_to root_path     #ここはまだ書き換えていないので途中(本来は管理者画面(データ全部登録できる画面)に飛ぶ)
       else
-          flash.now[:danger] = 'Invalid email/password combination'
+          flash.now[:danger] = 'Invalid name/password combination'
           render 'new'
       end
   end
