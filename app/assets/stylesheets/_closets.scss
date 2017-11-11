@@ -16,6 +16,9 @@
   border-radius: 0 4px 0 0;
   background-color: $kakeiemerald-light;
   height: 650px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #ClosetsItemGroups{
   border-radius: 0 0 4px 4px;
@@ -33,12 +36,13 @@
 }
 
 .ItemBox{
-  background-size:75% auto;
-  background-position: center center;
-  background-repeat: no-repeat;
   background-color: #FFF;
   height: 150px;
   margin: 15px 15px 0 0;
+}
+.ItemBox img{
+  height: 150px;
+  width: auto;
 }
 .GroupBox{
   height: 100px;
@@ -51,7 +55,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background-size:75% auto;
+  background-size: auto 100%;
   background-position: center center;
   background-repeat: no-repeat;
 }
