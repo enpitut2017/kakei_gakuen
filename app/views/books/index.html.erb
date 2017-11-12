@@ -8,7 +8,7 @@
         </div>
 
         <%
-        @books = Book.order(time: "DESC")
+        #@books = Book.order(time: "DESC")
         timesHash = Hash.new
         @books.each do |book|
            if !timesHash.has_key?(book.time)

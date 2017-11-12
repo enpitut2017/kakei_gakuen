@@ -4,6 +4,11 @@
     <div class="col-sm-12 box">
 
       <h1>アイテムを追加</h1>
+      <div id="explain">
+        <h4>使い方</h4>
+        <%= image_tag 'explain.png', :id => 'explain-img'%>
+      </div>
+      <br>
 
       <textarea name="rec_text" class="form-control" id="result_text" cols="100" rows="10"></textarea><br>
       <button class="btn btn-primary" type="button" onClick="parse_input()">決定</button>

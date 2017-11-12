@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @rest = inserted_cost(@user.budget - @lost)
     @lost = inserted_cost(@lost)
     @budget = inserted_cost(@user.budget)
-    @books = @user.books.order("time DESC")
+    @books = @user.books.order("time DESC").limit(5)
   end
 
   # GET /users/new
@@ -48,6 +48,7 @@ class UsersController < ApplicationController
     @user.coin = 0
     respond_to do |format|
       if @user.save
+		  initialize_clothes
           log_in @user
           flash[:success] = "User was successfully created."
         format.html { redirect_to @user }
@@ -144,4 +145,13 @@ class UsersController < ApplicationController
         end
         return str_cost
     end
+
+	def initialize_clothes
+		user_wearing = UserWearing.new(user_id: @user.id, upper_colthes: 1, lower_clothes: 2, sox: 3, front_hair: 4, back_hair: 5, face: 6)
+		user_wearing.save
+		for num in 1..6 do
+			user_has_clothe = UserHasClothe.new(user_id: @user.id, clothes_id: num);
+			user_has_clothe.save
+		end
+	end
 end
