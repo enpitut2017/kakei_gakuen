@@ -21,9 +21,11 @@ $kakeibrown-light:            #EFFFE4 !default;
 body{
   font-family: Noto Sans Japanese,Noto Sans JP,sans-serif;
   background-color: $kakeiemerald-dark;
+  word-wrap: break-word;
 }
 span{
   display: inline-block;
+  max-width: 100%;
 }
 hr{
   border-color: $kakeired-dark;
@@ -34,14 +36,30 @@ hr{
 }
 .box{
   margin-bottom: 15px;
+  padding: 0 0 15px 0;
   border-radius: 4px;
   background-color: $white;
   text-align: center;
 }
+.field{
+  margin: auto;
+  right: 0;
+  left: 0;
+  max-width: 460px;
+  text-align: left;
+  label{
+    float: left;
+    height: 34px;
+    width: 160px;
+    margin: 0 20px 0 5px;
+    line-height: 34px;
+  }
+}
 .title{
   text-align: center;
 }
-.title h3{
+.title h2{
+  font-size: 30px;
   display: block;
   margin-top: 0;
   padding-top: 30px;
@@ -72,10 +90,11 @@ hr{
   border-left: 40px solid transparent;
   border-right: 40px solid transparent;
 }
-.form-text{
+input{
   height: 40px;
-  width: 270px;
-  margin: 5px 0 5px 30px;
+  max-width: 270px;
+  width: 96%;
+  margin: 5px;
   padding: 0 10px;
   border: solid 1px $kakeigray-light;
   border-radius: 4px;
@@ -83,6 +102,9 @@ hr{
   &:focus{
   border-color: $kakeiemerald-dark;
   }
+}
+.form-control{
+  width: 96%;
 }
 
 /* Typography */
@@ -143,6 +165,12 @@ ul.nav{
 }
 #logo{
   margin: 25px;
+}
+@media (max-width: 767px) {
+  #logo{
+    margin: 35px 20px;
+    height: 30px;
+  }
 }
 
 /* Contents */
