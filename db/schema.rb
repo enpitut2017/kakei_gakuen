@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111081740) do
+ActiveRecord::Schema.define(version: 20171113005220) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20171111081740) do
 
   create_table "user_wearings", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "upper_colthes"
+    t.integer "upper_clothes"
     t.integer "lower_clothes"
     t.integer "sox"
     t.integer "front_hair"
