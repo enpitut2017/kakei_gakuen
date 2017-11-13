@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
     #books
     resources :books
+    resources :clothes
     resources :saves
+
+    #saves
+    post '/saves/update', to: 'saves#update'
 
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do
@@ -40,9 +44,6 @@ Rails.application.routes.draw do
     get '/error_403', to: 'error#error_403'
     get '/error_404', to: 'error#error_404'
     get '/error_500', to: 'error#error_500'
-
-    #save_picture
-
 
     #api
     #constraints subdomain: 'api' do
