@@ -3,6 +3,7 @@
   color: #0F0;
 }
 #ClosetsItems{
+  overflow: auto;
   border-radius: 4px 0 0 0;
   background-color: $kakeiorange-light;
   height: 650px;
@@ -32,6 +33,9 @@
 }
 
 .ItemBox{
+  background-size:75% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
   background-color: #FFF;
   height: 150px;
   margin: 15px 15px 0 0;
@@ -42,4 +46,12 @@
   margin: 15px;
   background-color: #fff;
   float: left;
+}
+.Layers{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-size:75% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

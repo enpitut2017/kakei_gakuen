@@ -4,14 +4,21 @@
       <% @send_clothes.each do |key, val| %>
         <% val.each do |obj| %>
           <div class="col-md-6 col-sm-12">
-            <div class="ItemBox">
-              <%= obj.file_name %>
+            <div class="ItemBox" style="background-image:url(<%= asset_path obj.file_name %>);" onclick="draw_image('<%= key %>', '<%= asset_path obj.file_name %>');">
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
     <div id="ClosetsCharactor" class="col-xs-8">
+      <div id="face" class="Layers" style="background-image:url(<%= asset_path 'clothes/006.png' %>);"></div>
+      <% @send_clothes.each do |key, val| %>
+        <% if key == 'face'%>
+
+        <% else %>
+          <div id="<%= key %>" class="Layers"></div>
+        <% end%>
+      <% end%>
     </div>
     <div id="ClosetsItemGroups" class="col-xs-12">
       <% @send_clothes.each do |key, val| %>
