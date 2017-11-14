@@ -2,7 +2,7 @@
 
 one:
   user_id: 1
-  upper_colthes: 1
+  upper_clothes: 1
   lower_clothes: 1
   sox: 1
   front_hair: 1
@@ -11,7 +11,7 @@ one:
 
 two:
   user_id: 1
-  upper_colthes: 1
+  upper_clothes: 1
   lower_clothes: 1
   sox: 1
   front_hair: 1

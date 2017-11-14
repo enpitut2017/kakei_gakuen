@@ -10,7 +10,9 @@ class ClosetsController < ApplicationController
 		@user_clothes = UserWearing.find_by(user_id: current_user.id)
 
 		#userが現在設定している装備を取得
-		user_clothes_data = Clothe.where(id:[@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face])
+		user_wear_clothes_key = Clothe.where(id:[@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face]).pluck(:id)
+		user_wear_clothes = Clothe.where(id:[@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face])
+		@user_wear_clothes = Hash[user_wear_clothes_key.collect.zip(user_wear_clothes)]
 
 		#userが所有している装備とそのタグ
         user_has_clothes = UserHasClothe.where(user_id: current_user.id).pluck(:clothes_id)
