@@ -3,6 +3,7 @@ require 'time'
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     include SessionsHelper
+    include ManagersHelper
 
     #httpエラーの処理
     rescue_from ActionController::ActionControllerError, with: :error_403
