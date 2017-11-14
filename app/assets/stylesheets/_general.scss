@@ -148,12 +148,16 @@ input{
   height: 100px;
   border: 0;
   border-radius: 0;
+  @media (max-width: 767px) {
+    height: 50px;
+  }
 }
 .navbar-header{
-  height: 100px;
+  height: 50px;
 }
 .navbar-toggle{
-  margin: 33px 20px;
+  border: 0;
+  margin: 9px 10px;
 }
 #gnavi{
   padding: 0;
@@ -165,10 +169,8 @@ ul.nav{
 }
 #logo{
   margin: 25px;
-}
-@media (max-width: 767px) {
-  #logo{
-    margin: 35px 20px;
+  @media (max-width: 767px) {
+    margin: 10px 20px;
     height: 30px;
   }
 }
