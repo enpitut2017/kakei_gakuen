@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
 
+  get '/managers_login', to: 'managers#new'
+  post '/managers_login', to: 'managers#create'
+  get '/managers_logout', to: 'managers#destroy'
+
   ActiveAdmin.routes(self)
     root 'static_page#index'
 
     #books
     resources :books
+    resources :clothes
+    resources :saves
+
+    #saves
+    post '/saves/update', to: 'saves#update'
 
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do

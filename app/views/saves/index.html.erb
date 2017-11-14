@@ -1,0 +1,24 @@
+<a href="/saves/new/">新規作成</a>
+<div>
+    <table>
+        <thead>
+            <tr><th>id</th><th>なまえ</th><th>tag</th><th></th></tr>
+        </thead>
+        <tbody>
+<% @clothes.each{|clothe| %>
+            <tr>
+                <td><%=clothe.id %></td>
+                <td><%=clothe.name %></td>
+                <td>
+                    <% if @send_clothe_tag_link[clothe.id] then %>
+                        <% tag_id = @send_clothe_tag_link[clothe.id].tag_id%>
+                        <%= @send_tags[tag_id].tag %>
+                    <% end %>
+                </td>
+                <td><a href="/saves/<%= clothe.id %>/edit/">編集</a></td>
+            </tr>
+<% } %>
+        </tbody>
+    </table>
+    <%= paginate(@clothes) %>
+</div>
