@@ -24,4 +24,5 @@ module ManagersHelper
         session.delete(:manager_id)
         @current_manager = nil
     end
+
 end

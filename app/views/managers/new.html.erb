@@ -1,0 +1,25 @@
+<% provide(:title, "Managers Log in") %>
+
+<% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <%= form_for(:manager, url: managers_login_path) do |f| %>
+
+    <br>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <br>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+    <div class="text-center"><br>
+      <%= f.submit "Log in for Managers", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+</div>
