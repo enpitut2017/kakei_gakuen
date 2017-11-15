@@ -21,6 +21,7 @@
   background-size: cover;
 }
 #ClosetsItemGroups{
+  overflow: auto;
   border-radius: 0 0 4px 4px;
   background-color: $kakeired-dark;
   height: 150px;
