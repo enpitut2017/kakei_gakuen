@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'admin_custom_controller/new'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   get "/managers_login", to: 'managers#new'
   post "/managers_login", to: 'managers#create'
