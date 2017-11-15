@@ -46,6 +46,7 @@ class SavesController < ApplicationController
             puts('error!! rollback') # トランザクション処理を戻す
         end
         puts("clothes data generate end")
+         redirect_to action: 'index'
     end
 
     def update
