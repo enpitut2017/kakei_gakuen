@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.string "file_name"
     t.string "name"
     t.integer "price"
+    t.string "image"
   end
 
   create_table "clothes_tags_links", force: :cascade do |t|
@@ -67,13 +68,6 @@ ActiveRecord::Schema.define(version: 20171115012946) do
   end
 
   create_table "managers", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-  
-  create_table "manages", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
     t.datetime "created_at", null: false
