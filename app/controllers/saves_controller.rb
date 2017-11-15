@@ -31,6 +31,8 @@ class SavesController < ApplicationController
         clothe = Clothe.new
         clothe.name = params[:clothe_name]
         clothe.image = params[:clothe_image]
+        clothe.price = params[:clothe_price]
+        clothe.priority = params[:clothe_priority]
         begin
             ActiveRecord::Base.transaction do
                 #ここに処理を書く
@@ -55,7 +57,7 @@ class SavesController < ApplicationController
         begin
             ActiveRecord::Base.transaction do
                 #ここに処理を書く
-                clothe.update(name: params[:clothe_name], image:params[:clothe_image])
+                clothe.update(name: params[:clothe_name], image: params[:clothe_image], price: params[:clothe_price], priority: params[:clothe_priority])
                 send_clotes_tags_link = ClothesTagsLink.find_by(clothes_id: params[:id])
                 send_clotes_tags_link.update(tag_id: params[:tag_id])
             end
