@@ -1,8 +1,5 @@
 <% provide(:title, "着せ替え") %>
 <div class="container">
-  <%= @user_clothes.inspect %>
-  <%= @send_clothes %>
-
   <div id="Closets" class="row box">
     <!-- カテゴリアイテム一覧 -->
     <div id="ClosetsItems" class="col-xs-4">
@@ -10,7 +7,7 @@
         <% val.each do |obj| %>
           <% unless obj.nil? %>
             <div class="col-md-6 col-sm-12">
-              <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>');">
+              <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>);">
                 <%= image_tag obj.image %>
               </div>
             </div>
