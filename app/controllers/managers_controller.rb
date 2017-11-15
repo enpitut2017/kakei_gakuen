@@ -10,6 +10,7 @@ class ManagersController < ApplicationController
       else
           flash.now[:danger] = 'Invalid email/password combination'
           redirect_to managers_login_path
+
       end
   end
 

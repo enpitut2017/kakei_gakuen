@@ -1,5 +1,5 @@
-window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-var recognition = new webkitSpeechRecognition();
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
 recognition.lang = 'ja';
 
 // 録音終了時トリガー
@@ -32,6 +32,7 @@ function parse_input() {
   if(str){
     str = str.replace(/\s|　|\.|\,|円/g, '');
     str = str.replace(/万/g, '0000');
+    str = str.replace(/千/g, '000');
     item = str.replace(/\d+/g, ' ');
     cost = str.replace(/\D+/g, ' ');
     items = item.split(' ');
