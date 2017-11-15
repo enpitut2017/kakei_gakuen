@@ -1,5 +1,5 @@
 delete from tags;
-insert into tags(id, tag, created_at, updated_at) values 
+insert into tags(id, tag, created_at, updated_at) values
 (1, 'upper_clothes', '2017-10-27', '2017-10-27'),
 (2, 'lower_clothes', '2017-10-27', '2017-10-27'),
 (3, 'sox', '2017-10-27', '2017-10-27'),

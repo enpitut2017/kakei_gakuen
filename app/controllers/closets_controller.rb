@@ -17,8 +17,8 @@ class ClosetsController < ApplicationController
 		user_wearing_clothes_tags_links = ClothesTagsLink.where(clothes_id: keys_user_wearing_clothes)
 
 		#userが所有している装備とそのタグ
-        user_has_clothes = UserHasClothe.where(user_id: current_user.id).pluck(:clothes_id)
-        clothes_tags_links = ClothesTagsLink.where(clothes_id: user_has_clothes)
+    user_has_clothes = UserHasClothe.where(user_id: current_user.id).pluck(:clothes_id)
+    clothes_tags_links = ClothesTagsLink.where(clothes_id: user_has_clothes)
 
 		#装備データ及びtagデータ
 		clothes = Clothe.where(id: user_has_clothes)
