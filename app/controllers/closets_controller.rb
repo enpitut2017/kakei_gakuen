@@ -10,9 +10,11 @@ class ClosetsController < ApplicationController
 		@user_clothes = UserWearing.find_by(user_id: current_user.id)
 
 		#userが現在設定している装備を取得
-		user_wear_clothes_key = Clothe.where(id:[@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face]).pluck(:id)
-		user_wear_clothes = Clothe.where(id:[@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face])
-		@user_wear_clothes = Hash[user_wear_clothes_key.collect.zip(user_wear_clothes)]
+
+		user_wearing_clothes = Clothe.where(id: [@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face])
+		keys_user_wearing_clothes = Clothe.where(id: [@user_clothes.upper_clothes, @user_clothes.lower_clothes, @user_clothes.sox, @user_clothes.front_hair, @user_clothes.back_hair, @user_clothes.face]).pluck(:id)
+		user_wearing_clothes = Hash[keys_user_wearing_clothes.collect.zip(user_wearing_clothes)]
+		user_wearing_clothes_tags_links = ClothesTagsLink.where(clothes_id: keys_user_wearing_clothes)
 
 		#userが所有している装備とそのタグ
     user_has_clothes = UserHasClothe.where(user_id: current_user.id).pluck(:clothes_id)
@@ -39,6 +41,16 @@ class ClosetsController < ApplicationController
 			else
 				@send_clothes[tags[clothes_tags_link.tag_id].tag] = Array.new
 				@send_clothes[tags[clothes_tags_link.tag_id].tag].push(clothes[clothes_tags_link.clothes_id])
+			end
+		end
+
+		@send_user_wearing_clothes = Hash.new
+		user_wearing_clothes_tags_links.each do |user_wearing_clothes_tags_link|
+			if @send_user_wearing_clothes.has_key?(tags[user_wearing_clothes_tags_link.tag_id].tag) then
+				@send_user_wearing_clothes[tags[user_wearing_clothes_tags_link.tag_id].tag].push(user_wearing_clothes[user_wearing_clothes_tags_link.clothes_id])
+			else
+				@send_user_wearing_clothes[tags[user_wearing_clothes_tags_link.tag_id].tag] = Array.new
+				@send_user_wearing_clothes[tags[user_wearing_clothes_tags_link.tag_id].tag].push(user_wearing_clothes[user_wearing_clothes_tags_link.clothes_id])
 			end
 		end
 

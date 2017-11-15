@@ -4,33 +4,33 @@
   <%= @send_clothes %>
 
   <div id="Closets" class="row box">
-  <div id="ClosetsItems" class="col-xs-4">
-    <% @send_clothes.each do |key, val| %>
-      <% val.each do |obj| %>
-      <% unless obj.nil? %>
-        <div class="col-md-6 col-sm-12">
-          <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>');">
-            <%= image_tag obj.image %>
-          </div>
-        </div>
+    <!-- カテゴリアイテム一覧 -->
+    <div id="ClosetsItems" class="col-xs-4">
+      <% @send_clothes.each do |key, val| %>
+        <% val.each do |obj| %>
+          <% unless obj.nil? %>
+            <div class="col-md-6 col-sm-12">
+              <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>');">
+                <%= image_tag obj.image %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
-      <% end %>
-    <% end %>
-  </div>
-  <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
-    <% @send_clothes.each do |key, val| %>
-      <% if key == 'face'%>
-
-      <% else %>
+    </div>
+    <!-- キャラクタ表示領域 -->
+    <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
+      <% @send_clothes.each do |key, val| %>
         <div id="<%= key %>" class="Layers"></div>
       <% end%>
-    <% end%>
-  </div>
-  <div id="ClosetsItemGroups" class="col-xs-12">
-    <% @send_clothes.each do |key, val| %>
-    <div class="GroupBox">
-      <%= key %>
     </div>
-    <% end %>
+    <!-- カテゴリ一覧 -->
+    <div id="ClosetsItemGroups" class="col-xs-12">
+      <% @send_clothes.each do |key, val| %>
+        <div id="<%= key %>" class="GroupBox" onclick="switch_items(<%= key %>)">
+          <%= key %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
