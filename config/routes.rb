@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
-  get '/managers_login', to: 'managers#new'
-  post '/managers_login', to: 'managers#create'
-  get '/managers_logout', to: 'managers#destroy'
+  get 'admin_custom_controller/new'
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  get "/managers_login", to: 'managers#new'
+  post "/managers_login", to: 'managers#create'
+  get"/managers_logout", to: 'managers#destroy'
+
+
 
   ActiveAdmin.routes(self)
     root 'static_page#index'
