@@ -58,10 +58,7 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.string "name"
     t.integer "price"
     t.string "image"
-<<<<<<< HEAD
     t.integer "priority"
-=======
->>>>>>> 8e14a64c80feb87538e12d2c60a4b28fcd7848d1
   end
 
   create_table "clothes_tags_links", force: :cascade do |t|
@@ -77,7 +74,6 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-<<<<<<< HEAD
 
   create_table "manages", force: :cascade do |t|
     t.string "name"
@@ -85,8 +81,6 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-=======
->>>>>>> 8e14a64c80feb87538e12d2c60a4b28fcd7848d1
 
   create_table "tags", force: :cascade do |t|
     t.string "tag"
