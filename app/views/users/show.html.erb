@@ -26,10 +26,7 @@
           <hr width="300px">
         </div>
         <div>
-          <form action="/books" accept-charset="UTF-8" method="post">
-            <!--要否を確認-->
-            <input name="utf8" type="hidden" value="✓">
-            <input type="hidden" name="authenticity_token" value="bh+KyNwkXQGsf20i70F3L+gooNy3SA3cvKRK50bk4Zpw/xlKW/MWUHH2UX6RKLHNaSSp52zxNUn44lOPqYlz8A==">
+          <%=form_for(@new_book, url: books_path) do |f| %>
             <table>
               <tr>
                 <h4 class="text-lightgray noto-light">用途<input class="form-text" type="text" name="items[]"></h4>
@@ -43,7 +40,7 @@
             </table>
             <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
             <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
-          </form>
+          <% end %>
         </div>
       </div>
     </div>
