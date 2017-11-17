@@ -62,6 +62,10 @@
     <div class="col-md-6 col-sm-12">
       <div id="Charactor" class="box">
         <div id="Charactor-bg">
+          <div id="Charactor-coin">
+            <%= image_tag 'icons/coin.png', :height => 40, :width => 40 %>
+            <span class="noto-bold"><%= @user.coin %>300</span>
+          </div>
           <%= link_to closets_path do %>
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>

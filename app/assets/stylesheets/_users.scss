@@ -35,6 +35,16 @@
   background-position: center;
   border-radius: 4px 4px 0 0;
 }
+#Charactor-coin{
+  width: 170px;
+  height: 72px;
+  padding: 32px 0 0 20px;
+  font-size: 22px;
+  text-align: left;
+  span{
+    vertical-align: middle;
+  }
+}
 #Charactor-ToClosetsBtn{
   display: block;
   position: absolute;
