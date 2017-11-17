@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     add_flash_types :success, :info, :warning, :danger
     protect_from_forgery with: :exception
     include SessionsHelper
+    include ManagersHelper
 
     #httpエラーの処理
     rescue_from ActionController::ActionControllerError, with: :error_403
