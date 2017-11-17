@@ -75,20 +75,6 @@ ActiveRecord::Schema.define(version: 20171115064310) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "manages", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.string "new"
-    t.string "create"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "tag"
     t.datetime "created_at", null: false
@@ -120,7 +106,6 @@ ActiveRecord::Schema.define(version: 20171115064310) do
     t.integer "budget"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password"
     t.string "password_digest"
     t.integer "coin"
   end

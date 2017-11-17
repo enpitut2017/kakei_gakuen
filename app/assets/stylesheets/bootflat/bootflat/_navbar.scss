@@ -13,6 +13,8 @@ $navbar-button-font-color-active:            $navbar-button-font-color !default;
 
 $navbar-item-background-color-hover:         $kakeigray-dark !default;
 
+$navbar-icon-bar-color:                      $kakeigray-dark !default;
+
 $navbar-inverse-background-color:            $black !default;
 
 // Exports
@@ -83,16 +85,16 @@ $navbar-inverse-background-color:            $black !default;
           background-color: transparent;
       }
       & .navbar-toggle {
-          border-color: darken($navbar-background-color, 15%);
-          background-color: darken($navbar-background-color, 15%);
+          border-color: $navbar-background-color;
+          background-color: $navbar-background-color;
       }
       & .navbar-toggle:hover,
       & .navbar-toggle:focus {
-          border-color: darken($navbar-background-color, 10%);
-          background-color: darken($navbar-background-color, 10%);
+          border-color: $navbar-background-color;
+          background-color: $navbar-background-color;
       }
       & .navbar-toggle .icon-bar {
-          background-color: $navbar-background-color;
+          background-color: $navbar-icon-bar-color;
       }
       & .navbar-collapse,
       & .navbar-form {
@@ -111,34 +113,34 @@ $navbar-inverse-background-color:            $black !default;
       @media (max-width: 767px) {
           & .navbar-nav > li > a {
               width: auto;
-              height: 75px;
+              height: 50px;
               margin: 0;
               padding-left: 20px;
-              line-height: 75px;
+              line-height: 50px;
               text-align: left;
-              font-size: 26pt;
+              font-size: 18pt;
               font-weight: 100;
               border: 0;
               border-top: solid 1px $navbar-button-color-active;
               border-radius: 0;
               color: $navbar-font-color;
-              background-color: $navbar-background-color;
+              background-color: rgba(255,255,255,0.8);
           }
           & .navbar-nav > li > a:hover,
           & .navbar-nav > li > a:focus {
               width: auto;
-              height: 75px;
+              height: 50px;
               margin: 0;
               padding-left: 20px;
-              line-height: 75px;
+              line-height: 50px;
               text-align: left;
-              font-size: 26pt;
+              font-size: 18pt;
               font-weight: 100;
               border: 0;
               border-top: solid 1px $navbar-button-color-active;
               border-radius: 0;
-              color: $navbar-font-color-active;
-              background-color: $navbar-background-color-active;
+              color: lighten($navbar-font-color, 50%);
+              background-color: rgba(255,255,255,0.8);
           }
           & .navbar-nav .open .dropdown-menu > .divider {
               background-color: $navbar-item-background-color-hover;

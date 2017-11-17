@@ -1,10 +1,20 @@
 <% provide(:title, "新規登録") %>
-<br>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= render 'errors', user: @user %>
-</div>
-  <div class="well col-md-6 col-md-offset-3">
-    <%= render 'form', user: @user %>
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'errors', user: @user %>
+    </div>
+    <div class="col-md-12">
+      <div class="box">
+        <div class="title">
+          <h2>
+            <span>アカウントを作る</span>
+          </h2>
+          <hr width="240px">
+        </div>
+        <%= render 'form', user: @user %>
+      </div>
+    </div>
   </div>
 </div>
