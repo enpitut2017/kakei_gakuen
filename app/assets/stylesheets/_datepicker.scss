@@ -1,0 +1,11 @@
+.datepicker{
+  background-color: $white;
+  padding: 2px;
+}
+.datepicker table tr td.active.active,
+.datepicker table tr td.active.active:hover,
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active.active:hover{
+  background-image: none;
+  background-color: $kakeiemerald-dark;
+}

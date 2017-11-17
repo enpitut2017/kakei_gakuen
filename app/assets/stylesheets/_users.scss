@@ -2,20 +2,22 @@
 
 /* show */
 #Information{
-  height: 300px;
+  min-height: 335px;
 
-  span.title-middle{
-    font-size: 25px;
-  }
   span.title-rest{
     font-size: 40pt;
+  }
+  span.title-middle{
+    font-size: 25px;
   }
 }
 
 
 #PurchaseForm{
-  height: 485px;
-
+  min-height: 450px;
+  .form-text{
+    margin: 0 10px;
+  }
   .btn{
     width: 160px;
     height: 54px;
@@ -33,9 +35,15 @@
   background-position: center;
   border-radius: 4px 4px 0 0;
 }
+#Charactor-ToClosetsBtn{
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 35px;
+}
 #Charactor-img{
   display: block;
-  height: 600px;
+  max-height: 600px;
   position: absolute;
   margin: auto;
   padding-bottom: 40px;
@@ -43,9 +51,12 @@
   bottom: 0;
   right: 0;
   left: 0;
+  @media (max-width: 396px) {
+    width: 100%;
+  }
 }
 #Charactor-balloon{
-  height: 100px;
+  min-height: 85px;
   background-color: $white;
   border-radius: 0 0 4px 4px;
 
