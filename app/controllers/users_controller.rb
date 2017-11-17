@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     @lost = inserted_cost(@lost)
     @budget = inserted_cost(@user.budget)
     @books = @user.books.order("time DESC").limit(5)
+    @new_book = Book.new
   end
 
   # GET /users/new
