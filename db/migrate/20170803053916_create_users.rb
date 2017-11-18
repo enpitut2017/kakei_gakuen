@@ -4,6 +4,8 @@
       t.string :name
       t.string :email
       t.integer :budget
+      t.integer :coin
+      t.string :password_digest
 
       t.timestamps
     end
