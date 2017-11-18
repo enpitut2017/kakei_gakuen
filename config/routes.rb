@@ -14,11 +14,12 @@ Rails.application.routes.draw do
 
     #books
     resources :books
-    resources :clothes
     resources :saves
 
     #saves
     post '/saves/update', to: 'saves#update'
+
+    post '/clothets/buy', to: 'clothets#buy'
 
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do

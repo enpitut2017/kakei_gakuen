@@ -1,5 +1,5 @@
 class ClosetsController < ApplicationController
-	before_action :logged_in_user, only: [:edit, :update]
+	before_action :logged_in_user, only: [:edit, :update, :buy]
     #before_action :correct_user, only: [:edit, :update]
 
     def edit
@@ -59,16 +59,53 @@ class ClosetsController < ApplicationController
     def update
     end
 
-	private
-		def logged_in_user
-			unless logged_in?
-				store_location
-				flash[:danger] = "Please log in."
-				redirect_to login_path
-			end
+	def buy
+		json_request = JSON.parse(request.body.read)
+		buy_id = json_request["buy_id"]
+		user_id = json_request["user_id"]
+		user = User.find_by(id: user_id)
+		cloth = Clothe.find_by(id: buy_id)
+		if user || cloth
+			puts ('ユーザもしくは購入しようとした服は存在しません')
 		end
+		if user.coin < cloth.price
+			result = {'result' => 0}
+		else
+			if UserHasClothe.find_by(clothes_id: cloth.id)
+				raise　"服をすでに持っています"
+			end
+			begin
+				ActiveRecord::Base.transaction do
+					user.coin -= cloth.price
+					user.save
+					UserHasClothe.create(user_id: user.id, clothes_id: cloth.id)
+				end
+				puts('success!')
+			rescue => e
+				puts('error! rollback!')
+				result = {'result' => 0}
+			end
+			result = {'result' => 1}
+		end
+		respond_to do |format|
+			forat.html{render :edit_clothe}
+			format.json{render :json => @result}
+			puts(result)
+		end
+	end
 
-		def correct_user
+
+	private
+
+	def logged_in_user
+		unless logged_in?
+			store_location
+			flash[:danger] = "Please log in."
+			redirect_to login_path
+		end
+	end
+
+	def correct_user
       @user = User.find(params[:id])
       redirect_to user_path(current_user) unless @user == current_user
     end
