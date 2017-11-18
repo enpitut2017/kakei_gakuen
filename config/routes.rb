@@ -19,8 +19,6 @@ Rails.application.routes.draw do
     #saves
     post '/saves/update', to: 'saves#update'
 
-    post '/clothets/buy', to: 'clothets#buy'
-
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do
         member do
@@ -40,6 +38,8 @@ Rails.application.routes.draw do
     #closets
     get '/closets', to:'closets#edit'
     patch '/closets', to:'closets#update'
+    post '/closets/buy', to: 'closets#buy'
+
 
     #sessions
     get    '/login',   to: 'sessions#new'

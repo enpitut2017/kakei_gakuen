@@ -66,12 +66,14 @@ class ClosetsController < ApplicationController
 		user = User.find_by(id: user_id)
 		cloth = Clothe.find_by(id: buy_id)
 		if user || cloth
-			puts ('ユーザもしくは購入しようとした服は存在しません')
+			puts ('購入しようとした服は存在しないか、ユーザが存在しません')
+			raise "購入しようとした服は存在しないか、ユーザが存在しません"
 		end
 		if user.coin < cloth.price
 			result = {'result' => 0}
 		else
 			if UserHasClothe.find_by(clothes_id: cloth.id)
+				puts ("服をすでに持っています")
 				raise　"服をすでに持っています"
 			end
 			begin
