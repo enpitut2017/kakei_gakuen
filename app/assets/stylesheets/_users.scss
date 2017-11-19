@@ -18,12 +18,18 @@
   .form-text{
     margin: 0 10px;
   }
+  input{
+    color: $kakeigray-dark;
+  }
   .btn{
     width: 160px;
     height: 54px;
     margin: 5px 10px;
     line-height: 50px;
     font-size: 16px;
+  }
+  .btn-danger{
+    color: $white;
   }
 }
 

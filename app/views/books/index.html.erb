@@ -3,12 +3,12 @@
     <div class="col-xs-12">
       <div id="PurchaseHistory" class="box">
         <div class="title">
-          <h3>家計簿</h3>
+          <h2>家計簿</h2>
           <hr width="300px">
         </div>
 
         <%
-        #@books = Book.order(time: "DESC")
+        #一覧用のハッシュ
         timesHash = Hash.new
         @books.each do |book|
            if !timesHash.has_key?(book.time)
@@ -20,6 +20,40 @@
            previousTime = book.time
          end
         %>
+        <%
+        #棒グラフ用のハッシュ
+        data_for_bar_chart = Hash.new
+        timesHash.each{|key,value|
+          if data_for_bar_chart[key.month]
+            data_for_bar_chart[key.month] += value[1].inject(0){|sum, i| sum + i }
+          else
+            data_for_bar_chart[key.month] = value[1].inject(0){|sum, i| sum + i }
+          end
+        }
+        #棒グラフ用データ
+        today_month = Date.today.month
+        data = {
+        labels: [(today_month - 5).to_s + "月",
+                 (today_month - 4).to_s + "月",
+                 (today_month - 3).to_s + "月",
+                 (today_month - 2).to_s + "月",
+                 (today_month - 1).to_s + "月",
+                 (today_month).to_s + "月"],
+        datasets: [
+          {
+              label: "過去6ヶ月の支出",
+              background_color: "rgba(220,30,30,0.8)",
+              data: [data_for_bar_chart[today_month - 5],
+                     data_for_bar_chart[today_month - 4],
+                     data_for_bar_chart[today_month - 3],
+                     data_for_bar_chart[today_month - 2],
+                     data_for_bar_chart[today_month - 1],
+                     data_for_bar_chart[today_month]]
+            }
+          ]
+        }
+        %>
+        <%= bar_chart data %>
 
         <div class="timeline">
           <dl>
@@ -27,9 +61,6 @@
             month = 0
             counter = 0
             timesHash.each{|key, value|
-              #if counter == 10
-              #  break
-              #end
               if month != key.month
             %>
             <dt>

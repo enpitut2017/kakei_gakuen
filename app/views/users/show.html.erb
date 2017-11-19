@@ -50,8 +50,8 @@
                 </h4>
               </tr>
             </table>
-            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
             <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
+            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default' %>
           <% end %>
         </div>
       </div>
@@ -61,7 +61,7 @@
         <div id="Charactor-bg">
           <div id="Charactor-coin">
             <%= image_tag 'icons/coin.png', :height => 40, :width => 40 %>
-            <span class="noto-bold"><%= @user.coin %>300</span>
+            <span class="noto-bold"><%= @user.coin %></span>
           </div>
           <%= link_to closets_path do %>
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
@@ -83,7 +83,6 @@
         </div>
 
         <%
-        #@books = Book.order(time: "DESC")
         timesHash = Hash.new
         @books.each do |book|
            if !timesHash.has_key?(book.time)
@@ -104,12 +103,13 @@
             timesHash.each{|key, value|
               if counter == 10
                 break
-              end
-              if month != key.month
+              else
+                if month != key.month
             %>
             <dt>
               <%= key.year.to_s + "年" + key.month.to_s + "月" %>
             </dt>
+            <%    end %>
             <% end %>
             <dd class="pos-right clearfix">
 						  <div class="circ"></div>
