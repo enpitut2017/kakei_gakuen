@@ -8,7 +8,6 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = @user.books.order('time DESC')
-
   end
 
   # GET /books/1
