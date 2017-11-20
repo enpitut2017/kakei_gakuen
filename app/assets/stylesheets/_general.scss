@@ -57,12 +57,18 @@ hr{
 }
 .title{
   text-align: center;
-}
-.title h2{
+  h2{
   font-size: 30px;
   display: block;
   margin-top: 0;
   padding-top: 30px;
+  }
+  h3{
+  font-size: 24px;
+  display: block;
+  margin-top: 0;
+  padding-top: 24px;
+  }
 }
 .triangle-top{
   position: relative;
