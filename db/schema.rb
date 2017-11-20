@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115064310) do
+ActiveRecord::Schema.define(version: 20171115012946) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 20171115064310) do
     t.string "item"
     t.integer "cost"
     t.integer "user_id"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 20171115064310) do
     t.integer "price"
     t.string "image"
     t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "clothes_tags_links", force: :cascade do |t|
@@ -84,8 +86,6 @@ ActiveRecord::Schema.define(version: 20171115064310) do
 
   create_table "tags", force: :cascade do |t|
     t.string "tag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_has_clothes", force: :cascade do |t|
@@ -111,11 +111,16 @@ ActiveRecord::Schema.define(version: 20171115064310) do
     t.string "name"
     t.string "email"
     t.integer "budget"
+    t.integer "coin"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
     t.string "password"
     t.string "password_digest"
     t.integer "coin"
+=======
+>>>>>>> my_develop
   end
 
 end
