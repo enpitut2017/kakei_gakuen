@@ -1,23 +1,49 @@
+<% provide(:title, "着せ替え") %>
 <div class="container">
+  <%= @send_user_wearing_clothes %>
+  <br>---------<br>
+  <%= @send_clothes %>
+
+  <br><div class="btn btn-default" onclick="build_json();">決定</div>
+
   <div id="Closets" class="row box">
+    <!-- カテゴリアイテム一覧 -->
     <div id="ClosetsItems" class="col-xs-4">
       <% @send_clothes.each do |key, val| %>
         <% val.each do |obj| %>
-          <div class="col-md-6 col-sm-12">
-            <div class="ItemBox">
-              <%= obj.file_name %>
+          <% unless obj.nil? %>
+            <div class="col-md-6 col-sm-12">
+              <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
+                <%= image_tag obj.image %>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
-    <div id="ClosetsCharactor" class="col-xs-8">
+    <!-- キャラクタ表示領域 -->
+    <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
+      <!-- レイヤ描画 -->
+      <% @send_clothes.each do |key, val| %>
+        <div id="<%= key %>" class="Layers">
+          <div id="<%= key %>-id" style="display:none;"></div>
+        </div>
+      <% end%>
+      <!-- 現在のキャラクタ描画 -->
+      <% @send_user_wearing_clothes.each do |key, val| %>
+        <% val.each do |obj| %>
+          <% unless obj.nil? %>
+            <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
+    <!-- カテゴリ一覧 -->
     <div id="ClosetsItemGroups" class="col-xs-12">
       <% @send_clothes.each do |key, val| %>
-      <div class="GroupBox">
-        <%= key %>
-      </div>
+        <div id="<%= key %>" class="GroupBox" onclick="switch_items(<%= key %>)">
+          <%= key %>
+        </div>
       <% end %>
     </div>
   </div>

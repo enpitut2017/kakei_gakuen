@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
 
+  get 'admin_custom_controller/new'
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  get "/managers_login", to: 'managers#new'
+  post "/managers_login", to: 'managers#create'
+  get"/managers_logout", to: 'managers#destroy'
+
+
+
   ActiveAdmin.routes(self)
     root 'static_page#index'
 
     #books
     resources :books
+    resources :clothes
+    resources :saves
+
+    #saves
+    post '/saves/update', to: 'saves#update'
 
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do
@@ -24,7 +38,7 @@ Rails.application.routes.draw do
 
     #closets
     get '/closets', to:'closets#edit'
-    patch '/closets', to:'closets#update'
+    post '/closets', to:'closets#update'
 
     #sessions
     get    '/login',   to: 'sessions#new'

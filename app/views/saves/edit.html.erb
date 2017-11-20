@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box">
+        <a href="/saves/">一覧に戻る</a>
+        <div>
+          <form action="/saves/update/" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+            <%= csrf_meta_tags %>
+            <input type="hidden" name="id" value="<%= @send_clothe.id.to_s %>">
+            <p>
+              服の名前 : <input type="text" name="clothe_name" value="<%= @send_clothe.name %>" required>
+            </p>
+            <p>
+              値段(数字で入力してね) : <input type="text" name="clothe_price" value="<%= @send_clothe.price.to_s %>" required>
+            </p>
+            <p>
+              z-index(数字で入力してね) : <input type="text" name="clothe_priority" value="<%= @send_clothe.priority.to_s %>" required>
+            </p>
+            <p>
+              タグ : 
+              <select name="tag_id">
+                <% @send_tags.each{|key, tag| %>
+                  <option value="<%= key %>"<% if @send_clothe_tag_link && @send_clothe_tag_link.tag_id == tag['id']  then %>selected<% end %>><%= tag['tag'] %></option>
+                <% } %>
+              </select>
+            </p>
+            <p>
+              写真 : <input type="file" name="clothe_image" id="clothe_image">
+              <% if @send_clothe.image then %>
+                <%= image_tag @send_clothe.image.to_s %>
+              <% end %>
+            </p>
+            <p>
+              <button type="submit" name="action" value="save">保存</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

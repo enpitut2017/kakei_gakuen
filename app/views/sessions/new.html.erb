@@ -1,18 +1,31 @@
-<% provide(:title, "Log in") %>
-<div class="row">
-  <br>
-  <div class="well col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
+<% provide(:title, "ログイン") %>
+<div class="container">
+  <div class="row">
+    <br>
+    <div class="col-md-12">
+      <div class="box">
+        <div class="title">
+          <h2>
+            <span>ログイン</span>
+          </h2>
+          <hr width="240px">
+        </div>
+        <%= form_for(:session, url: login_path) do |f| %>
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+        <small>初めての方はアカウントを<%= link_to "新規作成", signup_path %>してくださ  い</small>
 
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
-    <small>初めての方はアカウントを<%= link_to "新規作成", signup_path %>してください</small>
-
-    <div class="text-center"><br>
-      <%= f.submit "Log in", class: 'btn btn-primary' %>
+        <div class="text-center"><br>
+          <%= f.submit "Log in", class: 'btn btn-primary' %>
+        </div>
+        <% end %>
+      </div>
     </div>
-    <% end %>
   </div>
 </div>

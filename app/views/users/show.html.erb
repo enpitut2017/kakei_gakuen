@@ -1,3 +1,4 @@
+<% provide(:title, "ホーム") %>
 <script type="text/javascript">
   $(document).on('turbolinks:load', users_init);
 </script>
@@ -6,12 +7,15 @@
     <div class="col-md-6 col-sm-12">
       <div id="Information" class="box">
         <div class="title">
-          <h3><%= @user.name %>さんの家計簿</h3>
-          <hr width="300px">
+          <h2>
+            <span><%= @user.name %></span>
+            <span>さんの家計簿</span>
+          </h2>
+          <hr width="240px">
         </div>
         <div>
           <p>
-            <span class="title-middle noto-bold">今月の残高：</span>
+            <span class="title-middle noto-bold">今月の残高</span>
             <span class="title-rest noto-bold"><%= @rest %>円</span>
           </p>
           <p><span class="title-middle text-lightgray noto-light">今月の予算：<%= @budget %>円</span></p>
@@ -21,34 +25,43 @@
 
       <div id="PurchaseForm" class="box">
         <div class="title">
-          <h3>入出金を記録</h3>
-          <hr width="300px">
+          <h2>入出金を記録</h2>
+          <hr width="240px">
         </div>
         <div>
-          <form action="/books" accept-charset="UTF-8" method="post">
-            <!--要否を確認-->
-            <input name="utf8" type="hidden" value="✓">
-            <input type="hidden" name="authenticity_token" value="bh+KyNwkXQGsf20i70F3L+gooNy3SA3cvKRK50bk4Zpw/xlKW/MWUHH2UX6RKLHNaSSp52zxNUn44lOPqYlz8A==">
+          <%=form_for(@new_book, url: books_path) do |f| %>
             <table>
               <tr>
-                <h4 class="text-lightgray noto-light">用途<input class="form-text" type="text" name="items[]"></h4>
+                <h4 class="text-lightgray noto-light">
+                  <span class="form-text">用途</span>
+                  <input type="text" name="items[]">
+                </h4>
               </tr>
               <tr>
-                <h4 class="text-lightgray noto-light">金額<input class="form-text" type="text" name="costs[]"></h4>
+                <h4 class="text-lightgray noto-light">
+                  <span class="form-text">金額</span>
+                  <input type="text" name="costs[]">
+                </h4>
               </tr>
               <tr>
-                <h4 class="text-lightgray noto-light">日付<input class="form-text" type="text" name="times[]" id="date"></h4>
+                <h4 class="text-lightgray noto-light">
+                  <span class="form-text">日付</span>
+                  <input type="text" name="times[]" id="date">
+                </h4>
               </tr>
             </table>
             <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-primary' %>
             <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
-          </form>
+          <% end %>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div id="Charactor" class="box">
         <div id="Charactor-bg">
+          <%= link_to closets_path do %>
+            <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
+          <% end %>
           <img id="Charactor-img" alt="charactor" src="<%= @img_path %>" />
         </div>
         <div id="Charactor-balloon">
@@ -61,8 +74,8 @@
     <div class="col-xs-12">
       <div id="PurchaseHistory" class="box">
         <div class="title">
-          <h3>最近の家計簿</h3>
-          <hr width="300px">
+          <h2>最近の家計簿</h2>
+          <hr width="240px">
         </div>
 
         <%

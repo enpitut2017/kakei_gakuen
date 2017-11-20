@@ -82,9 +82,11 @@ capybara-*.html
 /log
 /tmp
 /db/*.sqlite3
+/db/schema.rb
 /db/*.sqlite3-journal
 /public/system
 /public/assets/*
+public/uploads/clothe/*
 /coverage/
 /spec/tmp
 *.orig
