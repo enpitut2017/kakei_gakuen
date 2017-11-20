@@ -77,6 +77,13 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "new"
+    t.string "create"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "tag"
   end
@@ -108,6 +115,12 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
+    t.string "password"
+    t.string "password_digest"
+    t.integer "coin"
+=======
+>>>>>>> my_develop
   end
 
 end

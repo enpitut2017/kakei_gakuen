@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
     #books
     resources :books
-    resources :clothes
     resources :saves
 
     #saves
@@ -38,7 +37,9 @@ Rails.application.routes.draw do
 
     #closets
     get '/closets', to:'closets#edit'
-    post '/closets', to:'closets#update'
+    patch '/closets', to:'closets#update'
+    post '/closets/buy', to: 'closets#buy'
+
 
     #sessions
     get    '/login',   to: 'sessions#new'
