@@ -1,12 +1,12 @@
 <%
 #一覧用ハッシュ
-timesHash = Hash.new
+hash_for_index = Hash.new
 @books.each do |book|
-   if !timesHash.has_key?(book.time)
-     timesHash[book.time] = [[book.item], [book.cost]]
+   if !hash_for_index.has_key?(book.time)
+     hash_for_index[book.time] = [[book.item], [book.cost]]
    else
-     timesHash[book.time][0].push(book.item)
-     timesHash[book.time][1].push(book.cost)
+     hash_for_index[book.time][0].push(book.item)
+     hash_for_index[book.time][1].push(book.cost)
    end
    previousTime = book.time
  end
@@ -14,7 +14,7 @@ timesHash = Hash.new
 <%
 #棒グラフ用ハッシュ
 hash_for_barchart = Hash.new
-timesHash.each{|key,value|
+hash_for_index.each{|key,value|
   if hash_for_barchart[key.month]
     hash_for_barchart[key.month] += value[1].inject(0){|sum, i| sum + i }
   else
@@ -50,7 +50,7 @@ options_for_barchart = {
 <%
 #円グラフ用ハッシュ
 hash_for_piechart = Hash.new
-timesHash.each{|key,value|
+hash_for_index.each{|key,value|
   counter = 0
   for item in value[0] do
     if hash_for_piechart[item]
@@ -92,7 +92,7 @@ options_for_barchart = {
 <%
 #円グラフ用ハッシュ
 hash_for_piechart = Hash.new
-timesHash.each{|key,value|
+hash_for_index.each{|key,value|
   counter = 0
   for item in value[0] do
     if hash_for_piechart[item]
@@ -141,12 +141,10 @@ datasets: [
   ]
 }
 options_for_piechart = {
-  maintainAspectRatio: false,
-  legend: {
-      display: false
-  }
+  maintainAspectRatio: false
 }
 %>
+
 <div class="container main">
   <div id="PurchaseHistory" class="row box">
 
@@ -157,7 +155,7 @@ options_for_piechart = {
 
     <div class="col-sm-6 col-xs-12" id="BarChart">
       <div class="title">
-        <h3>月毎の支出</h3>
+        <h3>過去6ヶ月の支出</h3>
         <hr width="200px">
       </div>
       <div>
@@ -185,7 +183,7 @@ options_for_piechart = {
           <%
           month = 0
           counter = 0
-          timesHash.each{|key, value|
+          hash_for_index.each{|key, value|
             if month != key.month
           %>
           <dt>

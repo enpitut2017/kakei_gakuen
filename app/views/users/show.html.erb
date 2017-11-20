@@ -83,13 +83,13 @@
         </div>
 
         <%
-        timesHash = Hash.new
+        hash_for_timeline = Hash.new
         @books.each do |book|
-           if !timesHash.has_key?(book.time)
-             timesHash[book.time] = [[book.item], [book.cost]]
+           if !hash_for_timeline.has_key?(book.time)
+             hash_for_timeline[book.time] = [[book.item], [book.cost]]
            else
-             timesHash[book.time][0].push(book.item)
-             timesHash[book.time][1].push(book.cost)
+             hash_for_timeline[book.time][0].push(book.item)
+             hash_for_timeline[book.time][1].push(book.cost)
            end
            previousTime = book.time
          end
@@ -100,7 +100,7 @@
             <%
             month = 0
             counter = 0
-            timesHash.each{|key, value|
+            hash_for_timeline.each{|key, value|
               if counter == 10
                 break
               else
