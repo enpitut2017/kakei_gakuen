@@ -56,7 +56,18 @@ class ClosetsController < ApplicationController
 
     end
 
-    def update
+	def update
+		if params.blank? then
+			redirect_to :action => "edit"
+		end
+		puts "json get"
+		user_wearing = UserWearing.find_by(user_id: current_user.id)
+		
+		if user_wearing.update(upper_clothes: params["upper_clothes"], lower_clothes: params["lower_clothes"], sox: params["sox"], back_hair: params["back_hair"], front_hair: params["front_hair"], face: params["face"]) then
+			redirect_to :action => "edit"
+		else
+			redirect_to :action => "edit"
+		end
     end
 
 	private
