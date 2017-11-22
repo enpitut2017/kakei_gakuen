@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
     #books
     resources :books
-    resources :clothes
     resources :saves
 
     #saves
