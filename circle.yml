@@ -6,9 +6,9 @@ machine:
       2.2.5
 dependencies:
   cache_directories:
-    - "vender/bundle"
+    - "vendor/bundle"
   override:
-    - bundle install:
+    - bundle install -j4 --path=vendor/bundle:
         timeout: 180
 database:
   override:
