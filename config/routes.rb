@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
     #closets
     get   '/closets', to:'closets#edit'
-    patch '/closets', to:'closets#update'
+    post  '/closets', to:'closets#update'
 
     #sessions
     get   '/login',   to: 'sessions#new'
