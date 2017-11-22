@@ -18,12 +18,18 @@
   .form-text{
     margin: 0 10px;
   }
+  input{
+    color: $kakeigray-dark;
+  }
   .btn{
     width: 160px;
     height: 54px;
     margin: 5px 10px;
     line-height: 50px;
     font-size: 16px;
+  }
+  .btn-danger{
+    color: $white;
   }
 }
 
@@ -34,6 +40,16 @@
   background-size: cover;
   background-position: center;
   border-radius: 4px 4px 0 0;
+}
+#Charactor-coin{
+  width: 170px;
+  height: 72px;
+  padding: 32px 0 0 20px;
+  font-size: 22px;
+  text-align: left;
+  span{
+    vertical-align: middle;
+  }
 }
 #Charactor-ToClosetsBtn{
   display: block;
@@ -120,4 +136,12 @@
     padding: 10px;
     font-size: 20px;
   }
+}
+
+/* Profile Edit */
+#LogoutWithdrawButtons{
+  margin-bottom: 15px;
+}
+#modal{
+  padding-top: 120px;
 }

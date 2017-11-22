@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @rest = inserted_cost(@user.budget - @lost)
     @lost = inserted_cost(@lost)
     @budget = inserted_cost(@user.budget)
-    @books = @user.books.order("time DESC").limit(5)
+    @books = @user.books.order("time DESC")
     @new_book = Book.new
   end
 
@@ -150,7 +150,7 @@ class UsersController < ApplicationController
 	def initialize_clothes
 		user_wearing = UserWearing.new(user_id: @user.id, upper_clothes: 1, lower_clothes: 2, sox: 3, front_hair: 4, back_hair: 5, face: 6)
 		user_wearing.save
-		for num in 1..6 do
+		for num in 1..12 do
 			user_has_clothe = UserHasClothe.new(user_id: @user.id, clothes_id: num);
 			user_has_clothe.save
 		end

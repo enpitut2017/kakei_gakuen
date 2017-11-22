@@ -72,6 +72,6 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
 
-
+gem 'chartjs-ror'
 gem 'rmagick'
 gem'carrierwave'
