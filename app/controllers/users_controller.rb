@@ -23,8 +23,10 @@ class UsersController < ApplicationController
     @rest = inserted_cost(@user.budget - @lost)
     @lost = inserted_cost(@lost)
     @budget = inserted_cost(@user.budget)
-    @books = @user.books.order("time DESC").limit(5)
+    @books = @user.books.order("time DESC")
     @new_book = Book.new
+    @send_user_wearing_clothes = Clothe::get_user_wearing_tag_hash(@user.id)
+    @tags = Tag.all
   end
 
   # GET /users/new

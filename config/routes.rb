@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
     #books
     resources :books
-    resources :clothes
     resources :saves
 
     #saves
@@ -37,12 +36,12 @@ Rails.application.routes.draw do
     get   '/retire',  to: 'users#destroy'
 
     #closets
-    get '/closets', to:'closets#edit'
-    post '/closets', to:'closets#update'
+    get   '/closets', to:'closets#edit'
+    post  '/closets', to:'closets#update'
 
     #sessions
-    get    '/login',   to: 'sessions#new'
-    post   '/login',   to: 'sessions#create'
+    get   '/login',   to: 'sessions#new'
+    post  '/login',   to: 'sessions#create'
     get   '/logout',  to: 'sessions#destroy'
 
     #error

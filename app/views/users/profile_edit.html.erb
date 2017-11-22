@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center" id="LogoutWithdrawButtons">
       <%= link_to 'ログアウト', logout_path, class: 'btn btn-default' %>
       <%= link_to '退会', {}, onclick: "confirm_delete();return false;", class: 'btn btn-danger' %>
     </div>
@@ -63,10 +63,10 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <%= link_to '退会する', retire_path, class: 'btn btn-danger' %>
-              </div>
+              <%= link_to '退会する', retire_path, class: 'btn btn-danger' %>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
