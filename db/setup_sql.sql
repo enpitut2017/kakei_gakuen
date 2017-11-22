@@ -39,17 +39,3 @@ insert into clothes_tags_links (id, tag_id, clothes_id, created_at, updated_at) 
 
 delete from user_wearings;
 insert into user_wearings (id, user_id, upper_clothes, lower_clothes, sox, front_hair, back_hair, face, created_at, updated_at) values (1, 1, 1, 2, 3, 4, 5, 12, '2017-10-27', '2017-10-27');
-
-delete from user_has_clothes;
-insert into user_has_clothes (id, user_id, clothes_id, created_at, updated_at) values
-(1, 1, 1, '2017-10-27', '2017-10-27'),
-(2, 1, 2, '2017-10-27', '2017-10-27'),
-(3, 1, 3, '2017-10-27', '2017-10-27'),
-(4, 1, 4, '2017-10-27', '2017-10-27'),
-(5, 1, 5, '2017-10-27', '2017-10-27'),
-(6, 1, 6, '2017-10-27', '2017-10-27'),
-(8, 1, 8, '2017-10-27', '2017-10-27'),
-(9, 1, 9, '2017-10-27', '2017-10-27'),
-(10, 1, 10, '2017-10-27', '2017-10-27'),
-(11, 1, 11, '2017-10-27', '2017-10-27'),
-(12, 1, 12, '2017-10-27', '2017-10-27');
