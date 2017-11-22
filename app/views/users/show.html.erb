@@ -62,10 +62,10 @@
           <%= link_to closets_path do %>
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>
-          <div id="Charactor-img">
+          <div id="Charactor-Img">
             <!-- レイヤー設定 -->
             <% @tags.each do |val| %>
-            <div id="<%= val.tag %>" class="Layers">
+            <div id="<%= val.tag %>" class="Charactor-ItemImg">
               <div id="<%= val.tag %>-id" style="display:none;"></div>
             </div>
             <% end %>
