@@ -5,6 +5,8 @@ machine:
     version:
       2.2.5
 dependencies:
+  cache_directories:
+    - "vender/bundle"
   override:
     - bundle install:
         timeout: 180
