@@ -1,74 +1,227 @@
+<%
+#一覧用ハッシュ
+hash_for_index = Hash.new
+@books.each do |book|
+   if !hash_for_index.has_key?(book.time)
+     hash_for_index[book.time] = [[book.item], [book.cost]]
+   else
+     hash_for_index[book.time][0].push(book.item)
+     hash_for_index[book.time][1].push(book.cost)
+   end
+   previousTime = book.time
+ end
+%>
+<%
+#棒グラフ用ハッシュ
+hash_for_barchart = Hash.new
+hash_for_index.each{|key,value|
+  if hash_for_barchart[key.month]
+    hash_for_barchart[key.month] += value[1].inject(0){|sum, i| sum + i }
+  else
+    hash_for_barchart[key.month] = value[1].inject(0){|sum, i| sum + i }
+  end
+}
+#棒グラフ用データ
+today_month = Date.today.month
+data_for_barchart = {
+labels: [(today_month - 5).to_s + "月",
+         (today_month - 4).to_s + "月",
+         (today_month - 3).to_s + "月",
+         (today_month - 2).to_s + "月",
+         (today_month - 1).to_s + "月",
+         (today_month).to_s + "月"],
+datasets: [
+  {
+      label: "過去6ヶ月の支出",
+      background_color: "rgba(220,30,30,0.8)",
+      data: [hash_for_barchart[today_month - 5],
+             hash_for_barchart[today_month - 4],
+             hash_for_barchart[today_month - 3],
+             hash_for_barchart[today_month - 2],
+             hash_for_barchart[today_month - 1],
+             hash_for_barchart[today_month]]
+    }
+  ]
+}
+options_for_barchart = {
+  maintainAspectRatio: false
+}
+%>
+<%
+#円グラフ用ハッシュ
+hash_for_piechart = Hash.new
+hash_for_index.each{|key,value|
+  counter = 0
+  for item in value[0] do
+    if hash_for_piechart[item]
+      hash_for_piechart[item] += value[1][counter]
+    else
+      hash_for_piechart[item] = value[1][counter]
+    end
+    counter += 1
+  end
+}
+#円グラフ用データ
+data_for_barchart = {
+labels: [(today_month - 5).to_s + "月",
+         (today_month - 4).to_s + "月",
+         (today_month - 3).to_s + "月",
+         (today_month - 2).to_s + "月",
+         (today_month - 1).to_s + "月",
+         (today_month).to_s + "月"],
+datasets: [
+  {
+      label: "過去6ヶ月の支出",
+      background_color: "rgba(220,30,30,0.8)",
+      data: [hash_for_barchart[today_month - 5],
+             hash_for_barchart[today_month - 4],
+             hash_for_barchart[today_month - 3],
+             hash_for_barchart[today_month - 2],
+             hash_for_barchart[today_month - 1],
+             hash_for_barchart[today_month]]
+    }
+  ]
+}
+options_for_barchart = {
+  maintainAspectRatio: false,
+  legend: {
+      display: false
+  }
+}
+%>
+<%
+#円グラフ用ハッシュ
+hash_for_piechart = Hash.new
+hash_for_index.each{|key,value|
+  counter = 0
+  for item in value[0] do
+    if hash_for_piechart[item]
+      hash_for_piechart[item] += value[1][counter]
+    else
+      hash_for_piechart[item] = value[1][counter]
+    end
+    counter += 1
+  end
+}
+#円グラフ用データ
+temp_sum_of_data = hash_for_piechart.values.inject(:+)
+hash_for_piechart = hash_for_piechart.sort {|(k1, v1), (k2, v2)| v2 <=> v1 }
+temp_array_for_labels = Array.new
+temp_array_for_data = Array.new
+counter = 0
+temp_sum_of_0to4 = 0
+hash_for_piechart.each{|key, value|
+  if counter == 5
+    break
+  end
+  temp_array_for_labels.push(key)
+  temp_array_for_data.push(value)
+  counter += 1
+  temp_sum_of_0to4 += value
+}
+temp_array_for_data[5] = temp_sum_of_data - temp_sum_of_0to4
+data_for_piechart = {
+labels: [temp_array_for_labels[0],
+         temp_array_for_labels[1],
+         temp_array_for_labels[2],
+         temp_array_for_labels[3],
+         temp_array_for_labels[4],
+         "その他"],
+datasets: [
+    {
+      label: "過去6ヶ月の支出",
+      background_color: ["rgba(220,30 ,30 ,0.8)",
+                         "rgba(220,137,29 ,0.8)",
+                         "rgba(124,220,29 ,0.8)",
+                         "rgba(29 ,220,191,0.8)",
+                         "rgba(29 ,51 ,220,0.8)",
+                         "rgba(150,150,150,0.8)"],
+      data: temp_array_for_data
+    }
+  ]
+}
+options_for_piechart = {
+  maintainAspectRatio: false
+}
+%>
+
 <div class="container main">
-  <div class="row">
-    <div class="col-xs-12">
-      <div id="PurchaseHistory" class="box">
-        <div class="title">
-          <h3>家計簿</h3>
-          <hr width="300px">
-        </div>
+  <div id="PurchaseHistory" class="row box">
 
-        <%
-        #@books = Book.order(time: "DESC")
-        timesHash = Hash.new
-        @books.each do |book|
-           if !timesHash.has_key?(book.time)
-             timesHash[book.time] = [[book.item], [book.cost]]
-           else
-             timesHash[book.time][0].push(book.item)
-             timesHash[book.time][1].push(book.cost)
-           end
-           previousTime = book.time
-         end
-        %>
-
-        <div class="timeline">
-          <dl>
-            <%
-            month = 0
-            counter = 0
-            timesHash.each{|key, value|
-              #if counter == 10
-              #  break
-              #end
-              if month != key.month
-            %>
-            <dt>
-              <%= key.year.to_s + "年" + key.month.to_s + "月" %>
-            </dt>
-            <% end %>
-            <dd class="pos-right clearfix">
-						  <div class="circ"></div>
-						  <div class="time">
-                <%= key.month.to_s + "/" + key.day.to_s %>
-              </div>
-						  <div class="events">
-							  <div class="events-body">
-                  <table>
-                    <% sum = 0 %>
-                    <% @books.where(time: key).each do |book| %>
-                    <tr>
-                      <td class="purchase-left noto-demilight"><%= book.item %></td>
-                      <td class="purchase-middle noto-demilight">:</td>
-                      <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
-                      <% sum += book.cost %>
-                    </tr>
-                    <% end %>
-                    <tr class="purchase-sum">
-                      <th class="purchase-left noto-bold">合計</th>
-                      <th class="purchase-middle noto-bold">:</th>
-                      <th class="purchase-right noto-bold"><%= sum %>円</th>
-                    </tr>
-                  </table>
-							  </div>
-						  </div>
-					  </dd>
-            <% counter += 1
-               month = key.month
-               } %>
-          </dl>
-        </div>
-      </div>
-      <%= link_to 'もどる', user_path(@user.id) %>
+    <div class="title col-sm-12">
+      <h2>家計簿</h2>
+      <hr width="300px">
     </div>
+
+    <div class="col-sm-6 col-xs-12" id="BarChart">
+      <div class="title">
+        <h3>過去6ヶ月の支出</h3>
+        <hr width="200px">
+      </div>
+      <div>
+        <%= bar_chart data_for_barchart, options_for_barchart %>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-xs-12" id="PieChart">
+      <div class="title">
+        <h3>支出内訳</h3>
+        <hr width="200px">
+      </div>
+      <div>
+        <%= pie_chart data_for_piechart, options_for_piechart %>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="title">
+        <h3>支出入一覧</h3>
+        <hr width="200px">
+      </div>
+      <div class="timeline">
+        <dl>
+          <%
+          month = 0
+          counter = 0
+          hash_for_index.each{|key, value|
+            if month != key.month
+          %>
+          <dt>
+            <%= key.year.to_s + "年" + key.month.to_s + "月" %>
+          </dt>
+          <% end %>
+          <dd class="pos-right clearfix">
+  				  <div class="circ"></div>
+  				  <div class="time">
+              <%= key.month.to_s + "/" + key.day.to_s %>
+            </div>
+  				  <div class="events">
+  					  <div class="events-body">
+                <table>
+                  <% sum = 0 %>
+                  <% @books.where(time: key).each do |book| %>
+                  <tr>
+                    <td class="purchase-left noto-demilight"><%= book.item %></td>
+                    <td class="purchase-middle noto-demilight">:</td>
+                    <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
+                    <% sum += book.cost %>
+                  </tr>
+                  <% end %>
+                  <tr class="purchase-sum">
+                    <th class="purchase-left noto-bold">合計</th>
+                    <th class="purchase-middle noto-bold">:</th>
+                    <th class="purchase-right noto-bold"><%= sum %>円</th>
+                  </tr>
+                </table>
+  					  </div>
+  				  </div>
+  			  </dd>
+          <% counter += 1
+             month = key.month
+             } %>
+        </dl>
+      </div>
+    </div>
+    <%= link_to 'もどる', user_path(@user.id) %>
   </div>
 </div>
