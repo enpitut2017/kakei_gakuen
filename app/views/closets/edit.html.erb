@@ -1,11 +1,5 @@
 <% provide(:title, "着せ替え") %>
 <div class="container">
-  <%= @send_user_wearing_clothes %>
-  <br>---------<br>
-  <%= @send_clothes %>
-  <br>---------<br>
-  <%= current_user.id %>
-
   <br><div class="btn btn-default" onclick="build_json();">決定</div>
 
   <div id="Closets" class="row box">
@@ -21,6 +15,7 @@
             </div>
           <% end %>
         <% end %>
+        <% break %>
       <% end %>
     </div>
     <!-- キャラクタ表示領域 -->
@@ -43,7 +38,16 @@
     <!-- カテゴリ一覧 -->
     <div id="ClosetsItemGroups" class="col-xs-12">
       <% @send_clothes.each do |key, val| %>
-        <div id="<%= key %>" class="GroupBox" onclick="switch_items(<%= key %>)">
+        <% hash = Hash.new { |h,k| h[k] = {} } %>
+        <% val.each do |obj| %>
+          <% unless obj.nil? %>
+            <% hash[obj.id]['id'] = obj.id %>
+            <% hash[obj.id]['category'] = key %>
+            <% hash[obj.id]['path'] = obj.image.to_s %>
+            <% hash[obj.id]['priority'] = obj.priority %>
+          <% end %>
+        <% end %>
+        <div id="<%= key %>-group" class="GroupBox" data-hoge="<%= hash.to_json %>" onclick="switch_items('<%= key %>');">
           <%= key %>
         </div>
       <% end %>
