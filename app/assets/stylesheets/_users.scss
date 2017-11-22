@@ -40,6 +40,7 @@
   position: absolute;
   top: 20px;
   right: 35px;
+  z-index: 9900;
 }
 #Charactor-img{
   display: block;
@@ -59,6 +60,7 @@
   min-height: 85px;
   background-color: $white;
   border-radius: 0 0 4px 4px;
+  z-index: 9900;
 
   div.triangle-top{
     margin-left: 15%;
