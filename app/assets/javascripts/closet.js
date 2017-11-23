@@ -3,11 +3,9 @@ function switch_items(category) {
 
   $('#ClosetsItems').children().remove();
   items = $(id).data('hoge');
-  console.log(items);
   $.each(items, function(i, item){
-    console.log(item);
     $('#ClosetsItems').append('<div class="col-md-6 col-sm-12">' +
-                              '<div class="ItemBox" onclick="draw_image(' + item.category + ', ' + item.path + ', ' + item.priority + ', ' + item.id + ')">' +
+                              '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
                               '<img src=' + item.path +'>' +
                               '</div></div>');
   });
@@ -29,6 +27,5 @@ function build_json() {
   });
 
   $.post('/closets', users_wear ,function(data){
-    console.log(data);
   });
 }
