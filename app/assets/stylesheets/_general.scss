@@ -1,11 +1,12 @@
 /* Global Variables */
 $white:                       #FFF !default;
+$gray:                        #777 !default;
 $black:                       #000 !default;
 
 /* color difined by Hassaku */
-$kakeigray-dark:              #2C363C !default;
-$kakeigray-middle:            #434D53 !default;
-$kakeigray-light:             #9298A4 !default;
+$kakeigray-dark:              #2C363C !default; /* rgb( 44, 54, 60) */
+$kakeigray-middle:            #434D53 !default; /* rgb( 67, 77, 83) */
+$kakeigray-light:             #9298A4 !default; /* rgb(146,152,164) */
 
 $kakeired-dark:               #DD5061 !default;
 $kakeired-light:              #FF5E71 !default;
@@ -40,7 +41,7 @@ span{
   max-width: 100%;
 }
 hr{
-  border-color: $kakeired-dark;
+  border-color: $kakeigray-dark;
   margin: 10px auto;
 }
 .main{

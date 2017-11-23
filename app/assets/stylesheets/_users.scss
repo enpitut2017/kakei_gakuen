@@ -75,7 +75,7 @@
 #Charactor-Img{
   height: 100%;
   @media (max-width: 767px) {
-    height: calc(80vh - 50px);
+    height: calc(70vh - 50px);
   }
 }
 .Charactor-ItemImg{
@@ -87,7 +87,7 @@
   background-repeat: no-repeat;
   margin: -15px;
   @media (max-width: 767px) {
-    height: calc(80vh - 50px);
+    height: calc(70vh - 50px);
   }
 }
 #Charactor-balloon{
@@ -95,7 +95,7 @@
   background-color: $white;
   border-radius: 0 0 4px 4px;
   @media (max-width: 767px) {
-    height: calc(20vh - 50px);
+    height: calc(30vh - 50px);
   }
 
   div.triangle-top{
