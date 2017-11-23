@@ -3,9 +3,9 @@ Heroku [![Build Status](https://travis-ci.org/enpitut2017/kakei_gakuen.svg?branc
 AWS [![CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master.svg?style=svg)](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master)
 
 ## 概要
-自分の残高を知りたい！既存の家計簿アプリの"続けられない"、"入力が面倒くさい"という問題を解決したい！
-お金の管理が苦手な人のための家計簿アプリ ***家計学園*** です。
-家計学園は通常の手入力に加えて、音声入力で簡単に買い物の記録をすることができます。また、残高などをゲーム的に管理することで継続的に家計簿を記録する事ができます。
+##### 既存の家計簿アプリの"続けられない"、"入力が面倒くさい"という問題を解決したい！  
+そんな想いのもと誕生したのがこの**家計学園**!  
+この家計学園は通常の手入力に加えて、**音声入力で簡単に買い物の記録をする**ことができます。また、残高などを**ゲーム的に管理**することで、家計簿にありがちな"めんどくさいから入力しなくていいや"を解消することができます。  
 
 ## メンバー
 [kobya4](https://github.com/kobya4)  
