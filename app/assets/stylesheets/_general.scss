@@ -70,6 +70,9 @@ hr{
 }
 .title{
   text-align: center;
+  hr{
+    border-color: $kakeired-dark;
+  }
   h2{
   font-size: 30px;
   display: block;
