@@ -25,23 +25,21 @@ body{
   word-wrap: break-word;
 }
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
+    height: 7px;
 }
 ::-webkit-scrollbar-track {
-  border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
+  background-color: rgba(255,255,255,0.5);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 50, .5);
-  border-radius: 10px;
-  box-shadow:0 0 0 1px rgba(255, 255, 255, .3);
+  background-color: $kakeigray-dark;
 }
 span{
   display: inline-block;
   max-width: 100%;
 }
 hr{
-  border-color: $kakeigray-dark;
+  border-color: $kakeired-dark;
   margin: 10px auto;
 }
 .main{
@@ -70,9 +68,6 @@ hr{
 }
 .title{
   text-align: center;
-  hr{
-    border-color: $kakeired-dark;
-  }
   h2{
   font-size: 30px;
   display: block;
