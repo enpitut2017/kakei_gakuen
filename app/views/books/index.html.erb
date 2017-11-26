@@ -177,7 +177,15 @@ options_for_piechart = {
                   <% sum = 0 %>
                   <% @books.where(time: key).each do |book| %>
                   <tr>
-                    <td class="purchase-left noto-demilight"><%= book.item %></td>
+                    <td class="purchase-left noto-demilight">
+                      <%= book.item %>
+                      <a href="<%= edit_book_path(book.id) %>">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </a>
+                      <a href="<%= book_path(book.id) %>" data-method="delete">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    </td>
                     <td class="purchase-middle noto-demilight">:</td>
                     <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
                     <% sum += book.cost %>
