@@ -62,7 +62,7 @@ class ClosetsController < ApplicationController
 		end
 		puts "json get"
 		user_wearing = UserWearing.find_by(user_id: current_user.id)
-		
+
 		if user_wearing.update(upper_clothes: params["upper_clothes"], lower_clothes: params["lower_clothes"], sox: params["sox"], back_hair: params["back_hair"], front_hair: params["front_hair"], face: params["face"]) then
 			redirect_to :action => "edit"
 		else
@@ -113,7 +113,7 @@ class ClosetsController < ApplicationController
 	def logged_in_user
 		unless logged_in?
 			store_location
-			flash[:danger] = "Please log in."
+			flash[:danger] = "ログインしてください."
 			redirect_to login_path
 		end
 	end
