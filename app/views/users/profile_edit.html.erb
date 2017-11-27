@@ -38,15 +38,15 @@
         </div>
 
         <div class="actions text-center"><br>
-            <%= form.submit '登録', class: 'btn btn-primary' %>
+            <%= form.submit '登録', class: 'btn btn-primary' , success: '変更内容を更新しました！'%>
         </div>
         <% end %>
       </div>
     </div>
 
     <div class="col-md-12 text-center" id="LogoutWithdrawButtons">
-      <%= link_to 'ログアウト', logout_path, class: 'btn btn-default' %>
-      <%= link_to '退会', {}, onclick: "confirm_delete();return false;", class: 'btn btn-danger' %>
+      <%= link_to 'ログアウト', logout_path, class: 'btn btn-default' , success: 'ばいばーい！'%>
+      <%= link_to '退会', {}, onclick: "confirm_delete();return false;", class: 'btn btn-danger' , success: 'ご利用いただきありがとうございました！'%>
     </div>
     <div class="col-md-12 text-center">
       <div id="modal" class="modal fade">

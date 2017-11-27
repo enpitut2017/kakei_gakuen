@@ -51,8 +51,9 @@
                 </h4>
               </tr>
             </table>
-            <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
-            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default' %>
+            <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit",
+             success: '記入完了! +' + culcurate_coin(items[], costs[]).to_s>
+            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default'%>
           <% end %>
         </div>
       </div>
@@ -111,6 +112,11 @@
          end
         %>
 
+        <% if hash_for_timeline.size == 0 %>
+        <br>
+        <p>データがありません</p>
+        <br>
+        <% else %>
         <div class="timeline">
           <dl>
             <%
@@ -159,8 +165,9 @@
           </dl>
         </div>
         <div class="purchase-link text-darkgray noto-regular">
-          <%= link_to 'もっと見る', books_path %>
+          <%= link_to 'くわしく見る', books_path %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>

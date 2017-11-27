@@ -1,11 +1,5 @@
 <% provide(:title, "着せ替え") %>
 <div class="container">
-  <%#= @send_user_wearing_clothes %>
-  <!--<br>---------<br>-->
-  <%#= @send_clothes %>
-
-
-
   <div id="Closets" class="row box" style="padding-bottom: 0px;">
     <!-- カテゴリアイテム一覧 -->
     <div id="ClosetsItems" class="col-xs-4">
@@ -19,10 +13,15 @@
             </div>
           <% end %>
         <% end %>
+        <% break %>
       <% end %>
     </div>
     <!-- キャラクタ表示領域 -->
     <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
+      <!-- 決定ボタン -->
+      <div onclick="post_json('<%= user_path(current_user.id) %>');">
+        <%= image_tag 'icons/totop.png', :height => 64, :width => 64, :alt => 'トップへ戻る', :id => "ClosetsToTopBtn" %>
+      </div>
       <!-- レイヤ描画 -->
       <% @send_clothes.each do |key, val| %>
         <div id="<%= key %>" class="Layers">
@@ -39,13 +38,24 @@
       <% end %>
     </div>
     <!-- カテゴリ一覧 -->
-    <div id="ClosetsItemGroups" class="col-xs-12" style="display:none;">
-      <% @send_clothes.each do |key, val| %>
-        <div id="<%= key %>" class="GroupBox" onclick="switch_items(<%= key %>)">
-          <%= key %>
-        </div>
-      <% end %>
+    <div id="ClosetsItemGroups" class="col-xs-12">
+      <div id="ClosetsItemGroupsIcons">
+        <% @send_clothes.each do |key, val| %>
+          <% hash = Hash.new { |h,k| h[k] = {} } %>
+          <% val.each do |obj| %>
+            <% unless obj.nil? %>
+              <% hash[obj.id]['id'] = obj.id %>
+              <% hash[obj.id]['category'] = key %>
+              <% hash[obj.id]['path'] = obj.image.to_s %>
+              <% hash[obj.id]['priority'] = obj.priority %>
+            <% end %>
+          <% end %>
+          <div id="<%= key %>-group" class="GroupBox" data-hoge="<%= hash.to_json %>" onclick="switch_items('<%= key %>');">
+            <% groupicon = 'icons/' + key + '.png' %>
+            <%= image_tag groupicon, :height => 64, :width => 64 %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="btn btn-default" style="margin-bottom: 15px;" onclick="build_json();">決定</div>
 </div>

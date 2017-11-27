@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       if @user.save
 		  initialize_clothes
           log_in @user
-          flash[:success] = "User was successfully created."
+          flash[:success] = "ようこそ家計学園へ！"
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
       else
@@ -68,12 +68,12 @@ class UsersController < ApplicationController
   def profile_update
     respond_to do |format|
       if @user.update(user_params)
-        flash[:success] = "User was successfully updated."
+        flash[:success] = "変更内容を更新しました！"
         format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
         return redirect_to user_url @user
       else
-        flash[:notice] = "User updating was failed."
+        flash[:notice] = "なんらかのエラーが発生しました."
         format.html { render :profile_edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -85,12 +85,12 @@ class UsersController < ApplicationController
     def budget_update
       respond_to do |format|
         if @user.update(user_params)
-            flash[:success] = "User was successfully updated."
+            flash[:success] = "変更内容を更新しました！"
           format.html { redirect_to @user }
           format.json { render :show, status: :ok, location: @user }
          return redirect_to user_url @user
         else
-          flash[:notice] = "User updating was failed."
+          flash[:notice] = "なんらかのエラーが発生しました."
           format.html { render :budget_edit }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
   def destroy
      User.find(current_user.id).destroy
      respond_to do |format|
-        flash[:success] = "User was successfully deestroyed."
+        flash[:success] = "ご利用ありがとうございました！"
      format.html { redirect_to users_url }
      format.json { head :no_content }
     end
@@ -128,7 +128,7 @@ class UsersController < ApplicationController
     def logged_in_user
       unless logged_in?
         store_location
-        flash[:danger] = "Please log in."
+        flash[:danger] = "ログインしてください."
         redirect_to login_path
       end
     end
