@@ -78,7 +78,6 @@ else
 end
 hash_for_piechart.each{|key, value|
   if counter == piechart_size
-    p "a"
     temp_array_for_data.push(temp_sum_of_data - temp_sum_of_0to4)
     temp_array_for_labels.push("その他")
     break
@@ -182,7 +181,7 @@ options_for_piechart = {
                       <a href="<%= edit_book_path(book.id) %>">
                         <span class="glyphicon glyphicon-pencil"></span>
                       </a>
-                      <a href="<%= book_path(book.id) %>" data-method="delete">
+                      <a onclick='confirm_item_delete(<%= book.id %>);return false;'>
                         <span class="glyphicon glyphicon-remove"></span>
                       </a>
                     </td>
@@ -209,5 +208,8 @@ options_for_piechart = {
     <% end %>
 
     <%= link_to 'もどる', user_path(@user.id) %>
+
+    <div id="Delete-Modal-Box" class="col-xs-12">
+    </div>
   </div>
 </div>
