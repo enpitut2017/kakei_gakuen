@@ -19,7 +19,7 @@ function draw_image(id, path, zindex, cloth_id) {
   $(id).children().val(cloth_id);
 }
 
-function build_json() {
+function post_json(user_path) {
   users_wear = {};
 
   $('.Layers').each(function(i, elm) {
@@ -27,5 +27,7 @@ function build_json() {
   });
 
   $.post('/closets', users_wear ,function(data){
+    console.log(data);
+    location.href=user_path;
   });
 }

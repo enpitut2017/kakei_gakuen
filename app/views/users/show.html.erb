@@ -51,8 +51,9 @@
                 </h4>
               </tr>
             </table>
-            <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit">
-            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default' %>
+            <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit",
+             success: '記入完了! +' + culcurate_coin(items[], costs[]).to_s>
+            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default'%>
           <% end %>
         </div>
       </div>

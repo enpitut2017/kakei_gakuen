@@ -38,7 +38,7 @@
         </div>
 
         <div class="actions text-center"><br>
-            <%= form.submit '登録', class: 'btn btn-primary' %>
+            <%= form.submit '登録', class: 'btn btn-primary' , success: '変更内容を更新しました！'%>
         </div>
         <% end %>
       </div>
@@ -63,7 +63,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-              <%= link_to '退会する', retire_path, class: 'btn btn-danger' %>
+              <%= link_to '退会する', retire_path, class: 'btn btn-danger', success: 'ご利用いただきありがとうございました！' %>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-              <%= link_to 'ログアウト', logout_path, class: 'btn btn-primary' %>
+              <%= link_to 'ログアウト', logout_path, class: 'btn btn-primary', success: 'ばいばーい！' %>
             </div>
           </div>
         </div>
