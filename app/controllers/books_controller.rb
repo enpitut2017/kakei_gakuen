@@ -36,7 +36,9 @@ class BooksController < ApplicationController
       @book = Book.new
       @book.errors[:base] << "家計簿を入力してください"
       return render :new
-    end
+  else
+      flash[:success] = "入力完了！ + #{culcurate_coin(_times, costs)} KC！"
+  end
 
     @books = [];
     @user = User.find(current_user.id)
@@ -54,7 +56,6 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if Book.import @books
-        #flash[:success] = "Book was successfully created."
         format.html { redirect_to @user}
         format.json { render :show, status: :created, location: @books }
       else
@@ -69,7 +70,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-          flash[:success] = "Book was successfully updated."
+          flash[:success] = "#{@book}を変更しました."
           format.html { redirect_to books_path }
           format.json { render :show, status: :ok, location: @book }
       else
@@ -84,7 +85,7 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-        flash[:success] = 'Book was successfully destroyed.'
+        flash[:success] = "#{@book}を削除しました."
       format.html { redirect_to books_url }
       format.json { head :no_content }
     end
@@ -105,7 +106,7 @@ class BooksController < ApplicationController
     def logged_in_user
       unless logged_in?
         store_location
-        flash[:danger] = "Please log in."
+        flash[:danger] = "ログインしてください."
         redirect_to login_path
       end
     end
@@ -142,4 +143,5 @@ class BooksController < ApplicationController
 
         return defalt_coin
     end
+
 end
