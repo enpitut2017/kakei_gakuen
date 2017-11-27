@@ -111,6 +111,11 @@
          end
         %>
 
+        <% if hash_for_timeline.size == 0 %>
+        <br>
+        <p>データがありません</p>
+        <br>
+        <% else %>
         <div class="timeline">
           <dl>
             <%
@@ -159,8 +164,9 @@
           </dl>
         </div>
         <div class="purchase-link text-darkgray noto-regular">
-          <%= link_to 'もっと見る', books_path %>
+          <%= link_to 'くわしく見る', books_path %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
