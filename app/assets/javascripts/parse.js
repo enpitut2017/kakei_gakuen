@@ -1,3 +1,3 @@
-function parse(str) {
-  
+function parse() {
+
 }
