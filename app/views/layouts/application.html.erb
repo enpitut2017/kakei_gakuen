@@ -8,10 +8,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
+    <%= favicon_link_tag('favicon.png') %>
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div id="Flash"><%= notice %></div>
+    <!--div id="Flash"><%= notice %></div-->
+    <% flash.each do |name, msg| %>
+  <div class="alert alert-<%= name %>">
+    <a class="close" data-dismiss="alert">×</a>
+    <%= msg %>
+  </div>
+<% end %>
     <div id="Contents">
       <%= yield %>
     </div>

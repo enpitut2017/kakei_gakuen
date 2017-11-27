@@ -22,63 +22,24 @@ hash_for_index.each{|key,value|
   end
 }
 #棒グラフ用データ
-today_month = Date.today.month
+today = Date.today
 data_for_barchart = {
-labels: [(today_month - 5).to_s + "月",
-         (today_month - 4).to_s + "月",
-         (today_month - 3).to_s + "月",
-         (today_month - 2).to_s + "月",
-         (today_month - 1).to_s + "月",
-         (today_month).to_s + "月"],
+labels: [today.months_ago(5).month.to_s + "月",
+         today.months_ago(4).month.to_s + "月",
+         today.months_ago(3).month.to_s + "月",
+         today.months_ago(2).month.to_s + "月",
+         today.months_ago(1).month.to_s + "月",
+         today.month.to_s + "月"],
 datasets: [
   {
       label: "過去6ヶ月の支出",
       background_color: "rgba(220,30,30,0.8)",
-      data: [hash_for_barchart[today_month - 5],
-             hash_for_barchart[today_month - 4],
-             hash_for_barchart[today_month - 3],
-             hash_for_barchart[today_month - 2],
-             hash_for_barchart[today_month - 1],
-             hash_for_barchart[today_month]]
-    }
-  ]
-}
-options_for_barchart = {
-  maintainAspectRatio: false
-}
-%>
-<%
-#円グラフ用ハッシュ
-hash_for_piechart = Hash.new
-hash_for_index.each{|key,value|
-  counter = 0
-  for item in value[0] do
-    if hash_for_piechart[item]
-      hash_for_piechart[item] += value[1][counter]
-    else
-      hash_for_piechart[item] = value[1][counter]
-    end
-    counter += 1
-  end
-}
-#円グラフ用データ
-data_for_barchart = {
-labels: [(today_month - 5).to_s + "月",
-         (today_month - 4).to_s + "月",
-         (today_month - 3).to_s + "月",
-         (today_month - 2).to_s + "月",
-         (today_month - 1).to_s + "月",
-         (today_month).to_s + "月"],
-datasets: [
-  {
-      label: "過去6ヶ月の支出",
-      background_color: "rgba(220,30,30,0.8)",
-      data: [hash_for_barchart[today_month - 5],
-             hash_for_barchart[today_month - 4],
-             hash_for_barchart[today_month - 3],
-             hash_for_barchart[today_month - 2],
-             hash_for_barchart[today_month - 1],
-             hash_for_barchart[today_month]]
+      data: [hash_for_barchart[today.months_ago(5)],
+             hash_for_barchart[today.months_ago(4)],
+             hash_for_barchart[today.months_ago(3)],
+             hash_for_barchart[today.months_ago(2)],
+             hash_for_barchart[today.months_ago(1)],
+             hash_for_barchart[today.month]]
     }
   ]
 }
@@ -110,8 +71,16 @@ temp_array_for_labels = Array.new
 temp_array_for_data = Array.new
 counter = 0
 temp_sum_of_0to4 = 0
+if hash_for_piechart.size > 5
+  piechart_size = 5
+else
+  piechart_size = hash_for_piechart.size
+end
 hash_for_piechart.each{|key, value|
-  if counter == 5
+  if counter == piechart_size
+    p "a"
+    temp_array_for_data.push(temp_sum_of_data - temp_sum_of_0to4)
+    temp_array_for_labels.push("その他")
     break
   end
   temp_array_for_labels.push(key)
@@ -119,17 +88,11 @@ hash_for_piechart.each{|key, value|
   counter += 1
   temp_sum_of_0to4 += value
 }
-temp_array_for_data[5] = temp_sum_of_data - temp_sum_of_0to4
 data_for_piechart = {
-labels: [temp_array_for_labels[0],
-         temp_array_for_labels[1],
-         temp_array_for_labels[2],
-         temp_array_for_labels[3],
-         temp_array_for_labels[4],
-         "その他"],
+labels: temp_array_for_labels,
 datasets: [
     {
-      label: "過去6ヶ月の支出",
+      label: "支出内訳",
       background_color: ["rgba(220,30 ,30 ,0.8)",
                          "rgba(220,137,29 ,0.8)",
                          "rgba(124,220,29 ,0.8)",
@@ -153,6 +116,15 @@ options_for_piechart = {
       <hr width="300px">
     </div>
 
+    <% if hash_for_index.size == 0 %>
+    <div class="col-xs-12">
+      <br>
+      <p>データがありません</p>
+      <br>
+    </div>
+    <% end %>
+
+    <% if hash_for_barchart.size != 0 %>
     <div class="col-sm-6 col-xs-12" id="BarChart">
       <div class="title">
         <h3>過去6ヶ月の支出</h3>
@@ -162,7 +134,9 @@ options_for_piechart = {
         <%= bar_chart data_for_barchart, options_for_barchart %>
       </div>
     </div>
+    <% end %>
 
+    <% if hash_for_piechart.size != 0 %>
     <div class="col-sm-6 col-xs-12" id="PieChart">
       <div class="title">
         <h3>支出内訳</h3>
@@ -172,7 +146,9 @@ options_for_piechart = {
         <%= pie_chart data_for_piechart, options_for_piechart %>
       </div>
     </div>
+    <% end %>
 
+    <% if hash_for_index.size != 0 %>
     <div class="col-xs-12">
       <div class="title">
         <h3>支出入一覧</h3>
@@ -201,7 +177,15 @@ options_for_piechart = {
                   <% sum = 0 %>
                   <% @books.where(time: key).each do |book| %>
                   <tr>
-                    <td class="purchase-left noto-demilight"><%= book.item %></td>
+                    <td class="purchase-left noto-demilight">
+                      <%= book.item %>
+                      <a href="<%= edit_book_path(book.id) %>">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </a>
+                      <a href="<%= book_path(book.id) %>" data-method="delete">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    </td>
                     <td class="purchase-middle noto-demilight">:</td>
                     <td class="purchase-right noto-demilight"><%= book.cost %>円</td>
                     <% sum += book.cost %>
@@ -222,6 +206,8 @@ options_for_piechart = {
         </dl>
       </div>
     </div>
+    <% end %>
+
     <%= link_to 'もどる', user_path(@user.id) %>
   </div>
 </div>

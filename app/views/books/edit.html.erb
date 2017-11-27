@@ -1,41 +1,50 @@
-<div class="col-sm-12">
-  <h1>Editing Book</h1>
+<div class="container main">
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="Information" class="box">
+        <div class="title col-sm-12">
+          <h2>アイテムの編集</h2>
+          <hr width="300px">
+        </div>
 
-  <%= form_with(model: @book, local: true) do |form| %>
-  <div id="add_items">
-  </div>
-  <div id="submit" style="display: none;">
-  <%= form.submit %>
-  </div>
-  <% if @book.errors.any? %>
-  <div id="error_explanation">
-    <ul>
-      <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+        <%= form_with(model: @book, local: true) do |form| %>
+        <div id="add_items">
+        </div>
+        <div id="submit" style="display: none;">
+        <%= form.submit %>
+        </div>
+        <% if @book.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
 
-  <div class="field">
-    <%= form.label :item %>
-    <%= form.text_field :item, id: :book_item %>
-  </div>
+        <div class="field">
+          <%= form.label :item %>
+          <%= form.text_field :item, id: :book_item, class: 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.text_field :cost, id: :book_cost %>
-  </div>
+        <div class="field">
+          <%= form.label :cost %>
+          <%= form.text_field :cost, id: :book_cost, class: 'form-control' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :time %>
-    <%= form.date_field :time, id: :book_time %>
-  </div>
+        <div class="field">
+          <%= form.label :time %>
+          <%= form.date_field :time, id: :book_time, class: 'form-control' %>
+        </div>
 
-  <div class="actions">
-  <%= form.submit %>
+        <div class="actions text-center">
+        <%= form.submit '更新', class: 'btn btn-primary' %>
+        </div>
+        <% end %>
+        <br>
+        <%= link_to 'もどる', books_path %>
+      </div>
+    </div>
   </div>
-  <% end %>
-
-  <%= link_to 'もどる', books_path %>
 </div>
