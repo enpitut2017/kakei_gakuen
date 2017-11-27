@@ -115,12 +115,6 @@ ActiveRecord::Schema.define(version: 20171115012946) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-    t.string "password"
-    t.string "password_digest"
-    t.integer "coin"
-=======
->>>>>>> my_develop
   end
 
 end
