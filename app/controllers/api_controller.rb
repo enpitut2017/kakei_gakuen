@@ -10,7 +10,7 @@ class ApiController < ApplicationController
         costs = params[:costs]
         _times = params[:times]
 
-        if token.empty?
+        if ! token.nil?
 
             user = User.find_by(token: token)
 
