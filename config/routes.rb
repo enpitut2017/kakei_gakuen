@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     get '/api/image/:token', to: 'api#image'
     post '/api/login/', to: 'api#login'
     post '/api/create/', to: 'api#create'
+    post '/api/books/', to: 'api#register_books'
 
     #static_page
     get 'static_page/index'
