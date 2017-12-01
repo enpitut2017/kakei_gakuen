@@ -7,8 +7,8 @@ class Clothe < ApplicationRecord
         tags = Hash[keys_tags.collect.zip(tags)]
 
         user_wearing = UserWearing.find_by(user_id: user_id)
-        clothes = Clothe.where(id: [user_wearing.upper_clothes, user_wearing.lower_clothes, user_wearing.sox, user_wearing.front_hair, user_wearing.back_hair, user_wearing.face])
-        keys_clothes = Clothe.where(id: [user_wearing.upper_clothes, user_wearing.lower_clothes, user_wearing.sox, user_wearing.front_hair, user_wearing.back_hair, user_wearing.face]).pluck(:id)
+        clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user_id))
+        keys_clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user_id)).pluck(:id)
         clothes = Hash[keys_clothes.collect.zip(clothes)]
         clothes_tags_links = ClothesTagsLink.where(clothes_id: keys_clothes)
 
