@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :profile_edit, :budget_edit, :profile_update, :budget_update]
-  before_action :logged_in_user, only: [:profile_edit, :budget_edit, :profile_update, :budget_update, :destroy]
+  before_action :logged_in_user, only: [:profile_edit, :budget_edit, :profile_update, :budget_update, :destroy, :image]
   before_action :correct_user,   only: [:show, :profile_edit,:budget_edit, :profile_update, :budget_update]
 
   # GET /users
@@ -50,17 +50,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.coin = 0
     respond_to do |format|
-      begin
-        ActiveRecord::Base.transaction do
-          @user.save
-          initialize_clothes
-        end
-      log_in @user
-      flash[:success] = "ようこそ家計学園へ！"
-      format.html { redirect_to @user }
-      format.json { render :show, status: :created, location: @user }
-      rescue => e
-        puts(e)
+      if @user.save
+		  initialize_clothes
+          log_in @user
+          flash[:success] = "ようこそ家計学園へ！"
+        format.html { redirect_to @user }
+        format.json { render :show, status: :created, location: @user }
+      else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -112,6 +108,25 @@ class UsersController < ApplicationController
      format.json { head :no_content }
     end
   end
+
+  def image
+      image = nil
+      clothes = Clothe.where(id: UserWearing::get_user_wearing_array(current_user.id)).order(:priority)
+      clothes.each do |clothe|
+          path = clothe.image.url
+          path = './public' + path
+
+          tmp_image = Magick::Image.from_blob(File.read(path)).first
+
+          if (image.nil?)
+              image = tmp_image
+          else
+              image = image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
+          end
+      end
+
+      send_data image.to_blob, type: "image/png", disposition: 'inline'
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

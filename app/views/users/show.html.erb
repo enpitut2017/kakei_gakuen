@@ -51,9 +51,12 @@
                 </h4>
               </tr>
             </table>
+            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default'%>
+            <button id="rec_button" class="btn btn-default" type="button" onClick="record_home()">
+              <span class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 音声入力
+            </button><br>
             <input type="submit" name="commit" value="登録" class="btn btn-danger" id="submit",
              success: '記入完了! +' + culcurate_coin(items[], costs[]).to_s>
-            <%= link_to 'まとめて入力', new_book_url, :class => 'btn btn-default'%>
           <% end %>
         </div>
       </div>
@@ -69,20 +72,7 @@
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>
           <div id="Charactor-Img">
-            <!-- レイヤー設定 -->
-            <% @tags.each do |val| %>
-            <div id="<%= val.tag %>" class="Charactor-ItemImg">
-              <div id="<%= val.tag %>-id" style="display:none;"></div>
-            </div>
-            <% end %>
-            <!-- 現在のキャラクタ描画 -->
-            <% @send_user_wearing_clothes.each do |key, val| %>
-              <% val.each do |obj| %>
-                <% unless obj.nil? %>
-                  <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
-                <% end %>
-              <% end %>
-            <% end %>
+            <div class="Charactor-ItemImg" style='background-image:url("<%= image_path %>");'></div>
           </div>
         </div>
         <div id="Charactor-balloon">
@@ -172,3 +162,4 @@
     </div>
   </div>
 </div>
+
