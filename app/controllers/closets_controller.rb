@@ -6,13 +6,16 @@ class ClosetsController < ApplicationController
 
 		#ユーザーが持っている服
 		@send_clothes = Clothe::get_user_has_clothes_tag_hash(current_user.id)
-
+		puts('ユーザーが持っている服読み込み完了')
 		#ユーザーが着ている服
 		@send_user_wearing_clothes = Clothe::get_user_wearing_tag_hash(current_user.id)
-
+		puts('ユーザーが来ている服読み込み完了')
 		#全服データ
 		@all_clothes = Clothe::get_clothes_tag_has
-
+		puts('全服読み込み完了')
+		#ユーザーが服を持っているかどうかの配列
+		@user_hash_clothes = UserHasClothe::all_clothes_user_has_clothe_array(current_user.id)
+		puts('ユーザーが持っている服の配列読み込み完了')
     end
 
 	def update
@@ -20,6 +23,7 @@ class ClosetsController < ApplicationController
 			redirect_to :action => "edit"
 		end
 		puts "json get"
+
 		user_wearing = UserWearing.find_by(user_id: current_user.id)
 
 		if user_wearing.update(upper_clothes: params["upper_clothes"], lower_clothes: params["lower_clothes"], sox: params["sox"], back_hair: params["back_hair"], front_hair: params["front_hair"], face: params["face"]) then

@@ -50,13 +50,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.coin = 0
     respond_to do |format|
-      if @user.save
-		  initialize_clothes
-          log_in @user
-          flash[:success] = "ようこそ家計学園へ！"
-        format.html { redirect_to @user }
-        format.json { render :show, status: :created, location: @user }
-      else
+      begin
+        ActiveRecord::Base.transaction do
+          @user.save
+          initialize_clothes
+        end
+      log_in @user
+      flash[:success] = "ようこそ家計学園へ！"
+      format.html { redirect_to @user }
+      format.json { render :show, status: :created, location: @user }
+      rescue => e
+        puts(e)
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -150,11 +154,7 @@ class UsersController < ApplicationController
     end
 
 	def initialize_clothes
-		user_wearing = UserWearing.new(user_id: @user.id, upper_clothes: 1, lower_clothes: 2, sox: 3, front_hair: 4, back_hair: 5, face: 6)
-		user_wearing.save
-		for num in 1..12 do
-			user_has_clothe = UserHasClothe.new(user_id: @user.id, clothes_id: num);
-			user_has_clothe.save
-		end
+    UserWearing::initialized_user_wearing(@user.id)
+    UserHasClothe::initialized_user_has_clothe(@user.id)
 	end
 end

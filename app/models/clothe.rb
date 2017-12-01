@@ -6,7 +6,6 @@ class Clothe < ApplicationRecord
         keys_tags = Tag.pluck(:id)
         tags = Hash[keys_tags.collect.zip(tags)]
 
-        user_wearing = UserWearing.find_by(user_id: user_id)
         clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user_id))
         keys_clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user_id)).pluck(:id)
         clothes = Hash[keys_clothes.collect.zip(clothes)]
