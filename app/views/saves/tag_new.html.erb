@@ -1,0 +1,15 @@
+<a href="/tags/">一覧に戻る</a>
+<div>
+  <form action="/tags" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <p>
+      タグ : <input type="text" name="tag_name" required>
+    </p>
+    <p>
+      タグサムネ : <input type="file" name="tag_image" id="tag_image">
+    </p>
+    <p>
+      <button type="submit" name="action" value="save">保存</button>
+    </p>
+  </form>
+</div>

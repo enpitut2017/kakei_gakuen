@@ -1,4 +1,5 @@
-<a href="/saves/new/">新規作成</a>
+<p><a href="/saves/new/">新規作成</a></p>
+<p><a href="/tags/">タグ一覧</a></p>
 <div>
     <table>
         <thead>
@@ -18,6 +19,7 @@
                 <td><a href="/saves/<%= clothe.id %>/edit/">編集</a></td>
             </tr>
 <% } %>
+
         </tbody>
     </table>
     <%= paginate(@clothes) %>

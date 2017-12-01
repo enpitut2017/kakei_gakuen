@@ -1,0 +1,20 @@
+<p><a href="/tags/new/">新規作成</a></p>
+<p><a href="/saves/">戻る</a></p>
+<div>
+    <table>
+        <thead>
+            <tr><th>id</th><th>タグ</th><th></th></tr>
+        </thead>
+        <tbody>
+<% if @send_tags then %>
+    <% @send_tags.each{|send_tag| %>
+            <tr>
+                <td><%=send_tag.id %></td>
+                <td><%=send_tag.tag %></td>
+                <td><a href="/tags/<%= send_tag.id %>/edit/">編集</a></td>
+            </tr>
+    <% } %>
+<% end %>
+        </tbody>
+    </table>
+</div>
