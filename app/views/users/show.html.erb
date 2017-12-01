@@ -69,20 +69,7 @@
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>
           <div id="Charactor-Img">
-            <!-- レイヤー設定 -->
-            <% @tags.each do |val| %>
-            <div id="<%= val.tag %>" class="Charactor-ItemImg">
-              <div id="<%= val.tag %>-id" style="display:none;"></div>
-            </div>
-            <% end %>
-            <!-- 現在のキャラクタ描画 -->
-            <% @send_user_wearing_clothes.each do |key, val| %>
-              <% val.each do |obj| %>
-                <% unless obj.nil? %>
-                  <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
-                <% end %>
-              <% end %>
-            <% end %>
+            <%= image_tag image_path, class: "Charactor-ItemImg" %>
           </div>
         </div>
         <div id="Charactor-balloon">
