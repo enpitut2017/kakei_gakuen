@@ -35,13 +35,13 @@
               <tr>
                 <h4 class="text-lightgray noto-light">
                   <span class="form-text">用途</span>
-                  <input id="item-home" type="text" name="items[]">
+                  <input type="text" name="items[]">
                 </h4>
               </tr>
               <tr>
                 <h4 class="text-lightgray noto-light">
                   <span class="form-text">金額</span>
-                  <input id="cost-home" type="text" name="costs[]">
+                  <input type="text" name="costs[]">
                 </h4>
               </tr>
               <tr>
@@ -72,20 +72,7 @@
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>
           <div id="Charactor-Img">
-            <!-- レイヤー設定 -->
-            <% @tags.each do |val| %>
-            <div id="<%= val.tag %>" class="Charactor-ItemImg">
-              <div id="<%= val.tag %>-id" style="display:none;"></div>
-            </div>
-            <% end %>
-            <!-- 現在のキャラクタ描画 -->
-            <% @send_user_wearing_clothes.each do |key, val| %>
-              <% val.each do |obj| %>
-                <% unless obj.nil? %>
-                  <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
-                <% end %>
-              <% end %>
-            <% end %>
+            <div class="Charactor-ItemImg" style='background-image:url("<%= image_path %>");'></div>
           </div>
         </div>
         <div id="Charactor-balloon">
@@ -175,3 +162,4 @@
     </div>
   </div>
 </div>
+

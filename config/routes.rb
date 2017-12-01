@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
     get   '/signup',  to:'users#new'
     get   '/retire',  to: 'users#destroy'
+    get   '/image',  to:'users#image'
 
     #closets
     get   '/closets', to:'closets#edit'
