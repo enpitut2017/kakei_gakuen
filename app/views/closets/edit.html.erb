@@ -51,8 +51,7 @@
             <% end %>
           <% end %>
           <div id="<%= key %>-group" class="GroupBox" data-hoge="<%= hash.to_json %>" onclick="switch_items('<%= key %>');">
-            <% groupicon = 'icons/' + key + '.png' %>
-            <%= image_tag groupicon, :height => 64, :width => 64 %>
+            <%= image_tag @tags[key].image.to_s, :height => 64, :width => 64 %>
           </div>
         <% end %>
       </div>

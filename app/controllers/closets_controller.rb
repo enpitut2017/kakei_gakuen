@@ -14,8 +14,10 @@ class ClosetsController < ApplicationController
 		@all_clothes = Clothe::get_clothes_tag_has
 		puts('全服読み込み完了')
 		#ユーザーが服を持っているかどうかの配列
-		@user_hash_clothes = UserHasClothe::all_clothes_user_has_clothe_array(current_user.id)
+		@user_has_clothes = UserHasClothe::all_clothes_user_has_clothe_array(current_user.id)
 		puts('ユーザーが持っている服の配列読み込み完了')
+
+		@tags = Tag::get_tag_key_hash
     end
 
 	def update
@@ -24,13 +26,34 @@ class ClosetsController < ApplicationController
 		end
 		puts "json get"
 
-		user_wearing = UserWearing.find_by(user_id: current_user.id)
+		input_params = params
+		input_params.delete('controller')
+		input_params.delete('action')
 
-		if user_wearing.update(upper_clothes: params["upper_clothes"], lower_clothes: params["lower_clothes"], sox: params["sox"], back_hair: params["back_hair"], front_hair: params["front_hair"], face: params["face"]) then
-			redirect_to :action => "edit"
-		else
-			redirect_to :action => "edit"
+		tag_id = Tag.where(tag: input_params.keys).pluck(:id)
+		tag_value = input_params.values
+		tags = Hash[tag_id.collect.zip(tag_value)]
+
+		begin
+			tags.each do |key, value|
+				user_wearing = UserWearing.find_by(user_id: current_user.id, tag_id: key)
+				if user_wearing then
+					user_wearing.update_attribute(:clothe_id, value)
+				else
+					user_wearing = UserWearing.new
+					user_wearing.user_id = current_user.id
+					user_wearing.tag_id = key
+					user_wearing.clothe_id = value
+					user_wearing.save
+				end
+			end 
+			flash[:success] = 'お着替えしました'
+		rescue
+			flash[:danger] = 'お着替えに失敗しました'
 		end
+		
+		redirect_to :action => "edit"
+
     end
 
 

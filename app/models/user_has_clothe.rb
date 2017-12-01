@@ -2,7 +2,7 @@ class UserHasClothe < ApplicationRecord
     
     def self.user_has_clothe?(user_id, clothe_id)
         flag = false
-        user_has_clothe = UserHasClothe.where(user_id: user_id, clothe_id:clothe_id)
+        user_has_clothe = UserHasClothe.where(user_id: user_id, clothe_id: clothe_id)
         if (user_has_clothe) then
             flag = true
         end
