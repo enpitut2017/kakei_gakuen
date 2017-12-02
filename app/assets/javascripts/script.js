@@ -102,7 +102,7 @@ function remove(obj) {
     }
 }
 
-function confirm_delete(modal) {
+function display_modal(modal) {
   $(modal).modal('show');
 }
 
@@ -126,6 +126,28 @@ function confirm_item_delete(bookid) {
   '  </div>' +
   '</div>';
   $('#Delete-Modal').modal('show');
+}
+
+function confirm_clothes_purchase(id) {
+  var modal_box = document.getElementById("Closets-Modal-Box");
+  modal_box.innerHTML =
+  '<div id="Closet-Modal" class="modal fade">' +
+  '  <div class="modal-dialog">' +
+  '    <div class="modal-content">' +
+  '      <div class="modal-header">' +
+  '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+  '        <h3 class="modal-title">衣装購入</h3>' +
+  '      </div>' +
+  '    <div class="modal-body">' +
+  '      <p>衣装を購入しますか?</p>' +
+  '    </div>' +
+  '    <div class="modal-footer">' +
+  '       <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
+  '       <a class="btn btn-primary" rel="nofollow" href="/books/' + id + '">購入</a>' +
+  '    </div>' +
+  '  </div>' +
+  '</div>';
+  $('#Closet-Modal').modal('show');
 }
 
 function escape_html(string) {

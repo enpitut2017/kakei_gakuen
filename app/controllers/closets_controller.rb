@@ -14,7 +14,7 @@ class ClosetsController < ApplicationController
 		@all_clothes = Clothe::get_clothes_tag_has
 		puts('全服読み込み完了')
 		#ユーザーが服を持っているかどうかの配列
-		@user_hash_clothes = UserHasClothe::all_clothes_user_has_clothe_array(current_user.id)
+		@user_has_clothes = UserHasClothe::all_clothes_user_has_clothe_array(current_user.id)
 		puts('ユーザーが持っている服の配列読み込み完了')
     end
 

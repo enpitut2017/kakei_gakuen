@@ -3,12 +3,20 @@
   <div id="Closets" class="row box" style="padding-bottom: 0px;">
     <!-- カテゴリアイテム一覧 -->
     <div id="ClosetsItems" class="col-xs-4">
-      <% @send_clothes.each do |key, val| %>
+      <% @all_clothes.each do |key, val| %>
         <% val.each do |obj| %>
-          <% unless obj.nil? %>
+          <% if @user_has_clothes[obj.id] == true %>
             <div class="col-md-6 col-sm-12">
-              <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
-                <%= image_tag obj.image %>
+              <div class="ItemBoxBg" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
+                <div class="ItemImg" style='background-image: url("<%= obj.image %>")'></div>
+              </div>
+            </div>
+          <% else %>
+            <div class="col-md-6 col-sm-12">
+              <div class="ItemBoxBg">
+                <div class="ItemImg" onclick='confirm_clothes_purchase(<%= obj.id %>);return false;' style='background-image: url("<%= obj.image %>")'>
+                  <div class="ItemDark noto-light"></div>
+                </div>
               </div>
             </div>
           <% end %>
@@ -23,7 +31,7 @@
         <%= image_tag 'icons/totop.png', :height => 64, :width => 64, :alt => 'トップへ戻る', :id => "ClosetsToTopBtn" %>
       </div>
       <!-- レイヤ描画 -->
-      <% @send_clothes.each do |key, val| %>
+      <% @all_clothes.each do |key, val| %>
         <div id="<%= key %>" class="Layers">
           <div id="<%= key %>-id" style="display:none;"></div>
         </div>
@@ -40,7 +48,7 @@
     <!-- カテゴリ一覧 -->
     <div id="ClosetsItemGroups" class="col-xs-12">
       <div id="ClosetsItemGroupsIcons">
-        <% @send_clothes.each do |key, val| %>
+        <% @all_clothes.each do |key, val| %>
           <% hash = Hash.new { |h,k| h[k] = {} } %>
           <% val.each do |obj| %>
             <% unless obj.nil? %>
@@ -57,5 +65,8 @@
         <% end %>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div id="Closets-Modal-Box" class="col-xs-12"></div>
   </div>
 </div>
