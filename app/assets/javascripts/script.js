@@ -107,46 +107,18 @@ function display_modal(modal) {
 }
 
 function confirm_item_delete(bookid) {
-  var modal_box = document.getElementById("Delete-Modal-Box");
+  var modal_box = document.getElementById("Delete-Modal-Footer");
   modal_box.innerHTML =
-  '<div id="Delete-Modal" class="modal fade">' +
-  '  <div class="modal-dialog">' +
-  '    <div class="modal-content">' +
-  '      <div class="modal-header">' +
-  '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-  '        <h3 class="modal-title">アイテム削除</h3>' +
-  '      </div>' +
-  '    <div class="modal-body">' +
-  '      <p>アイテムを削除しますか?</p>' +
-  '    </div>' +
-  '    <div class="modal-footer">' +
-  '       <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
-  '       <a class="btn btn-primary" rel="nofollow" data-method="delete" href="/books/' + bookid + '">削除</a>' +
-  '    </div>' +
-  '  </div>' +
-  '</div>';
+  '<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
+  '<a class="btn btn-primary" rel="nofollow" data-method="delete" href="/books/' + bookid + '">削除</a>';
   $('#Delete-Modal').modal('show');
 }
 
 function confirm_clothes_purchase(id) {
-  var modal_box = document.getElementById("Closets-Modal-Box");
+  var modal_box = document.getElementById("Closet-Modal-Footer");
   modal_box.innerHTML =
-  '<div id="Closet-Modal" class="modal fade">' +
-  '  <div class="modal-dialog">' +
-  '    <div class="modal-content">' +
-  '      <div class="modal-header">' +
-  '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-  '        <h3 class="modal-title">衣装購入</h3>' +
-  '      </div>' +
-  '    <div class="modal-body">' +
-  '      <p>衣装を購入しますか?</p>' +
-  '    </div>' +
-  '    <div class="modal-footer">' +
-  '       <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
-  '       <a class="btn btn-primary" rel="nofollow" href="/books/' + id + '">購入</a>' +
-  '    </div>' +
-  '  </div>' +
-  '</div>';
+  '<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
+  '<a class="btn btn-primary" rel="nofollow" href="' + id + '">購入</a>';
   $('#Closet-Modal').modal('show');
 }
 
