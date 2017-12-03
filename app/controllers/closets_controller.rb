@@ -4,6 +4,8 @@ class ClosetsController < ApplicationController
 
     def edit
 
+		#ユーザー情報
+		@user = current_user
 		#ユーザーが持っている服
 		@send_clothes = Clothe::get_user_has_clothes_tag_hash(current_user.id)
 		puts('ユーザーが持っている服読み込み完了')

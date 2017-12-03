@@ -5,27 +5,31 @@
     <div id="ClosetsItems" class="col-xs-4">
       <% @all_clothes.each do |key, val| %>
         <% val.each do |obj| %>
-          <% if @user_has_clothes[obj.id] == true %>
-            <div class="col-md-6 col-sm-12">
+        <% p val %>
+          <div class="col-md-6 col-sm-12">
+            <% if @user_has_clothes[obj.id] == true %>
               <div class="ItemBoxBg" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
                 <div class="ItemImg" style='background-image: url("<%= obj.image %>")'></div>
               </div>
-            </div>
-          <% else %>
-            <div class="col-md-6 col-sm-12">
+            <% else %>
               <div class="ItemBoxBg">
-                <div class="ItemImg" onclick='confirm_clothes_purchase(<%= obj.id %>);return false;' style='background-image: url("<%= obj.image %>")'>
+                <div class="ItemImg" onclick='confirm_clothes_purchase("<%= obj.name %>",<%= @user.coin %>,<%= obj.price %>,<%= obj.id %>,<%= @user.id %>);return false;' style='background-image: url("<%= obj.image %>")'>
                   <div class="ItemDark noto-light"></div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         <% end %>
         <% break %>
       <% end %>
     </div>
     <!-- キャラクタ表示領域 -->
     <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
+      <!-- コイン -->
+      <div id="Charactor-coin">
+        <%= image_tag 'icons/coin.png', :height => 40, :width => 40 %>
+        <span class="noto-bold"><%= @user.coin %></span>
+      </div>
       <!-- 決定ボタン -->
       <div onclick="post_json('<%= user_path(current_user.id) %>');">
         <%= image_tag 'icons/totop.png', :height => 64, :width => 64, :alt => 'トップへ戻る', :id => "ClosetsToTopBtn" %>
@@ -75,7 +79,9 @@
             <h3 class="modal-title">衣装購入</h3>
           </div>
         <div class="modal-body">
-          <p>衣装を購入しますか?</p>
+          <p>未所持の衣装です。</p>
+          <p>衣装を購入しますか？</p>
+          <div id="Closet-Modal-Price"></div>
         </div>
         <div class="modal-footer" id="Closet-Modal-Footer">
         </div>
