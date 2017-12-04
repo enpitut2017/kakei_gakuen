@@ -33,11 +33,12 @@ class ClosetsController < ApplicationController
 		else
 			redirect_to :action => "edit"
 		end
-    end
+  end
 
 
 	def buy
-		error = false
+		p "piyo"
+		#error = false
 		#知らないuser, clotheがきたらrescue
 		begin
 			#受け取った、購入したい情報をパース
