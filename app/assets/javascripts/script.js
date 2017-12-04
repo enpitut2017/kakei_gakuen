@@ -133,11 +133,11 @@ function confirm_clothes_purchase(item, coin, price, bookid, userid) {
 }
 
 function buy_clothes(bookid, userid){
-  $.post(
-    url: '',
-    data: {buy_id:bookid, user_id:userid,},
-    success: 'success.',
-  )
+  //$.post(
+  //  url: '',
+  //  data: {buy_id:bookid, user_id:userid,},
+  //  success: 'success.',
+  //)
 }
 
 function escape_html(string) {
