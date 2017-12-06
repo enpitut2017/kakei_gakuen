@@ -1,11 +1,11 @@
 delete from tags;
-insert into tags(id, tag) values
-(1, 'upper_clothes'),
-(2, 'lower_clothes'),
-(3, 'sox'),
-(4, 'front_hair'),
-(5, 'back_hair'),
-(6, 'face');
+insert into tags(id, tag, image) values
+(1, 'upper_clothes', ''),
+(2, 'lower_clothes', ''),
+(3, 'sox', ''),
+(4, 'front_hair', ''),
+(5, 'back_hair', ''),
+(6, 'face', '');
 
 delete from clothes;
 insert into clothes (id, file_name, name, image, price, priority, created_at, updated_at) values
@@ -36,6 +36,3 @@ insert into clothes_tags_links (id, tag_id, clothes_id, created_at, updated_at) 
 (10, 4, 10,'2017-10-27', '2017-10-27'),
 (11, 5, 11, '2017-10-27', '2017-10-27'),
 (12, 6, 12, '2017-10-27', '2017-10-27');
-
-delete from user_wearings;
-insert into user_wearings (id, user_id, upper_clothes, lower_clothes, sox, front_hair, back_hair, face, created_at, updated_at) values (1, 1, 1, 2, 3, 4, 5, 12, '2017-10-27', '2017-10-27');

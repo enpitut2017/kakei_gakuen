@@ -1,11 +1,15 @@
 class SavesController < ApplicationController
-    protect_from_forgery :except => [:create, :update]
+    protect_from_forgery :except => [:create, :update, :tag_create, :tag_update]
 
     def index
+        @send_tags = nil
+        @clothes = nil
+        @send_clothe_tag_link = nil
+
         @clothes = Clothe.page(params[:page]).per(10).order(:id)
         clothes_id = Clothe.page(params[:page]).per(10).order(:id).pluck(:id)
 
-        tags = Tag.all;
+        tags = Tag.all
         keys_tags = Tag.pluck(:id)
 		@send_tags = Hash[keys_tags.collect.zip(tags)]
 
@@ -67,5 +71,44 @@ class SavesController < ApplicationController
         end
         puts("clothes data generate end")
         redirect_to action: 'edit', id: params[:id]
+    end
+
+    def tag_index
+        @send_tags = Tag.all
+    end
+
+    def tag_new
+    end
+
+    def tag_edit
+        @send_tag = Tag.find(params[:id])
+    end
+
+    def tag_create
+        puts("tag data generate start")
+        tag = Tag.new
+        tag.tag = params[:tag_name]
+        tag.image = params[:tag_image]
+
+        if tag.save
+            puts('success!! commit')
+        else
+            puts('error!! rollback')
+        end
+        
+        puts("tags data generate end")
+        redirect_to action: 'tag_index'
+    end
+
+    def tag_update
+        puts("clothes data update start")
+        tag = Tag.find(params[:id])
+        if tag.update(tag: params[:tag_name], image: params[:tag_image])
+            puts('success!! commit')
+        else
+            puts('error!! rollback')
+        end
+        puts("clothes data update end")
+        redirect_to action: 'tag_edit', id: params[:id]
     end
 end

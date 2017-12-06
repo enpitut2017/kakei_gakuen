@@ -169,11 +169,7 @@ class UsersController < ApplicationController
     end
 
 	def initialize_clothes
-		user_wearing = UserWearing.new(user_id: @user.id, upper_clothes: 1, lower_clothes: 2, sox: 3, front_hair: 4, back_hair: 5, face: 6)
-		user_wearing.save
-		for num in 1..12 do
-			user_has_clothe = UserHasClothe.new(user_id: @user.id, clothes_id: num);
-			user_has_clothe.save
-		end
+    UserWearing::initialized_user_wearing(@user.id)
+    UserHasClothe::initialized_user_has_clothe(@user.id)
 	end
 end

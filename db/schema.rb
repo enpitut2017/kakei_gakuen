@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128102616) do
+ActiveRecord::Schema.define(version: 20171201101516) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 20171128102616) do
     t.string "item"
     t.integer "cost"
     t.integer "user_id"
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "time"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 20171128102616) do
     t.integer "price"
     t.string "image"
     t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "clothes_tags_links", force: :cascade do |t|
@@ -75,17 +77,9 @@ ActiveRecord::Schema.define(version: 20171128102616) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "manages", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "tag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "user_has_clothes", force: :cascade do |t|
@@ -97,12 +91,8 @@ ActiveRecord::Schema.define(version: 20171128102616) do
 
   create_table "user_wearings", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "upper_clothes"
-    t.integer "lower_clothes"
-    t.integer "sox"
-    t.integer "front_hair"
-    t.integer "back_hair"
-    t.integer "face"
+    t.integer "tag_id"
+    t.integer "clothe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -111,10 +101,10 @@ ActiveRecord::Schema.define(version: 20171128102616) do
     t.string "name"
     t.string "email"
     t.integer "budget"
+    t.integer "coin"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
-    t.integer "coin"
     t.string "token"
   end
 

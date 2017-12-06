@@ -18,6 +18,11 @@ Rails.application.routes.draw do
 
     #saves
     post '/saves/update', to: 'saves#update'
+    get '/tags', to: 'saves#tag_index'
+    get '/tags/:id/edit', to: 'saves#tag_edit'
+    get '/tags/new', to: 'saves#tag_new'
+    post '/tags/update', to: 'saves#tag_update'
+    post '/tags', to: 'saves#tag_create'
 
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do
