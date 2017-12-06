@@ -209,7 +209,21 @@ options_for_piechart = {
 
     <%= link_to 'もどる', user_path(@user.id) %>
 
-    <div id="Delete-Modal-Box" class="col-xs-12">
+    <div id="Delete-Modal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title">アイテム削除</h3>
+          </div>
+        <div class="modal-body">
+          <p>アイテムを削除しますか?</p>
+        </div>
+        <div id="Delete-Modal-Footer" class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+           <a class="btn btn-primary" rel="nofollow" data-method="delete" href="/books/' + bookid + '">削除</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
