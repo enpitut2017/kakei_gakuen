@@ -2,8 +2,13 @@ class UserHasClothe < ApplicationRecord
 
     def self.user_has_clothe?(user_id, clothe_id)
         flag = false
+<<<<<<< HEAD
         user_has_clothe = UserHasClothe.where(user_id: user_id, clothes_id:clothe_id)
         if ( ! user_has_clothe.empty?) then
+=======
+        user_has_clothe = UserHasClothe.where(user_id: user_id, clothe_id: clothe_id)
+        if (user_has_clothe) then
+>>>>>>> e0685573e92cfe6b59160ba6689c18303a1a7aec
             flag = true
         end
         return flag
