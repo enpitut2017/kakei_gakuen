@@ -37,7 +37,6 @@ class ClosetsController < ApplicationController
 
 
 	def buy
-		p "piyo"
 		#error = false
 		#知らないuser, clotheがきたらrescue
 		begin

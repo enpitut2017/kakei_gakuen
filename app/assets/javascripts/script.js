@@ -133,10 +133,8 @@ function confirm_clothes_purchase(item, coin, price, bookid, userid) {
 }
 
 function buy_clothes(bookid, userid){
-  var data = {
-    buy_id: bookid,
-    user_id: userid
-  };
+  var data = '{"buy_id":"' + bookid + '","user_id":"' + userid + '"}';
+  console.log(data);
   $.post(
     "/buy_clothes",
     data,
