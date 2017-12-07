@@ -70,7 +70,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-          flash[:success] = "#{@book}を変更しました."
+          flash[:success] = "#{@book.item}を変更しました."
           format.html { redirect_to books_path }
           format.json { render :show, status: :ok, location: @book }
       else
@@ -85,7 +85,7 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-        flash[:success] = "#{@book}を削除しました."
+        flash[:success] = "#{@book.item}を削除しました."
       format.html { redirect_to books_url }
       format.json { head :no_content }
     end

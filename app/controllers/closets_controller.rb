@@ -4,6 +4,8 @@ class ClosetsController < ApplicationController
 
     def edit
 
+		#ユーザー情報
+		@user = current_user
 		#ユーザーが持っている服
 		@send_clothes = Clothe::get_user_has_clothes_tag_hash(current_user.id)
 		puts('ユーザーが持っている服読み込み完了')
@@ -46,80 +48,95 @@ class ClosetsController < ApplicationController
 					user_wearing.clothe_id = value
 					user_wearing.save
 				end
-			end 
+			end
 			flash[:success] = 'お着替えしました'
 		rescue
 			flash[:danger] = 'お着替えに失敗しました'
 		end
-		
+
 		redirect_to :action => "edit"
 
     end
 
 
 	def buy
-		error = false
+		#error = false
 		#知らないuser, clotheがきたらrescue
 		begin
-			#受け取った、購入したい情報をパース
-			json_request = JSON.parse(request.body.read)
-			buy_id = json_request["buy_id"]
-			user_id = json_request["user_id"]
 
-			user = User.find_by(id: user_id)
-			cloth = Clothe.find_by(id: buy_id)
-			puts "successfully received"
-		rescue
-			puts "failed to receive json data"
-		end
+			begin
+				#受け取った、購入したい情報をパース
+				json_request = JSON.parse(request.body.read)
+				buy_id = json_request["buy_id"]
+				user_id = json_request["user_id"]
 
-
-		#数々のエラー処理
-		#存在しない、ユーザもしくは服が送られてきたら
-		if !(user || cloth)
-			error = true
-			puts("購入しようとした服は存在しないか、ユーザが存在しません")
-		end
-		#高い商品を購入しようとしたら
-		if user.coin < cloth.price
-			error = true
-			puts("高杉新作")
-		end
-
-		#エラーが出たらresult = 0 elseはresult = 1をsend
-		if error
-			puts "something has failed to update user data"
-			result = {'result' => 0}
-		else
-			if !UserHasClothe.find_by(clothes_id: cloth.id)
-				user.update_attribute(:coin, user.coin - cloth.price)	#支払い
-				UserHasClothe.create(user_id: user.id, clothes_id: cloth.id)	#ユーザの持ってる服追加
-				puts "服の新規購入"
-			else
-				puts "既に持ってるので着せ替えだけしました"
+				user = User.find_by(id: user_id)
+				cloth = Clothe.find_by(id: buy_id)
+				puts "successfully received"
+			rescue
+				puts "failed to receive json data"
+				raise
 			end
 
-			user_wearings = UserWearing.find_by(user_id: user_id)		#ユーザの現在きている服取得
-			user_wearings_hash = user_wearings.attributes		#ハッシュ化
-			bought_cloth_tag = Tag.find_by(id: ClothesTagsLink.find_by(clothes_id: buy_id)).attributes["tag"]	#ユーザの買った服のタグハッシュで取得
+			error = false
+			begin
+				if !(user || cloth)
+					error = true
+					puts("購入しようとした服は存在しないか、ユーザが存在しません")
+				end
+				#高い商品を購入しようとしたら
+				if user.coin < cloth.price
+					error = true
+					puts("高杉新作")
+				end
+			rescue
+				puts "null pointer Exception."
+				raise
+			end
 
-			# user_wearings_hash.map { |key, value|		#購入した服と同じ部分を着せ替える
-			# 	if key == bought_cloth_tag
-			# 		user_wearings_hash[key] = buy_id
-			# 	end
-			# }
-			user_wearings_hash[bought_cloth_tag] = buy_id
-			user_wearings.update_attributes(user_wearings_hash)		#ユーザの服情報更新
-			user_wearings = UserWearing.find_by(user_id: user_id)	#ユーザの現在きている服取得
+			if error
+				puts "purchase failed."
+				@result = {'result' => 0}
+			else
+				begin
+					if !UserHasClothe.find_by(clothes_id: cloth.id)
+						user.update_attribute(:coin, user.coin - cloth.price)	#支払い
+						UserHasClothe.create(user_id: user.id, clothes_id: cloth.id)	#ユーザの持ってる服追加
+						puts "服の新規購入"
+					else
+						puts "既に持ってるので着せ替えだけしました"
+					end
 
-			result = {'result' => 1}
-			puts('successfully updated user data')
-		end
+					user_wearings = UserWearing.where(user_id: user_id)		#ユーザの現在きている服全部を取得
 
-		#viewにjsonを送信
-		respond_to do |format|
-			format.html{redirect_to action: :edit}
-			format.json{render :json => @result}
+					#ユーザの買った服のタグを取得
+					bought_cloth_tag_id = ClothesTagsLink.find_by(clothes_id: buy_id).tag_id
+
+					#nilなら購入したい服のタグを所持していないので新規作成
+					#タグを所持していたら、clothe_idを書き換え
+					change_cloth_data = user_wearings.find_by(tag_id: bought_cloth_tag_id)
+
+					if change_cloth_data.nil?
+						UserWearing.create(user_id: user.id, tag_id: bought_cloth_tag_id, clothe_id: buy_id)
+					else
+						change_cloth_data.update_attribute(:clothe_id, buy_id)		#ユーザの服情報更新
+					end
+
+					@result = {'result' => 1}
+					puts('successfully updated user data')
+				rescue
+					raise
+				end
+			end
+
+			#viewにjsonを送信
+			respond_to do |format|
+				format.html{redirect_to action: :edit}
+				format.json{render :json => @result}
+			end
+
+		rescue
+			puts "something failed. check error message"
 		end
 	end
 

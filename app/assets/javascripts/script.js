@@ -102,30 +102,45 @@ function remove(obj) {
     }
 }
 
-function confirm_delete(modal) {
+function display_modal(modal) {
   $(modal).modal('show');
 }
 
 function confirm_item_delete(bookid) {
-  var modal_box = document.getElementById("Delete-Modal-Box");
+  var modal_box = document.getElementById("Delete-Modal-Footer");
   modal_box.innerHTML =
-  '<div id="Delete-Modal" class="modal fade">' +
-  '  <div class="modal-dialog">' +
-  '    <div class="modal-content">' +
-  '      <div class="modal-header">' +
-  '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-  '        <h3 class="modal-title">アイテム削除</h3>' +
-  '      </div>' +
-  '    <div class="modal-body">' +
-  '      <p>アイテムを削除しますか?</p>' +
-  '    </div>' +
-  '    <div class="modal-footer">' +
-  '       <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
-  '       <a class="btn btn-primary" rel="nofollow" data-method="delete" href="/books/' + bookid + '">削除</a>' +
-  '    </div>' +
-  '  </div>' +
-  '</div>';
+  '<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
+  '<a class="btn btn-primary" rel="nofollow" data-method="delete" href="/books/' + bookid + '">削除</a>';
   $('#Delete-Modal').modal('show');
+}
+
+function confirm_clothes_purchase(item, coin, price, bookid, userid) {
+  var pricediv = document.getElementById("Closet-Modal-Price");
+  pricediv.innerHTML =
+  '<p style="font-size:22px;">' + item + '</p>' +
+  '<p style="font-size:20px;">カケイコイン：' +coin+' - '+price+' = '+(coin-price)+ '</p>';
+  var footer = document.getElementById("Closet-Modal-Footer");
+  if ((coin-price) >= 0) {
+    footer.innerHTML =
+    '<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
+    '<a class="btn btn-primary" rel="nofollow" onclick="buy_clothes('+bookid+','+userid+')">購入</a>';
+  } else {
+    footer.innerHTML =
+    '<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>' +
+    '<a class="btn btn-primary disabled" rel="nofollow">コインが足りません</a>';
+  }
+  $('#Closet-Modal').modal('show');
+}
+
+function buy_clothes(bookid, userid){
+  var data = '{"buy_id":"' + bookid + '","user_id":"' + userid + '"}';
+  console.log(data);
+  $.post(
+    "/buy_clothes",
+    data,
+    function(){},
+    "json"
+  )
 }
 
 function escape_html(string) {

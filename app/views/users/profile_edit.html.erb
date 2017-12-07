@@ -45,8 +45,8 @@
     </div>
 
     <div class="col-md-12 text-center" id="LogoutWithdrawButtons">
-      <%= link_to 'ログアウト', {}, onclick: "confirm_delete(\"#Logout-Modal\");return false;", class: 'btn btn-default' %>
-      <%= link_to '退会', {}, onclick: "confirm_delete(\"#Leave-Modal\");return false;", class: 'btn btn-danger' %>
+      <%= link_to 'ログアウト', {}, onclick: "display_modal(\"#Logout-Modal\");return false;", class: 'btn btn-default' %>
+      <%= link_to '退会', {}, onclick: "display_modal(\"#Leave-Modal\");return false;", class: 'btn btn-danger' %>
     </div>
     <div class="col-md-12 text-center">
       <div id="Leave-Modal" class="modal fade">
