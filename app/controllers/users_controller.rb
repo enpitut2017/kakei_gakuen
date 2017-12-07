@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :profile_edit, :budget_edit, :profile_update, :budget_update]
-  before_action :logged_in_user, only: [:profile_edit, :budget_edit, :profile_update, :budget_update, :destroy]
+  before_action :logged_in_user, only: [:profile_edit, :budget_edit, :profile_update, :budget_update, :destroy, :image]
   before_action :correct_user,   only: [:show, :profile_edit,:budget_edit, :profile_update, :budget_update]
 
   # GET /users
@@ -109,6 +109,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def image
+      image = nil
+      clothes = Clothe.where(id: UserWearing::get_user_wearing_array(current_user.id)).order(:priority)
+      clothes.each do |clothe|
+          path = clothe.image.url
+          path = './public' + path
+
+          tmp_image = Magick::Image.from_blob(File.read(path)).first
+
+          if (image.nil?)
+              image = tmp_image
+          else
+              image = image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
+          end
+      end
+
+      send_data image.to_blob, type: "image/png", disposition: 'inline'
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -150,11 +169,7 @@ class UsersController < ApplicationController
     end
 
 	def initialize_clothes
-		user_wearing = UserWearing.new(user_id: @user.id, upper_clothes: 1, lower_clothes: 2, sox: 3, front_hair: 4, back_hair: 5, face: 6)
-		user_wearing.save
-		for num in 1..12 do
-			user_has_clothe = UserHasClothe.new(user_id: @user.id, clothes_id: num);
-			user_has_clothe.save
-		end
+    UserWearing::initialized_user_wearing(@user.id)
+    UserHasClothe::initialized_user_has_clothe(@user.id)
 	end
 end

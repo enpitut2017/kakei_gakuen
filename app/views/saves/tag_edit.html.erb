@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box">
+        <a href="/tags/">一覧に戻る</a>
+        <div>
+          <form action="/tags/update/" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+            <%= csrf_meta_tags %>
+            <input type="hidden" name="id" value="<%= @send_tag.id.to_s %>">
+            <p>
+              タグ : <input type="text" name="tag_name" value="<%= @send_tag.tag %>" required>
+            </p>
+            <p>
+              写真 : <input type="file" name="tag_image" id="tag_image">
+              <% if @send_tag.image then %>
+                <%= image_tag @send_tag.image.to_s %>
+              <% end %>
+            </p>
+            <p>
+              <button type="submit" name="action" value="save">保存</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

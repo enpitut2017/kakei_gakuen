@@ -18,6 +18,11 @@ Rails.application.routes.draw do
 
     #saves
     post '/saves/update', to: 'saves#update'
+    get '/tags', to: 'saves#tag_index'
+    get '/tags/:id/edit', to: 'saves#tag_edit'
+    get '/tags/new', to: 'saves#tag_new'
+    post '/tags/update', to: 'saves#tag_update'
+    post '/tags', to: 'saves#tag_create'
 
     #users
     resources :users, :except => [:edit, :update, :new, :destroy] do
@@ -34,6 +39,7 @@ Rails.application.routes.draw do
 
     get   '/signup',  to:'users#new'
     get   '/retire',  to: 'users#destroy'
+    get   '/image',  to:'users#image'
 
     #closets
     get   '/closets', to:'closets#edit'
@@ -64,6 +70,7 @@ Rails.application.routes.draw do
     get '/api/image/:token', to: 'api#image'
     post '/api/login/', to: 'api#login'
     post '/api/create/', to: 'api#create'
+    post '/api/books/', to: 'api#register_books'
 
     #static_page
     get 'static_page/index'

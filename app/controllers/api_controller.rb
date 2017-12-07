@@ -1,7 +1,66 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:create, :login, :image]
+    protect_from_forgery :except => [:create, :login, :image, :register_books]
     
     require 'rmagick'
+
+    def register_books
+        response = {'token' => 'error', 'budget' => 0}
+        token = params[:token]
+        items = params[:items]
+        costs = params[:costs]
+        _times = params[:times]
+
+        if ! token.nil?
+
+            user = User.find_by(token: token)
+
+            if user && ! items.empty? && ! costs.empty? && ! _times.empty? then
+                
+                if ! items.kind_of?(Array)
+                    items = [items]
+                end
+
+                if ! costs.kind_of?(Array)
+                    costs = [costs]
+                end
+
+                if ! _times.kind_of?(Array)
+                    _times = [_times]
+                end
+
+                begin
+                puts('books api start')
+                ActiveRecord::Base.transaction do
+                    books = [];
+                    #経験値の計算
+
+                    puts('coin update start')
+
+                    coin = user.coin + culcurate_coin(_times, costs)
+                    user.update_attribute(:coin, coin)
+
+                    puts('coin update')
+
+                    for i in 0..items.size-1 do
+                        if costs[i].length >= 10 then
+                            next
+                        end
+                        books.push(Book.new(item: items[i], cost: costs[i], user: user, time: _times[i]))
+                    end
+
+                    Book.import books
+                end
+                    puts('success!! commit') # トランザクション処理を確定
+                    response = {'token' => user.token, 'budget' => rest_budget(user.id)}
+                rescue => e
+                    puts e # トランザクション処理を戻す
+                end
+            
+            end
+        end
+
+        render :json => response
+    end
 
     def create
         response = {'token' => 'error', 'budget' => 0}
@@ -23,7 +82,7 @@ class ApiController < ApplicationController
 
     def login
 
-        response = {'token' => 'error'}
+        response = {'token' => 'error', 'budget' => 0}
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             if user.token.nil?
