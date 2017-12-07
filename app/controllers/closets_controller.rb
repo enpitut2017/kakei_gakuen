@@ -30,12 +30,10 @@ class ClosetsController < ApplicationController
 		input_params.delete('controller')
 		input_params.delete('action')
 
-		tag_id = Tag.where(tag: input_params.keys).pluck(:id)
-		tag_value = input_params.values
-		tags = Hash[tag_id.collect.zip(tag_value)]
+		clothes_tag_links_hash = ClothesTagsLink.get_clothes_tags_links_hash_from_clothes(params.values)
 
 		begin
-			tags.each do |key, value|
+			clothes_tag_links_hash.each do |key, value|
 				user_wearing = UserWearing.find_by(user_id: current_user.id, tag_id: key)
 				if user_wearing then
 					user_wearing.update_attribute(:clothe_id, value)
