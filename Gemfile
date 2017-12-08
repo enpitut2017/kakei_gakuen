@@ -37,6 +37,7 @@ gem 'activerecord-import'
 # Use kaminaei pagenation
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'httpclient'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

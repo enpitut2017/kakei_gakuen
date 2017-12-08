@@ -1,5 +1,6 @@
 class ClosetsController < ApplicationController
 	before_action :logged_in_user, only: [:edit, :update]
+	protect_from_forgery :except => [:update]
     #before_action :correct_user, only: [:edit, :update]
 
     def edit
@@ -18,6 +19,8 @@ class ClosetsController < ApplicationController
 		puts('ユーザーが持っている服の配列読み込み完了')
 
 		@tags = Tag::get_tag_key_hash
+
+		@user = current_user
     end
 
 	def update
@@ -25,29 +28,63 @@ class ClosetsController < ApplicationController
 			redirect_to :action => "edit"
 		end
 		puts "json get"
-		user_wearing = UserWearing.find_by(user_id: current_user.id)
 
 		input_params = params
 		input_params.delete('controller')
 		input_params.delete('action')
 
 		clothes_tag_links_hash = ClothesTagsLink.get_clothes_tags_links_hash_from_clothes(params.values)
-
+		user_wearings = UserWearing::get_user_wearing_tag_hash(current_user.id)
 		begin
-			clothes_tag_links_hash.each do |key, value|
-				user_wearing = UserWearing.find_by(user_id: current_user.id, tag_id: key)
-				if user_wearing then
-					user_wearing.update_attribute(:clothe_id, value)
-				else
-					user_wearing = UserWearing.new
-					user_wearing.user_id = current_user.id
-					user_wearing.tag_id = key
-					user_wearing.clothe_id = value
-					user_wearing.save
+			ActiveRecord::Base.transaction do
+				clothes_tag_links_hash.each do |key, value|
+					if user_wearings.has_key?(key) then
+						if user_wearings[key].clothe_id != value then
+							user_wearings[key].update_attribute(:clothe_id, value)
+						end
+					else
+						user_wearing = UserWearing.new
+						user_wearing.user_id = current_user.id
+						user_wearing.tag_id = key
+						user_wearing.clothe_id = value
+						user_wearing.save
+					end
 				end
 			end
+			#if Rails.env != 'production' then
+				#ローカルの場合、ローカル環境で画像を生成、登録を行う
+				image = nil
+				clothes = Clothe.where(id: params.values).order(:priority)
+				clothes.each do |clothe|
+					path = clothe.image.url
+					path = './public' + path
+					tmp_image = Magick::Image.from_blob(File.read(path)).first
+
+					if (image.nil?)
+						image = tmp_image
+					else
+						image = image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
+					end
+				end
+
+				puts "画像の保存"
+				image.write('public/image.png')
+				postdata = {"image" => image.to_blob, "id" => current_user.id}
+				url = root_url(only_path: false)
+				url = url + "api/register"
+				c = HTTPClient.new
+				c.connect_timeout = 100
+				c.send_timeout    = 100
+				c.receive_timeout = 100
+				open("public/image.png") do |file|
+					postdata = {"image" => file, "id" => current_user.id}
+					puts c.post_content(url, postdata)
+				end
+				image.destroy!
+			#end
 			flash[:success] = 'お着替えしました'
-		rescue
+		rescue => e
+			puts e
 			flash[:danger] = 'お着替えに失敗しました'
 		end
     end

@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:create, :login, :image, :register_books]
+    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image]
     
     require 'rmagick'
 
@@ -94,6 +94,13 @@ class ApiController < ApplicationController
         end
 
         render :json => response
+    end
+
+    def register_image
+        puts "画像の登録"
+        user = User.find(params[:id])
+        user.update_attribute(:image, params[:image])
+        render :json => {'token' => 'register'}
     end
 
     def image

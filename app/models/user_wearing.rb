@@ -5,6 +5,16 @@ class UserWearing < ApplicationRecord
         return user_wearings 
     end
 
+    def self.get_user_wearing_tag_hash(user_id)
+        user_wearings = UserWearing.where(user_id: user_id)
+        user_wearings_hash = {}
+        user_wearings.each do |user_wearing|
+            user_wearings_hash[user_wearing.tag_id] = user_wearing
+        end
+
+        return user_wearings_hash
+    end
+
     def self.initialized_user_wearing(user_id)
         initial_clothes=[1,2,4,5,6,7,8,9,11,12]
         clothes_tag_links = ClothesTagsLink.get_clothes_tags_links_hash_from_clothes(initial_clothes)
