@@ -83,7 +83,15 @@ function reset() {
 
 // 録音開始
 function record() {
-    recognition.start();
+        // Google Chrome
+    var ua = window.navigator.userAgent.toLowerCase();
+    var isChrome = ua.indexOf('chrome') != -1;
+    if (isChrome) {
+        recognition.start();
+    } else {
+        //modal出現
+        $("#modal").modal('show');
+    }
 }
 
 function getDate() {
