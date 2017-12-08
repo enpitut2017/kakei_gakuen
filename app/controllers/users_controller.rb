@@ -25,8 +25,6 @@ class UsersController < ApplicationController
     @budget = inserted_cost(@user.budget)
     @books = @user.books.order("time DESC")
     @new_book = Book.new
-    @send_user_wearing_clothes = Clothe::get_user_wearing_tag_hash(@user.id)
-    @tags = Tag.all
   end
 
   # GET /users/new
@@ -50,16 +48,24 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.coin = 0
     respond_to do |format|
-      if @user.save
-		  initialize_clothes
-          log_in @user
-          flash[:success] = "ようこそ家計学園へ！"
-        format.html { redirect_to @user }
-        format.json { render :show, status: :created, location: @user }
-      else
+      begin
+        ActiveRecord::Base.transaction do
+          #ここに処理を書く
+          @user.save
+          initialize_clothes
+        end
+        puts('success!! commit') # トランザクション処理を確定
+      rescue => e
+        puts('error!! rollback') # トランザクション処理を戻す
+        puts e
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+      end 
+
+      log_in @user
+      flash[:success] = "ようこそ家計学園へ！"
+      format.html { redirect_to @user }
+      format.json { render :show, status: :created, location: @user }
     end
   end
 
