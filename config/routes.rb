@@ -18,9 +18,9 @@ Rails.application.routes.draw do
 
     #saves
     post '/saves/update', to: 'saves#update'
-    get  '/tags', to: 'saves#tag_index'
-    get  '/tags/:id/edit', to: 'saves#tag_edit'
-    get  '/tags/new', to: 'saves#tag_new'
+    get '/tags', to: 'saves#tag_index'
+    get '/tags/:id/edit', to: 'saves#tag_edit'
+    get '/tags/new', to: 'saves#tag_new'
     post '/tags/update', to: 'saves#tag_update'
     post '/tags', to: 'saves#tag_create'
 
@@ -39,12 +39,11 @@ Rails.application.routes.draw do
 
     get   '/signup',  to:'users#new'
     get   '/retire',  to: 'users#destroy'
-    get   '/image',   to:'users#image'
+    get   '/image',  to:'users#image'
 
     #closets
-    get   '/closets',     to:'closets#edit'
-    post  '/closets',     to:'closets#update'
-    post  '/buy_clothes', to:'closets#buy'
+    get   '/closets', to:'closets#edit'
+    post  '/closets', to:'closets#update'
 
     #sessions
     get   '/login',   to: 'sessions#new'
