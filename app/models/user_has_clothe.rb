@@ -19,9 +19,10 @@ class UserHasClothe < ApplicationRecord
     end
 
     def self.initialized_user_has_clothe(user_id)
+        user_has_clothe = []
         for num in 1..12 do
-			user_has_clothe = UserHasClothe.new(user_id: user_id, clothes_id: num);
-			user_has_clothe.save
-		end
+			user_has_clothe.push(UserHasClothe.new(user_id: user_id, clothes_id: num))
+        end
+        UserHasClothe.import user_has_clothe
     end
 end
