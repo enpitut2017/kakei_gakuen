@@ -1,6 +1,10 @@
 // books/new 音声入力
 function record() {
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!window.SpeechRecognition) {
+    $("#modal").modal("show");
+  }
   recognition = new SpeechRecognition();
   recognition.lang = 'ja';
   recognition.start();
