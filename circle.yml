@@ -19,7 +19,7 @@ test:
     - bundle exec rails test
 deployment: # デプロイ詳細
   production: # （本番）
-    branch: feature/image_mix_fix # Githubはここのブランチ名見てプッシュと同時に動作開始
+    branch: master # Githubはここのブランチ名見てプッシュと同時に動作開始
     codedeploy: # CodeDeployの設定
       yatteiki_kakeigakuen:
         deployment_group: yatteiki # CodeDeployのデプロイグループ名
