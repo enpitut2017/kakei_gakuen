@@ -50,9 +50,9 @@ class UsersController < ApplicationController
     @user.coin = 0
     respond_to do |format|
       begin
+        @user.save
         ActiveRecord::Base.transaction do
           #ここに処理を書く
-          @user.save
           initialize_clothes
         end
         puts('success!! commit') # トランザクション処理を確定
