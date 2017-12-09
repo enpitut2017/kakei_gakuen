@@ -51,8 +51,14 @@ class ClosetsController < ApplicationController
 					end
 				end
 			end
-			#if Rails.env != 'production' then
-				#ローカルの場合、ローカル環境で画像を生成、登録を行う
+
+			#画像の登録 ローカル環境の場合はすべてローカルのみで行う
+			#本番環境の場合idcfサーバーを経由して登録
+			if Rails.env != 'production' then
+				#ローカルの場合、ローカル環境で画像の生成のみを行う
+				#/public/image.pngに生成される
+				#テストで生成する場合、コメントアウトを外す。日本語ファイル不可
+=begin
 				image = nil
 				clothes = Clothe.where(id: params.values).order(:priority)
 				clothes.each do |clothe|
@@ -69,19 +75,24 @@ class ClosetsController < ApplicationController
 
 				puts "画像の保存"
 				image.write('public/image.png')
-				postdata = {"image" => image.to_blob, "id" => current_user.id}
-				url = root_url(only_path: false)
-				url = url + "api/register"
+				image.destroy!
+=end
+			else
+				clothes = Clothe.where(id: params.values).order(:priority)
+				image_path = []
+				clothes.each do |clothe|
+					image_path.push('https://'+clothe.image.to_s)
+				end
+
+				postdata = {"url[]" => image_path, "id" => current_user.id}
+				url = "https://kakeigakuen-staging.xyz/api/image/"
 				c = HTTPClient.new
 				c.connect_timeout = 100
 				c.send_timeout    = 100
 				c.receive_timeout = 100
-				open("public/image.png") do |file|
-					postdata = {"image" => file, "id" => current_user.id}
-					puts c.post_content(url, postdata)
-				end
-				image.destroy!
-			#end
+
+				puts c.post_content(url, postdata)
+			end
 			flash[:success] = 'お着替えしました'
 		rescue => e
 			puts e

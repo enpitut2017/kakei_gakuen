@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
     protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image]
+    after_action :destroy_image, only: [:image]
     
     require 'rmagick'
 
@@ -105,7 +106,7 @@ class ApiController < ApplicationController
 
     def image
         token= params[:token]
-        image = nil
+        @image = nil
         user = User.find_by(token: token)
         if (user) then
             clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user.id)).order(:priority)
@@ -115,28 +116,24 @@ class ApiController < ApplicationController
 
                 tmp_image = Magick::Image.from_blob(File.read(path)).first
 
-                if (image.nil?)  
-                    image = tmp_image
+                if (@image.nil?)  
+                    @image = tmp_image
                 else 
-                    image = image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
+                    @image = @image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
                 end
             end
         else
-            image = Magick::Image.from_blob(File.read('./public/error.png')).first
+            @image = Magick::Image.from_blob(File.read('./public/error.png')).first
         end
 
-        send_data image.to_blob, type: "image/png", disposition: 'inline'
+        send_data @image.to_blob, type: "image/png", disposition: 'inline'
     end
 
     private
 
     def initialize_clothes(user_id)
-		user_wearing = UserWearing.new(user_id: user_id, upper_clothes: 1, lower_clothes: 2, sox: 3, front_hair: 4, back_hair: 5, face: 6)
-		user_wearing.save
-		for num in 1..12 do
-			user_has_clothe = UserHasClothe.new(user_id: user_id, clothes_id: num);
-			user_has_clothe.save
-		end
+		UserWearing::initialized_user_wearing(@user.id)
+        UserHasClothe::initialized_user_has_clothe(@user.id)
     end
 
     #経験値計算
@@ -178,5 +175,12 @@ class ApiController < ApplicationController
         end
 
         return user.budget - lost
+    end
+
+    def destroy_image
+        if @image
+        @image.destroy!
+        puts 'image destroy'
+        end
     end
 end

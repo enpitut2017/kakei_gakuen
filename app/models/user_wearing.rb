@@ -23,6 +23,23 @@ class UserWearing < ApplicationRecord
 			user_wearing.push(UserWearing.new(user_id: user_id, tag_id: key ,clothe_id: value))
         end
         UserWearing.import user_wearing
+
+        if Rails.env == 'production' then
+            clothes = Clothe.where(id: initial_clothes).order(:priority)
+            image_path = []
+            clothes.each do |clothe|
+                image_path.push('https://'+clothe.image.to_s)
+            end
+
+            postdata = {"url[]" => image_path, "id" => user_id}
+            url = "https://kakeigakuen-staging.xyz/api/image/"
+            c = HTTPClient.new
+            c.connect_timeout = 100
+            c.send_timeout    = 100
+            c.receive_timeout = 100
+
+            puts c.post_content(url, postdata)
+        end 
     end
 end
 

@@ -37,7 +37,10 @@ gem 'activerecord-import'
 # Use kaminaei pagenation
 gem 'kaminari'
 gem 'rails-i18n'
+#http connection
 gem 'httpclient'
+# image_upload
+gem 'fog', '1.36.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
