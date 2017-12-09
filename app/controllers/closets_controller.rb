@@ -21,6 +21,7 @@ class ClosetsController < ApplicationController
 		@tags = Tag::get_tag_key_hash
 
 		@user = current_user
+
     end
 
 	def update
@@ -98,6 +99,9 @@ class ClosetsController < ApplicationController
 			puts e
 			flash[:danger] = 'お着替えに失敗しました'
 		end
+		
+		redirect_to :action => "edit"
+
     end
 
 
@@ -147,6 +151,11 @@ class ClosetsController < ApplicationController
 			user_wearings_hash = user_wearings.attributes		#ハッシュ化
 			bought_cloth_tag = Tag.find_by(id: ClothesTagsLink.find_by(clothes_id: buy_id)).attributes["tag"]	#ユーザの買った服のタグハッシュで取得
 
+			# user_wearings_hash.map { |key, value|		#購入した服と同じ部分を着せ替える
+			# 	if key == bought_cloth_tag
+			# 		user_wearings_hash[key] = buy_id
+			# 	end
+			# }
 			user_wearings_hash[bought_cloth_tag] = buy_id
 			user_wearings.update_attributes(user_wearings_hash)		#ユーザの服情報更新
 			user_wearings = UserWearing.find_by(user_id: user_id)	#ユーザの現在きている服取得

@@ -3,7 +3,7 @@
   <div id="Closets" class="row box" style="padding-bottom: 0px;">
     <!-- カテゴリアイテム一覧 -->
     <div id="ClosetsItems" class="col-xs-4">
-      <% @all_clothes.each do |key, val| %>
+      <% @send_clothes.each do |key, val| %>
         <% val.each do |obj| %>
         <% p val %>
           <div class="col-md-6 col-sm-12">
@@ -22,25 +22,20 @@
                   <div class="ItemDark noto-light"></div>
                 </div>
               </div>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         <% end %>
         <% break %>
       <% end %>
     </div>
     <!-- キャラクタ表示領域 -->
     <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
-      <!-- コイン -->
-      <div id="Charactor-coin">
-        <%= image_tag 'icons/coin.png', :height => 40, :width => 40 %>
-        <span class="noto-bold"><%= @user.coin %></span>
-      </div>
       <!-- 決定ボタン -->
       <div onclick="post_json('<%= user_path(current_user.id) %>');">
         <%= image_tag 'icons/totop.png', :height => 64, :width => 64, :alt => 'トップへ戻る', :id => "ClosetsToTopBtn" %>
       </div>
       <!-- レイヤ描画 -->
-      <% @all_clothes.each do |key, val| %>
+      <% @send_clothes.each do |key, val| %>
         <div id="<%= key %>" class="Layers">
           <div id="<%= key %>-id" style="display:none;"></div>
         </div>
@@ -61,7 +56,7 @@
     <!-- カテゴリ一覧 -->
     <div id="ClosetsItemGroups" class="col-xs-12">
       <div id="ClosetsItemGroupsIcons">
-        <% @all_clothes.each do |key, val| %>
+        <% @send_clothes.each do |key, val| %>
           <% hash = Hash.new { |h,k| h[k] = {} } %>
           <% val.each do |obj| %>
             <% unless obj.nil? %>
@@ -83,24 +78,6 @@
 <% end %>
           </div>
         <% end %>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="Closet-Modal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 class="modal-title">衣装購入</h3>
-          </div>
-        <div class="modal-body">
-          <p>未所持の衣装です。</p>
-          <p>衣装を購入しますか？</p>
-          <div id="Closet-Modal-Price"></div>
-        </div>
-        <div class="modal-footer" id="Closet-Modal-Footer">
-        </div>
       </div>
     </div>
   </div>
