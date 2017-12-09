@@ -27,7 +27,11 @@
             <p>
               写真 : <input type="file" name="clothe_image" id="clothe_image">
               <% if @send_clothe.image then %>
+<% if Rails.env == 'production' then %>
+                <img src="https://<%= @send_clothe.image.to_s %>" alt="">
+<% else %>
                 <%= image_tag @send_clothe.image.to_s %>
+<% end %>
               <% end %>
             </p>
             <p>
