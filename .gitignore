@@ -186,4 +186,8 @@ Session.vim
 # auto-generated tag files
 tags
 
+#SCSSs
+app/assets/stylesheets/bootstrap
+app/assets/stylesheets/bootflat
+
 # End of https://www.gitignore.io/api/osx,vim,ruby,rails,emacs
