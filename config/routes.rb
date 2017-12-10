@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     post '/api/login/', to: 'api#login'
     post '/api/create/', to: 'api#create'
     post '/api/books/', to: 'api#register_books'
+    post '/api/register', to: 'api#register_image'
 
     #static_page
     get 'static_page/index'
