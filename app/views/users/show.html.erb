@@ -73,7 +73,7 @@
           <% end %>
           <div id="Charactor-Img">
 <% if Rails.env == 'production' then %>
-            <div class="Charactor-ItemImg" style='background-image:url("https://<%= @user.image %>");'></div>
+            <div class="Charactor-ItemImg" style='background-image:url("<%= @user.image %>");'></div>
 <% else %>
             <div class="Charactor-ItemImg" style='background-image:url("<%= image_path %>");'></div>
 <% end %>
