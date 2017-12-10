@@ -178,6 +178,7 @@ class UsersController < ApplicationController
 	def initialize_clothes
     UserWearing::initialized_user_wearing(@user.id)
     UserHasClothe::initialized_user_has_clothe(@user.id)
+    @user.update_attribute(:image, 'https://kakeigakuen-staging.xyz/user/image/' + @user.id.to_s + '/image.png')
   end
   
   def destroy_image
