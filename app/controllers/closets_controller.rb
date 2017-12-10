@@ -65,14 +65,12 @@ class ClosetsController < ApplicationController
 					path = clothe.image.url
 					path = './public' + path
 					tmp_image = Magick::Image.from_blob(File.read(path)).first
-
 					if (image.nil?)
 						image = tmp_image
 					else
 						image = image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
 					end
 				end
-
 				puts "画像の保存"
 				image.write('public/image.png')
 				image.destroy!
@@ -172,31 +170,11 @@ class ClosetsController < ApplicationController
 					raise
 				end
 			end
-
-<<<<<<< Updated upstream
-			user_wearings = UserWearing.find_by(user_id: user_id)		#ユーザの現在きている服取得
-			user_wearings_hash = user_wearings.attributes		#ハッシュ化
-			bought_cloth_tag = Tag.find_by(id: ClothesTagsLink.find_by(clothes_id: buy_id)).attributes["tag"]	#ユーザの買った服のタグハッシュで取得
-
-			# user_wearings_hash.map { |key, value|		#購入した服と同じ部分を着せ替える
-			# 	if key == bought_cloth_tag
-			# 		user_wearings_hash[key] = buy_id
-			# 	end
-			# }
-			user_wearings_hash[bought_cloth_tag] = buy_id
-			user_wearings.update_attributes(user_wearings_hash)		#ユーザの服情報更新
-			user_wearings = UserWearing.find_by(user_id: user_id)	#ユーザの現在きている服取得
-
-			result = {'result' => 1}
-			puts('successfully updated user data')
-		end
-=======
 			#viewにjsonを送信
 			respond_to do |format|
 				format.html{redirect_to action: :edit}
 				format.json{render :json => @result}
 			end
->>>>>>> Stashed changes
 
 		rescue
 			puts "something failed. check error message"
