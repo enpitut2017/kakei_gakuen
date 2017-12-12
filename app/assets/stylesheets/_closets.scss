@@ -36,12 +36,15 @@
   position: absolute;
   top: 20px;
   right: 35px;
-  z-index: 1050;
+  z-index: 9900;
   @media (max-width: 767px) {
     top: 10px;
     right: 25px;
     height: 48px;
     width: 48px;
+  }
+  &:hover{
+    filter: brightness(200%);
   }
 }
 #ClosetsItemGroupsIcons{
@@ -68,29 +71,21 @@
 //  background-color: #aaa;
 //}
 
-.ItemBoxBg{
+.ItemBox{
   background-color: #FFF;
   height: 150px;
   margin: 15px 15px 0 0;
   border-radius: 4px;
   border: 1px solid $kakeigray-light;
-  background-size: auto 100%;
-  background-position: center center;
-  background-repeat: no-repeat;
   background-image: image-url("sotai.png");
-}
-.ItemImg{
-  height: 150px;
   background-size: auto 100%;
   background-position: center center;
   background-repeat: no-repeat;
+  img{
+    height: 150px;
+    width: auto;
+  }
 }
-.ItemDark{
-  border-radius: 3px;
-  background-color: rgba(0,0,0,0.5);
-  height: 148px;
-}
-
 .GroupBox{
   width: 64px;
   height: 64px;
@@ -107,7 +102,7 @@
   }
 }
 .Layers{
-  margin: -72px -15px 0 -15px;
+  margin: 0 -15px;
   position: absolute;
   height: 100%;
   width: 100%;

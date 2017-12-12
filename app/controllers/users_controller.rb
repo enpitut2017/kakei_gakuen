@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :profile_edit, :budget_edit, :profile_update, :budget_update]
   before_action :logged_in_user, only: [:profile_edit, :budget_edit, :profile_update, :budget_update, :destroy, :image]
   before_action :correct_user,   only: [:show, :profile_edit,:budget_edit, :profile_update, :budget_update]
+  after_action :destroy_image, only: [:image]
 
   # GET /users
   # GET /users.json
@@ -49,9 +50,9 @@ class UsersController < ApplicationController
     @user.coin = 0
     respond_to do |format|
       begin
+        @user.save
         ActiveRecord::Base.transaction do
           #ここに処理を書く
-          @user.save
           initialize_clothes
         end
         puts('success!! commit') # トランザクション処理を確定
@@ -116,7 +117,7 @@ class UsersController < ApplicationController
   end
 
   def image
-      image = nil
+      @image = nil
       clothes = Clothe.where(id: UserWearing::get_user_wearing_array(current_user.id)).order(:priority)
       clothes.each do |clothe|
           path = clothe.image.url
@@ -124,14 +125,14 @@ class UsersController < ApplicationController
 
           tmp_image = Magick::Image.from_blob(File.read(path)).first
 
-          if (image.nil?)
-              image = tmp_image
+          if (@image.nil?)
+              @image = tmp_image
           else
-              image = image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
+              @image = @image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
           end
       end
 
-      send_data image.to_blob, type: "image/png", disposition: 'inline'
+      send_data @image.to_blob, type: "image/png", disposition: 'inline'
     end
 
   private
@@ -177,5 +178,13 @@ class UsersController < ApplicationController
 	def initialize_clothes
     UserWearing::initialized_user_wearing(@user.id)
     UserHasClothe::initialized_user_has_clothe(@user.id)
-	end
+    @user.update_attribute(:image, 'https://kakeigakuen-staging.xyz/user/image/' + @user.id.to_s + '/image.png')
+  end
+  
+  def destroy_image
+    if @image
+      @image.destroy!
+      puts 'image destroy'
+    end
+  end
 end

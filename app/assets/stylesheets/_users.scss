@@ -64,12 +64,15 @@
   position: absolute;
   top: 20px;
   right: 35px;
-  z-index: 1050;
+  z-index: 9900;
   @media (max-width: 767px) {
     top: 10px;
     right: 25px;
     height: 48px;
     width: 48px;
+  }
+  &:hover{
+    filter: brightness(200%);
   }
 }
 #Charactor-Img{
