@@ -3,6 +3,7 @@ function switch_items(category) {
 
   $('#ClosetsItems').children().remove();
   items = $(id).data('hoge');
+  console.log(items);
   $.each(items, function(i, item){
     if (item.has_clothe) {
         $('#ClosetsItems').append(
@@ -14,11 +15,12 @@ function switch_items(category) {
 
      } else {       //このelse文でエラー
         $('#ClosetsItems').append(
-                    '<div class="ItemBoxBg">' +
-                        '<div class="ItemImg" onclick="confirm_clothes_purchase(<%= obj.name %> + \",\" + @user.coin + \",\" + obj.price + \",\" + obj.id + \",\" + @user.id); return false;" + style="background-image: url(obj.image %>)">' +
-                            '<div class="ItemDark noto-light"></div>' +
-                        '</div>' +
-                    '</div>');
+                                    '<div class="ItemBoxBg">' +
+                                    '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
+                                    '<img src=' + item.path +'>' +
+                                    '<div class="ItemDark noto-light"></div>' +
+                                    '</div></div>'
+                                );
     }
   });
 }
