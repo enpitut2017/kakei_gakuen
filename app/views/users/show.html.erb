@@ -71,12 +71,25 @@
           <%= link_to closets_path do %>
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>
-          <div id="Charactor-Img">
+          <div id="Charactor-Img" class="Charactor-Img">
+          <!-- レイヤ描画 -->
+          <% @send_user_wearing_clothes.each do |key, val| %>
+            <div id="<%= key %>" class="Charactor-ItemImg">
+              <div id="<%= key %>-id" style="display:none;"></div>
+            </div>
+          <% end %>
+          <!-- 現在のキャラクタ描画 -->
+          <% @send_user_wearing_clothes.each do |key, val| %>
+            <% val.each do |obj| %>
+              <% unless obj.nil? %>
 <% if Rails.env == 'production' then %>
-            <div class="Charactor-ItemImg" style='background-image:url("<%= @user.image %>");'></div>
+                <script>draw_image('<%= key %>', 'https://<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
 <% else %>
-            <div class="Charactor-ItemImg" style='background-image:url("<%= image_path %>");'></div>
+                <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
 <% end %>
+                <% end %>
+            <% end %>
+          <% end %>
           </div>
         </div>
         <div id="Charactor-balloon">

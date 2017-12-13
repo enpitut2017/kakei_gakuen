@@ -54,11 +54,12 @@ class ClosetsController < ApplicationController
 
 			#画像の登録 ローカル環境の場合はすべてローカルのみで行う
 			#本番環境の場合idcfサーバーを経由して登録
+			#サーバーの問題があるので以下の方法はやめます
+=begin
 			if Rails.env != 'production' then
 				#ローカルの場合、ローカル環境で画像の生成のみを行う
 				#/public/image.pngに生成される
 				#テストで生成する場合、コメントアウトを外す。日本語ファイル不可
-=begin
 				image = nil
 				clothes = Clothe.where(id: params.values).order(:priority)
 				clothes.each do |clothe|
@@ -74,7 +75,7 @@ class ClosetsController < ApplicationController
 				puts "画像の保存"
 				image.write('public/image.png')
 				image.destroy!
-=end
+
 			else
 				clothes = Clothe.where(id: params.values).order(:priority)
 				image_path = []
@@ -91,12 +92,12 @@ class ClosetsController < ApplicationController
 
 				puts c.post_content(url, postdata)
 			end
+=end
 			flash[:success] = 'お着替えしました'
 		rescue => e
 			puts e
 			flash[:danger] = 'お着替えに失敗しました'
-		end
-
+		end		
 		redirect_to :action => "edit"
 
     end
