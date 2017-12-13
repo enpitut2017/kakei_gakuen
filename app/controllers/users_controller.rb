@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     @budget = inserted_cost(@user.budget)
     @books = @user.books.order("time DESC")
     @new_book = Book.new
+    @send_user_wearing_clothes = Clothe::get_user_wearing_tag_hash(current_user.id)
   end
 
   # GET /users/new
