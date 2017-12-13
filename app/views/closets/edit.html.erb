@@ -9,35 +9,30 @@
             <% if @user_has_clothes[obj.id] == true %>
 
             <!--ここに買っている画像描画を挟む-->
-                <% puts "ok_item tag: " + key + " clothe_id: " + obj.id.to_s %>
 <% if Rails.env == 'production' then %>
 <%= p obj.inspect %>
-                <div class="ItemBoxBg" onclick="draw_image('<%= key %>', 'https://<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
+                <div class="ItemBox" onclick="draw_image('<%= key %>', 'https://<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
                     <div class="ItemImg" style='background-image: url("https://<%= obj.image %>")'></div>
                 </div>
 <% else %>
-            <p> hoge</p>
-                <div class="ItemBoxBg" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
+                <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
                     <div class="ItemImg" style='background-image: url("<%= obj.image %>")'></div>
                 </div>
 <% end %>
             <% else %>
             <!--ここに買っていない画像描画を挟む-->
-                <% puts "no_item" %>
 <% if Rails.env == 'production' then %>
-                <!-- <div class="ItemBoxBg">
+                <div class="ItemBox">
                     <div class="ItemImg" onclick='confirm_clothes_purchase("<%= obj.name %>",<%= @user.coin %>,<%= obj.price %>,<%= obj.id %>,<%= @user.id %>);return false;' style='background-image: url("https://<%= obj.image %>")'>
                         <div class="ItemDark noto-light"></div>
                     </div>
-                </div> -->
+                </div>
 <% else %>
-<%= p obj.inspect %>
-
-                <!-- <div class="ItemBoxBg">
+                <div class="ItemBox">
                     <div class="ItemImg" onclick='confirm_clothes_purchase("<%= obj.name %>",<%= @user.coin %>,<%= obj.price %>,<%= obj.id %>,<%= @user.id %>);return false;' style='background-image: url("<%= obj.image %>")'>
                         <div class="ItemDark noto-light"></div>
                     </div>
-                </div> -->
+                </div>
 <% end %>
             <% end %>
             </div>

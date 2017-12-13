@@ -7,19 +7,22 @@ function switch_items(category) {
   $.each(items, function(i, item){
     if (item.has_clothe) {
         $('#ClosetsItems').append(
-                                  '<div class="col-md-6 col-sm-12">' +
-                                  '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
-                                  '<img src=' + item.path +'>' +
-                                  '</div></div>'
+                                '<div id="ClosetsItems" class="col-xs-6">' +
+                                    '<div class="col-md-6 col-sm-12">' +
+                                        '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
+                                            '<img src=' + item.path +'>' +
+                                        '</div></div></div>'
                             );
 
      } else {       //このelse文でエラー
         $('#ClosetsItems').append(
-                                    '<div class="ItemBoxBg">' +
-                                    '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
-                                    '<img src=' + item.path +'>' +
-                                    '<div class="ItemDark noto-light"></div>' +
-                                    '</div></div>'
+                                    '<div id="ClosetsItems" class="col-xs-6">' +
+                                        '<div class="col-md-6 col-sm-12">' +
+                                            '<div class="ItemBoxBg">' +
+                                                '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
+                                                    '<img src=' + item.path +'>' +
+                                                    '<div class="ItemDark noto-light"></div>' +
+                                                '</div></div></div></div>'
                                 );
     }
   });
