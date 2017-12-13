@@ -20,7 +20,7 @@ class Clothe < ApplicationRecord
 				user_wearing_clothes[tags[clothes_tags_link.tag_id].tag].push(clothes[clothes_tags_link.clothes_id])
 			end
         end
-        
+
         return user_wearing_clothes
     end
 
@@ -32,11 +32,11 @@ class Clothe < ApplicationRecord
         #ユーザーが持っている服のタグ
         user_has_clothes = UserHasClothe.where(user_id: user_id).pluck(:clothes_id)
         clothes_tags_links = ClothesTagsLink.where(clothes_id: user_has_clothes)
-            
+
         clothes = Clothe.where(id: user_has_clothes)
         keys_clothes = Clothe.where(id: user_has_clothes).pluck(:id)
         clothes =  Hash[keys_clothes.collect.zip(clothes)]
-        
+
         user_has_clothes = Hash.new
 		clothes_tags_links.each do |clothes_tags_link|
 			if user_has_clothes.has_key?(tags[clothes_tags_link.tag_id].tag) then
@@ -46,7 +46,7 @@ class Clothe < ApplicationRecord
 				user_has_clothes[tags[clothes_tags_link.tag_id].tag].push(clothes[clothes_tags_link.clothes_id])
 			end
         end
-        
+
         return user_has_clothes
 
     end
@@ -61,7 +61,7 @@ class Clothe < ApplicationRecord
         clothes =  Hash[keys_clothes.collect.zip(clothes)]
 
         clothes_tags_links = ClothesTagsLink.all
-        
+
         all_clothes = Hash.new
 		clothes_tags_links.each do |clothes_tags_link|
 			if all_clothes.has_key?(tags[clothes_tags_link.tag_id].tag) then
@@ -71,7 +71,7 @@ class Clothe < ApplicationRecord
 				all_clothes[tags[clothes_tags_link.tag_id].tag].push(clothes[clothes_tags_link.clothes_id])
 			end
         end
-        
+
         return all_clothes
     end
 
