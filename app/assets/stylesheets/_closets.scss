@@ -36,12 +36,15 @@
   position: absolute;
   top: 20px;
   right: 35px;
-  z-index: 9900;
+  z-index: 1000;
   @media (max-width: 767px) {
     top: 10px;
     right: 25px;
     height: 48px;
     width: 48px;
+  }
+  &:hover {
+    filter: brightness(200%);
   }
 }
 #ClosetsItemGroupsIcons{
@@ -78,11 +81,19 @@
   background-size: auto 100%;
   background-position: center center;
   background-repeat: no-repeat;
-  img{
-    height: 150px;
-    width: auto;
-  }
 }
+.ItemImg{
+  height: 148px;
+  background-size: auto 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.ItemDark{
+  border-radius: 3px;
+  background-color: rgba(0,0,0,0.5);
+  height: 148px;
+}
+
 .GroupBox{
   width: 64px;
   height: 64px;
