@@ -71,6 +71,9 @@
     height: 48px;
     width: 48px;
   }
+  &:hover {
+    filter: brightness(200%);
+  }
 }
 #Charactor-Img{
   height: 100%;

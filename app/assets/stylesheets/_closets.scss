@@ -43,6 +43,9 @@
     height: 48px;
     width: 48px;
   }
+  &:hover {
+    filter: brightness(200%);
+  }
 }
 #ClosetsItemGroupsIcons{
   width: 564px;
