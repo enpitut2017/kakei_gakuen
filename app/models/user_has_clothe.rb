@@ -1,5 +1,5 @@
 class UserHasClothe < ApplicationRecord
-    
+
     def self.user_has_clothe?(user_id, clothe_id)
         flag = false
         user_has_clothe = UserHasClothe.where(user_id: user_id, clothes_id: clothe_id)
@@ -14,7 +14,7 @@ class UserHasClothe < ApplicationRecord
         clothes = Clothe.all
         user_has_clothes_array = UserHasClothe.where(user_id: user_id).pluck(:clothes_id)
         clothes.each do |clothe|
-            hash[clothe.id] = user_has_clothes_array.include?(clothe.id) 
+            hash[clothe.id] = user_has_clothes_array.include?(clothe.id)
         end
         return hash
     end
