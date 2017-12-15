@@ -27,3 +27,22 @@ function parse_home(text) {
     $('#cost-home').val(costs[0]);
   }
 }
+
+function tweet_oauth() {
+  location.href = '/auth/twitter'
+}
+
+function tweet_modal() {
+  $('#Tweet-Modal .modal-body').children().remove();
+  $('#Tweet-Modal .modal-body').append('<p>私のカケイちゃんです！ | おてがる、カンタン、家計簿アプリ #家計学園</p>');
+  $('#Tweet-Modal .modal-body').append('<img src="'+ snapshot() +'">');
+  $('#Tweet-Modal').modal('show');
+}
+
+function post_tweet() {
+  params = {};
+  params['text'] = 'テスト | おてがる、カンタン、家計簿アプリ #家計学園';
+  params['image'] = $('#Tweet-Modal .modal-body img').attr('src'); 
+  $.post('/tweet', params ,function(){
+  });
+}
