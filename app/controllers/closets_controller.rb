@@ -1,6 +1,6 @@
 class ClosetsController < ApplicationController
 	before_action :logged_in_user, only: [:edit, :update]
-	protect_from_forgery :except => [:update]
+	protect_from_forgery :except => [:update, :buy]
     #before_action :correct_user, only: [:edit, :update]
 
     def edit
@@ -105,8 +105,12 @@ class ClosetsController < ApplicationController
 
 	def buy
 		#知らないuser, clotheがきたらrescue
+		@result ={
+			'user_id' => 0,
+			'clothe_id' => 0,
+			'result' => 0,
+		}
 		begin
-
 			begin
 				#受け取った、購入したい情報をパース
 				json_request = JSON.parse(request.body.read)
@@ -115,9 +119,14 @@ class ClosetsController < ApplicationController
 
 				user = User.find_by(id: user_id)
 				cloth = Clothe.find_by(id: buy_id)
+
+				@result['user_id'] = user_id
+				@result['clothe_id'] = buy_id
+
 				puts "successfully received"
 			rescue
 				puts "failed to receive json data"
+				flash[:danger] = "服の読み込みかユーザーの読み込みに失敗しました"
 				raise
 			end
 
@@ -134,19 +143,22 @@ class ClosetsController < ApplicationController
 				end
 			rescue
 				puts "null pointer Exception."
+				flash[:danger] = "ユーザーか服が見つかりませんでした"
 				raise
 			end
 
 			if error
 				puts "purchase failed."
-				@result = {'result' => 0}
+				@result['result'] = 0
 			else
 				begin
-					if !UserHasClothe.find_by(clothes_id: cloth.id)
+					if ! UserHasClothe::user_has_clothe?(user.id, cloth.id)
 						user.update_attribute(:coin, user.coin - cloth.price)	#支払い
 						UserHasClothe.create(user_id: user.id, clothes_id: cloth.id)	#ユーザの持ってる服追加
+						flash[:danger] = "服が購入できました"
 						puts "服の新規購入"
 					else
+						flash[:danger] = "もう服を持っています"
 						puts "既に持ってるので着せ替えだけしました"
 					end
 
@@ -165,21 +177,20 @@ class ClosetsController < ApplicationController
 						change_cloth_data.update_attribute(:clothe_id, buy_id)		#ユーザの服情報更新
 					end
 
-					@result = {'result' => 1}
+					@result['result'] = 1
 					puts('successfully updated user data')
 				rescue
+					flash[:danger] = "服が購入できませんでした"
 					raise
 				end
-			end
-			#viewにjsonを送信
-			respond_to do |format|
-				format.html{redirect_to action: :edit}
-				format.json{render :json => @result}
 			end
 
 		rescue
 			puts "something failed. check error message"
 		end
+
+		#viewにjsonを送信
+		render :json => @result
 	end
 
 
