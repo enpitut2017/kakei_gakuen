@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   def show
     @lost = 0
     @rest = 0
+    @serif = select_serif()
     @img_path = image_path(@user.coin)
     books = Book.where(user: @user)
     books.each do |book|
@@ -62,7 +63,7 @@ class UsersController < ApplicationController
         puts e
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end 
+      end
 
       log_in @user
       flash[:success] = "ようこそ家計学園へ！"
@@ -181,11 +182,19 @@ class UsersController < ApplicationController
     UserHasClothe::initialized_user_has_clothe(@user.id)
     @user.update_attribute(:image, 'https://kakeigakuen-staging.xyz/user/image/' + @user.id.to_s + '/image.png')
   end
-  
+
   def destroy_image
     if @image
       @image.destroy!
       puts 'image destroy'
     end
+  end
+
+  def select_serif
+    f = File.open("#{Rails.public_path}/serif.txt")
+    array = f.readlines
+    p array
+    f.close
+    return array.sample ? array.sample : '今日も1日がんばろう！'
   end
 end
