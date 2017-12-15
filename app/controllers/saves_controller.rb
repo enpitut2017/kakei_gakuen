@@ -1,5 +1,6 @@
 class SavesController < ApplicationController
     protect_from_forgery :except => [:create, :update, :tag_create, :tag_update]
+    before_action :digest_auth, only: [:index, :edit, :new, :tag_index, :tag_new, :tag_edit]
 
     def index
         @send_tags = nil
@@ -111,4 +112,12 @@ class SavesController < ApplicationController
         puts("clothes data update end")
         redirect_to action: 'tag_edit', id: params[:id]
     end
+
+    private
+
+    def digest_auth
+        authenticate_or_request_with_http_basic do |name, password|
+            name == ENV['YATTEIKI_USER'] && password == ENV['YATTEIKI_PASSWORD']
+        end
+   end
 end
