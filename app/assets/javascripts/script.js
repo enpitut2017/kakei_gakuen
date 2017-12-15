@@ -147,14 +147,26 @@ function confirm_clothes_purchase(item, coin, price, bookid, userid) {
 }
 
 function buy_clothes(bookid, userid){
-  var data = '{"buy_id":"' + bookid + '","user_id":"' + userid + '"}';
+
+  var data = {
+	  "buy_id" : bookid,
+	  "user_id" : userid,
+  }
   console.log(data);
-  $.post(
-    "/buy_clothes",
-    data,
-    function(){location.href="/closets"},
-    "json"
-  )
+  $.ajax({
+	  type: "post",
+	  url: "/buy_clothes",
+	  data: JSON.stringify(data),
+	  contentType: "application/json",
+	  dataType: "json",
+	  success: function(response) {
+		location.reload();
+		console.log(response);
+	  },
+	  error: function() {
+		console.log("error");
+	  }
+  });
 }
 
 function escape_html(string) {
