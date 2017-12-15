@@ -184,3 +184,11 @@ function escape_html(string) {
     }[match]
   });
 }
+
+function snapshot() {
+  html2canvas(document.querySelector("#Charactor-Img")).then(canvas => {
+    base64 = canvas.toDataURL('image/png');
+    //console.log(base64);
+    return base64
+  });
+}
