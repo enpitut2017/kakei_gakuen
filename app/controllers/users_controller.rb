@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     @budget = inserted_cost(@user.budget)
     @books = @user.books.order("time DESC")
     @new_book = Book.new
+    @send_user_wearing_clothes = Clothe::get_user_wearing_tag_hash(current_user.id)
   end
 
   # GET /users/new
@@ -178,6 +179,7 @@ class UsersController < ApplicationController
 	def initialize_clothes
     UserWearing::initialized_user_wearing(@user.id)
     UserHasClothe::initialized_user_has_clothe(@user.id)
+    @user.update_attribute(:image, 'https://kakeigakuen-staging.xyz/user/image/' + @user.id.to_s + '/image.png')
   end
   
   def destroy_image

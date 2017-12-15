@@ -42,8 +42,9 @@ Rails.application.routes.draw do
     get   '/image',  to:'users#image'
 
     #closets
-    get   '/closets', to:'closets#edit'
-    post  '/closets', to:'closets#update'
+    get   '/closets',     to:'closets#edit'
+    post  '/closets',     to:'closets#update'
+    post  '/buy_clothes', to:'closets#buy'
 
     #sessions
     get   '/login',   to: 'sessions#new'

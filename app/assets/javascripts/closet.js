@@ -4,10 +4,23 @@ function switch_items(category) {
   $('#ClosetsItems').children().remove();
   items = $(id).data('hoge');
   $.each(items, function(i, item){
-    $('#ClosetsItems').append('<div class="col-md-6 col-sm-12">' +
-                              '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
-                              '<img src=' + item.path +'>' +
-                              '</div></div>');
+    if (item.has_clothe) {
+        $('#ClosetsItems').append(
+                                  '<div class="col-md-6 col-sm-12">' +
+                                  '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
+                                  '<div class="ItemImg" style="background-image: url(' + item.path +')">' +
+                                  '</div></div></div>'
+                            );
+        console.log(item.path);
+
+     } else {
+        $('#ClosetsItems').append(
+                                  '<div class="col-md-6 col-sm-12">' +
+                                  '<div class="ItemBox" onclick="confirm_clothes_purchase(\'' + item.name + '\', '  + item.user_coin + ', '  + item.price + ', ' + item.id + ', '  + item.user_id + ')">' +
+                                  '<div class="ItemImg" style="background-image: url(' + item.path +')">' +
+                                  '<div class="ItemDark"></div></div></div></div>'
+                                );
+    }
   });
 }
 
@@ -25,9 +38,7 @@ function post_json(user_path) {
   $('.Layers').each(function(i, elm) {
     users_wear[$(elm).attr('id')] = $(elm).children().val();
   });
-
-  $.post('/closets', users_wear ,function(data){
-    console.log(data);
+  $.post('/closets', users_wear ,function(){
     location.href=user_path;
   });
 }
