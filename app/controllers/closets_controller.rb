@@ -113,9 +113,10 @@ class ClosetsController < ApplicationController
 		begin
 			begin
 				#受け取った、購入したい情報をパース
-				json_request = JSON.parse(request.body.read)
-				buy_id = json_request["buy_id"]
-				user_id = json_request["user_id"]
+				input_params = params
+				#json_request = JSON.parse(request.body.read)
+				buy_id = input_params["buy_id"]
+				user_id = input_params["user_id"]
 
 				user = User.find_by(id: user_id)
 				cloth = Clothe.find_by(id: buy_id)
@@ -126,7 +127,7 @@ class ClosetsController < ApplicationController
 				puts "successfully received"
 			rescue
 				puts "failed to receive json data"
-				flash[:danger] = "服の読み込みかユーザーの読み込みに失敗しました"
+				flash[:danger] = "服の読み込みかユーザーの読み込みに失敗しました user_id : #{user_id} buy_id: #{buy_id}"
 				raise
 			end
 
