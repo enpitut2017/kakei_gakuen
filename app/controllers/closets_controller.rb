@@ -156,7 +156,7 @@ class ClosetsController < ApplicationController
 					if ! UserHasClothe::user_has_clothe?(user.id, cloth.id)
 						user.update_attribute(:coin, user.coin - cloth.price)	#支払い
 						UserHasClothe.create(user_id: user.id, clothes_id: cloth.id)	#ユーザの持ってる服追加
-						flash[:danger] = "服が購入できました"
+						flash[:success] = "服が購入できました"
 						puts "服の新規購入"
 					else
 						flash[:danger] = "もう服を持っています"
