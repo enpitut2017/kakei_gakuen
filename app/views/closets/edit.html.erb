@@ -9,10 +9,11 @@
         <div class="col-md-6 col-sm-12">
         <%# 持ってるかどうか判定 %>
         <% if @user_has_clothes[obj.id] == true %>
-          <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
 <% if Rails.env == 'production' then %>
+            <div class="ItemBox" onclick="draw_image('<%= key %>', 'https://<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
             <div class="ItemImg" style='background-image: url("https://<%= obj.image %>")'></div>
 <% else %>
+            <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
             <div class="ItemImg" style='background-image: url("<%= obj.image %>")'></div>
 <% end %>
           </div>

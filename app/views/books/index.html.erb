@@ -34,11 +34,11 @@ datasets: [
   {
       label: "過去6ヶ月の支出",
       background_color: "rgba(220,30,30,0.8)",
-      data: [hash_for_barchart[today.months_ago(5)],
-             hash_for_barchart[today.months_ago(4)],
-             hash_for_barchart[today.months_ago(3)],
-             hash_for_barchart[today.months_ago(2)],
-             hash_for_barchart[today.months_ago(1)],
+      data: [hash_for_barchart[today.months_ago(5).month].to_i,
+             hash_for_barchart[today.months_ago(4).month].to_i,
+             hash_for_barchart[today.months_ago(3).month].to_i,
+             hash_for_barchart[today.months_ago(2).month].to_i,
+             hash_for_barchart[today.months_ago(1).month].to_i,
              hash_for_barchart[today.month]]
     }
   ]

@@ -35,13 +35,13 @@
               <tr>
                 <h4 class="text-lightgray noto-light">
                   <span class="form-text">用途</span>
-                  <input type="text" name="items[]">
+                  <input id="item-home" type="text" name="items[]">
                 </h4>
               </tr>
               <tr>
                 <h4 class="text-lightgray noto-light">
                   <span class="form-text">金額</span>
-                  <input type="text" name="costs[]">
+                  <input id="cost-home" type="text" name="costs[]">
                 </h4>
               </tr>
               <tr>
@@ -94,8 +94,8 @@
         </div>
         <div id="Charactor-balloon">
           <div class="triangle-top"></div>
-          <h4>素体ちゃん</h4>
-          <p>「今日も一日がんばろう！」</p>
+          <h4>カケイちゃん</h4>
+          <p style="margin-bottom:0px;">「<%= @serif %>」</p>
         </div>
       </div>
     </div>
@@ -179,4 +179,3 @@
     </div>
   </div>
 </div>
-

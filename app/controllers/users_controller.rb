@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   def show
     @lost = 0
     @rest = 0
+    @serif = select_serif()
     @img_path = image_path(@user.coin)
     books = Book.where(user: @user)
     books.each do |book|
@@ -50,24 +51,29 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.coin = 0
     respond_to do |format|
-      begin
-        @user.save
-        ActiveRecord::Base.transaction do
-          #ここに処理を書く
-          initialize_clothes
+      if @user.save
+        begin
+          @user.save
+          ActiveRecord::Base.transaction do
+            #ここに処理を書く
+            initialize_clothes
+          end
+          puts('success!! commit') # トランザクション処理を確定
+          log_in @user
+          flash[:success] = "ようこそ家計学園へ！"
+          format.html { redirect_to @user }
+          format.json { render :show, status: :created, location: @user }
+        rescue => e
+          puts('error!! rollback') # トランザクション処理を戻す
+          puts e
+          @user.destroy
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-        puts('success!! commit') # トランザクション処理を確定
-      rescue => e
-        puts('error!! rollback') # トランザクション処理を戻す
-        puts e
+      else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end 
-
-      log_in @user
-      flash[:success] = "ようこそ家計学園へ！"
-      format.html { redirect_to @user }
-      format.json { render :show, status: :created, location: @user }
+      end
     end
   end
 
@@ -181,11 +187,19 @@ class UsersController < ApplicationController
     UserHasClothe::initialized_user_has_clothe(@user.id)
     @user.update_attribute(:image, 'https://kakeigakuen-staging.xyz/user/image/' + @user.id.to_s + '/image.png')
   end
-  
+
   def destroy_image
     if @image
       @image.destroy!
       puts 'image destroy'
     end
+  end
+
+  def select_serif
+    f = File.open("#{Rails.public_path}/serif.txt")
+    array = f.readlines
+    p array
+    f.close
+    return array.sample ? array.sample : '今日も1日がんばろう！'
   end
 end

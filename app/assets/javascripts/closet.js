@@ -10,9 +10,7 @@ function switch_items(category) {
                                   '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
                                   '<div class="ItemImg" style="background-image: url(' + item.path +')">' +
                                   '</div></div></div>'
-                            );
-        console.log(item.path);
-
+                                );
      } else {
         $('#ClosetsItems').append(
                                   '<div class="col-md-6 col-sm-12">' +
