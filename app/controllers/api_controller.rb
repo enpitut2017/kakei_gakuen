@@ -7,26 +7,19 @@ class ApiController < ApplicationController
     def register_books
         response = {'token' => 'error', 'budget' => 0}
         token = params[:token]
-        items = params[:items]
+        items = 'アプリから登録しました'
         costs = params[:costs]
-        _times = params[:times]
+        _times = Time.zone.now
 
         if ! token.nil?
 
             user = User.find_by(token: token)
 
-            if user && ! items.empty? && ! costs.empty? && ! _times.empty? then
+            if user && ! costs.empty? then
                 
-                if ! items.kind_of?(Array)
-                    items = [items]
-                end
 
                 if ! costs.kind_of?(Array)
                     costs = [costs]
-                end
-
-                if ! _times.kind_of?(Array)
-                    _times = [_times]
                 end
 
                 begin
@@ -37,16 +30,16 @@ class ApiController < ApplicationController
 
                     puts('coin update start')
 
-                    coin = user.coin + culcurate_coin(_times, costs)
+                    coin = user.coin + 2 #apiの場合、コインは2コインとする #culcurate_coin(_times, costs)
                     user.update_attribute(:coin, coin)
 
                     puts('coin update')
 
-                    for i in 0..items.size-1 do
+                    for i in 0..costs.size-1 do
                         if costs[i].length >= 10 then
                             next
                         end
-                        books.push(Book.new(item: items[i], cost: costs[i], user: user, time: _times[i]))
+                        books.push(Book.new(item: items, cost: costs[i], user: user, time: _times))
                     end
 
                     Book.import books
