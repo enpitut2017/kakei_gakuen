@@ -11,16 +11,15 @@ class ApiController < ApplicationController
         costs = params[:costs]
         _times = Time.zone.now
 
-        if ! token.nil?
+        if ! token.nil? && ! costs.nil?
 
-            user = User.find_by(token: token)
+			user = User.find_by(token: token)
+			
+			if ! costs.kind_of?(Array)
+				costs = [costs]
+			end
 
             if user && ! costs.empty? then
-                
-
-                if ! costs.kind_of?(Array)
-                    costs = [costs]
-                end
 
                 begin
                 puts('books api start')
