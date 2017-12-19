@@ -164,9 +164,11 @@ class UsersController < ApplicationController
     path = "#{Rails.root}/tmp/#{SecureRandom.hex}.png"
     File.open(path, 'wb') do |f|
       f.write(Base64.decode64(params[:image].gsub!(/data:(.*?);(?:.*?),/, '')))
-    end
-    client.update_with_media(params[:text], File.new(path))
-    File.delete(path)
+	end
+	file = File.new(path)
+    client.update_with_media(params[:text], file)
+	file.delete(path)
+	file.close()
     redirect_to root_path, flash[:success] = "ツイートしました"
   end
 
