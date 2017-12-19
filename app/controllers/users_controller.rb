@@ -163,7 +163,7 @@ class UsersController < ApplicationController
     end
     path = "#{Rails.root}/tmp/#{SecureRandom.hex}.png"
     File.open(path, 'wb') do |f|
-      f.write(Base64.decode64(params[:image]))
+      f.write(Base64.decode64(params[:image].gsub!(/data:(.*?);(?:.*?),/, '')))
     end
     client.update_with_media(params[:text], File.new(path))
     File.delete(path)
