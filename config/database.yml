@@ -35,7 +35,7 @@ staging:
 
 production:
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
   pool: 5
   socket: /var/lib/mysql/mysql.sock
   database: kakeigakuen
