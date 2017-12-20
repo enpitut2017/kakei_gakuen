@@ -27,3 +27,31 @@ function parse_home(text) {
     $('#cost-home').val(costs[0]);
   }
 }
+
+function tweet_oauth() {
+  location.href = '/auth/twitter'
+}
+
+function tweet_modal() {
+  html2canvas(document.querySelector("#Charactor-Img")).then(function(canvas) {
+    base64 = canvas.toDataURL('image/png');
+    $('#Tweet-Modal .modal-body').children().remove();
+    $('#Tweet-Modal .modal-body').append('<textarea id="tweet-text" class="form-control" rows="3" maxlength="140">私のカケイちゃんです！ | おてがる、カンタン、家計簿アプリ #家計学園</textarea>');
+    $('#Tweet-Modal .modal-body').append('<img src="'+ base64 +'" style="width:80%">');
+    $('#Tweet-Modal').modal('show');
+  });
+}
+
+function post_tweet() {
+  params = {};
+  params['text'] = $('#Tweet-Modal .modal-body textarea').val();
+  params['image'] = $('#Tweet-Modal .modal-body img').attr('src');
+  $.post('/tweet', params ,function(){
+  });
+}
+
+$(function(){
+  $("#Tweet-Modal").bind('keyup' ,function(){
+    $("#tweet-text").val($("#tweet-text").val());
+  });
+});
