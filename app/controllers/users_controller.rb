@@ -148,9 +148,9 @@ class UsersController < ApplicationController
       session[:oauth_token] = auth.credentials.token
       session[:oauth_token_secret] = auth.credentials.secret
       flash[:success] = "Oauth認証に成功しました"
-      redirect_to user_url
+      redirect_to user_path(current_user.id)
     else
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 
@@ -164,12 +164,13 @@ class UsersController < ApplicationController
     path = "#{Rails.root}/tmp/#{SecureRandom.hex}.png"
     File.open(path, 'wb') do |f|
       f.write(Base64.decode64(params[:image].gsub!(/data:(.*?);(?:.*?),/, '')))
-	end
-	file = File.new(path)
+	  end
+	  file = File.new(path)
     client.update_with_media(params[:text], file)
-	file.delete(path)
-	file.close()
-    redirect_to root_path, flash[:success] = "ツイートしました"
+    file.close()
+	  File.delete(path)
+    flash[:success] = "ツイートしました"
+    redirect_to user_path(current_user.id)
   end
 
   private
