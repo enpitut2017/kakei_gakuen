@@ -9,7 +9,16 @@ Bundler.require(*Rails.groups)
 module KakeiGakuen
   class Application < Rails::Application
 
-      config.action_controller.action_on_unpermitted_parameters = :log
+	config.action_controller.action_on_unpermitted_parameters = :log
+	config.time_zone = 'Tokyo'
+  config.active_record.default_timezone = :local
+  
+  config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+    allow do
+      origins '*'
+      resource '*', :headers => :any, :methods => [:get, :post, :delete]
+    end
+  end
 
 
     # Initialize configuration defaults for originally generated Rails version.

@@ -32,34 +32,40 @@ class BooksController < ApplicationController
     costs = params[:costs]
     _times = params[:times]
 
-    if items == nil || costs == nil || _times == nil then
+    @books = [];
+    @user = User.find(current_user.id)
+
+    if items[0] == "" || costs[0] == "" || _times[0] == "" then
       @book = Book.new
       @book.errors[:base] << "家計簿を入力してください"
-      return render :new
+      return redirect_to @user
   else
       flash[:success] = "入力完了！ + #{culcurate_coin(_times, costs)} KC！"
   end
 
-    @books = [];
-    @user = User.find(current_user.id)
-
     #経験値の計算
     coin = @user.coin + culcurate_coin(_times, costs)
-    @user.update_attribute(:coin, coin)
 
     for i in 0..items.size-1 do
         if costs[i].length >= 10 then
             next
         end
-      @books.push(Book.new(item: items[i], cost: costs[i], user: @user, time: _times[i]))
+      if ! (items[i] == "" || costs[i] == "" || _times[i] == "") then
+        @books.push(Book.new(item: items[i], cost: costs[i], user: @user, time: _times[i]))
+      end
     end
 
+    p 'book array :'
+    p @books
     respond_to do |format|
       if Book.import @books
+        if ! (items[0] == "" || costs[0] == "" || _times[0] == "")
+          @user.update_attribute(:coin, coin)
+        end
         format.html { redirect_to @user}
         format.json { render :show, status: :created, location: @books }
       else
-        format.html { render :new }
+        format.html { redirect_to @user }
         format.json { render json: @books.errors, status: :unprocessable_entity }
       end
     end
@@ -126,7 +132,11 @@ class BooksController < ApplicationController
             times.push(((d-Time.parse(item).to_i)/100)/864)
         end
         times.each do |time|
+          if time < 0 then
+            return 0
+          else
             defalt_coin -= time
+          end
         end
         if defalt_coin < 1 then
             defalt_coin = 1
