@@ -75,6 +75,22 @@
     filter: brightness(200%);
   }
 }
+#Charactor-ShareBtn{
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  z-index: 1000;
+  @media (max-width: 767px) {
+    top: 10px;
+    right: 80px;
+    height: 48px;
+    width: 48px;
+  }
+  &:hover{
+    filter: brightness(200%);
+  }
+}
 #Charactor-Img{
   height: 100%;
   @media (max-width: 767px) {
