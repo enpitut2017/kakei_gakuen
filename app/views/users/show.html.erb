@@ -16,11 +16,11 @@
         </div>
         <div>
           <p>
-            <span class="title-middle noto-bold">今月の残高</span>
+            <span class="title-middle noto-bold">残高</span>
             <span class="title-rest noto-bold"><%= @rest %>円</span>
           </p>
-          <p><span class="title-middle text-lightgray noto-light">今月の予算：<%= @budget %>円</span></p>
-          <p><span class="title-middle text-lightgray noto-light">今月の出費：<%= @lost%>円</span></p>
+          <p><span class="title-middle text-lightgray noto-light">予算：<%= @budget %>円</span></p>
+          <p><span class="title-middle text-lightgray noto-light">出費：<%= @lost%>円</span></p>
         </div>
       </div>
 
@@ -71,6 +71,13 @@
           <%= link_to closets_path do %>
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
           <% end %>
+          <% if session[:oauth_token] %>
+            <a onclick="tweet_modal()">
+          <% else %>
+            <a onclick="tweet_oauth()">
+          <% end %>
+            <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn"%>
+          </a>
           <div id="Charactor-Img" class="Charactor-Img">
           <!-- レイヤ描画 -->
           <% @send_user_wearing_clothes.each do |key, val| %>
@@ -175,6 +182,24 @@
           <%= link_to 'くわしく見る', books_path %>
         </div>
         <% end %>
+      </div>
+    </div>
+    <div class="col-md-12 text-center">
+      <div id="Tweet-Modal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3 class="modal-title">ツイートの確認</h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+              <button type="button" class="btn btn-primary" onclick="post_tweet()">ツイートする</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

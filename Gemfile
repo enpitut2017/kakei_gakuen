@@ -41,6 +41,13 @@ gem 'rails-i18n'
 gem 'httpclient'
 # image_upload
 gem 'fog', '1.36.0'
+
+# Twitter Oauth
+gem 'twitter'
+gem 'omniauth'
+gem 'omniauth-twitter'
+
+# cors
 gem 'rack-cors'
 
 # Use Capistrano for deployment

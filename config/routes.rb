@@ -78,6 +78,11 @@ Rails.application.routes.draw do
     get 'static_page/index'
     get '/index.html', to:'static_page#index'
 
+    # twitter oauth
+    get '/auth/:provider/callback', to: 'users#callback'
+    post '/auth/:provider/callback', to: 'users#callback'
+    post '/tweet', to: 'users#tweet'
+
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     get '*path', to: 'application#error_404'
     end

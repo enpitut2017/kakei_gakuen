@@ -109,7 +109,7 @@ class UsersController < ApplicationController
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
-  end
+    end
 
 
   # DELETE /users/1
@@ -140,7 +140,38 @@ class UsersController < ApplicationController
       end
 
       send_data @image.to_blob, type: "image/png", disposition: 'inline'
+  end
+
+  def callback
+    if (request.path_info == "/auth/twitter/callback")
+      auth = request.env["omniauth.auth"]
+      session[:oauth_token] = auth.credentials.token
+      session[:oauth_token_secret] = auth.credentials.secret
+      flash[:success] = "Oauth認証に成功しました"
+      redirect_to user_path(current_user.id)
+    else
+      redirect_to root_path
     end
+  end
+
+  def tweet
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.secrets.twitter_consumer_key
+      config.consumer_secret = Rails.application.secrets.twitter_consumer_secret
+      config.access_token = session[:oauth_token]
+      config.access_token_secret = session[:oauth_token_secret]
+    end
+    path = "#{Rails.root}/tmp/#{SecureRandom.hex}.png"
+    File.open(path, 'wb') do |f|
+      f.write(Base64.decode64(params[:image].gsub!(/data:(.*?);(?:.*?),/, '')))
+	  end
+	  file = File.new(path)
+    client.update_with_media(params[:text], file)
+    file.close()
+	  File.delete(path)
+    flash[:success] = "ツイートしました"
+    redirect_to user_path(current_user.id)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -182,7 +213,7 @@ class UsersController < ApplicationController
         return str_cost
     end
 
-	def initialize_clothes
+  def initialize_clothes
     UserWearing::initialized_user_wearing(@user.id)
     UserHasClothe::initialized_user_has_clothe(@user.id)
     @user.update_attribute(:image, 'https://kakeigakuen-staging.xyz/user/image/' + @user.id.to_s + '/image.png')
@@ -198,7 +229,6 @@ class UsersController < ApplicationController
   def select_serif
     f = File.open("#{Rails.public_path}/serif.txt")
     array = f.readlines
-    p array
     f.close
     return array.sample ? array.sample : '今日も1日がんばろう！'
   end
