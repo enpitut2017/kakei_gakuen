@@ -73,6 +73,7 @@ Rails.application.routes.draw do
     post '/api/create/', to: 'api#create'
     post '/api/books/', to: 'api#register_books'
     post '/api/register', to: 'api#register_image'
+    post '/api/image', to: 'api#get_image_path'
 
     #static_page
     get 'static_page/index'

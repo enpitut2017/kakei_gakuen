@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image]
+    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image, :get_image_path]
     after_action :destroy_image, only: [:image]
     
     require 'rmagick'
@@ -119,6 +119,26 @@ class ApiController < ApplicationController
         end
 
         send_data @image.to_blob, type: "image/png", disposition: 'inline'
+    end
+
+    def get_image_path
+
+        token= params[:token]
+        response = {'token' => 'error', 'path' => 0}
+        user = User.find_by(token: token)
+
+        if (user) then
+            clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user.id)).order(:priority)
+            path=[]
+            clothes.each do |clothe|
+                path.push('https://' + clothe.image.url)
+            end
+            if  ! path.empty?
+                response = { 'token' => user.token, 'path' => path}
+            end
+        end
+
+        render :json => response
     end
 
     private
