@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
     protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image, :get_image_path]
     after_action :destroy_image, only: [:image]
-    
+
     require 'rmagick'
 
     def register_books
@@ -14,7 +14,7 @@ class ApiController < ApplicationController
         if ! token.nil? && ! costs.nil?
 
 			user = User.find_by(token: token)
-			
+
 			if ! costs.kind_of?(Array)
 				costs = [costs]
 			end
@@ -48,7 +48,7 @@ class ApiController < ApplicationController
                 rescue => e
                     puts e # トランザクション処理を戻す
                 end
-            
+
             end
         end
 
@@ -80,8 +80,12 @@ class ApiController < ApplicationController
         if user && user.authenticate(params[:password])
             if user.token.nil?
                 token = Digest::SHA1.hexdigest(params[:email].downcase)
-                user.update(token: token, password: params[:password], password_confirmation: params[:password])
-                user.token = token
+                if user.update(token: token, password: params[:password], password_confirmation: params[:password]) then
+					user.token = token
+				else
+					render :json => response
+					return
+				end
             end
             response = { 'token' => user.token, 'budget' => rest_budget(user.id)}
         end
@@ -108,9 +112,9 @@ class ApiController < ApplicationController
 
                 tmp_image = Magick::Image.from_blob(File.read(path)).first
 
-                if (@image.nil?)  
+                if (@image.nil?)
                     @image = tmp_image
-                else 
+                else
                     @image = @image.composite(tmp_image, 0, 0, Magick::OverCompositeOp)
                 end
             end
