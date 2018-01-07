@@ -80,11 +80,12 @@ class ApiController < ApplicationController
         if user && user.authenticate(params[:password])
             if user.token.nil?
                 token = Digest::SHA1.hexdigest(params[:email].downcase)
-                user.update(token: token, password: params[:password], password_confirmation: params[:password])
-                user.token = token
-                if !user.save
-                    render :json => response
-                end
+                if user.update(token: token, password: params[:password], password_confirmation: params[:password]) then
+					user.token = token
+				else
+					render :json => response
+					return
+				end
             end
             response = { 'token' => user.token, 'budget' => rest_budget(user.id)}
         end
