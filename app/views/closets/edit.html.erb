@@ -9,22 +9,13 @@
         <div class="col-md-6 col-sm-12">
         <%# 持ってるかどうか判定 %>
         <% if @user_has_clothes[obj.id] == true %>
-<% if Rails.env == 'production' then %>
-            <div class="ItemBox" onclick="draw_image('<%= key %>', 'https://<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
-            <div class="ItemImg" style='background-image: url("https://<%= obj.image %>")'></div>
-<% else %>
             <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
             <div class="ItemImg" style='background-image: url("<%= obj.image %>")'></div>
-<% end %>
           </div>
         <% else %>
           <!--ここに買っていない画像描画を挟む-->
           <div class="ItemBox" onclick='confirm_clothes_purchase("<%= obj.name %>",<%= @user.coin %>,<%= obj.price %>,<%= obj.id %>,<%= @user.id %>)'>
-<% if Rails.env == 'production' then %>
-            <div class="ItemImg" style='background-image: url("https://<%= obj.image %>")'>
-<% else %>
             <div class="ItemImg" style='background-image: url("<%= obj.image %>")'>
-<% end %>
               <div class="ItemDark"></div>
             </div>
           </div>
@@ -52,11 +43,7 @@
       <% @send_user_wearing_clothes.each do |key, val| %>
         <% val.each do |obj| %>
           <% unless obj.nil? %>
-<% if Rails.env == 'production' then %>
-            <script>draw_image('<%= key %>', 'https://<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
-<% else %>
             <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
-<% end %>
           <% end %>
         <% end %>
       <% end %>
@@ -72,11 +59,7 @@
             <% hash[obj.id]['id'] = obj.id %>
             <% hash[obj.id]['name'] = obj.name %>
             <% hash[obj.id]['category'] = key %>
-<% if Rails.env == 'production' then %>
-              <% hash[obj.id]['path'] = 'https://' + obj.image.to_s %>
-<% else %>
-              <% hash[obj.id]['path'] = obj.image.to_s %>
-<% end %>
+            <% hash[obj.id]['path'] = obj.image.to_s %>
             <% hash[obj.id]['priority'] = obj.priority %>
             <% hash[obj.id]['price'] = obj.price %>
             <% hash[obj.id]['has_clothe'] =  @user_has_clothes[obj.id]%>
@@ -85,11 +68,7 @@
           <% end %>
         <% end %>
         <div id="<%= key %>-group" class="GroupBox" data-hoge="<%= hash.to_json %>" onclick="switch_items('<%= key %>');">
-<% if Rails.env == 'production' then %>
-          <img src="https://<%= @tags[key].image.to_s %>" alt="" height="64px" width="64px">
-<% else %>
           <%= image_tag @tags[key].image.to_s, :height => 64, :width => 64 %>
-<% end %>
         </div>
       <% end %>
       </div>
