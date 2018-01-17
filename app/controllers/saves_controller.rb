@@ -115,9 +115,11 @@ class SavesController < ApplicationController
 
     private
 
-    def digest_auth
-        authenticate_or_request_with_http_basic do |name, password|
-            name == ENV['YATTEIKI_USER'] && password == ENV['YATTEIKI_PASSWORD']
-        end
+	def digest_auth
+		if Rails.env == 'production'
+			authenticate_or_request_with_http_basic do |name, password|
+				name == ENV['YATTEIKI_USER'] && password == ENV['YATTEIKI_PASSWORD']
+			end	
+		end
    end
 end
