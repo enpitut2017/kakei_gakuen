@@ -15,7 +15,7 @@ function switch_items(category) {
      } else if (item.category=="face") {
         $('#ClosetsItems').append(
                                   '<div class="col-md-6 col-sm-12">' +
-                                  '<div class="ItemBox" onclick="draw_image(\'' + item.category + '\', \'' + item.path + '\', '  + item.priority + ', ' + item.id + ')">' +
+                                  '<div class="ItemBox" onclick="confirm_clothes_purchase(\'' + item.name + '\', '  + item.user_coin + ', '  + item.price + ', ' + item.id + ', '  + item.user_id + ')">' +
                                   '<div class="ItemImg" style="background-image: url(' + item.path + ')"></div>' +
                                   '<div class="ItemImg" style="background-image: url(' + image_path("frontsilhouette.png") +'); margin-top:-148px;">' +
                                   '<div class="ItemDark"></div></div></div></div>'
