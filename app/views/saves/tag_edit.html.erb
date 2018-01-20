@@ -13,11 +13,7 @@
             <p>
               写真 : <input type="file" name="tag_image" id="tag_image">
               <% if @send_tag.image then %>
-<% if Rails.env == 'production' then %>
-                <img src="https://<%= @send_tag.image.to_s %>" alt="">
-<% else %>
                 <%= image_tag @send_tag.image.to_s %>
-<% end %>
               <% end %>
             </p>
             <p>
