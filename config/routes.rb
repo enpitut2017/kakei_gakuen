@@ -68,12 +68,15 @@ Rails.application.routes.draw do
     #    resources :users
     #end
 
-    get '/api/image/:token', to: 'api#image'
     post '/api/login/', to: 'api#login'
     post '/api/create/', to: 'api#create'
     post '/api/books/', to: 'api#register_books'
-    post '/api/register', to: 'api#register_image'
-    post '/api/image', to: 'api#get_image_path'
+	post '/api/register/', to: 'api#register_image'
+	post '/api/image/', to: 'api#image'
+	post '/api/image/path/', to: 'api#get_image_path'
+	post '/api/image/download/', to: 'api#download_image_all'
+	post '/api/image/download/id/', to: 'api#download_image_by_id'
+	post '/api/image/download/date/', to: 'api#download_image_by_date'
 
     #static_page
     get 'static_page/index'

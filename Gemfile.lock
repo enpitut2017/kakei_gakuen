@@ -308,6 +308,7 @@ GEM
     public_suffix (3.0.1)
     puma (3.10.0)
     rack (2.0.3)
+    rack-cors (1.0.2)
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rails (5.1.4)
@@ -411,6 +412,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
+    unf_ext (0.0.7.4-x64-mingw32)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -448,6 +450,7 @@ DEPENDENCIES
   omniauth
   omniauth-twitter
   puma (~> 3.7)
+  rack-cors
   rails (~> 5.1.2)
   rails-i18n
   rmagick

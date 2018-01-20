@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image, :get_image_path]
+    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
     after_action :destroy_image, only: [:image]
 
     require 'rmagick'
@@ -100,7 +100,9 @@ class ApiController < ApplicationController
         render :json => {'token' => 'register'}
     end
 
-    def image
+	def image
+		#ローカル環境のみ起動可能
+		#画像を合成して書き出す
         token= params[:token]
         @image = nil
         user = User.find_by(token: token)
@@ -125,7 +127,9 @@ class ApiController < ApplicationController
         send_data @image.to_blob, type: "image/png", disposition: 'inline'
     end
 
-    def get_image_path
+	def get_image_path
+		#現在の方法
+		#tokenをpostすると現在来ている服のパスが返ってくる
 
         token= params[:token]
         response = {'token' => 'error', 'path' => 0}
@@ -143,7 +147,82 @@ class ApiController < ApplicationController
         end
 
         render :json => response
-    end
+	end
+
+	def get_image_path_by_id
+		#あまり推奨しない方法
+	end
+	
+	def download_image_by_id
+		#画像ダウンロード設定1
+		#現在持っている服のidをpostすると持っていない服のidとurlの配列を返す
+
+		token = params[:token]
+		id = params[:id]
+
+		response = {'token' => 'error', 'id' => 0, 'path' => 0}
+		user = User.find_by(token: token)
+
+		if (user) then
+			clothes = Clothe.where(id: UserHasClothe.where(user_id: user.id).where.not(clothes_id: id).pluck(:clothes_id))
+			id = []
+			path = []
+			clothes.each do |clothe|
+				id.push(clothe.id)
+				path.push('https://' + clothe.image.url)
+			end
+			response = {'token' => user.token, 'id' => id, 'path' => path}
+		end
+
+		render :json => response
+	end
+
+	def download_image_by_date
+		#画像ダウンロード設定2
+		#最後に同期した日付をpostするとそれ以降に購入した服urlの配列と同期した日付を返す
+		#時間はサーバーに依存するため必ず受け取った時間を使うこと
+		#初回更新はdateを0で送る
+
+		token = params[:token]
+		date = params[:date]
+
+		response = {'token' => 'error', 'date' => 0, 'path' => 0}
+		user = User.find_by(token: token)
+
+		if (user) then
+			clothes = Clothe.where(id: UserHasClothe.where(user_id: user.id).where("updated_at > ?", date).pluck(:clothes_id))
+			path=[]
+            clothes.each do |clothe|
+                path.push('https://' + clothe.image.url)
+			end
+			response = {'token' => user.token, 'date' => Date.today, 'path' =>path}
+		end
+
+		render :json => response
+	end
+
+	def download_image_all
+		#postされたid以降の画像をすべてダウンロードする
+		#初回は0
+
+		id = params[:id]
+
+		response = {'id' => 0, 'path' => 0}
+
+		clothes = Clothe.where("id > ?", id)
+		if clothes.empty? then
+			response = {'id' => id, 'path' => 0}
+		else
+			path=[]
+			clothes.each do |clothe|
+				path.push('https://' + clothe.image.url)
+			end
+			id = clothes.last.id
+			response = {'id' => id, 'path' => path}
+		end
+
+		render :json => response
+	end
 
     private
 
