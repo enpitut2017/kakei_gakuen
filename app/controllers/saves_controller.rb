@@ -119,7 +119,7 @@ class SavesController < ApplicationController
 		if Rails.env == 'production'
 			authenticate_or_request_with_http_basic do |name, password|
 				name == ENV['YATTEIKI_USER'] && password == ENV['YATTEIKI_PASSWORD']
-			end	
+			end
 		end
    end
 end
