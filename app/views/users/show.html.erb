@@ -69,15 +69,17 @@
             <span class="noto-bold"><%= @user.coin %></span>
           </div>
           <%= link_to closets_path do %>
-            <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn"%>
+            <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn", :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => '着せかえ画面へ' %>
           <% end %>
           <% if session[:oauth_token] %>
             <a onclick="tweet_modal()">
+              <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" , :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'ツイートする'%>
+            </a>
           <% else %>
             <a onclick="tweet_oauth()">
+              <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" , :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'Twitter認証する'%>
+            </a>
           <% end %>
-            <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" %>
-          </a>
           <div id="Charactor-Img" class="Charactor-Img">
           <!-- レイヤ描画 -->
           <% @send_user_wearing_clothes.each do |key, val| %>
