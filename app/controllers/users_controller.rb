@@ -230,6 +230,9 @@ class UsersController < ApplicationController
     f = File.open("#{Rails.public_path}/serif.txt")
     array = f.readlines
     f.close
-    return array.sample.empty? ? '今日も1日がんばろう！' : array.sample
+
+    array.map! { |serif| serif.strip }
+    p array
+    return array.sample.blank? ? '今日も1日がんばろう！' : array.sample
   end
 end
