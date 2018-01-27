@@ -230,6 +230,6 @@ class UsersController < ApplicationController
     f = File.open("#{Rails.public_path}/serif.txt")
     array = f.readlines
     f.close
-    return array.sample ? array.sample : '今日も1日がんばろう！'
+    return array.sample.empty? ? '今日も1日がんばろう！' : array.sample
   end
 end
