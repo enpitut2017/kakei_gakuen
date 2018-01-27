@@ -232,7 +232,6 @@ class UsersController < ApplicationController
     f.close
 
     array.map! { |serif| serif.strip }
-    p array
     return array.sample.blank? ? '今日も1日がんばろう！' : array.sample
   end
 end
