@@ -1,13 +1,13 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
+    protect_from_forgery :except => [:book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
     after_action :destroy_image, only: [:image]
 
     require 'rmagick'
 
     def register_books
-        response = {'token' => 'error', 'budget' => 0}
+        response = {'token' => 'error', 'budget' => 0, 'rest' => 0}
         token = params[:token]
-        items = 'アプリから登録しました'
+        items = params[:item]
         costs = params[:costs]
         _times = Time.zone.now
 
@@ -44,7 +44,7 @@ class ApiController < ApplicationController
                     Book.import books
                 end
                     puts('success!! commit') # トランザクション処理を確定
-                    response = {'token' => user.token, 'budget' => rest_budget(user.id)}
+                    response = {'token' => user.token, 'budget' => user.budget, 'rest' => rest_budget(user.id)}
                 rescue => e
                     puts e # トランザクション処理を戻す
                 end
@@ -53,6 +53,24 @@ class ApiController < ApplicationController
         end
 
         render :json => response
+    end
+
+    def book_list
+      response = {'token' => 'error', 'list' => []}
+
+      token = params[:token]
+      user = User.find_by(token: token)
+      if !user
+        return render :json => response
+      end
+      now = Time.current
+      books = Book.where(user: user).order('time DESC').where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month)
+      ansbook =[]
+      books.each do |book|
+        ansbook.push(book)
+      end
+      response = {'token' => token, 'list' => ansbook}
+      return render :json => response
     end
 
     def create
@@ -75,7 +93,7 @@ class ApiController < ApplicationController
 
     def login
 
-        response = {'token' => 'error', 'budget' => 0}
+        response = {'token' => 'error', 'budget' => 0, 'rest' => 0}
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             if user.token.nil?
@@ -87,7 +105,7 @@ class ApiController < ApplicationController
 					return
 				end
             end
-            response = { 'token' => user.token, 'budget' => rest_budget(user.id)}
+            response = { 'token' => user.token, 'budget' => user.budget, 'rest' => rest_budget(user.id)}
         end
 
         render :json => response
@@ -152,7 +170,7 @@ class ApiController < ApplicationController
 	def get_image_path_by_id
 		#あまり推奨しない方法
 	end
-	
+
 	def download_image_by_id
 		#画像ダウンロード設定1
 		#現在持っている服のidをpostすると持っていない服のidとurlの配列を返す
@@ -224,6 +242,7 @@ class ApiController < ApplicationController
 		render :json => response
 	end
 
+
     private
 
     def initialize_clothes(user_id)
@@ -259,11 +278,12 @@ class ApiController < ApplicationController
     end
 
     def rest_budget(user_id)
+        now = Time.current
         rest = 0
         user = User.find(user_id)
         if user then
             lost = 0
-            books = Book.where(user: user)
+            books = Book.where(user: user).where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month).order('time DESC')
             books.each do |book|
                 lost += book.cost
             end
@@ -278,4 +298,6 @@ class ApiController < ApplicationController
         puts 'image destroy'
         end
     end
+
+
 end
