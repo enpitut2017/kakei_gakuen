@@ -41,7 +41,7 @@ function tweet_modal() {
     base64 = canvas.toDataURL('image/png');
 
     $('#Tweet-Modal .modal-body').children().remove();
-    $('#Tweet-Modal .modal-body').append('<textarea id="tweet-text" class="form-control" rows="3" maxlength="140">私のカケイちゃんです！ | おてがる、カンタン、家計簿アプリ #家計学園 https://kakeigakuen.xyz</textarea>');
+    $('#Tweet-Modal .modal-body').append('<textarea id="tweet-text" class="form-control" rows="3" maxlength="140">私のカケイちゃんです！ | キャラクターきせかえ家計簿アプリ #家計学園 https://kakeigakuen.xyz</textarea>');
     $('#Tweet-Modal .modal-body').append('<img src="'+ base64 +'" style="width:80%">');
     $('#Tweet-Modal').modal('show');
   });
