@@ -3,8 +3,8 @@
 /* Index */
 /* TopPic */
 #TopPic{
-  height: 600px;
-  background-image: image-url("top.png");
+  height: 530px;
+  background-image: image-url("top2.png");
   background-size: cover;
   background-position: center;
 
@@ -21,6 +21,60 @@
     right: 0;
   }
 }
+
+/* Sign in Links */
+#Links{
+  text-align: center;
+  color: $kakeiorange-light;
+  background-color: $kakeibrown-light;
+  //padding: 0 0 20px 0;
+  h2{
+    font-size: 30pt;
+  }
+  h3{
+    font-size: 22pt;
+    margin-bottom: 0px;
+  }
+  p{
+    font-size: 14pt;
+    margin-top: 0;
+  }
+  .btn{
+    width: 200px;
+    height: 60px;
+    font-size: 14pt;
+    line-height: 60px;
+  }
+}
+
+/* Features */
+#Features{
+  padding-top: 15px;
+  background-color: $white;
+  .box{
+    border: solid 1px $kakeigray-border;
+  }
+  h2{
+    color: $kakeired-dark;
+    font-size: 20pt;
+  }
+  .feature-text{
+    height: 60px;
+    vertical-align: bottom;
+  }
+}
+#Abouts{
+  .box{
+    padding: 0 30px 30px 30px;
+    text-align: left;
+  }
+  h3, h4{
+    color: $kakeiorange-light;
+  }
+}
+
+
+
 
 /* AppInfo */
 #AppInfo{
