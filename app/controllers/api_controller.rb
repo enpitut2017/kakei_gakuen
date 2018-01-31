@@ -5,7 +5,7 @@ class ApiController < ApplicationController
     require 'rmagick'
 
     def register_books
-        response = {'token' => 'error', 'budget' => 0}
+        response = {'token' => 'error', 'budget' => 0, 'rest' => 0}
         token = params[:token]
         items = 'アプリから登録しました'
         costs = params[:costs]
@@ -44,7 +44,7 @@ class ApiController < ApplicationController
                     Book.import books
                 end
                     puts('success!! commit') # トランザクション処理を確定
-                    response = {'token' => user.token, 'budget' => rest_budget(user.id)}
+                    response = {'token' => user.token, 'budget' => user.budget, 'rest' => rest_budget(user.id)}
                 rescue => e
                     puts e # トランザクション処理を戻す
                 end
@@ -75,7 +75,7 @@ class ApiController < ApplicationController
 
     def login
 
-        response = {'token' => 'error', 'budget' => 0}
+        response = {'token' => 'error', 'budget' => 0, 'rest' => 0}
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             if user.token.nil?
@@ -87,7 +87,7 @@ class ApiController < ApplicationController
 					return
 				end
             end
-            response = { 'token' => user.token, 'budget' => rest_budget(user.id)}
+            response = { 'token' => user.token, 'budget' => user.budget, 'rest' => rest_budget(user.id)}
         end
 
         render :json => response
@@ -259,11 +259,12 @@ class ApiController < ApplicationController
     end
 
     def rest_budget(user_id)
+        now = Time.current
         rest = 0
         user = User.find(user_id)
         if user then
             lost = 0
-            books = Book.where(user: user)
+            books = Book.where(user: user).where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month).order('time DESC')
             books.each do |book|
                 lost += book.cost
             end
