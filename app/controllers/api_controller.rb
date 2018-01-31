@@ -73,6 +73,21 @@ class ApiController < ApplicationController
       return render :json => response
     end
 
+    def status
+      response = {'token' => 'error', 'budget' => '0', 'rest' => '0'}
+      token = params[:token]
+      print token
+      user = User.find_by(token: token)
+      if !user
+        return render :json => response
+      end
+      budget = user.budget
+      rest = rest_budget(user.id)
+      response = {'token' => token, 'budget' => budget, 'rest' => rest}
+      return render :json => response
+    end
+
+
     def create
         response = {'token' => 'error', 'budget' => 0}
         user = User.new
