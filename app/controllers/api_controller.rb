@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
+    protect_from_forgery :except => [:book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
     after_action :destroy_image, only: [:image]
 
     require 'rmagick'
@@ -7,7 +7,7 @@ class ApiController < ApplicationController
     def register_books
         response = {'token' => 'error', 'budget' => 0}
         token = params[:token]
-        items = 'アプリから登録しました'
+        items = params[:item]
         costs = params[:costs]
         _times = Time.zone.now
 
@@ -53,6 +53,24 @@ class ApiController < ApplicationController
         end
 
         render :json => response
+    end
+
+    def book_list
+      response = {'token' => 'error', 'list' => []}
+
+      token = params[:token]
+      user = User.find_by(token: token)
+      if !user
+        return render :json => response
+      end
+      now = Time.current
+      books = Book.where(user: user).order('time DESC').where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month)
+      ansbook =[]
+      books.each do |book|
+        ansbook.push(book)
+      end
+      response = {'token' => token, 'list' => ansbook}
+      return render :json => response
     end
 
     def create
@@ -152,7 +170,7 @@ class ApiController < ApplicationController
 	def get_image_path_by_id
 		#あまり推奨しない方法
 	end
-	
+
 	def download_image_by_id
 		#画像ダウンロード設定1
 		#現在持っている服のidをpostすると持っていない服のidとurlの配列を返す
@@ -224,6 +242,7 @@ class ApiController < ApplicationController
 		render :json => response
 	end
 
+
     private
 
     def initialize_clothes(user_id)
@@ -278,4 +297,6 @@ class ApiController < ApplicationController
         puts 'image destroy'
         end
     end
+
+
 end
