@@ -78,6 +78,7 @@ Rails.application.routes.draw do
 	post '/api/image/download/id/', to: 'api#download_image_by_id'
 	post '/api/image/download/date/', to: 'api#download_image_by_date'
   post 'api/book_list', to: 'api#book_list'
+  post 'api/status', to: 'api#status'
 
     #static_page
     get 'static_page/index'
