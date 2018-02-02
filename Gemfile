@@ -50,6 +50,9 @@ gem 'omniauth-twitter'
 # cors
 gem 'rack-cors'
 
+# browser
+gem 'browser'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
