@@ -91,8 +91,12 @@
           <% @send_user_wearing_clothes.each do |key, val| %>
             <% val.each do |obj| %>
               <% unless obj.nil? %>
-                <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
+                <% if browser.device.mobile? %>
+                  <script>draw_image('<%= key %>', '<%= obj.image.thumb %>', <%= obj.priority %>, <%= obj.id %>);</script>
+                <% else %>
+                  <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
                 <% end %>
+              <% end%>
             <% end %>
           <% end %>
           </div>
