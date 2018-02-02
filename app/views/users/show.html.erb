@@ -71,14 +71,16 @@
           <%= link_to closets_path do %>
             <%= image_tag 'icons/toclosets.png', :height => 64, :width => 64, :alt => '衣装変更', :id => "Charactor-ToClosetsBtn", :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => '着せかえ画面へ' %>
           <% end %>
-          <% if session[:oauth_token] %>
-            <a onclick="tweet_modal()">
-              <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" , :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'ツイートする'%>
-            </a>
-          <% else %>
-            <a onclick="tweet_oauth()">
-              <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" , :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'Twitter認証する'%>
-            </a>
+          <% unless browser.device.mobile? %>
+            <% if session[:oauth_token] %>
+              <a onclick="tweet_modal()">
+                <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" , :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'ツイートする'%>
+              </a>
+            <% else %>
+              <a onclick="tweet_oauth()">
+                <%= image_tag 'icons/twitter-gray.png', :height => 64, :width => 64, :alt => 'Twitter共有', :id => "Charactor-ShareBtn" , :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'Twitter認証する'%>
+              </a>
+            <% end %>
           <% end %>
           <div id="Charactor-Img" class="Charactor-Img">
           <!-- レイヤ描画 -->
@@ -91,11 +93,7 @@
           <% @send_user_wearing_clothes.each do |key, val| %>
             <% val.each do |obj| %>
               <% unless obj.nil? %>
-                <% if browser.device.mobile? %>
-                  <script>draw_image('<%= key %>', '<%= obj.image.thumb %>', <%= obj.priority %>, <%= obj.id %>);</script>
-                <% else %>
-                  <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
-                <% end %>
+                <script>draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);</script>
               <% end%>
             <% end %>
           <% end %>
