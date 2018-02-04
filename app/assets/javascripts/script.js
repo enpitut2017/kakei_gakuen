@@ -1,23 +1,3 @@
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-var recognition = new SpeechRecognition();
-recognition.lang = 'ja';
-
-// 録音終了時トリガー
-recognition.addEventListener('result', function(event){
-    var text = event.results.item(0).item(0).transcript;
-    $("#result_text").val(text);
-}, false);
-
-recognition.onaudiostart = function() {
-  $('#rec_button').html('<span class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 録音中');
-  $('#rec_button').prop("disabled", true);
-}
-
-recognition.onaudioend = function() {
-  $('#rec_button').html('<span class="glyphicon glyphicon-record" aria-hidden="true" style="color: #92140C;"></span> 録音開始');
-  $('#rec_button').prop("disabled", false);
-}
-
 function parse_input() {
   str = $("#result_text").val();
 
@@ -72,18 +52,8 @@ function users_init() {
   });
 }
 
-/* 入力時のフォーマットがダメな時モーダルかなんかで警告する
-function format_check() {
-
-}*/
-
 function reset() {
   $('#result_text').val('');
-}
-
-// 録音開始
-function record() {
-    recognition.start();
 }
 
 function getDate() {
