@@ -172,7 +172,7 @@ class ApiController < ApplicationController
             clothes = Clothe.where(id: UserWearing::get_user_wearing_array(user.id)).order(:priority)
             path=[]
             clothes.each do |clothe|
-                path.push('https://' + clothe.image.url)
+                path.push(clothe.image.url)
             end
             if  ! path.empty?
                 response = { 'token' => user.token, 'path' => path}
