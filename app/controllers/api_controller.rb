@@ -76,7 +76,6 @@ class ApiController < ApplicationController
     def status
       response = {'token' => 'error', 'budget' => '0', 'rest' => '0'}
       token = params[:token]
-      print token
       user = User.find_by(token: token)
       if !user
         return render :json => response
@@ -261,8 +260,8 @@ class ApiController < ApplicationController
     private
 
     def initialize_clothes(user_id)
-		UserWearing::initialized_user_wearing(@user.id)
-        UserHasClothe::initialized_user_has_clothe(@user.id)
+		UserWearing::initialized_user_wearing(user_id)
+        UserHasClothe::initialized_user_has_clothe(user_id)
     end
 
     #経験値計算
