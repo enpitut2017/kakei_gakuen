@@ -240,11 +240,12 @@ class ApiController < ApplicationController
                 path.push(clothe.image.url)
             end
             if  ! path.empty?
+                response['message']['get_clothes'] = '服のパスを取得しました'
                 response['token'] = user.token
                 response['path'] = path
             end
         else
-            return :json => no_user(response)
+            return render :json => no_user(response)
         end
 
         render :json => response
