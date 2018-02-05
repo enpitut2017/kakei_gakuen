@@ -126,7 +126,11 @@ class ApiController < ApplicationController
       end
       budget = user.budget
       rest = rest_budget(user.id)
-      response = {'token' => token, 'budget' => budget, 'rest' => rest}
+
+      response['message']['get_user'] = 'ユーザーを取得しました'
+      response['token'] = user.token
+      response['budget'] = user.budget
+      response['rest'] = rest
       return render :json => response
     end
 
