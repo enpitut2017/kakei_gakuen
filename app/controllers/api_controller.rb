@@ -5,63 +5,104 @@ class ApiController < ApplicationController
     require 'rmagick'
 
     def register_books
-        response = {'token' => 'error', 'budget' => 0, 'rest' => 0}
+        response = initialize_response
         token = params[:token]
-        items = params[:item]
+        items = params[:items]
         costs = params[:costs]
         _times = Time.zone.now
 
-        if ! token.nil? && ! costs.nil?
+        user = User.find_by(token: token)
 
-			user = User.find_by(token: token)
+        if ! user then
+            return render :json => no_user(response)
+        end
 
-			if ! costs.kind_of?(Array)
-				costs = [costs]
-			end
+        #ユーザー情報のセット
+        response['token'] = user.token
+        response['budget'] = user.budget
+        response['rest'] = rest_budget(user.id)
 
-            if user && ! costs.empty? then
+        if items.nil? then
+            response['error'] = true
+            response['message']['no_item'] = '用途を入力してください'
+        end
 
-                begin
-                puts('books api start')
-                ActiveRecord::Base.transaction do
-                    books = [];
-                    #経験値の計算
+        if costs.nil? then
+            response['error'] = true
+            response['message']['no_cost'] = '値段を入力してください'
+        end
 
-                    puts('coin update start')
+        if ! items.kind_of?(Array)
+            items = [items]
+        end
 
-                    coin = user.coin + 2 #apiの場合、コインは2コインとする #culcurate_coin(_times, costs)
-                    user.update_attribute(:coin, coin)
+        if ! costs.kind_of?(Array)
+            costs = [costs]
+        end
 
-                    puts('coin update')
+        if items.size != costs.size then
+            response['error'] = true
+            response['message']['size_missmatch'] = '用途と値段は正しく入力してください'
+        end
 
-                    for i in 0..costs.size-1 do
-                        if costs[i].length >= 10 then
-                            next
-                        end
-                        books.push(Book.new(item: items, cost: costs[i], user: user, time: _times))
-                    end
-
-                    Book.import books
-                end
-                    puts('success!! commit') # トランザクション処理を確定
-                    response = {'token' => user.token, 'budget' => user.budget, 'rest' => rest_budget(user.id)}
-                rescue => e
-                    puts e # トランザクション処理を戻す
-                end
-
+        costs.each do |cost|
+            if cost !~ /\d+$/ then
+                response['error'] = true
+                response['message']['cost_no_intger'] = '値段は数値で入力してください'
+                break
             end
+        end
+
+        if response['error'] then
+            return render :json => response
+        end
+
+        begin
+        puts('books api start')
+        ActiveRecord::Base.transaction do
+            books = [];
+            #経験値の計算
+
+            puts('coin update start')
+
+            coin = user.coin + 2 #apiの場合、コインは2コインとする #culcurate_coin(_times, costs)
+            user.update_attribute(:coin, coin)
+
+            puts('coin update')
+
+            for i in 0..costs.size-1 do
+                if costs[i].length >= 10 then
+                    next
+                end
+                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: _times.strftime('%Y-%m-%d')))
+            end
+
+            Book.import books
+        end
+            puts('success!! commit') # トランザクション処理を確定
+            response['rest'] = rest_budget(user.id)
+            response['message']['book_register_success'] = '商品の登録に成功しました'
+        rescue => e
+            puts e # トランザクション処理を戻す
+            response['error'] = true
+            response['message']['system_error'] = e
         end
 
         render :json => response
     end
 
     def book_list
-      response = {'token' => 'error', 'list' => []}
+      response = {
+          'error' => false,
+          'message' => {},
+          'token' => '', 
+          'list' => []
+        }
 
       token = params[:token]
       user = User.find_by(token: token)
-      if !user
-        return render :json => response
+      if ! user
+        return render :json => no_user(response)
       end
       now = Time.current
       books = Book.where(user: user).order('time DESC').where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month)
@@ -69,16 +110,19 @@ class ApiController < ApplicationController
       books.each do |book|
         ansbook.push(book)
       end
-      response = {'token' => token, 'list' => ansbook}
+
+      response['token'] = user.token
+      response['message']['get_list_success'] = 'listを取得しました'
+      response['list'] = ansbook
       return render :json => response
     end
 
     def status
-      response = {'token' => 'error', 'budget' => '0', 'rest' => '0'}
+      response = initialize_response
       token = params[:token]
       user = User.find_by(token: token)
       if !user
-        return render :json => response
+        return render :json => no_user(response)
       end
       budget = user.budget
       rest = rest_budget(user.id)
@@ -88,7 +132,7 @@ class ApiController < ApplicationController
 
 
     def create
-        response = {'token' => 'error', 'budget' => 0}
+        response = initialize_response
         user = User.new
         user.name = params[:name]
         user.email = params[:email]
@@ -99,7 +143,12 @@ class ApiController < ApplicationController
         user.token = Digest::SHA1.hexdigest(params[:email].downcase)
         if user.save
             initialize_clothes(user.id)
-            response = {'token' => user.token, 'budget' => rest_budget(user.id)}
+            response['message'] = '新規作成しました'
+            response['token'] = user.token
+            response['budget'] = user.budget
+            response['rest'] = rest_budget(user.id)
+        else
+            response['message'] = user.errors
         end
 
         render :json => response
@@ -107,19 +156,27 @@ class ApiController < ApplicationController
 
     def login
 
-        response = {'token' => 'error', 'budget' => 0, 'rest' => 0}
+        response = initialize_response
         user = User.find_by(email: params[:email])
-        if user && user.authenticate(params[:password])
+        if user && user.authenticate(params[:password]) then
             if user.token.nil?
                 token = Digest::SHA1.hexdigest(params[:email].downcase)
                 if user.update(token: token, password: params[:password], password_confirmation: params[:password]) then
 					user.token = token
-				else
+                else
+                    response['error'] = true
+                    response['message']['system_error'] = 'システムにエラーが発生しました'
 					render :json => response
 					return
 				end
             end
-            response = { 'token' => user.token, 'budget' => user.budget, 'rest' => rest_budget(user.id)}
+            response['message']['login_success'] = 'ログインしました'
+            response['token'] = user.token
+            response['budget'] = user.budget
+            response['rest'] = rest_budget(user.id)
+        else
+            response['error'] = true
+            response['message']['login_fail'] = 'emailまたはパスワードが間違っています'
         end
 
         render :json => response
@@ -164,7 +221,12 @@ class ApiController < ApplicationController
 		#tokenをpostすると現在来ている服のパスが返ってくる
 
         token= params[:token]
-        response = {'token' => 'error', 'path' => 0}
+        response = {
+            'error' => false,
+            'message' => {},
+            'token' => '', 
+            'path' => [],
+        }
         user = User.find_by(token: token)
 
         if (user) then
@@ -174,8 +236,11 @@ class ApiController < ApplicationController
                 path.push(clothe.image.url)
             end
             if  ! path.empty?
-                response = { 'token' => user.token, 'path' => path}
+                response['token'] = user.token
+                response['path'] = path
             end
+        else
+            return :json => no_user(response)
         end
 
         render :json => response
@@ -313,5 +378,19 @@ class ApiController < ApplicationController
         end
     end
 
+    def initialize_response
+        return response = {
+            'error' => false,
+            'message' => {},
+            'token' => '', 
+            'budget' => 0, 
+            'rest' => 0
+        }
+    end
 
+    def no_user(response)
+        response['error'] = true
+        response['message']['no_user'] = 'ユーザーが存在しません'
+        return response
+    end
 end
