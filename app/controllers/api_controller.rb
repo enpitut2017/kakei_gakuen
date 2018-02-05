@@ -152,6 +152,7 @@ class ApiController < ApplicationController
             response['budget'] = user.budget
             response['rest'] = rest_budget(user.id)
         else
+            response['error'] = true
             response['message'] = user.errors
         end
 
