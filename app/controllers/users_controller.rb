@@ -21,9 +21,10 @@ class UsersController < ApplicationController
     books.each do |book|
       @lost += book.cost
     end
-    #@rest = @user.budget - @lost
-    @rest = inserted_cost(@user.budget - @lost)
-    @lost = inserted_cost(@lost)
+	#@rest = @user.budget - @lost
+	rest_tmp = rest_budget(@user.id)
+    @rest = inserted_cost(rest_tmp)
+    @lost = inserted_cost(@user.budget - rest_tmp)
     @budget = inserted_cost(@user.budget)
     @books = @user.books.order("time DESC")
     @new_book = Book.new
@@ -234,4 +235,19 @@ class UsersController < ApplicationController
     array.map! { |serif| serif.strip }
     return array.sample.blank? ? '今日も1日がんばろう！' : array.sample
   end
+
+  def rest_budget(user_id)
+	now = Time.current
+	rest = 0
+	user = User.find(user_id)
+	if user then
+		lost = 0
+		books = Book.where(user: user).where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month).order('time DESC')
+		books.each do |book|
+			lost += book.cost
+		end
+	end
+
+	return user.budget - lost
+end
 end
