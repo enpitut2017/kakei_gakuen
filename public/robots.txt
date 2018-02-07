@@ -5,6 +5,7 @@ User-agent: Googlebot
 User-agent: Googlebot-Image
 User-agent: bingbot
 User-agent: Yeti/1.0
+User-agent: Facebot
 
 User-agent: *
 Disallow: /
