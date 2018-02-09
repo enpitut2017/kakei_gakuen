@@ -23,6 +23,9 @@ AWS [![CircleCI](https://circleci.com/gh/enpitut2017/kakei_gakuen/tree/master.sv
 
 ### リリースノート
 
+**💪3.2.0**  
+トップページのデザインが大幅に変更されました。
+
 **💪3.1.0**  
 予算の表示が月ごとになりました。
 
