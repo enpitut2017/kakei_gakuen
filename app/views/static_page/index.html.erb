@@ -14,11 +14,11 @@
 				<h2>Web版を使ってみる</h2>
 				<%= link_to 'Sign up', signup_path, class: 'btn btn-danger' %>
 			</div>
-			<div class="col-sm-6 col-xs-12" style="padding-bottom:20px; background-color:#AEF9E9; filter: brightness(20%);">
+			<div class="col-sm-6 col-xs-12" style="padding-bottom:20px;">
 				<h3>スマートフォンアプリを使う</h3>
 				<p>(Web版でのアカウント登録が必要です)</p>
-				<%= image_tag("icons/google-play-badge.svg", :size=>"200x50") %>
-				<%= image_tag("icons/app-store-badge.svg", :size=>"200x50") %>
+				<%= link_to image_tag("icons/google-play-badge.svg", :size=>"200x50", :border => '0', :alt => 'android app',), 'https://play.google.com/store/apps/details?id=xyz.kakeigakuen.kakeityan_agent' %>
+				<!--<%= link_to image_tag("icons/app-store-badge.svg", :size=>"200x50", :border => '0', :alt => 'iOS app'), '' %>-->
 			</div>
 		</div>
 	</div>
