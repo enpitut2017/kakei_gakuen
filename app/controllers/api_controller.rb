@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
+    protect_from_forgery :except => [:budget_edit, :book_edit, :book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
     after_action :destroy_image, only: [:image]
 
     require 'rmagick'
@@ -117,6 +117,92 @@ class ApiController < ApplicationController
       return render :json => response
     end
 
+    def book_edit
+        response = {
+            'error' => false,
+            'message' => {},
+            'token' => '',
+            'list' => [],
+            'rest' => 0
+        }
+
+        token = params[:token]
+        user = User.find_by(token: token)
+        if ! user
+            return render :json => no_user(response)
+        end
+
+        id = params[:id]
+        if id.nil? then
+            response['error'] = true
+            response['message']['no_id'] = 'システムエラー(id null reference)'
+        end
+
+        cost = params[:cost]
+        if cost.nil? then
+            response['error'] = true
+            response['message']['no_cost'] = '値段を入力してください'
+        end
+
+        if cost !~ /\d+$/ then
+            response['error'] = true
+            response['message']['cost_no_intger'] = '値段は数値で入力してください'
+        end
+
+        item = params[:item]
+        if item.nil? then
+            response['error'] = true
+            response['message']['no_item'] = '用途を入力してください'
+        end
+
+        date = params[:date]
+        if date.nil? then
+            response['error'] = true
+            response['message']['no_date'] = '日付を入力してください'
+        end
+
+        book = Book.find(id)
+
+        if book.nil? then
+            response['error'] = true
+            response['message']['no_book'] = 'システムエラー(no_book)'
+        end
+
+        if response['error'] then
+            return render :json => response
+        end
+
+        date = Time.zone.parse(date)
+        now = Time.current
+        puts date.class
+
+        begin
+            ActiveRecord::Base.transaction do
+                book.update(item: item, cost: cost, time: date)
+                #response['message']['update_success'] = '更新しました'
+            end
+        rescue => e
+            puts e # トランザクション処理を戻す
+            response['error'] = true
+            response['message']['system_error'] = e
+        end
+
+        rest = rest_budget(user.id)
+        books = Book.where(user: user).order('time DESC').where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month)
+        ansbook =[]
+        books.each do |book|
+            ansbook.push(book)
+        end
+
+    
+        response['token'] = user.token
+        response['budget'] = user.budget
+        response['rest'] = rest
+        response['list'] = ansbook
+
+        return render :json => response
+    end
+
     def status
       response = initialize_response
       token = params[:token]
@@ -185,6 +271,44 @@ class ApiController < ApplicationController
         end
 
         render :json => response
+    end
+
+    def budget_edit
+        response = initialize_response
+
+        token = params[:token]
+        user = User.find_by(token: token)
+        if ! user
+            return render :json => no_user(response)
+        end
+
+        budget = params[:budget]
+        if budget.nil?
+            response['error'] = true
+            response['message']['budget'] = '予算を入力してください'
+        end
+
+        if budget !~ /\d+$/ then
+            response['error'] = true
+            response['message']['budget_no_intger'] = '予算は数値で入力してください'
+        end
+
+        if response['error'] then
+            return render :json => response
+        end
+
+        if user.update_attribute(:budget, budget) then
+            response['message']['update_success'] = '更新に成功しました'
+        else
+            response['error'] = true
+            response['message']['update_error'] = '更新に失敗しました'
+        end
+
+        response['token'] = user.token
+        response['budget'] = user.budget
+        response['rest'] = rest_budget(user.id)
+
+        return render :json => response
     end
 
     def register_image
