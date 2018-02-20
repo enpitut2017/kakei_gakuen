@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>それいけ！カケイちゃん</title>
+    <%= csrf_meta_tags %>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="キャラクターきせかえ家計簿アプリ「家計学園」" />
+
+    <meta property="og:url"         　content="https://kakeigakuen.xyz/" />
+    <meta property="og:title"       　content="キャラクターきせかえ家計簿アプリ「家計学園」" />
+    <meta property="og:type"        　content="website" />
+    <meta property="og:description" 　content="家計簿アプリ「家計学園」のページです。音声認識とキャラクターきせかえ機能でラクラク入力！便利なスマホアプリもリリース予定！" />
+    <meta property="og:image"       　content="https://kakeigakuen.xyz/ogcimage.png" />
+    <meta property="og:site_name"   　content="キャラクターきせかえ家計簿アプリ「家計学園」" />
+    <meta property="og:locale"      　content="ja_JP" />
+    <meta property="fb:app_id"      　content="2097928073773827" />
+
+    <meta name="twitter:card"         content="summary" />
+    <meta name="twitter:site"         content="@kakeigakuen" />
+    <meta name="twitter:title"        content="キャラクターきせかえ家計簿アプリ「家計学園」" />
+    <meta name="twitter:description"  content="家計簿アプリ「家計学園」のページです。音声認識とキャラクターきせかえ機能でラクラク入力！便利なスマホアプリもリリース予定！" />
+    <meta name="twitter:image"        content="https://kakeigakuen.xyz/ogcimage.png" />
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
+    <%= favicon_link_tag('favicon.png') %>
+  </head>
+  <body id="comics">
+    <%= render 'layouts/header' %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

@@ -86,6 +86,10 @@ Rails.application.routes.draw do
     get 'static_page/index'
     get '/index.html', to:'static_page#index'
 
+    #comics
+    get '/comics',     to:'comics#index'
+    get '/comics/:id', to:'comics#episode'
+
     # twitter oauth
     get '/auth/:provider/callback', to: 'users#callback'
     post '/auth/:provider/callback', to: 'users#callback'
