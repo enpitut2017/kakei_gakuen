@@ -9,6 +9,7 @@ class ApiController < ApplicationController
         token = params[:token]
         items = params[:items]
         costs = params[:costs]
+        date = params[:date]
         _times = Time.zone.now
 
         user = User.find_by(token: token)
@@ -30,6 +31,10 @@ class ApiController < ApplicationController
         if costs.nil? then
             response['error'] = true
             response['message']['no_cost'] = '値段を入力してください'
+        end
+
+        if date.nil? then
+            date = _times.strftime('%Y-%m-%d')
         end
 
         if ! items.kind_of?(Array)
@@ -74,7 +79,7 @@ class ApiController < ApplicationController
                 if costs[i].length >= 10 then
                     next
                 end
-                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: _times.strftime('%Y-%m-%d')))
+                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: date))
             end
 
             Book.import books
@@ -179,7 +184,7 @@ class ApiController < ApplicationController
         begin
             ActiveRecord::Base.transaction do
                 book.update(item: item, cost: cost, time: date)
-                #response['message']['update_success'] = '更新しました'
+                response['message']['update_success'] = '更新しました'
             end
         rescue => e
             puts e # トランザクション処理を戻す
