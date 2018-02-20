@@ -123,35 +123,35 @@ class BooksController < ApplicationController
       redirect_to user_path(current_user) unless @user == current_user
     end
 
-    #経験値計算
+    #経験値(KC)計算
     def culcurate_coin(items, costs)
-        defalt_coin = 10
+        default_coin = 10
         times = Array.new
         d = Time.parse(Date.today.strftime("%Y-%m-%d")).to_i
         items.each do |item|
             times.push(((d-Time.parse(item).to_i)/100)/864)
         end
+
         times.each do |time|
           if time < 0 then
             return 0
           else
-            defalt_coin -= time
+            default_coin -= time
           end
         end
-        if defalt_coin < 1 then
-            defalt_coin = 1
+        
+        if default_coin < 1 then
+            default_coin = 1
         end
 
         costs.length.times do |i|
-            if costs[i].length < 10 then
-                break
-            end
-            if i == costs.length - 1 then
-                defalt_coin = 0
-            end
+          if costs[i].length >= 10 then
+            default_coin = 0
+            break
+          end
         end
 
-        return defalt_coin
+        return default_coin
     end
 
 end
