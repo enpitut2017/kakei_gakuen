@@ -222,6 +222,58 @@ class ApiController < ApplicationController
         return render :json => response
     end
 
+    def book_delete
+        response = {
+            'error' => false,
+            'message' => {},
+            'token' => '',
+            'list' => [],
+            'rest' => 0
+        }
+
+        now = Time.zone.now
+
+        token = params[:token]
+        user = User.find_by(token: token)
+        if ! user
+            return render :json => no_user(response)
+        end
+
+        response['token'] = token
+
+        id = params[:id]
+        if id.nil? then
+            response['error'] = true
+            response['message']['no_id'] = 'システムエラー(no_id)'
+        end
+
+        book = user.books.find(id)
+        if book.nil? then
+            response['error'] = true
+            response['message']['no_book'] = 'システムエラー(no_book)'
+        end
+
+        if ! response['error'] then
+            if ! book.destroy then
+                response['error'] = true
+                response['message']['delete_error'] = '削除に失敗しました'
+            end
+        end
+
+        rest = rest_budget(user.id)
+        books = Book.where(user: user).order('time DESC').where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month)
+        ansbook =[]
+        books.each do |book|
+            ansbook.push(book)
+        end
+
+        response['budget'] = user.budget
+        response['rest'] = rest
+        response['list'] = ansbook
+
+        render :json => response
+    end
+
     def status
       response = initialize_response
       token = params[:token]
