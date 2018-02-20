@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:budget_edit, :book_edit, :book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
+    protect_from_forgery :except => [:book_delete, :budget_edit, :book_edit, :book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
     after_action :destroy_image, only: [:image]
 
     require 'rmagick'
@@ -290,7 +290,6 @@ class ApiController < ApplicationController
       response['rest'] = rest
       return render :json => response
     end
-
 
     def create
         response = initialize_response
