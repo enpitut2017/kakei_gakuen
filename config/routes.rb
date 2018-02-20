@@ -80,6 +80,7 @@ Rails.application.routes.draw do
 	post '/api/image/download/date/', to: 'api#download_image_by_date'
     post 'api/book_list', to: 'api#book_list'
     post 'api/book_edit', to: 'api#book_edit'
+    post 'api/book_delete', to: 'api#book_delete'
     post 'api/status', to: 'api#status'
 
     #static_page
