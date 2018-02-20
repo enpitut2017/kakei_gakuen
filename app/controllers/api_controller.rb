@@ -9,7 +9,7 @@ class ApiController < ApplicationController
         token = params[:token]
         items = params[:items]
         costs = params[:costs]
-        date = params[:date]
+        dates = params[:dates]
         _times = Time.zone.now
 
         user = User.find_by(token: token)
@@ -33,8 +33,11 @@ class ApiController < ApplicationController
             response['message']['no_cost'] = '値段を入力してください'
         end
 
-        if date.nil? then
-            date = _times.strftime('%Y-%m-%d')
+        if dates.nil? then
+            dates = []
+            for i in 0..costs.size-1 do
+                dates.push(_times.strftime('%Y-%m-%d'))
+            end
         end
 
         if ! items.kind_of?(Array)
@@ -43,6 +46,17 @@ class ApiController < ApplicationController
 
         if ! costs.kind_of?(Array)
             costs = [costs]
+        end
+
+        if  ! dates.kind_of?(Array)
+            dates = [Date.strptime(dates, '%Y-%m-%d')]
+        else
+            temp_date = []
+            dates.each do |date|
+                puts date
+                temp_date.push(Date.strptime(date, '%Y-%m-%d'))
+            end
+            dates = temp_date
         end
 
         if items.size != costs.size then
@@ -79,7 +93,7 @@ class ApiController < ApplicationController
                 if costs[i].length >= 10 then
                     next
                 end
-                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: date))
+                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: dates[i]))
             end
 
             Book.import books
