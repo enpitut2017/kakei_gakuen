@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $('.image_slider').slick({
+    slidesToShow: 3
   });
 });
 
