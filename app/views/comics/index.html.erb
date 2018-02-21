@@ -1,0 +1,20 @@
+<div class="container">
+  <%= image_tag 'comic-rogo.png', :class => 'img-responsive' %>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 episode-bunner-box">
+      <div class="episode-bunner">
+        <%= link_to "第1話", {:controller => "comics", :action => "episode", :id => 1}%>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 episode-bunner-box">
+      <div class="episode-bunner">
+        <%= link_to "第2話", {:controller => "comics", :action => "episode", :id => 2}%>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 episode-bunner-box">
+      <div class="episode-bunner">
+        <%= link_to "第3話", {:controller => "comics", :action => "episode", :id => 3}%>
+      </div>
+    </div>
+  </div>
+</div>

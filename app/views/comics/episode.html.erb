@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= link_to image_tag('comic-rogo.png', :class => 'img-responsive'), comics_path %>
+    </div>
+  </div>
+
+  <% this = @episode.to_i %>
+
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <% episode = "ep#{this}.png" %>
+      <%= image_tag episode, :class => 'img-responsive center-block comic' %>
+    </div>
+  </div>
+
+  <div class="row row-eq-height" style="margin-bottom:30px;">
+    <div class="col-xs-6">
+      <% if this > 1 %>
+        <%= link_to "#{this-1}" do %>
+        <div class="next-comic">
+          < 前の話
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-6">
+      <% if File.exist? "#{Rails.root}/app/assets/images/ep#{this+1}.png" %>
+        <%= link_to "#{this+1}" do %>
+        <div class="next-comic">
+          次の話 >
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -24,9 +24,19 @@
 	</div>
 </div>
 
+<div id="Slider">
+	<div class="container">
+		<div class="image_slider">
+			<%= image_tag("slider1.png", class:"img-responsive")%>
+			<%= image_tag("slider2.png", class:"img-responsive")%>
+			<%= image_tag("slider3.png", class:"img-responsive")%>
+		</div>
+	</div>
+</div>
+
 <div id="Features">
 	<div class="container">
-		<div class="row">
+		<div class="row row-eq-height">
 			<div id="Feature1" class="col-sm-6 col-xs-12">
 				<div class="box">
 					<div class="feature-text">
@@ -73,6 +83,16 @@
 						<span>家計学園のイメージキャラクターです。</span>
 						<span>自由に着せ替えて遊んでね！</span>
 					</p>
+				</div>
+			</div>
+
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="youtube">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/KdNDeTmx07s?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					</div>
+
+					<%= link_to image_tag('bunner.png', :class => 'img-responsive center-block'), comics_path %>
 				</div>
 			</div>
 		</div>
