@@ -1,3 +1,8 @@
+$(document).on('turbolinks:load', function() {
+  $('.image_slider').slick({
+  });
+});
+
 function parse_input() {
   str = $("#result_text").val();
 
