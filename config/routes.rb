@@ -70,6 +70,7 @@ Rails.application.routes.draw do
 
     post '/api/login/', to: 'api#login'
     post '/api/create/', to: 'api#create'
+    post '/api/budget_edit', to: 'api#budget_edit'
     post '/api/books/', to: 'api#register_books'
 	post '/api/register/', to: 'api#register_image'
 	post '/api/image/', to: 'api#image'
@@ -77,12 +78,18 @@ Rails.application.routes.draw do
 	post '/api/image/download/', to: 'api#download_image_all'
 	post '/api/image/download/id/', to: 'api#download_image_by_id'
 	post '/api/image/download/date/', to: 'api#download_image_by_date'
-  post 'api/book_list', to: 'api#book_list'
-  post 'api/status', to: 'api#status'
+    post 'api/book_list', to: 'api#book_list'
+    post 'api/book_edit', to: 'api#book_edit'
+    post 'api/book_delete', to: 'api#book_delete'
+    post 'api/status', to: 'api#status'
 
     #static_page
     get 'static_page/index'
     get '/index.html', to:'static_page#index'
+
+    #comics
+    get '/comics',     to:'comics#index'
+    get '/comics/:id', to:'comics#episode'
 
     # twitter oauth
     get '/auth/:provider/callback', to: 'users#callback'

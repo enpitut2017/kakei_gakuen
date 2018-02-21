@@ -1,0 +1,40 @@
+// Place all the styles related to the comics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#comics{
+  background-image: image-url("wallpaper.png");
+}
+.episode-bunner-box{
+  padding: 5px;
+}
+.episode-bunner{
+  height: 100px;
+  background-color: rgba(0,0,0,0.5);
+  text-align: center;
+  font-size: 30pt;
+  line-height: 95px;
+  :hover{
+    opacity: 0.7;
+  }
+  a{
+    color: $white
+  }
+}
+.row-eq-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+.comic{
+  margin: 20px 0;
+}
+.next-comic{
+  height: 100%;
+  text-align: center;
+  font-size: 15pt;
+  color: $white;
+  background-color: rgba(0,0,0,0.5);
+  :hover{
+    opacity: 0.7;
+  }
+}

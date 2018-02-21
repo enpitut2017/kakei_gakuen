@@ -14,19 +14,29 @@
 				<h2>Web版を使ってみる</h2>
 				<%= link_to 'Sign up', signup_path, class: 'btn btn-danger' %>
 			</div>
-			<div class="col-sm-6 col-xs-12" style="padding-bottom:20px; background-color:#AEF9E9; filter: brightness(20%);">
+			<div class="col-sm-6 col-xs-12" style="padding-bottom:20px;">
 				<h3>スマートフォンアプリを使う</h3>
 				<p>(Web版でのアカウント登録が必要です)</p>
-				<%= image_tag("icons/google-play-badge.svg", :size=>"200x50") %>
-				<%= image_tag("icons/app-store-badge.svg", :size=>"200x50") %>
+				<%= link_to image_tag("icons/google-play-badge.svg", :size=>"200x50", :border => '0', :alt => 'android app',), 'https://play.google.com/store/apps/details?id=xyz.kakeigakuen.kakeityan_agent' %>
+				<!--<%= link_to image_tag("icons/app-store-badge.svg", :size=>"200x50", :border => '0', :alt => 'iOS app'), '' %>-->
 			</div>
+		</div>
+	</div>
+</div>
+
+<div id="Slider">
+	<div class="container">
+		<div class="image_slider">
+			<%= image_tag("slider1.png", class:"img-responsive")%>
+			<%= image_tag("slider2.png", class:"img-responsive")%>
+			<%= image_tag("slider3.png", class:"img-responsive")%>
 		</div>
 	</div>
 </div>
 
 <div id="Features">
 	<div class="container">
-		<div class="row">
+		<div class="row row-eq-height">
 			<div id="Feature1" class="col-sm-6 col-xs-12">
 				<div class="box">
 					<div class="feature-text">
@@ -73,6 +83,16 @@
 						<span>家計学園のイメージキャラクターです。</span>
 						<span>自由に着せ替えて遊んでね！</span>
 					</p>
+				</div>
+			</div>
+
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="youtube">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/KdNDeTmx07s?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					</div>
+
+					<%= link_to image_tag('bunner.png', :class => 'img-responsive center-block'), 'comics/1' %>
 				</div>
 			</div>
 		</div>
