@@ -5,19 +5,6 @@
 	</div>
 </div>
 
-<div id="Slider">
-	<div class="container">
-		<div class="image_slider">
-			<%= image_tag("slider1.png", class:"img-responsive")%>
-			<%= image_tag("slider2.png", class:"img-responsive")%>
-			<%= image_tag("slider3.png", class:"img-responsive")%>
-			<%= image_tag("slider4.png", class:"img-responsive")%>
-			<%= image_tag("slider5.png", class:"img-responsive")%>
-			<%= image_tag("slider6.png", class:"img-responsive")%>
-		</div>
-	</div>
-</div>
-
 <!-- Sign in Links-->
 <div id="Links">
 	<div class="container">
@@ -33,6 +20,19 @@
 				<%= link_to image_tag("icons/google-play-badge.svg", :size=>"200x50", :border => '0', :alt => 'android app',), 'https://play.google.com/store/apps/details?id=xyz.kakeigakuen.kakeityan_agent' %>
 				<!--<%= link_to image_tag("icons/app-store-badge.svg", :size=>"200x50", :border => '0', :alt => 'iOS app'), '' %>-->
 			</div>
+		</div>
+	</div>
+</div>
+
+<div id="Slider">
+	<div class="container">
+		<div class="image_slider">
+			<%= image_tag("slider1.png", class:"img-responsive")%>
+			<%= image_tag("slider2.png", class:"img-responsive")%>
+			<%= image_tag("slider3.png", class:"img-responsive")%>
+			<%= image_tag("slider4.png", class:"img-responsive")%>
+			<%= image_tag("slider5.png", class:"img-responsive")%>
+			<%= image_tag("slider6.png", class:"img-responsive")%>
 		</div>
 	</div>
 </div>
@@ -96,7 +96,7 @@
 					</div>
 				</div>
 				<div class="box">
-					<%= link_to image_tag('bunner.png', :class => 'img-responsive center-block'), comics_path %>
+					<%= link_to image_tag('bunner.png', :class => 'img-responsive center-block comics-bunner'), comics_path %>
 				</div>
 			</div>
 		</div>

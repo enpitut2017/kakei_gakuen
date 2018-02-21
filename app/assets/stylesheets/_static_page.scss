@@ -27,10 +27,11 @@
 /* Sign in Links */
 #Links{
   text-align: center;
-  color: $white;
-  background-color: $kakeigray-dark;
-  //background-color: $kakeibrown-light;
-  //padding: 0 0 20px 0;
+  //color: $white;
+  //background-color: $kakeigray-dark;
+  color: $kakeiorange-light;
+  background-color: $kakeibrown-light;
+  padding: 0 0 20px 0;
   h1{
     color: $kakeired-dark;
     font-size: 14pt;
@@ -57,8 +58,8 @@
 }
 
 #Slider{
-  height: 80%;
-  background-color: $kakeigray-light;
+  height: 60%;
+  background-color: $white;
 }
 
 /* Features */
@@ -88,17 +89,27 @@
   }
 }
 
+.slick-prev:before{
+  color: $kakeigray-dark !important;
+}
+.slick-next:before{
+  color: $kakeigray-dark !important;
+}
 .youtube {
   position: relative;
   width: 100%;
   padding-top: 56.25%;
+  margin-bottom: -15px;
 }
 .youtube iframe {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100% !important;
-    height: 100% !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.comics-bunner{
+  margin-bottom: -15px;
 }
 
 /* AppInfo */
