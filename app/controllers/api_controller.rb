@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-    protect_from_forgery :except => [:budget_edit, :book_edit, :book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
+    protect_from_forgery :except => [:book_delete, :budget_edit, :book_edit, :book_list, :create, :login, :image, :register_books, :register_image, :get_image_path, :download_image_by_id, :download_image_by_date, :download_image_all]
     after_action :destroy_image, only: [:image]
 
     require 'rmagick'
@@ -9,7 +9,7 @@ class ApiController < ApplicationController
         token = params[:token]
         items = params[:items]
         costs = params[:costs]
-        date = params[:date]
+        dates = params[:dates]
         _times = Time.zone.now
 
         user = User.find_by(token: token)
@@ -33,8 +33,11 @@ class ApiController < ApplicationController
             response['message']['no_cost'] = '値段を入力してください'
         end
 
-        if date.nil? then
-            date = _times.strftime('%Y-%m-%d')
+        if dates.nil? then
+            dates = []
+            for i in 0..costs.size-1 do
+                dates.push(_times.strftime('%Y-%m-%d'))
+            end
         end
 
         if ! items.kind_of?(Array)
@@ -43,6 +46,17 @@ class ApiController < ApplicationController
 
         if ! costs.kind_of?(Array)
             costs = [costs]
+        end
+
+        if  ! dates.kind_of?(Array)
+            dates = [Date.strptime(dates, '%Y-%m-%d')]
+        else
+            temp_date = []
+            dates.each do |date|
+                puts date
+                temp_date.push(Date.strptime(date, '%Y-%m-%d'))
+            end
+            dates = temp_date
         end
 
         if items.size != costs.size then
@@ -79,7 +93,7 @@ class ApiController < ApplicationController
                 if costs[i].length >= 10 then
                     next
                 end
-                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: date))
+                books.push(Book.new(item: items[i], cost: costs[i], user: user, time: dates[i]))
             end
 
             Book.import books
@@ -208,6 +222,58 @@ class ApiController < ApplicationController
         return render :json => response
     end
 
+    def book_delete
+        response = {
+            'error' => false,
+            'message' => {},
+            'token' => '',
+            'list' => [],
+            'rest' => 0
+        }
+
+        now = Time.zone.now
+
+        token = params[:token]
+        user = User.find_by(token: token)
+        if ! user
+            return render :json => no_user(response)
+        end
+
+        response['token'] = token
+
+        id = params[:id]
+        if id.nil? then
+            response['error'] = true
+            response['message']['no_id'] = 'システムエラー(no_id)'
+        end
+
+        book = user.books.find(id)
+        if book.nil? then
+            response['error'] = true
+            response['message']['no_book'] = 'システムエラー(no_book)'
+        end
+
+        if ! response['error'] then
+            if ! book.destroy then
+                response['error'] = true
+                response['message']['delete_error'] = '削除に失敗しました'
+            end
+        end
+
+        rest = rest_budget(user.id)
+        books = Book.where(user: user).order('time DESC').where("time > ?", now.beginning_of_month).where("time < ?", now.end_of_month)
+        ansbook =[]
+        books.each do |book|
+            ansbook.push(book)
+        end
+
+        response['budget'] = user.budget
+        response['rest'] = rest
+        response['list'] = ansbook
+
+        render :json => response
+    end
+
     def status
       response = initialize_response
       token = params[:token]
@@ -224,7 +290,6 @@ class ApiController < ApplicationController
       response['rest'] = rest
       return render :json => response
     end
-
 
     def create
         response = initialize_response
