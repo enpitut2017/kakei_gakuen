@@ -5,6 +5,19 @@
 	</div>
 </div>
 
+<div id="Slider">
+	<div class="container">
+		<div class="image_slider">
+			<%= image_tag("slider1.png", class:"img-responsive")%>
+			<%= image_tag("slider2.png", class:"img-responsive")%>
+			<%= image_tag("slider3.png", class:"img-responsive")%>
+			<%= image_tag("slider4.png", class:"img-responsive")%>
+			<%= image_tag("slider5.png", class:"img-responsive")%>
+			<%= image_tag("slider6.png", class:"img-responsive")%>
+		</div>
+	</div>
+</div>
+
 <!-- Sign in Links-->
 <div id="Links">
 	<div class="container">
@@ -20,16 +33,6 @@
 				<%= link_to image_tag("icons/google-play-badge.svg", :size=>"200x50", :border => '0', :alt => 'android app',), 'https://play.google.com/store/apps/details?id=xyz.kakeigakuen.kakeityan_agent' %>
 				<!--<%= link_to image_tag("icons/app-store-badge.svg", :size=>"200x50", :border => '0', :alt => 'iOS app'), '' %>-->
 			</div>
-		</div>
-	</div>
-</div>
-
-<div id="Slider">
-	<div class="container">
-		<div class="image_slider">
-			<%= image_tag("slider1.png", class:"img-responsive")%>
-			<%= image_tag("slider2.png", class:"img-responsive")%>
-			<%= image_tag("slider3.png", class:"img-responsive")%>
 		</div>
 	</div>
 </div>
@@ -89,9 +92,10 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="youtube">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/KdNDeTmx07s?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/KdNDeTmx07s?rel=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 					</div>
-
+				</div>
+				<div class="box">
 					<%= link_to image_tag('bunner.png', :class => 'img-responsive center-block'), comics_path %>
 				</div>
 			</div>
