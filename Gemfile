@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 
@@ -31,13 +30,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
+gem 'bcrypt-ruby', '3.1.1.rc1', require: 'bcrypt'
 # Use activerecord method import
 gem 'activerecord-import'
 # Use kaminaei pagenation
 gem 'kaminari'
 gem 'rails-i18n'
-#http connection
+# http connection
 gem 'httpclient'
 # image_upload
 gem 'fog', '1.36.0'
@@ -52,6 +51,9 @@ gem 'rack-cors'
 
 # browser
 gem 'browser'
+
+# Google Analytics
+gem 'google-analytics-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

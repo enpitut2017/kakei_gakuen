@@ -227,6 +227,7 @@ GEM
     formtastic_i18n (0.6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    google-analytics-rails (1.1.1)
     has_scope (0.7.1)
       actionpack (>= 4.1, < 5.2)
       activesupport (>= 4.1, < 5.2)
@@ -442,6 +443,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   fog (= 1.36.0)
+  google-analytics-rails
   httpclient
   inherited_resources!
   jbuilder (~> 2.5)
