@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="キャラクターきせかえ家計簿アプリ「家計学園」" />
 
+	<meta name="google-site-verification" content="wE1Zh57fH_QBe_Ojwdyo1W0uyNlcSIDhR8I0MipGMX4" />
+
     <meta property="og:url"         　content="https://kakeigakuen.xyz/" />
     <meta property="og:title"       　content="キャラクターきせかえ家計簿アプリ「家計学園」" />
     <meta property="og:type"        　content="website" />
@@ -31,6 +33,13 @@
     <%= favicon_link_tag('favicon.png') %>
 
     <%= analytics_init if Rails.env.production? %>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-2938171672494404",
+        enable_page_level_ads: true
+      });
+    </script>
   </head>
   <body>
     <%= render 'layouts/header' %>
@@ -43,6 +52,11 @@
 <% end %>
     <div id="Contents">
       <%= yield %>
+    </div>
+    <div class="text-center">
+      <!-- admax -->
+      <script src="//adm.shinobi.jp/o/75faea35dab0bc9e0c61c75bd1a73f4f"></script>
+      <!-- admax -->
     </div>
     <%= render 'layouts/footer' %>
   </body>
