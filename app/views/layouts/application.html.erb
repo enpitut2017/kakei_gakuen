@@ -55,7 +55,11 @@
     </div>
     <div class="text-center">
       <!-- admax -->
-      <script src="//adm.shinobi.jp/o/75faea35dab0bc9e0c61c75bd1a73f4f"></script>
+      <script>
+        $(document).on("turbolinks:load", function() {
+          $.getScript("//adm.shinobi.jp/o/75faea35dab0bc9e0c61c75bd1a73f4f");
+        });
+      </script>
       <!-- admax -->
     </div>
     <%= render 'layouts/footer' %>
