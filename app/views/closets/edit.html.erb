@@ -9,12 +9,12 @@
         <div class="col-md-6 col-sm-12">
         <%# 持ってるかどうか判定 %>
         <% if @user_has_clothes[obj.id] == true %>
-            <div class="ItemBox" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
+            <div class="ItemBox" title="<%= obj.name %>" data-toggle="tooltip" data-placement="bottom" onclick="draw_image('<%= key %>', '<%= obj.image %>', <%= obj.priority %>, <%= obj.id %>);">
             <div class="ItemImg" style='background-image: url("<%= obj.image %>")'></div>
           </div>
         <% else %>
           <!--ここに買っていない画像描画を挟む-->
-          <div class="ItemBox" onclick='confirm_clothes_purchase("<%= obj.name %>",<%= @user.coin %>,<%= obj.price %>,<%= obj.id %>,<%= @user.id %>)'>
+          <div class="ItemBox" title="<%= obj.name %>" data-toggle="tooltip" data-placement="bottom" onclick='confirm_clothes_purchase("<%= obj.name %>",<%= @user.coin %>,<%= obj.price %>,<%= obj.id %>,<%= @user.id %>)'>
             <div class="ItemImg" style='background-image: url("<%= obj.image %>")'>
               <div class="ItemDark"></div>
             </div>
@@ -31,7 +31,7 @@
     <div id="ClosetsCharactor" class="col-xs-8" style="background-image:url(<%= asset_path 'closet-img.jpg' %>);">
     <!-- 決定ボタン -->
       <div onclick="post_json('<%= user_path(current_user.id) %>');">
-        <%= image_tag 'icons/totop.png', :height => 64, :width => 64, :alt => 'トップへ戻る', :id => "ClosetsToTopBtn" %>
+        <%= image_tag 'icons/totop.png', :height => 64, :width => 64, :alt => 'ホームへ戻る', :id => "ClosetsToTopBtn", :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => 'ホームへ戻る' %>
       </div>
     <!-- レイヤ描画 -->
       <% @send_clothes.each do |key, val| %>
@@ -67,7 +67,7 @@
             <% hash[obj.id]['user_id'] = @user.id %>
           <% end %>
         <% end %>
-        <div id="<%= key %>-group" class="GroupBox" data-hoge="<%= hash.to_json %>" onclick="switch_items('<%= key %>');">
+        <div id="<%= key %>-group" class="GroupBox" data-item="<%= hash.to_json %>" onclick="switch_items('<%= key %>');">
           <%= image_tag @tags[key].image.to_s, :height => 64, :width => 64 %>
         </div>
       <% end %>

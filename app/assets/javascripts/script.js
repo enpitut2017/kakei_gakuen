@@ -145,9 +145,11 @@ function buy_clothes(bookid, userid){
   });
 }
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+$(document).on("turbolinks:load", function() {
+  $('body').tooltip({
+    selector: '[data-toggle="tooltip"]'
+  });
+});
 
 function escape_html(string) {
   if(typeof string !== 'string') {
