@@ -33,6 +33,13 @@
     <%= favicon_link_tag('favicon.png') %>
 
     <%= analytics_init if Rails.env.production? %>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-2938171672494404",
+        enable_page_level_ads: true
+      });
+    </script>
   </head>
   <body>
     <%= render 'layouts/header' %>
